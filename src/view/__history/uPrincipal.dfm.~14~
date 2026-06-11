@@ -240,32 +240,4 @@ object frmPrincipal: TfrmPrincipal
       ExplicitHeight = 22
     end
   end
-  object pnlInfoArtSintetico: TPanel
-    Left = 302
-    Top = 183
-    Width = 121
-    Height = 57
-    Color = clDarkmagenta
-    ParentBackground = False
-    TabOrder = 8
-    object btnInfoArtSintetico: TSpeedButton
-      Left = 1
-      Top = 1
-      Width = 119
-      Height = 55
-      Cursor = crHandPoint
-      Align = alClient
-      Flat = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 98
-      ExplicitTop = 35
-      ExplicitWidth = 23
-      ExplicitHeight = 22
-    end
-  end
 end

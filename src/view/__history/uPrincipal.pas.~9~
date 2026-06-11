@@ -24,8 +24,6 @@ type
     btnProdutividade: TSpeedButton;
     pnlEntradaSaida: TPanel;
     btnEntradaSaida: TSpeedButton;
-    pnlInfoArtSintetico: TPanel;
-    btnInfoArtSintetico: TSpeedButton;
     procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
@@ -50,7 +48,6 @@ begin
     btnInfArtReferencia.Caption     :='Inf. Artigo por'#13#10'Referencia'#13#10'(Sintetico)';
     btnProdutividade.Caption        :='Produtividade';
     btnEntradaSaida.Caption         :='Entrada e Saida'#13#10'(sintético)';
-    btnInfoArtSintetico.Caption     :='Informações'#13#10'Artigo (Sintético)';
 end;
 
 end.

@@ -1,0 +1,36 @@
+unit uPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons;
+
+type
+  TfrmPrincipal = class(TForm)
+    pnlRefOrdCorte: TPanel;
+    btnRefOrdCorte: TSpeedButton;
+    pnlInfoArtigo: TPanel;
+    btnInfoArtigo: TSpeedButton;
+    Panel1: TPanel;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+procedure TfrmPrincipal.FormCreate(Sender: TObject);
+begin
+    btnRefOrdCorte.Caption  :='Referências por'#13#10'Ordem de Corte';
+    btnInfoArtigo.Caption   :='Informações'#13#10'Artigo(Analitico)';
+end;
+
+end.

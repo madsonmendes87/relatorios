@@ -4,7 +4,7 @@ object frmPrincipal: TfrmPrincipal
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Relat'#243'rios'
-  ClientHeight = 267
+  ClientHeight = 234
   ClientWidth = 441
   Color = clFloralwhite
   Font.Charset = DEFAULT_CHARSET
@@ -165,90 +165,6 @@ object frmPrincipal: TfrmPrincipal
     ParentBackground = False
     TabOrder = 5
     object btnInfArtReferencia: TSpeedButton
-      Left = 1
-      Top = 1
-      Width = 119
-      Height = 55
-      Cursor = crHandPoint
-      Align = alClient
-      Flat = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 98
-      ExplicitTop = 35
-      ExplicitWidth = 23
-      ExplicitHeight = 22
-    end
-  end
-  object pnlProdutividade: TPanel
-    Left = 18
-    Top = 183
-    Width = 121
-    Height = 57
-    Color = clMenuHighlight
-    ParentBackground = False
-    TabOrder = 6
-    object btnProdutividade: TSpeedButton
-      Left = 1
-      Top = 1
-      Width = 119
-      Height = 55
-      Cursor = crHandPoint
-      Align = alClient
-      Flat = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 98
-      ExplicitTop = 35
-      ExplicitWidth = 23
-      ExplicitHeight = 22
-    end
-  end
-  object pnlEntradaSaida: TPanel
-    Left = 162
-    Top = 183
-    Width = 121
-    Height = 57
-    Color = clIndigo
-    ParentBackground = False
-    TabOrder = 7
-    object btnEntradaSaida: TSpeedButton
-      Left = 1
-      Top = 1
-      Width = 119
-      Height = 55
-      Cursor = crHandPoint
-      Align = alClient
-      Flat = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      ExplicitLeft = 98
-      ExplicitTop = 35
-      ExplicitWidth = 23
-      ExplicitHeight = 22
-    end
-  end
-  object pnlInfoArtSintetico: TPanel
-    Left = 302
-    Top = 183
-    Width = 121
-    Height = 57
-    Color = clDarkmagenta
-    ParentBackground = False
-    TabOrder = 8
-    object btnInfoArtSintetico: TSpeedButton
       Left = 1
       Top = 1
       Width = 119
