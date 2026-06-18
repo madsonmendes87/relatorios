@@ -27,7 +27,6 @@ type
     pnlInfoArtSintetico: TPanel;
     btnInfoArtSintetico: TSpeedButton;
     procedure FormCreate(Sender: TObject);
-    procedure btnInfoArtigoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -40,19 +39,6 @@ var
 implementation
 
 {$R *.dfm}
-
-uses uFiltroArtigo;
-
-procedure TfrmPrincipal.btnInfoArtigoClick(Sender: TObject);
-begin
-    frmFiltroArtigo :=TfrmFiltroArtigo.Create(nil);
-
-    try
-      frmFiltroArtigo.ShowModal;
-    finally
-      FreeAndNil(frmFiltroArtigo);
-    end;
-end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin

@@ -1,0 +1,39 @@
+unit uFiltroArtigo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+
+type
+  TfrmFiltroArtigo = class(TForm)
+    lblTipoSaldo: TLabel;
+    cboTipoSaldo: TComboBox;
+    lblCodigo: TLabel;
+    edtCodigo: TEdit;
+    lblPesquisar: TLabel;
+    procedure edtCodigoKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFiltroArtigo: TfrmFiltroArtigo;
+
+implementation
+
+{$R *.dfm}
+
+uses uPrincipal;
+
+procedure TfrmFiltroArtigo.edtCodigoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+    if not (Key in ['0'..'9', #8]) then
+      Key := #0;
+end;
+
+end.

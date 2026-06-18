@@ -3,8 +3,7 @@ program Relatorios;
 uses
   Vcl.Forms,
   uPrincipal in 'src\view\uPrincipal.pas' {frmPrincipal},
-  uConexao in 'src\datamodule\uConexao.pas' {dmConexao: TDataModule},
-  uFiltroArtigo in 'src\view\uFiltroArtigo.pas' {frmFiltroArtigo};
+  uConexao in 'src\datamodule\uConexao.pas' {dmConexao: TDataModule};
 
 {$R *.res}
 
