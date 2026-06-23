@@ -25,16 +25,12 @@ type
     btnZeraComprador: TSpeedButton;
     lblTipoReserva: TLabel;
     cbTipoReserva: TComboBox;
-    chkProtSemGE: TCheckBox;
+    checkProtSemGE: TCheckBox;
     lblCheck1: TLabel;
     lblCheck2: TLabel;
     lblFornecedor: TLabel;
     dblcbFornecedor: TDBLookupComboBox;
     SpeedButton1: TSpeedButton;
-    lblTipoEmpenho: TLabel;
-    cboTipoEmpenho: TComboBox;
-    boxTecido: TGroupBox;
-    chkEmpRolos: TCheckBox;
     procedure edtCodigoKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure btnZerarCorClick(Sender: TObject);
@@ -136,26 +132,6 @@ begin
             ParamByName('idProduto').AsInteger    :=StrToInt(edtCodigo.Text);
             Open;
         end;
-
-
-
-        with dmPrincipal.qryFornecedor do
-        begin
-            Close;
-            SQL.Clear;
-            SQL.Add('SELECT DISTINCT');
-            SQL.Add('   fo.for_codigo,');
-            SQL.Add('   fo.for_apelido');
-            SQL.Add('   FROM itens_grade_nfentrada ign');
-            SQL.Add('   JOIN estoque es ON es.es_codproduto = ign.ig_codproduto');
-            SQL.Add('   JOIN nota_fiscal_entrada nf ON nf.nfe_id = ign.ig_idnfent');
-            SQL.Add('   JOIN fornecedor fo ON nf.nfe_codforn = fo.for_codigo');
-            SQL.Add('   WHERE es.es_codproduto = :idProduto');
-
-            ParamByName('idProduto').AsInteger    :=StrToInt(edtCodigo.Text);
-            Open;
-        end;
-
     end;
 end;
 

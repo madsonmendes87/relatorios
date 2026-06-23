@@ -55,8 +55,8 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     ParentFont = False
   end
   object lblCor: TLabel
-    Left = 200
-    Top = 65
+    Left = 184
+    Top = 67
     Width = 24
     Height = 15
     Caption = 'COR'
@@ -125,103 +125,6 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object btnZeraComprador: TSpeedButton
-    Left = 176
-    Top = 152
-    Width = 23
-    Height = 22
-    Cursor = crHandPoint
-    Caption = 'X'
-    Flat = True
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-    OnClick = btnZeraCompradorClick
-  end
-  object lblTipoReserva: TLabel
-    Left = 200
-    Top = 131
-    Width = 98
-    Height = 15
-    Caption = 'TIPO DE RESERVA'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object lblCheck1: TLabel
-    Left = 471
-    Top = 144
-    Width = 181
-    Height = 15
-    Caption = 'PROT'#211'TIPOS E QUE N'#195'O TENHA'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object lblCheck2: TLabel
-    Left = 471
-    Top = 158
-    Width = 141
-    Height = 15
-    Caption = 'GRADE ESCALA INICIADA'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object lblFornecedor: TLabel
-    Left = 8
-    Top = 195
-    Width = 77
-    Height = 15
-    Caption = 'FORNECEDOR'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
-  object SpeedButton1: TSpeedButton
-    Left = 176
-    Top = 217
-    Width = 23
-    Height = 22
-    Cursor = crHandPoint
-    Caption = 'X'
-    Flat = True
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-    OnClick = SpeedButton1Click
-  end
-  object lblTipoEmpenho: TLabel
-    Left = 200
-    Top = 195
-    Width = 105
-    Height = 15
-    Caption = 'TIPO DE EMPENHO'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
   object cboTipoSaldo: TComboBox
     Left = 8
     Top = 29
@@ -237,16 +140,16 @@ object frmFiltroArtigo: TfrmFiltroArtigo
   object edtCodigo: TEdit
     Left = 8
     Top = 85
-    Width = 167
+    Width = 145
     Height = 23
     TabOrder = 1
     OnExit = edtCodigoExit
     OnKeyPress = edtCodigoKeyPress
   end
   object dblcbCor: TDBLookupComboBox
-    Left = 200
+    Left = 184
     Top = 85
-    Width = 209
+    Width = 225
     Height = 23
     KeyField = 'grc_id'
     ListField = 'grc_nome_pa'
@@ -266,76 +169,11 @@ object frmFiltroArtigo: TfrmFiltroArtigo
   object dblcbComprador: TDBLookupComboBox
     Left = 8
     Top = 152
-    Width = 167
+    Width = 145
     Height = 23
     KeyField = 'comp_id'
     ListField = 'comp_nome'
     ListSource = dmPrincipal.dsComprador
     TabOrder = 4
-  end
-  object cbTipoReserva: TComboBox
-    Left = 200
-    Top = 152
-    Width = 185
-    Height = 23
-    ItemIndex = 0
-    TabOrder = 5
-    Text = 'AMBOS'
-    Items.Strings = (
-      'AMBOS'
-      'PROTOTIPO'
-      'GRANDE ESCALA')
-  end
-  object chkProtSemGE: TCheckBox
-    Left = 448
-    Top = 152
-    Width = 17
-    Height = 17
-    TabOrder = 6
-  end
-  object dblcbFornecedor: TDBLookupComboBox
-    Left = 8
-    Top = 216
-    Width = 167
-    Height = 23
-    KeyField = 'for_codigo'
-    ListField = 'for_apelido'
-    ListSource = dmPrincipal.dsFornecedor
-    TabOrder = 7
-  end
-  object cboTipoEmpenho: TComboBox
-    Left = 200
-    Top = 217
-    Width = 185
-    Height = 23
-    ItemIndex = 0
-    TabOrder = 8
-    Text = 'AMBOS'
-    Items.Strings = (
-      'AMBOS'
-      'PROTOTIPO'
-      'GRANDE ESCALA')
-  end
-  object boxTecido: TGroupBox
-    Left = 8
-    Top = 245
-    Width = 297
-    Height = 44
-    Caption = 'OP'#199#195'O SOMENTE PARA TECIDO'
-    TabOrder = 9
-    object chkEmpRolos: TCheckBox
-      Left = 3
-      Top = 19
-      Width = 273
-      Height = 17
-      Caption = 'SOMENTE EMPENHO DOS ROLOS IMPRESSO'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-    end
   end
 end

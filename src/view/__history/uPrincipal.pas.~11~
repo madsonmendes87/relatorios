@@ -32,7 +32,6 @@ type
     { Private declarations }
   public
     { Public declarations }
-
   end;
 
 var
@@ -42,7 +41,7 @@ implementation
 
 {$R *.dfm}
 
-uses uFiltroArtigo, uDmPrincipal;
+uses uFiltroArtigo;
 
 procedure TfrmPrincipal.btnInfoArtigoClick(Sender: TObject);
 begin

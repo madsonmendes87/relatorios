@@ -1,0 +1,156 @@
+object frmFiltroArtigo: TfrmFiltroArtigo
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Relat'#243'rio de Demonstrativo de uso de artigo'
+  ClientHeight = 343
+  ClientWidth = 725
+  Color = clBtnHighlight
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poScreenCenter
+  OnShow = FormShow
+  TextHeight = 15
+  object lblTipoSaldo: TLabel
+    Left = 8
+    Top = 8
+    Width = 87
+    Height = 15
+    Caption = 'TIPO DE SALDO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblCodigo: TLabel
+    Left = 8
+    Top = 67
+    Width = 47
+    Height = 15
+    Caption = 'CODIGO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblPesquisar: TLabel
+    Left = 78
+    Top = 67
+    Width = 57
+    Height = 12
+    Caption = 'F5 PESQUISAR'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -9
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lblCor: TLabel
+    Left = 184
+    Top = 67
+    Width = 24
+    Height = 15
+    Caption = 'COR'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object btnZerarCor: TSpeedButton
+    Left = 407
+    Top = 85
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = btnZerarCorClick
+  end
+  object lblTamanho: TLabel
+    Left = 448
+    Top = 67
+    Width = 60
+    Height = 15
+    Caption = 'TAMANHO'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object btnZeraTamanho: TSpeedButton
+    Left = 695
+    Top = 85
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    OnClick = btnZeraTamanhoClick
+  end
+  object cboTipoSaldo: TComboBox
+    Left = 8
+    Top = 29
+    Width = 145
+    Height = 23
+    ItemIndex = 0
+    TabOrder = 0
+    Text = '>=0'
+    Items.Strings = (
+      '>=0'
+      '>0')
+  end
+  object edtCodigo: TEdit
+    Left = 8
+    Top = 85
+    Width = 145
+    Height = 23
+    TabOrder = 1
+    OnExit = edtCodigoExit
+    OnKeyPress = edtCodigoKeyPress
+  end
+  object dblcbCor: TDBLookupComboBox
+    Left = 184
+    Top = 85
+    Width = 225
+    Height = 23
+    KeyField = 'grc_id'
+    ListField = 'grc_nome_pa'
+    ListSource = dmPrincipal.dsGrc
+    TabOrder = 2
+  end
+  object dblcbTamanho: TDBLookupComboBox
+    Left = 448
+    Top = 85
+    Width = 249
+    Height = 23
+    KeyField = 'grt_id'
+    ListField = 'grt_nome'
+    ListSource = dmPrincipal.dsTamanho
+    TabOrder = 3
+  end
+end

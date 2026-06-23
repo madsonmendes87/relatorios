@@ -1,0 +1,24 @@
+object dmPrincipal: TdmPrincipal
+  Height = 480
+  Width = 640
+  object qryGrc: TFDQuery
+    Connection = dmConexao.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '    gc.grc_id,'
+      '    CAST('
+      
+        '        COALESCE(gc.grc_codexterno, '#39#39') || '#39' - '#39' || TRIM(gc.grc_' +
+        'nome)'
+      '        AS VARCHAR(50)'
+      '    ) AS grc_nome_pa'
+      'FROM grade_cor AS gc')
+    Left = 88
+    Top = 48
+  end
+  object dsGrc: TDataSource
+    DataSet = qryGrc
+    Left = 152
+    Top = 48
+  end
+end
