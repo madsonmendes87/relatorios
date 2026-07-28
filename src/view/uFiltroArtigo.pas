@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls,
-  Vcl.Buttons;
+  Vcl.Buttons, Vcl.ExtCtrls;
 
 type
   TfrmFiltroArtigo = class(TForm)
@@ -30,18 +30,29 @@ type
     lblCheck2: TLabel;
     lblFornecedor: TLabel;
     dblcbFornecedor: TDBLookupComboBox;
-    SpeedButton1: TSpeedButton;
+    btnZeraFornecedor: TSpeedButton;
     lblTipoEmpenho: TLabel;
     cboTipoEmpenho: TComboBox;
     boxTecido: TGroupBox;
     chkEmpRolos: TCheckBox;
+    boxOrdenar: TGroupBox;
+    rbREF: TRadioButton;
+    rbNumRolo: TRadioButton;
+    rbEstilista: TRadioButton;
+    chkConsEstilista: TCheckBox;
+    chkRelPaisagem: TCheckBox;
+    chkAbrirAplicativo: TCheckBox;
+    lblRelPaisagem: TLabel;
+    pnlVisualizar: TPanel;
+    btnVisualizar: TSpeedButton;
     procedure edtCodigoKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure btnZerarCorClick(Sender: TObject);
     procedure edtCodigoExit(Sender: TObject);
     procedure btnZeraTamanhoClick(Sender: TObject);
     procedure btnZeraCompradorClick(Sender: TObject);
-    procedure SpeedButton1Click(Sender: TObject);
+    procedure btnZeraFornecedorClick(Sender: TObject);
+    procedure btnVisualizarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,7 +66,20 @@ implementation
 
 {$R *.dfm}
 
-uses uPrincipal, uDmPrincipal;
+uses uPrincipal, uDmPrincipal, uRelArtigos;
+
+procedure TfrmFiltroArtigo.btnVisualizarClick(Sender: TObject);
+begin
+    if edtCodigo.Text = '' then
+    begin
+        Application.MessageBox('Informe o código do produto','Relatorio Artigos', MB_OK + MB_ICONINFORMATION);
+        exit;
+    end;
+
+    frmRelArtigos.carregarDados;
+    frmRelArtigos.rlRelArtigos.Preview();
+
+end;
 
 procedure TfrmFiltroArtigo.btnZeraCompradorClick(Sender: TObject);
 begin
@@ -172,9 +196,12 @@ begin
     dmPrincipal.qryTamanho.Active         :=true;
     dmPrincipal.qryComprador.Active       :=true;
     dmPrincipal.qryFornecedor.Active      :=true;
+    rbEstilista.Checked                   :=true;
+    chkConsEstilista.Checked              :=true;
+    chkAbrirAplicativo.Checked            :=true;
 end;
 
-procedure TfrmFiltroArtigo.SpeedButton1Click(Sender: TObject);
+procedure TfrmFiltroArtigo.btnZeraFornecedorClick(Sender: TObject);
 begin
     dblcbFornecedor.KeyValue   :=Null;
 end;

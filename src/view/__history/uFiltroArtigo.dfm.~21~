@@ -428,7 +428,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     ParentFont = False
     TabOrder = 12
   end
-  object chkAbrirAplicativo: TCheckBox
+  object rbAbrirAplicativo: TCheckBox
     Left = 471
     Top = 318
     Width = 130
@@ -465,7 +465,6 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = btnVisualizarClick
       ExplicitLeft = 86
       ExplicitTop = 9
       ExplicitWidth = 23

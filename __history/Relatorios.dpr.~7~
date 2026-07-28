@@ -5,8 +5,7 @@ uses
   uPrincipal in 'src\view\uPrincipal.pas' {frmPrincipal},
   uConexao in 'src\datamodule\uConexao.pas' {dmConexao: TDataModule},
   uFiltroArtigo in 'src\view\uFiltroArtigo.pas' {frmFiltroArtigo},
-  uDmPrincipal in 'src\datamodule\uDmPrincipal.pas' {dmPrincipal: TDataModule},
-  uRelArtigos in 'src\view\uRelArtigos.pas' {frmRelArtigos};
+  uDmPrincipal in 'src\datamodule\uDmPrincipal.pas' {dmPrincipal: TDataModule};
 
 {$R *.res}
 
@@ -16,6 +15,5 @@ begin
   Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.CreateForm(TdmConexao, dmConexao);
   Application.CreateForm(TdmPrincipal, dmPrincipal);
-  Application.CreateForm(TfrmRelArtigos, frmRelArtigos);
   Application.Run;
 end.

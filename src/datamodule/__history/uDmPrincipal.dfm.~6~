@@ -61,34 +61,4 @@ object dmPrincipal: TdmPrincipal
     Left = 376
     Top = 128
   end
-  object qryDadosArtigo: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 80
-    Top = 208
-  end
-  object dsDadosArtigo: TDataSource
-    DataSet = qryDadosArtigo
-    Left = 168
-    Top = 208
-  end
-  object qryEstArtigo: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 272
-    Top = 208
-  end
-  object dsEstArtigo: TDataSource
-    DataSet = qryEstArtigo
-    Left = 360
-    Top = 208
-  end
-  object qryTotaisEstoque: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 72
-    Top = 272
-  end
-  object dsTotaisEstoque: TDataSource
-    DataSet = qryTotaisEstoque
-    Left = 176
-    Top = 272
-  end
 end

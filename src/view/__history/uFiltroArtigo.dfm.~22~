@@ -465,7 +465,6 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = btnVisualizarClick
       ExplicitLeft = 86
       ExplicitTop = 9
       ExplicitWidth = 23

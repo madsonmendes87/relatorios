@@ -22,8 +22,6 @@ type
     dsDadosArtigo: TDataSource;
     qryEstArtigo: TFDQuery;
     dsEstArtigo: TDataSource;
-    qryTotaisEstoque: TFDQuery;
-    dsTotaisEstoque: TDataSource;
   private
     { Private declarations }
   public
