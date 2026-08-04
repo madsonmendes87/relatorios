@@ -66,7 +66,7 @@ implementation
 
 {$R *.dfm}
 
-uses uPrincipal, uDmPrincipal, uRelArtigos;
+uses uPrincipal, uDmPrincipal, uRelTecidos;
 
 procedure TfrmFiltroArtigo.btnVisualizarClick(Sender: TObject);
 begin
@@ -76,8 +76,39 @@ begin
         exit;
     end;
 
-    frmRelArtigos.carregarDados;
-    frmRelArtigos.rlRelArtigos.Preview();
+    //dmConexao.Conexao.Connected := true;
+
+    with dmPrincipal.qryDadosArtigo do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     cp.cp_id,');
+        SQL.Add('     cp.cp_descricao,');
+        SQL.Add('     gr.gr_nome,');
+        SQL.Add('     sgr.sgr_nome,');
+        SQL.Add('     tp.tp_nome,');
+        SQL.Add('     cm.cm_descricao');
+        SQL.Add('     FROM cadastro_produto AS cp');
+        SQL.Add('     LEFT JOIN grupo AS gr ON gr.gr_id = cp.cp_idgrupo');
+        SQL.Add('     LEFT JOIN subgrupo AS sgr ON sgr.sgr_id = cp.cp_idsubgrupo');
+        SQL.Add('     LEFT JOIN tipo_produto AS tp ON tp.tp_id = cp.cp_idtipoproduto');
+        SQL.Add('     LEFT JOIN composicao_material AS cm ON cm.cm_id = cp.cp_idcomposicao');
+        SQL.Add('     WHERE cp_id = :idArtigo');
+
+        ParamByName('idArtigo').AsInteger   :=StrToInt(edtCodigo.Text);
+        Open;
+    end;
+
+    if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
+    begin
+        frmRelTecidos.carregarDados;
+        frmRelTecidos.rlRelTecidos.Preview();
+    end
+    else
+    begin
+        ShowMessage('Abrir relatorio artigos');
+    end;
 
 end;
 

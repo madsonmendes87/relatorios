@@ -146,8 +146,8 @@
             <FormType>dfm</FormType>
             <DesignClass>TDataModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="src\view\uRelArtigos.pas">
-            <Form>frmRelArtigos</Form>
+        <DCCReference Include="src\view\uRelTecidos.pas">
+            <Form>frmRelTecidos</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

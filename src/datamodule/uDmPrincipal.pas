@@ -20,10 +20,14 @@ type
     dsFornecedor: TDataSource;
     qryDadosArtigo: TFDQuery;
     dsDadosArtigo: TDataSource;
-    qryEstArtigo: TFDQuery;
-    dsEstArtigo: TDataSource;
-    qryTotaisEstoque: TFDQuery;
-    dsTotaisEstoque: TDataSource;
+    qryEstAviamentos: TFDQuery;
+    dsEstAviamentos: TDataSource;
+    qryTotaisAviamentos: TFDQuery;
+    dsTotaisAviamentos: TDataSource;
+    qryTotaisTecido: TFDQuery;
+    dsTotaisTecido: TDataSource;
+    qryEstTecidos: TFDQuery;
+    dsEstTecidos: TDataSource;
   private
     { Private declarations }
   public
