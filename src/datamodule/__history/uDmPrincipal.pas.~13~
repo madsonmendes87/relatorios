@@ -1,0 +1,72 @@
+unit uDmPrincipal;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TdmPrincipal = class(TDataModule)
+    qryGrc: TFDQuery;
+    dsGrc: TDataSource;
+    qryTamanho: TFDQuery;
+    dsTamanho: TDataSource;
+    qryComprador: TFDQuery;
+    dsComprador: TDataSource;
+    qryFornecedor: TFDQuery;
+    dsFornecedor: TDataSource;
+    qryDadosArtigo: TFDQuery;
+    dsDadosArtigo: TDataSource;
+    qryEstAviamentos: TFDQuery;
+    dsEstAviamentos: TDataSource;
+    qryTotaisAviamentos: TFDQuery;
+    dsTotaisAviamentos: TDataSource;
+    qryTotaisTecido: TFDQuery;
+    dsTotaisTecido: TDataSource;
+    qryEstTecidos: TFDQuery;
+    dsEstTecidos: TDataSource;
+    qryEstTecidosnfe_id: TIntegerField;
+    qryEstTecidosnfe_codnfe: TIntegerField;
+    qryEstTecidosnfe_dtrecebimento: TDateField;
+    qryEstTecidoscp_id: TIntegerField;
+    qryEstTecidoscp_descricao: TWideStringField;
+    qryEstTecidosgrc_nome: TWideMemoField;
+    qryEstTecidosgrt_nome: TWideStringField;
+    qryEstTecidospnfe_pcofornecedor: TFMTBCDField;
+    qryEstTecidoscomp_id: TIntegerField;
+    qryEstTecidoscomp_nome: TWideStringField;
+    qryEstTecidosig_numrolo: TWideStringField;
+    qryEstTecidosig_qtdadeforn: TBCDField;
+    qryEstTecidosentrada: TFMTBCDField;
+    qryEstTecidoscp_unestoque: TWideStringField;
+    qryEstTecidospnfe_uncom: TWideStringField;
+    qryEstTecidosbalanco: TWideMemoField;
+    qryEstTecidosestoque_fisico: TFMTBCDField;
+    qryEstTecidosempenhos: TFMTBCDField;
+    qryEstTecidosdisponivel_para_empenho: TFMTBCDField;
+    qryEstTecidoses_custoatual: TFMTBCDField;
+    qryEstTecidosfor_nome: TWideStringField;
+    qryEstTecidosfor_apelido: TWideStringField;
+    qryEstTecidoses_id: TIntegerField;
+    qryEstTecidosig_fatorconversao: TBCDField;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmPrincipal: TdmPrincipal;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+uses uConexao;
+
+{$R *.dfm}
+
+end.

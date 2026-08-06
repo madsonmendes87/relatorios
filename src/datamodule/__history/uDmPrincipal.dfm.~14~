@@ -1,0 +1,423 @@
+object dmPrincipal: TdmPrincipal
+  Height = 480
+  Width = 640
+  object qryGrc: TFDQuery
+    Connection = dmConexao.Conexao
+    SQL.Strings = (
+      'SELECT '
+      '    gc.grc_id,'
+      '    CAST('
+      
+        '        COALESCE(gc.grc_codexterno, '#39#39') || '#39' - '#39' || TRIM(gc.grc_' +
+        'nome)'
+      '        AS VARCHAR(50)'
+      '    ) AS grc_nome_pa'
+      'FROM grade_cor AS gc')
+    Left = 88
+    Top = 48
+  end
+  object dsGrc: TDataSource
+    DataSet = qryGrc
+    Left = 152
+    Top = 48
+  end
+  object qryTamanho: TFDQuery
+    Connection = dmConexao.Conexao
+    SQL.Strings = (
+      'SELECT grt_id, grt_nome FROM grade_tamanho ORDER BY grt_id')
+    Left = 224
+    Top = 48
+  end
+  object dsTamanho: TDataSource
+    DataSet = qryTamanho
+    Left = 312
+    Top = 48
+  end
+  object qryComprador: TFDQuery
+    Connection = dmConexao.Conexao
+    SQL.Strings = (
+      
+        'SELECT comp_id, comp_nome FROM cadastro_compradores ORDER BY com' +
+        'p_nome')
+    Left = 88
+    Top = 128
+  end
+  object dsComprador: TDataSource
+    DataSet = qryComprador
+    Left = 192
+    Top = 128
+  end
+  object qryFornecedor: TFDQuery
+    Connection = dmConexao.Conexao
+    SQL.Strings = (
+      
+        'SELECT for_codigo, for_apelido FROM fornecedor ORDER BY for_apel' +
+        'ido')
+    Left = 288
+    Top = 128
+  end
+  object dsFornecedor: TDataSource
+    DataSet = qryFornecedor
+    Left = 376
+    Top = 128
+  end
+  object qryDadosArtigo: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 80
+    Top = 208
+  end
+  object dsDadosArtigo: TDataSource
+    DataSet = qryDadosArtigo
+    Left = 168
+    Top = 208
+  end
+  object qryEstAviamentos: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 272
+    Top = 208
+  end
+  object dsEstAviamentos: TDataSource
+    DataSet = qryEstAviamentos
+    Left = 376
+    Top = 208
+  end
+  object qryTotaisAviamentos: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 72
+    Top = 272
+  end
+  object dsTotaisAviamentos: TDataSource
+    DataSet = qryTotaisAviamentos
+    Left = 200
+    Top = 272
+  end
+  object qryTotaisTecido: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 312
+    Top = 272
+  end
+  object dsTotaisTecido: TDataSource
+    DataSet = qryTotaisTecido
+    Left = 408
+    Top = 272
+  end
+  object qryEstTecidos: TFDQuery
+    Connection = dmConexao.Conexao
+    SQL.Strings = (
+      'SELECT'
+      #9#9'nfe.nfe_id,'
+      #9#9'nfe.nfe_codnfe,'
+      #9#9'nfe.nfe_dtrecebimento,'
+      #9#9'cp.cp_id,'
+      #9#9'cp.cp_descricao,'
+      #9#9'(gc.grc_codexterno || '#39' - '#39' || gc.grc_nome) AS grc_nome,'
+      #9#9'gt.grt_nome,'
+      #9#9'('
+      #9#9#9#9'SELECT pnfe_pcofornecedor'
+      #9#9#9#9#9'FROM produto_nf_entrada WHERE pnfe_idnfe=nfe.nfe_id'
+      #9#9#9#9#9'AND pnfe_codprod=cp.cp_id'
+      #9#9#9#9#9'ORDER BY pnfe_id DESC'
+      #9#9#9#9#9'LIMIT 1'
+      #9#9') AS pnfe_pcofornecedor,'
+      #9#9'cc.comp_id,'
+      #9#9'cc.comp_nome,'
+      #9#9'igf.ig_numrolo,'
+      #9#9'igf.ig_qtdadeforn,'
+      #9#9'(igf.ig_quantidade) AS entrada,'
+      #9#9'cp.cp_unestoque,'
+      #9#9'('
+      #9#9#9#9'SELECT pnfe_uncom'
+      #9#9#9#9'FROM produto_nf_entrada WHERE pnfe_idnfe=nfe.nfe_id'
+      #9#9#9#9'AND pnfe_codprod=cp.cp_id'
+      #9#9#9#9'ORDER BY pnfe_id DESC'
+      #9#9#9#9'LIMIT 1'
+      #9#9') AS pnfe_uncom,'
+      
+        #9#9'(CASE WHEN coalesce(e.es_saidabalanco, 0.0000)>0 OR coalesce(e' +
+        '.es_entbalanco, 0.0000)>0 THEN '#39'SIM'#39' ELSE '#39'N'#195'O'#39' END) AS balanco,'
+      #9#9'('
+      #9#9#9#9'('
+      
+        #9#9#9#9#9#9'coalesce(e.es_entradaforn, 0.0000) - coalesce(e.es_saidafo' +
+        'rn, 0.000) +'
+      
+        #9#9#9#9#9#9'coalesce(e.es_enttransf, 0.000) - coalesce(e.es_saidatrans' +
+        'f, 0.0000)'
+      #9#9#9#9') -'
+      #9#9#9#9'('
+      
+        #9#9#9#9#9#9'coalesce(e.es_saidabalanco, 0.0000) - coalesce(e.es_entbal' +
+        'anco, 0.0000)'
+      #9#9#9#9') '
+      #9#9') AS estoque_fisico,'
+      #9#9'('
+      
+        #9#9#9#9'coalesce(e.es_saidaempenho, 0.0000) - coalesce(e.es_entempen' +
+        'ho, 0.0000)'
+      #9#9') AS empenhos,'
+      #9#9'('
+      #9#9#9#9'('
+      
+        #9#9#9#9#9#9'coalesce(e.es_entradaforn, 0.0000) - coalesce(e.es_saidafo' +
+        'rn, 0.000) +'
+      
+        #9#9#9#9#9#9'coalesce(e.es_enttransf, 0.000) - coalesce(e.es_saidatrans' +
+        'f, 0.0000)'
+      #9#9#9#9') -'
+      #9#9#9#9'('
+      
+        #9#9#9#9#9#9'coalesce(e.es_saidaempenho, 0.0000) - coalesce(e.es_entemp' +
+        'enho, 0.0000)'
+      #9#9#9#9') -'
+      #9#9#9#9'('
+      
+        #9#9#9#9#9#9'coalesce(e.es_saidabalanco, 0.0000) - coalesce(e.es_entbal' +
+        'anco, 0.0000)'
+      #9#9#9#9')'
+      #9#9') AS disponivel_para_empenho,'
+      #9#9'coalesce(e.es_custoatual, 0) AS es_custoatual,'
+      #9#9'f.for_nome,'
+      #9#9'f.for_apelido,'
+      #9#9'e.es_id,'
+      #9#9'igf.ig_fatorconversao'
+      #9#9'FROM estoque AS e'
+      #9#9'JOIN cadastro_produto AS cp ON e.es_codproduto = cp.cp_id'
+      #9#9'JOIN grade_cor AS gc ON gc.grc_id = e.es_idgradecor'
+      #9#9'JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam'
+      
+        #9#9'LEFT JOIN itens_grade_nfentrada AS igf ON igf.ig_codproduto=cp' +
+        '.cp_id AND e.es_codproduto=igf.ig_codproduto'
+      
+        #9#9'AND igf.ig_gradecor=gc.grc_id AND e.es_idgradecor=igf.ig_grade' +
+        'cor'
+      
+        #9#9'AND igf.ig_gradetam=gt.grt_id AND e.es_idgradetam=igf.ig_grade' +
+        'tam'
+      #9#9'AND igf.ig_numrolo=e.es_numrolo'
+      #9#9'AND igf.ig_metragemrolo=e.es_metragemrolo'
+      
+        #9#9'LEFT JOIN nota_fiscal_entrada AS nfe ON igf.ig_idnfent=nfe.nfe' +
+        '_id'
+      
+        #9#9'LEFT JOIN cadastro_compradores AS cc ON cc.comp_id = igf.ig_id' +
+        'comprador'
+      #9#9'LEFT JOIN fornecedor AS f ON f.for_codigo = nfe.nfe_codforn'
+      #9#9'LEFT JOIN itens_xml AS ixml ON ixml.pnfe_idnfe=nfe.nfe_id'
+      #9#9'AND ixml.pnfe_coditem=igf.ig_codproduto'
+      #9#9'WHERE 1=1'
+      #9#9'AND'
+      #9#9#9#9'('
+      #9#9#9#9#9'('
+      
+        #9#9#9#9#9#9'coalesce(e.es_entradaforn, 0.0000) - coalesce(e.es_saidafo' +
+        'rn, 0.000) +'
+      
+        #9#9#9#9#9#9'coalesce(e.es_enttransf, 0.000) - coalesce(e.es_saidatrans' +
+        'f, 0.0000)'
+      #9#9#9#9#9') -'
+      #9#9#9#9#9'('
+      
+        #9#9#9#9#9#9'coalesce(e.es_saidaempenho, 0.0000) - coalesce(e.es_entemp' +
+        'enho, 0.0000)'
+      #9#9#9#9#9') -'
+      #9#9#9#9#9'('
+      
+        #9#9#9#9#9#9'coalesce(e.es_saidabalanco, 0.0000) - coalesce(e.es_entbal' +
+        'anco, 0.0000)'
+      #9#9#9#9#9')'
+      #9#9#9#9') >=0'
+      #9#9'AND cp.cp_id=4653'#9
+      #9#9'GROUP BY'
+      #9#9#9#9'nfe.nfe_id,'
+      #9#9#9#9'nfe.nfe_codnfe,'
+      #9#9#9#9'nfe.nfe_dtrecebimento,'
+      #9#9#9#9'cp.cp_id,'
+      #9#9#9#9'cp.cp_descricao,'
+      #9#9#9#9'gc.grc_codexterno,'
+      #9#9#9#9'gc.grc_nome,'
+      #9#9#9#9'gt.grt_nome,'
+      #9#9#9#9'cc.comp_id,'
+      #9#9#9#9'cc.comp_nome,'
+      #9#9#9#9'igf.ig_numrolo,'
+      #9#9#9#9'igf.ig_metragemrolo,'
+      #9#9#9#9'igf.ig_qtdadeforn,'
+      #9#9#9#9'cp.cp_unestoque,'
+      #9#9#9#9'e.es_id,'
+      #9#9#9#9'e.es_entradaforn,'
+      #9#9#9#9'e.es_saidaforn,'
+      #9#9#9#9'e.es_enttransf,'
+      #9#9#9#9'e.es_saidatransf,'
+      #9#9#9#9'e.es_saidaempenho,'
+      #9#9#9#9'e.es_entempenho,'
+      #9#9#9#9'e.es_entbalanco,'
+      #9#9#9#9'e.es_saidabalanco,'
+      #9#9#9#9'e.es_custoatual,'
+      #9#9#9#9'e.es_metragemrolo,'
+      #9#9#9#9'f.for_nome,'
+      #9#9#9#9'f.for_apelido,'
+      #9#9#9#9'igf.ig_quantidade,'
+      #9#9#9#9'igf.ig_fatorconversao'
+      #9#9'ORDER BY'
+      #9#9#9#9'cc.comp_nome,'
+      #9#9#9#9'nfe.nfe_id,'
+      
+        '(SUBSTRING (gc.grc_codexterno, 1, 1), lpad(SUBSTRING (gc.grc_cod' +
+        'externo, 2), 5, '#39'0'#39'))')
+    Left = 72
+    Top = 336
+    object qryEstTecidosnfe_id: TIntegerField
+      FieldName = 'nfe_id'
+      Origin = 'nfe_id'
+    end
+    object qryEstTecidosnfe_codnfe: TIntegerField
+      FieldName = 'nfe_codnfe'
+      Origin = 'nfe_codnfe'
+    end
+    object qryEstTecidosnfe_dtrecebimento: TDateField
+      FieldName = 'nfe_dtrecebimento'
+      Origin = 'nfe_dtrecebimento'
+    end
+    object qryEstTecidoscp_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'cp_id'
+      Origin = 'cp_id'
+    end
+    object qryEstTecidoscp_descricao: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cp_descricao'
+      Origin = 'cp_descricao'
+      Size = 60
+    end
+    object qryEstTecidosgrc_nome: TWideMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'grc_nome'
+      Origin = 'grc_nome'
+      ReadOnly = True
+      BlobType = ftWideMemo
+    end
+    object qryEstTecidosgrt_nome: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'grt_nome'
+      Origin = 'grt_nome'
+      Size = 30
+    end
+    object qryEstTecidospnfe_pcofornecedor: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'pnfe_pcofornecedor'
+      Origin = 'pnfe_pcofornecedor'
+      ReadOnly = True
+      Precision = 18
+      Size = 10
+    end
+    object qryEstTecidoscomp_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'comp_id'
+      Origin = 'comp_id'
+    end
+    object qryEstTecidoscomp_nome: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'comp_nome'
+      Origin = 'comp_nome'
+    end
+    object qryEstTecidosig_numrolo: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'ig_numrolo'
+      Origin = 'ig_numrolo'
+    end
+    object qryEstTecidosig_qtdadeforn: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'ig_qtdadeforn'
+      Origin = 'ig_qtdadeforn'
+      DisplayFormat = ',#0.0000'
+      Precision = 14
+    end
+    object qryEstTecidosentrada: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'entrada'
+      Origin = 'entrada'
+      Precision = 15
+      Size = 5
+    end
+    object qryEstTecidoscp_unestoque: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'cp_unestoque'
+      Origin = 'cp_unestoque'
+      FixedChar = True
+      Size = 6
+    end
+    object qryEstTecidospnfe_uncom: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'pnfe_uncom'
+      Origin = 'pnfe_uncom'
+      ReadOnly = True
+      Size = 6
+    end
+    object qryEstTecidosbalanco: TWideMemoField
+      AutoGenerateValue = arDefault
+      FieldName = 'balanco'
+      Origin = 'balanco'
+      ReadOnly = True
+      BlobType = ftWideMemo
+    end
+    object qryEstTecidosestoque_fisico: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'estoque_fisico'
+      Origin = 'estoque_fisico'
+      ReadOnly = True
+      Precision = 64
+      Size = 64
+    end
+    object qryEstTecidosempenhos: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'empenhos'
+      Origin = 'empenhos'
+      ReadOnly = True
+      Precision = 64
+      Size = 64
+    end
+    object qryEstTecidosdisponivel_para_empenho: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'disponivel_para_empenho'
+      Origin = 'disponivel_para_empenho'
+      ReadOnly = True
+      Precision = 64
+      Size = 64
+    end
+    object qryEstTecidoses_custoatual: TFMTBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'es_custoatual'
+      Origin = 'es_custoatual'
+      ReadOnly = True
+      Precision = 64
+      Size = 64
+    end
+    object qryEstTecidosfor_nome: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'for_nome'
+      Origin = 'for_nome'
+      Size = 40
+    end
+    object qryEstTecidosfor_apelido: TWideStringField
+      AutoGenerateValue = arDefault
+      FieldName = 'for_apelido'
+      Origin = 'for_apelido'
+    end
+    object qryEstTecidoses_id: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'es_id'
+      Origin = 'es_id'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object qryEstTecidosig_fatorconversao: TBCDField
+      AutoGenerateValue = arDefault
+      FieldName = 'ig_fatorconversao'
+      Origin = 'ig_fatorconversao'
+      Precision = 14
+    end
+  end
+  object dsEstTecidos: TDataSource
+    DataSet = qryEstTecidos
+    Left = 160
+    Top = 336
+  end
+end

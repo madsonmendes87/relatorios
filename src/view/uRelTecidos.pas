@@ -39,37 +39,72 @@ type
     RLDraw13: TRLDraw;
     RLDraw14: TRLDraw;
     RLDraw15: TRLDraw;
-    RLLabel1: TRLLabel;
+    rlLabBalanco: TRLLabel;
     RLDraw16: TRLDraw;
-    RLLabel2: TRLLabel;
-    RLLabel3: TRLLabel;
-    RLLabel4: TRLLabel;
-    RLLabel5: TRLLabel;
-    RLLabel6: TRLLabel;
-    RLLabel7: TRLLabel;
-    RLLabel8: TRLLabel;
-    RLLabel9: TRLLabel;
-    RLLabel10: TRLLabel;
-    RLLabel11: TRLLabel;
+    rlLabCor: TRLLabel;
+    rlLabCustoForn: TRLLabel;
+    rlLabCustoForn_: TRLLabel;
+    rlLabCusto: TRLLabel;
+    rlLabDisponivel: TRLLabel;
+    rlLabEntData_: TRLLabel;
+    rlLabEntData: TRLLabel;
+    rlLabEntradaForn: TRLLabel;
+    rlLabEntradaForn_: TRLLabel;
+    rlLabEntrada: TRLLabel;
     RLLabel12: TRLLabel;
-    RLLabel13: TRLLabel;
-    RLLabel14: TRLLabel;
-    RLLabel15: TRLLabel;
+    rlLabFator: TRLLabel;
+    rlLabFisico: TRLLabel;
+    rlLabForn: TRLLabel;
     rlLabNumInterno: TRLLabel;
-    RLLabel17: TRLLabel;
+    rlLabEmpenhos: TRLLabel;
     rlLabCodNfe: TRLLabel;
-    RLLabel19: TRLLabel;
-    RLLabel20: TRLLabel;
+    rlLabRolo: TRLLabel;
+    rlLabTamanho: TRLLabel;
     rlCabecalho: TRLBand;
     rlCabecalhoEstoque: TRLBand;
     rlDadosEstoque: TRLBand;
     rlPanelEstilista: TRLPanel;
     rlEstoqueEstilista: TRLGroup;
+    rlPanelNfe: TRLPanel;
+    rlDBCodNfe: TRLDBText;
+    rlDBInternoNfe: TRLDBText;
+    rlPanelDtEntrada: TRLPanel;
+    rlDBDtEntrada: TRLDBText;
+    rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
+    rlPanelTamanho: TRLPanel;
+    rlDBTamanho: TRLDBText;
+    rlPanelRolo: TRLPanel;
+    rlDBRolo: TRLDBMemo;
+    rlPanelEntForn: TRLPanel;
+    rlDBEntForn: TRLDBText;
+    rlPanelCustoForn: TRLPanel;
+    rlDBCustForn: TRLDBText;
+    rlPanelEntrada: TRLPanel;
+    rlDBEntrada: TRLDBText;
+    rlPanelFator: TRLPanel;
+    rlDBFator: TRLDBText;
+    rlPanelBalanco: TRLPanel;
+    rlDBalanco: TRLDBText;
+    rlPanelFisico: TRLPanel;
+    rlDBFisico: TRLDBText;
+    rlPanelEmpenhos: TRLPanel;
+    rlDBEmpenhos: TRLDBText;
+    rlPanelDisp: TRLPanel;
+    rlDBDisp: TRLDBText;
+    rlCusto: TRLPanel;
+    rlDBCusto: TRLDBText;
+    rlPanelForn: TRLPanel;
+    rlDBFornecedor: TRLDBMemo;
     procedure FormShow(Sender: TObject);
     procedure rlLabelEstilistaBeforePrint(Sender: TObject;
       var AText: string; var PrintIt: Boolean);
     procedure rlRelTecidosBeforePrint(Sender: TObject;
       var PrintIt: Boolean);
+    
+
+
+
 
 
 
@@ -219,19 +254,35 @@ begin
           SQL.Add('     LEFT JOIN itens_xml AS ixml ON ixml.pnfe_idnfe=nfe.nfe_id');
           SQL.Add('     AND ixml.pnfe_coditem=igf.ig_codproduto');
           SQL.Add('     WHERE 1=1');
-          SQL.Add('     AND');
-          SQL.Add('               (');
-          SQL.Add('                         (');
-          SQL.Add('                                   COALESCE(e.es_entradaforn, 0.0000) - COALESCE(e.es_saidaforn, 0.000) +');
-          SQL.Add('                                   COALESCE(e.es_enttransf, 0.000) - COALESCE(e.es_saidatransf, 0.0000)');
-          SQL.Add('                         ) -');
-          SQL.Add('                         (');
-          SQL.Add('                                   COALESCE(e.es_saidaempenho, 0.0000) - COALESCE(e.es_entempenho, 0.0000)');
-          SQL.Add('                         ) -');
-          SQL.Add('                         (');
-          SQL.Add('                                   COALESCE(e.es_saidabalanco, 0.0000) - COALESCE(e.es_entbalanco, 0.0000)');
-          SQL.Add('                         )');
-          SQL.Add('                ) >= 0');
+
+          case frmFiltroArtigo.cboTipoSaldo.ItemIndex of
+              0: SQL.Add(' AND ((' +
+                         ' COALESCE(e.es_entradaforn,0)-COALESCE(e.es_saidaforn,0)+' +
+                         ' COALESCE(e.es_enttransf,0)-COALESCE(e.es_saidatransf,0))-' +
+                         ' (COALESCE(e.es_saidaempenho,0)-COALESCE(e.es_entempenho,0))-' +
+                         ' (COALESCE(e.es_saidabalanco,0)-COALESCE(e.es_entbalanco,0))' +
+                         ' ) >= 0');
+
+              1: SQL.Add(' AND ((' +
+                         ' COALESCE(e.es_entradaforn,0)-COALESCE(e.es_saidaforn,0)+' +
+                         ' COALESCE(e.es_enttransf,0)-COALESCE(e.es_saidatransf,0))-' +
+                         ' (COALESCE(e.es_saidaempenho,0)-COALESCE(e.es_entempenho,0))-' +
+                         ' (COALESCE(e.es_saidabalanco,0)-COALESCE(e.es_entbalanco,0))' +
+                         ' ) > 0');
+          end;
+//          SQL.Add('     AND');
+//          SQL.Add('               (');
+//          SQL.Add('                         (');
+//          SQL.Add('                                   COALESCE(e.es_entradaforn, 0.0000) - COALESCE(e.es_saidaforn, 0.000) +');
+//          SQL.Add('                                   COALESCE(e.es_enttransf, 0.000) - COALESCE(e.es_saidatransf, 0.0000)');
+//          SQL.Add('                         ) -');
+//          SQL.Add('                         (');
+//          SQL.Add('                                   COALESCE(e.es_saidaempenho, 0.0000) - COALESCE(e.es_entempenho, 0.0000)');
+//          SQL.Add('                         ) -');
+//          SQL.Add('                         (');
+//          SQL.Add('                                   COALESCE(e.es_saidabalanco, 0.0000) - COALESCE(e.es_entbalanco, 0.0000)');
+//          SQL.Add('                         )');
+//          SQL.Add('                ) >= 0');
           SQL.Add('     AND cp.cp_id=:idArtigo');
           SQL.Add('     GROUP BY');
           SQL.Add('               nfe.nfe_id,');
@@ -276,13 +327,59 @@ begin
      dmPrincipal.dsEstTecidos.DataSet     :=dmPrincipal.qryEstTecidos;
 
 
-
      rlRelTecidos.DataSource              :=dmPrincipal.dsEstTecidos;
      rlEstoqueEstilista.DataFields        :='comp_nome';
 
      rlLabelEstilista.DataSource          :=dmPrincipal.dsEstTecidos;
      rlLabelEstilista.DataField           :='comp_nome';
 
+     rlDBCodNfe.DataSource                :=dmPrincipal.dsEstTecidos;
+     rlDBCodNfe.DataField                 :='nfe_codnfe';
+
+     rlDBInternoNfe.DataSource            :=dmPrincipal.dsEstTecidos;
+     rlDBInternoNfe.DataField             :='nfe_id';
+
+     rlDBDtEntrada.DataSource             :=dmPrincipal.dsEstTecidos;
+     rlDBDtEntrada.DataField              :='nfe_dtrecebimento';
+
+     rlDbCor.DataSource                   :=dmPrincipal.dsEstTecidos;
+     rlDbCor.DataField                    :='grc_nome';
+
+     rlDBTamanho.DataSource               :=dmPrincipal.dsEstTecidos;
+     rlDBTamanho.DataField                :='grt_nome';
+
+     rlDBRolo.DataSource                  :=dmPrincipal.dsEstTecidos;
+     rlDBRolo.DataField                   :='ig_numrolo';
+
+     rlDBEntForn.DataSource               :=dmPrincipal.dsEstTecidos;
+     rlDBEntForn.DataField                :='ig_qtdadeforn';
+
+     rlDBCustForn.DataSource              :=dmPrincipal.dsEstTecidos;
+     rlDBCustForn.DataField               :='es_custoatual';
+
+     rlDBEntrada.DataSource               :=dmPrincipal.dsEstTecidos;
+     rlDBEntrada.DataField                :='entrada';
+
+     rlDBFator.DataSource                 :=dmPrincipal.dsEstTecidos;
+     rlDBFator.DataField                  :='ig_fatorconversao';
+
+     rlDBalanco.DataSource                :=dmPrincipal.dsEstTecidos;
+     rlDBalanco.DataField                 :='balanco';
+
+     rlDBFisico.DataSource                :=dmPrincipal.dsEstTecidos;
+     rlDBFisico.DataField                 :='estoque_fisico';
+
+     rlDBEmpenhos.DataSource              :=dmPrincipal.dsEstTecidos;
+     rlDBEmpenhos.DataField               :='empenhos';
+
+     rlDBDisp.DataSource                  :=dmPrincipal.dsEstTecidos;
+     rlDBDisp.DataField                   :='disponivel_para_empenho';
+
+     rlDBCusto.DataSource                 :=dmPrincipal.dsEstTecidos;
+     rlDBCusto.DataField                  :='es_custoatual';
+
+     rlDBFornecedor.DataSource            :=dmPrincipal.dsEstTecidos;
+     rlDBFornecedor.DataField             :='for_apelido';
 //     RLDBMemo1.DataSource           :=dmPrincipal.dsEstTecidos;
 //     RLDBMemo1.DataField            :='ig_numrolo';
      //rlDBEstilista.DataField                   :='comp_nome';
@@ -486,7 +583,6 @@ begin
 //    rlPanelEstoque.Parent :=rlCorpoEstoque;
 //      rlCelulaEstilista.Color :=clBlue;
 end;
-
 
 
 procedure TfrmRelTecidos.rlLabelEstilistaBeforePrint(Sender: TObject;

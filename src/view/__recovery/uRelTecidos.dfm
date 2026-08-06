@@ -630,7 +630,421 @@ object frmRelTecidos: TfrmRelTecidos
         Left = 0
         Top = 89
         Width = 786
-        Height = 61
+        Height = 40
+        object rlPanelNfe: TRLPanel
+          Left = 3
+          Top = 0
+          Width = 61
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = True
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          object rlDBCodNfe: TRLDBText
+            Left = 4
+            Top = 2
+            Width = 51
+            Height = 15
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clNavy
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+          object rlDBInternoNfe: TRLDBText
+            Left = 4
+            Top = 16
+            Width = 61
+            Height = 15
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelDtEntrada: TRLPanel
+          Left = 64
+          Top = 0
+          Width = 54
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedBottom = True
+          object rlDBDtEntrada: TRLDBText
+            Left = -3
+            Top = 12
+            Width = 59
+            Height = 15
+            Align = faCenter
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelCor: TRLPanel
+          Left = 117
+          Top = 0
+          Width = 53
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedBottom = True
+          object rlDBCor: TRLDBMemo
+            Left = 3
+            Top = 13
+            Width = 45
+            Height = 13
+            Align = faCenter
+            Behavior = [beSiteExpander]
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+          end
+        end
+        object rlPanelTamanho: TRLPanel
+          Left = 171
+          Top = 0
+          Width = 58
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedBottom = True
+          object rlDBTamanho: TRLDBText
+            Left = 5
+            Top = 13
+            Width = 47
+            Height = 13
+            Align = faCenter
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelRolo: TRLPanel
+          Left = 229
+          Top = 0
+          Width = 65
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedRight = True
+          Borders.FixedBottom = True
+          object rlDBRolo: TRLDBMemo
+            Left = 3
+            Top = 13
+            Width = 58
+            Height = 13
+            Align = faCenter
+            Behavior = [beSiteExpander]
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+          end
+        end
+        object rlPanelEntForn: TRLPanel
+          Left = 294
+          Top = 0
+          Width = 57
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedBottom = True
+          object rlDBEntForn: TRLDBText
+            Left = 2
+            Top = 12
+            Width = 52
+            Height = 15
+            Align = faCenter
+            DisplayMask = '0.0000'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelCustoForn: TRLPanel
+          Left = 350
+          Top = 0
+          Width = 58
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedBottom = True
+          object rlDBCustForn: TRLDBText
+            Left = 0
+            Top = 12
+            Width = 58
+            Height = 15
+            Align = faCenter
+            DisplayMask = '0.00'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelEntrada: TRLPanel
+          Left = 406
+          Top = 0
+          Width = 56
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedRight = True
+          Borders.FixedBottom = True
+          object rlDBEntrada: TRLDBText
+            Left = 2
+            Top = 12
+            Width = 51
+            Height = 15
+            Align = faCenter
+            DisplayMask = '0.0'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelFator: TRLPanel
+          Left = 461
+          Top = 0
+          Width = 42
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedRight = True
+          Borders.FixedBottom = True
+          object rlDBFator: TRLDBText
+            Left = 0
+            Top = 12
+            Width = 41
+            Height = 15
+            Align = faCenter
+            DisplayMask = '0.0000'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelBalanco: TRLPanel
+          Left = 502
+          Top = 0
+          Width = 58
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedBottom = True
+          object rlDBalanco: TRLDBText
+            Left = 5
+            Top = 12
+            Width = 47
+            Height = 15
+            Align = faCenter
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelFisico: TRLPanel
+          Left = 560
+          Top = 0
+          Width = 44
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedRight = True
+          Borders.FixedBottom = True
+          object rlDBFisico: TRLDBText
+            Left = -1
+            Top = 12
+            Width = 45
+            Height = 15
+            Align = faCenter
+            DisplayMask = '0.0000'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelEmpenhos: TRLPanel
+          Left = 603
+          Top = 0
+          Width = 57
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedBottom = True
+          object rlDBEmpenhos: TRLDBText
+            Left = -4
+            Top = 12
+            Width = 64
+            Height = 15
+            Align = faCenter
+            DisplayMask = '0.0000'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelDisp: TRLPanel
+          Left = 659
+          Top = 0
+          Width = 49
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedRight = True
+          Borders.FixedBottom = True
+          object rlDBDisp: TRLDBText
+            Left = 5
+            Top = 12
+            Width = 38
+            Height = 15
+            Align = faCenter
+            DisplayMask = '0.0000'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlCusto: TRLPanel
+          Left = 708
+          Top = 0
+          Width = 40
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedBottom = True
+          object rlDBCusto: TRLDBText
+            Left = -2
+            Top = 12
+            Width = 44
+            Height = 15
+            Align = faCenter
+            DisplayMask = '0.00'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
+        end
+        object rlPanelForn: TRLPanel
+          Left = 748
+          Top = 0
+          Width = 38
+          Height = 40
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedRight = True
+          Borders.FixedBottom = True
+          object rlDBFornecedor: TRLDBMemo
+            Left = 0
+            Top = 13
+            Width = 32
+            Height = 13
+            Behavior = [beSiteExpander]
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -9
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+          end
+        end
       end
       object rlCabecalhoEstoque: TRLBand
         Left = 0
@@ -732,7 +1146,7 @@ object frmRelTecidos: TfrmRelTecidos
           Left = 3
           Top = 1
           Width = 783
-          Height = 30
+          Height = 31
         end
         object rlLabBalanco: TRLLabel
           Left = 505
@@ -998,10 +1412,10 @@ object frmRelTecidos: TfrmRelTecidos
           Left = 3
           Top = 66
           Width = 783
-          Height = 20
+          Height = 23
           Borders.Sides = sdCustom
           Borders.DrawLeft = True
-          Borders.DrawTop = True
+          Borders.DrawTop = False
           Borders.DrawRight = True
           Borders.DrawBottom = True
           Color = clLavenderblush
@@ -1009,7 +1423,7 @@ object frmRelTecidos: TfrmRelTecidos
           Transparent = False
           object rlLabelEstilista: TRLDBText
             Left = 351
-            Top = 2
+            Top = 3
             Width = 81
             Height = 16
             Align = faCenter

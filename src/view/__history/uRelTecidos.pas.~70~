@@ -39,37 +39,61 @@ type
     RLDraw13: TRLDraw;
     RLDraw14: TRLDraw;
     RLDraw15: TRLDraw;
-    RLLabel1: TRLLabel;
+    rlLabBalanco: TRLLabel;
     RLDraw16: TRLDraw;
-    RLLabel2: TRLLabel;
-    RLLabel3: TRLLabel;
-    RLLabel4: TRLLabel;
-    RLLabel5: TRLLabel;
-    RLLabel6: TRLLabel;
-    RLLabel7: TRLLabel;
-    RLLabel8: TRLLabel;
-    RLLabel9: TRLLabel;
-    RLLabel10: TRLLabel;
-    RLLabel11: TRLLabel;
+    rlLabCor: TRLLabel;
+    rlLabCustoForn: TRLLabel;
+    rlLabCustoForn_: TRLLabel;
+    rlLabCusto: TRLLabel;
+    rlLabDisponivel: TRLLabel;
+    rlLabEntData_: TRLLabel;
+    rlLabEntData: TRLLabel;
+    rlLabEntradaForn: TRLLabel;
+    rlLabEntradaForn_: TRLLabel;
+    rlLabEntrada: TRLLabel;
     RLLabel12: TRLLabel;
-    RLLabel13: TRLLabel;
-    RLLabel14: TRLLabel;
-    RLLabel15: TRLLabel;
-    RLLabel16: TRLLabel;
-    RLLabel17: TRLLabel;
-    RLLabel18: TRLLabel;
-    RLLabel19: TRLLabel;
-    RLLabel20: TRLLabel;
-    RLBand1: TRLBand;
-    RLBand3: TRLBand;
-    RLBand2: TRLBand;
-    RLPanel1: TRLPanel;
-    RLGroup1: TRLGroup;
+    rlLabFator: TRLLabel;
+    rlLabFisico: TRLLabel;
+    rlLabForn: TRLLabel;
+    rlLabNumInterno: TRLLabel;
+    rlLabEmpenhos: TRLLabel;
+    rlLabCodNfe: TRLLabel;
+    rlLabRolo: TRLLabel;
+    rlLabTamanho: TRLLabel;
+    rlCabecalho: TRLBand;
+    rlCabecalhoEstoque: TRLBand;
+    rlDadosEstoque: TRLBand;
+    rlPanelEstilista: TRLPanel;
+    rlEstoqueEstilista: TRLGroup;
+    rlPanelNfe: TRLPanel;
+    rlDBCodNfe: TRLDBText;
+    rlDBInternoNfe: TRLDBText;
+    rlPanelDtEntrada: TRLPanel;
+    rlDBDtEntrada: TRLDBText;
+    rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
+    rlPanelTamanho: TRLPanel;
+    rlDBTamanho: TRLDBText;
+    rlPanelRolo: TRLPanel;
+    rlDBRolo: TRLDBMemo;
+    rlPanelEntForn: TRLPanel;
+    rlDBEntForn: TRLDBText;
+    rlPanelCustoForn: TRLPanel;
+    rlDBCustForn: TRLDBText;
+    rlPanelEntrada: TRLPanel;
+    rlDBEntrada: TRLDBText;
+    rlPanelFator: TRLPanel;
+    rlDBFator: TRLDBText;
+    rlPanelBalanco: TRLPanel;
     procedure FormShow(Sender: TObject);
     procedure rlLabelEstilistaBeforePrint(Sender: TObject;
       var AText: string; var PrintIt: Boolean);
     procedure rlRelTecidosBeforePrint(Sender: TObject;
       var PrintIt: Boolean);
+    
+
+
+
 
 
 
@@ -276,13 +300,41 @@ begin
      dmPrincipal.dsEstTecidos.DataSet     :=dmPrincipal.qryEstTecidos;
 
 
-
      rlRelTecidos.DataSource              :=dmPrincipal.dsEstTecidos;
-     RLGroup1.DataFields                  :='comp_nome';
+     rlEstoqueEstilista.DataFields        :='comp_nome';
 
      rlLabelEstilista.DataSource          :=dmPrincipal.dsEstTecidos;
      rlLabelEstilista.DataField           :='comp_nome';
 
+     rlDBCodNfe.DataSource                :=dmPrincipal.dsEstTecidos;
+     rlDBCodNfe.DataField                 :='nfe_codnfe';
+
+     rlDBInternoNfe.DataSource            :=dmPrincipal.dsEstTecidos;
+     rlDBInternoNfe.DataField             :='nfe_id';
+
+     rlDBDtEntrada.DataSource             :=dmPrincipal.dsEstTecidos;
+     rlDBDtEntrada.DataField              :='nfe_dtrecebimento';
+
+     rlDbCor.DataSource                   :=dmPrincipal.dsEstTecidos;
+     rlDbCor.DataField                    :='grc_nome';
+
+     rlDBTamanho.DataSource               :=dmPrincipal.dsEstTecidos;
+     rlDBTamanho.DataField                :='grt_nome';
+
+     rlDBRolo.DataSource                  :=dmPrincipal.dsEstTecidos;
+     rlDBRolo.DataField                   :='ig_numrolo';
+
+     rlDBEntForn.DataSource               :=dmPrincipal.dsEstTecidos;
+     rlDBEntForn.DataField                :='ig_qtdadeforn';
+
+     rlDBCustForn.DataSource              :=dmPrincipal.dsEstTecidos;
+     rlDBCustForn.DataField               :='es_custoatual';
+
+     rlDBEntrada.DataSource               :=dmPrincipal.dsEstTecidos;
+     rlDBEntrada.DataField                :='entrada';
+
+     rlDBFator.DataSource                 :=dmPrincipal.dsEstTecidos;
+     rlDBFator.DataField                  :='ig_fatorconversao';
 //     RLDBMemo1.DataSource           :=dmPrincipal.dsEstTecidos;
 //     RLDBMemo1.DataField            :='ig_numrolo';
      //rlDBEstilista.DataField                   :='comp_nome';
@@ -486,7 +538,6 @@ begin
 //    rlPanelEstoque.Parent :=rlCorpoEstoque;
 //      rlCelulaEstilista.Color :=clBlue;
 end;
-
 
 
 procedure TfrmRelTecidos.rlLabelEstilistaBeforePrint(Sender: TObject;

@@ -103,8 +103,6 @@ object dmPrincipal: TdmPrincipal
   end
   object qryEstTecidos: TFDQuery
     Connection = dmConexao.Conexao
-    SQL.Strings = (
-      '')
     Left = 72
     Top = 336
   end

@@ -12,6 +12,22 @@ type
   TdmPrincipal = class(TDataModule)
     qryGrc: TFDQuery;
     dsGrc: TDataSource;
+    qryTamanho: TFDQuery;
+    dsTamanho: TDataSource;
+    qryComprador: TFDQuery;
+    dsComprador: TDataSource;
+    qryFornecedor: TFDQuery;
+    dsFornecedor: TDataSource;
+    qryDadosArtigo: TFDQuery;
+    dsDadosArtigo: TDataSource;
+    qryEstAviamentos: TFDQuery;
+    dsEstAviamentos: TDataSource;
+    qryTotaisAviamentos: TFDQuery;
+    dsTotaisAviamentos: TDataSource;
+    qryTotaisTecido: TFDQuery;
+    dsTotaisTecido: TDataSource;
+    qryEstTecidos: TFDQuery;
+    dsEstTecidos: TDataSource;
   private
     { Private declarations }
   public
