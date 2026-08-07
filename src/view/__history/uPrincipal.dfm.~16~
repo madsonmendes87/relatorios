@@ -4,7 +4,7 @@ object frmPrincipal: TfrmPrincipal
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Relat'#243'rios'
-  ClientHeight = 269
+  ClientHeight = 267
   ClientWidth = 441
   Color = clFloralwhite
   Font.Charset = DEFAULT_CHARSET
@@ -267,31 +267,6 @@ object frmPrincipal: TfrmPrincipal
       ExplicitTop = 35
       ExplicitWidth = 23
       ExplicitHeight = 22
-    end
-  end
-  object pnlFooter: TPanel
-    Left = 0
-    Top = 249
-    Width = 441
-    Height = 20
-    Align = alBottom
-    Color = clFloralwhite
-    ParentBackground = False
-    TabOrder = 9
-    ExplicitTop = 246
-    object lblVersao: TLabel
-      Left = 19
-      Top = 4
-      Width = 48
-      Height = 15
-      Align = alCustom
-      Caption = 'lblVersao'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = [fsBold]
-      ParentFont = False
     end
   end
 end

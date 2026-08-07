@@ -96,11 +96,28 @@ type
     rlDBCusto: TRLDBText;
     rlPanelForn: TRLPanel;
     rlDBFornecedor: TRLDBMemo;
+    rlTotais: TRLBand;
+    rlPanelTotEntForn: TRLPanel;
+    rLabTotEntForn: TRLLabel;
+    rlPanelTotEntrada: TRLPanel;
+    rLabTotEntrada: TRLLabel;
+    rlLblTotalEntForn: TRLLabel;
+    rlLblTotalEntrada: TRLLabel;
+    rlPanelTotalFisico: TRLPanel;
+    rlLabelTotalFisico: TRLLabel;
+    rlLblTotalFisico: TRLLabel;
+    rlTotalEmpenhos: TRLPanel;
+    rLabelTotEmpenhos: TRLLabel;
+    rlLblTotEmpenhos: TRLLabel;
+    RLPanel1: TRLPanel;
+    rlLabTotDisponivel: TRLLabel;
+    rlLblTotDisponivel: TRLLabel;
     procedure FormShow(Sender: TObject);
     procedure rlLabelEstilistaBeforePrint(Sender: TObject;
       var AText: string; var PrintIt: Boolean);
     procedure rlRelTecidosBeforePrint(Sender: TObject;
       var PrintIt: Boolean);
+    procedure rlTotaisBeforePrint(Sender: TObject; var PrintIt: Boolean);
     
 
 
@@ -130,6 +147,7 @@ uses uFiltroArtigo, uDmPrincipal, uConexao;
 { TfrmRelTecidos }
 
 procedure TfrmRelTecidos.carregarDados;
+
 begin
     dmConexao.Conexao.Connected :=true;
 
@@ -200,7 +218,9 @@ begin
           SQL.Add('     cc.comp_nome,');
           SQL.Add('     igf.ig_numrolo,');
           SQL.Add('     igf.ig_qtdadeforn,');
+          SQL.Add('     SUM(igf.ig_qtdadeforn) OVER() AS total_ig_qtdadeforn,');
           SQL.Add('     (igf.ig_quantidade) AS entrada,');
+          SQL.Add('     SUM(igf.ig_quantidade) OVER() AS total_entrada,');
           SQL.Add('     cp.cp_unestoque,');
           SQL.Add('     (');
           SQL.Add('               SELECT pnfe_uncom');
@@ -219,9 +239,28 @@ begin
           SQL.Add('                           COALESCE(e.es_saidabalanco, 0.0000) - COALESCE(e.es_entbalanco, 0.0000)');
           SQL.Add('               )');
           SQL.Add('     ) AS estoque_fisico,');
+          SQL.Add('     SUM(');
+          SQL.Add('               (');
+          SQL.Add('                       (');
+          SQL.Add('                               COALESCE(e.es_entradaforn, 0.0000) -');
+          SQL.Add('                               COALESCE(e.es_saidaforn, 0.0000) +');
+          SQL.Add('                               COALESCE(e.es_enttransf, 0.0000) -');
+          SQL.Add('                               COALESCE(e.es_saidatransf, 0.0000)');
+          SQL.Add('                       )');
+          SQL.Add('                       -');
+          SQL.Add('                       (');
+          SQL.Add('                               COALESCE(e.es_saidabalanco, 0.0000) -');
+          SQL.Add('                               COALESCE(e.es_entbalanco, 0.0000)');
+          SQL.Add('                       )');
+          SQL.Add('               )');
+          SQL.Add('      ) OVER() AS total_estoque_fisico,');
           SQL.Add('     (');
           SQL.Add('               COALESCE(e.es_saidaempenho, 0.0000) - coalesce(e.es_entempenho, 0.0000)');
           SQL.Add('     ) AS empenhos,');
+          SQL.Add('     SUM(');
+          SQL.Add('               COALESCE(e.es_saidaempenho,0.0000) -');
+          SQL.Add('               COALESCE(e.es_entempenho,0.0000)');
+          SQL.Add('     ) OVER() AS total_empenhos,');
           SQL.Add('     (');
           SQL.Add('               (');
           SQL.Add('                           COALESCE(e.es_entradaforn, 0.0000) - COALESCE(e.es_saidaforn, 0.000) +');
@@ -234,6 +273,26 @@ begin
           SQL.Add('                           COALESCE(e.es_saidabalanco, 0.0000) - COALESCE(e.es_entbalanco, 0.0000)');
           SQL.Add('               )');
           SQL.Add('     ) AS disponivel_para_empenho,');
+          SQL.Add('     SUM(');
+          SQL.Add('               (');
+          SQL.Add('                       (');
+          SQL.Add('                               COALESCE(e.es_entradaforn,0.0000) -');
+          SQL.Add('                               COALESCE(e.es_saidaforn,0.0000) +');
+          SQL.Add('                               COALESCE(e.es_enttransf,0.0000) -');
+          SQL.Add('                               COALESCE(e.es_saidatransf,0.0000)');
+          SQL.Add('                       )');
+          SQL.Add('                       -');
+          SQL.Add('                       (');
+          SQL.Add('                               COALESCE(e.es_saidaempenho,0.0000) -');
+          SQL.Add('                               COALESCE(e.es_entempenho,0.0000)');
+          SQL.Add('                       )');
+          SQL.Add('                       -');
+          SQL.Add('                       (');
+          SQL.Add('                               COALESCE(e.es_saidabalanco,0.0000) -');
+          SQL.Add('                               COALESCE(e.es_entbalanco,0.0000)');
+          SQL.Add('                       )');
+          SQL.Add('               )');
+          SQL.Add('     ) OVER() AS total_disponivel_para_empenho,');
           SQL.Add('     COALESCE(e.es_custoatual, 0) AS es_custoatual,');
           SQL.Add('     f.for_nome,');
           SQL.Add('     f.for_apelido,');
@@ -270,19 +329,7 @@ begin
                          ' (COALESCE(e.es_saidabalanco,0)-COALESCE(e.es_entbalanco,0))' +
                          ' ) > 0');
           end;
-//          SQL.Add('     AND');
-//          SQL.Add('               (');
-//          SQL.Add('                         (');
-//          SQL.Add('                                   COALESCE(e.es_entradaforn, 0.0000) - COALESCE(e.es_saidaforn, 0.000) +');
-//          SQL.Add('                                   COALESCE(e.es_enttransf, 0.000) - COALESCE(e.es_saidatransf, 0.0000)');
-//          SQL.Add('                         ) -');
-//          SQL.Add('                         (');
-//          SQL.Add('                                   COALESCE(e.es_saidaempenho, 0.0000) - COALESCE(e.es_entempenho, 0.0000)');
-//          SQL.Add('                         ) -');
-//          SQL.Add('                         (');
-//          SQL.Add('                                   COALESCE(e.es_saidabalanco, 0.0000) - COALESCE(e.es_entbalanco, 0.0000)');
-//          SQL.Add('                         )');
-//          SQL.Add('                ) >= 0');
+
           SQL.Add('     AND cp.cp_id=:idArtigo');
           SQL.Add('     GROUP BY');
           SQL.Add('               nfe.nfe_id,');
@@ -380,6 +427,13 @@ begin
 
      rlDBFornecedor.DataSource            :=dmPrincipal.dsEstTecidos;
      rlDBFornecedor.DataField             :='for_apelido';
+
+     //FTotalEntForn := dmPrincipal.qryEstTecidos.FieldByName('total_ig_qtdadeforn').AsFloat;
+
+     //rlTotalEntForn.DataSource            :=dmPrincipal.dsEstTecidos;
+     //rlTotalEntForn.DataField             :='total_ig_qtdadeforn';
+
+     //ShowMessage(dmPrincipal.qryEstTecidos.FieldByName('total_ig_qtdadeforn').AsString);
 //     RLDBMemo1.DataSource           :=dmPrincipal.dsEstTecidos;
 //     RLDBMemo1.DataField            :='ig_numrolo';
      //rlDBEstilista.DataField                   :='comp_nome';
@@ -599,6 +653,29 @@ procedure TfrmRelTecidos.rlRelTecidosBeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 begin
     FUltimoComprador := '';
+end;
+
+procedure TfrmRelTecidos.rlTotaisBeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+
+  var
+      totalEntForn, totalEntrada, totalFisico, totalEmpenho, totalDisponivel : double;
+
+begin
+    totalEntForn                :=dmPrincipal.qryEstTecidos.FieldByName('total_ig_qtdadeforn').AsFloat;
+    rlLblTotalEntForn.Caption   :=FormatFloat('0.0000', totalEntForn);
+
+    totalEntrada                :=dmPrincipal.qryEstTecidos.FieldByName('total_entrada').AsFloat;
+    rlLblTotalEntrada.Caption   :=FormatFloat('0.0000', totalEntrada);
+
+    totalFisico                 :=dmPrincipal.qryEstTecidos.FieldByName('total_estoque_fisico').AsFloat;
+    rlLblTotalFisico.Caption    :=FormatFloat('0.0000', totalFisico);
+
+    totalEmpenho                :=dmPrincipal.qryEstTecidos.FieldByName('total_empenhos').AsFloat;
+    rlLblTotEmpenhos.Caption    :=FormatFloat('0.0000', totalEmpenho);
+
+    totalDisponivel             :=dmPrincipal.qryEstTecidos.FieldByName('total_disponivel_para_empenho').AsFloat;
+    rlLblTotDisponivel.Caption  :=FormatFloat('0.0000', totalDisponivel);
 end;
 
 end.

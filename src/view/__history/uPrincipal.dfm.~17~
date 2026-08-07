@@ -271,27 +271,20 @@ object frmPrincipal: TfrmPrincipal
   end
   object pnlFooter: TPanel
     Left = 0
-    Top = 249
+    Top = 242
     Width = 441
-    Height = 20
+    Height = 27
     Align = alBottom
     Color = clFloralwhite
     ParentBackground = False
     TabOrder = 9
-    ExplicitTop = 246
     object lblVersao: TLabel
       Left = 19
       Top = 4
-      Width = 48
-      Height = 15
+      Width = 47
+      Height = 16
       Align = alCustom
       Caption = 'lblVersao'
-      Font.Charset = ANSI_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI Semibold'
-      Font.Style = [fsBold]
-      ParentFont = False
     end
   end
 end

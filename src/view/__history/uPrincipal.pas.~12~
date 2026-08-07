@@ -4,8 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons,
-  Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Buttons;
 
 type
   TfrmPrincipal = class(TForm)
@@ -27,13 +26,10 @@ type
     btnEntradaSaida: TSpeedButton;
     pnlInfoArtSintetico: TPanel;
     btnInfoArtSintetico: TSpeedButton;
-    pnlFooter: TPanel;
-    lblVersao: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnInfoArtigoClick(Sender: TObject);
   private
     { Private declarations }
-    function VersaoPrograma: string;
   public
     { Public declarations }
 
@@ -70,42 +66,6 @@ begin
     btnProdutividade.Caption        :='Produtividade';
     btnEntradaSaida.Caption         :='Entrada e Saida'#13#10'(sintético)';
     btnInfoArtSintetico.Caption     :='Informações'#13#10'Artigo (Sintético)';
-
-    lblVersao.Caption := 'Versão ' + VersaoPrograma;
-end;
-
-function TfrmPrincipal.VersaoPrograma: string;
-
-var
-  InfoSize, Wnd: DWORD;
-  VerBuf: Pointer;
-  VerInfo: PVSFixedFileInfo;
-  VerSize: UINT;
-
-begin
-    Result := '';
-
-    InfoSize := GetFileVersionInfoSize(PChar(ParamStr(0)), Wnd);
-
-    if InfoSize <> 0 then
-    begin
-        GetMem(VerBuf, InfoSize);
-        try
-            if GetFileVersionInfo(PChar(ParamStr(0)), Wnd, InfoSize, VerBuf) then
-            begin
-                if VerQueryValue(VerBuf, '\', Pointer(VerInfo), VerSize) then
-                begin
-                  Result := Format('%d.%d.%d.%d',
-                    [HiWord(VerInfo.dwFileVersionMS),
-                     LoWord(VerInfo.dwFileVersionMS),
-                     HiWord(VerInfo.dwFileVersionLS),
-                     LoWord(VerInfo.dwFileVersionLS)]);
-                end;
-            end;
-        finally
-            FreeMem(VerBuf);
-        end;
-    end;
 end;
 
 end.
