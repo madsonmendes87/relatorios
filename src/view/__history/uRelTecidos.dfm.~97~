@@ -625,7 +625,7 @@ object frmRelTecidos: TfrmRelTecidos
       Left = 4
       Top = 159
       Width = 786
-      Height = 170
+      Height = 178
       object rlDadosEstoque: TRLBand
         Left = 0
         Top = 89
@@ -1422,10 +1422,11 @@ object frmRelTecidos: TfrmRelTecidos
           ParentColor = False
           Transparent = False
           object rlLabelEstilista: TRLDBText
-            Left = 320
+            Left = 351
             Top = 3
             Width = 81
             Height = 16
+            Align = faCenter
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
             Font.Height = -13

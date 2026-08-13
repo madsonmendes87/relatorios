@@ -222,6 +222,19 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object lblRelPaisagem: TLabel
+    Left = 250
+    Top = 318
+    Width = 146
+    Height = 15
+    Caption = 'RELAT'#211'RIO EM PAISAGEM'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object cboTipoSaldo: TComboBox
     Left = 8
     Top = 29
@@ -308,7 +321,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Top = 217
     Width = 185
     Height = 23
-    ItemIndex = 2
+    ItemIndex = 0
     TabOrder = 8
     Text = 'AMBOS'
     Items.Strings = (
@@ -388,14 +401,55 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       TabOrder = 2
     end
   end
+  object chkConsEstilista: TCheckBox
+    Left = 8
+    Top = 318
+    Width = 161
+    Height = 17
+    Caption = 'RESUMO POR ESTILISTA'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 11
+  end
+  object chkRelPaisagem: TCheckBox
+    Left = 234
+    Top = 318
+    Width = 23
+    Height = 17
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 12
+  end
+  object chkAbrirAplicativo: TCheckBox
+    Left = 471
+    Top = 318
+    Width = 130
+    Height = 17
+    Caption = 'Abrir no Aplicativo'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 13
+  end
   object pnlVisualizar: TPanel
-    Left = 6
+    Left = 607
     Top = 304
     Width = 109
     Height = 31
     Color = clMenuHighlight
     ParentBackground = False
-    TabOrder = 11
+    TabOrder = 14
     object btnVisualizar: TSpeedButton
       Left = 1
       Top = 1
@@ -403,7 +457,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       Height = 29
       Cursor = crHandPoint
       Align = alClient
-      Caption = 'Visualizar Estoque'
+      Caption = 'F1 - Visualizar'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -414,36 +468,6 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       OnClick = btnVisualizarClick
       ExplicitLeft = 86
       ExplicitTop = 9
-      ExplicitWidth = 23
-      ExplicitHeight = 22
-    end
-  end
-  object pnlVisualEmpenho: TPanel
-    Left = 138
-    Top = 304
-    Width = 120
-    Height = 31
-    Color = clHotLight
-    ParentBackground = False
-    TabOrder = 12
-    object btnVisEmpenho: TSpeedButton
-      Left = 1
-      Top = 1
-      Width = 118
-      Height = 29
-      Cursor = crHandPoint
-      Align = alClient
-      Caption = 'Visualizar Empenhos'
-      Flat = True
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      OnClick = btnVisEmpenhoClick
-      ExplicitLeft = 64
-      ExplicitTop = 8
       ExplicitWidth = 23
       ExplicitHeight = 22
     end

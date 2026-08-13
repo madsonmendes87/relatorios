@@ -66,23 +66,20 @@ implementation
 
 {$R *.dfm}
 
-uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho;
+uses uPrincipal, uDmPrincipal, uRelTecidos;
 
 procedure TfrmFiltroArtigo.btnVisEmpenhoClick(Sender: TObject);
 begin
     previsualizacao;
 
-    if dmPrincipal.qryDadosArtigo.FindField('tp_nome') <> nil then
+    if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
     begin
-        if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
-        begin
-            frmRelTecidoEmpenho.carregarDados;
-            frmRelTecidoEmpenho.rlRelTecidoEmpenho.Preview();
-        end
-        else
-        begin
-            ShowMessage('Abrir relatorio artigos');
-        end;
+//        frmRelTecidos.carregarDados;
+//        frmRelTecidos.rlRelTecidos.Preview();
+    end
+    else
+    begin
+        ShowMessage('Abrir relatorio artigos');
     end;
 end;
 
@@ -90,17 +87,14 @@ procedure TfrmFiltroArtigo.btnVisualizarClick(Sender: TObject);
 begin
     previsualizacao;
 
-    if dmPrincipal.qryDadosArtigo.FindField('tp_nome') <> nil then
+    if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
     begin
-        if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
-        begin
-            frmRelTecidos.carregarDados;
-            frmRelTecidos.rlRelTecidos.Preview();
-        end
-        else
-        begin
-            ShowMessage('Abrir relatorio artigos');
-        end;
+        frmRelTecidos.carregarDados;
+        frmRelTecidos.rlRelTecidos.Preview();
+    end
+    else
+    begin
+        ShowMessage('Abrir relatorio artigos');
     end;
 
 end;

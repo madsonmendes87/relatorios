@@ -436,7 +436,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       Caption = 'Visualizar Empenhos'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWhite
+      Font.Color = clWindowText
       Font.Height = -12
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]

@@ -6,8 +6,7 @@ uses
   uConexao in 'src\datamodule\uConexao.pas' {dmConexao: TDataModule},
   uFiltroArtigo in 'src\view\uFiltroArtigo.pas' {frmFiltroArtigo},
   uDmPrincipal in 'src\datamodule\uDmPrincipal.pas' {dmPrincipal: TDataModule},
-  uRelTecidos in 'src\view\uRelTecidos.pas' {frmRelTecidos},
-  uRelTecidoEmpenho in 'src\view\uRelTecidoEmpenho.pas' {frmRelTecidoEmpenho};
+  uRelTecidos in 'src\view\uRelTecidos.pas' {frmRelTecidos};
 
 {$R *.res}
 
@@ -18,6 +17,5 @@ begin
   Application.CreateForm(TdmConexao, dmConexao);
   Application.CreateForm(TdmPrincipal, dmPrincipal);
   Application.CreateForm(TfrmRelTecidos, frmRelTecidos);
-  Application.CreateForm(TfrmRelTecidoEmpenho, frmRelTecidoEmpenho);
   Application.Run;
 end.

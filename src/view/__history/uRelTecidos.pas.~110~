@@ -114,6 +114,7 @@ type
     rlLblTotDisponivel: TRLLabel;
     rlDBTotal: TRLDBText;
     rlLabTotal: TRLLabel;
+    rlEmpenhoEstilista: TRLGroup;
     procedure FormShow(Sender: TObject);
     procedure rlLabelEstilistaBeforePrint(Sender: TObject;
       var AText: string; var PrintIt: Boolean);
@@ -548,6 +549,211 @@ begin
 //          ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
 //          Open;
 //     end;
+
+
+     //dmPrincipal.dsEmpTecidos.DataSet     :=dmPrincipal.qryEmpTecidos;
+
+
+     //FTotalEntForn := dmPrincipal.qryEstTecidos.FieldByName('total_ig_qtdadeforn').AsFloat;
+
+     //rlTotalEntForn.DataSource            :=dmPrincipal.dsEstTecidos;
+     //rlTotalEntForn.DataField             :='total_ig_qtdadeforn';
+
+     //ShowMessage(dmPrincipal.qryEstTecidos.FieldByName('total_ig_qtdadeforn').AsString);
+//     RLDBMemo1.DataSource           :=dmPrincipal.dsEstTecidos;
+//     RLDBMemo1.DataField            :='ig_numrolo';
+     //rlDBEstilista.DataField                   :='comp_nome';
+    {    with dmPrincipal.qryEstAviamentos do
+        begin
+            Close;
+            SQL.Clear;
+            SQL.Add('SELECT');
+            SQL.Add('     CAST(');
+            SQL.Add('             COALESCE(gc.grc_codexterno, '''') || '' - '' || TRIM(gc.grc_nome) AS VARCHAR(50)');
+            SQL.Add('         ) AS grc_nome_pa,');
+            SQL.Add('     gt.grt_nome,');
+            SQL.Add('     CASE');
+            SQL.Add('         WHEN es.es_entbalanco > 0 THEN ''SIM''');
+            SQL.Add('         ELSE ''NAO''');
+            SQL.Add('     END AS balanco,');
+            SQL.Add('     CAST(');
+            SQL.Add('               (');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_entradaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_enttransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_entbalanco, 0)');
+            SQL.Add('                     ) -');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidatransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidabalanco, 0)');
+            SQL.Add('                     )');
+            SQL.Add('               ) AS VARCHAR(20)');
+            SQL.Add('         ) || '' '' || cp.cp_un AS estoque_fisico,');
+            SQL.Add('     CAST(');
+            SQL.Add('               (');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaempenho, 0) -');
+            SQL.Add('                             COALESCE(es.es_entempenho, 0)');
+            SQL.Add('                     )');
+            SQL.Add('               ) AS VARCHAR(20)');
+            SQL.Add('         ) || '' '' || cp.cp_un AS empenhos,');
+            SQL.Add('     CAST(');
+            SQL.Add('               (');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_entradaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_enttransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_entbalanco, 0)');
+            SQL.Add('                     ) -');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidatransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidabalanco, 0)');
+            SQL.Add('                     )');
+            SQL.Add('                     -');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaempenho, 0) -');
+            SQL.Add('                             COALESCE(es.es_entempenho, 0)');
+            SQL.Add('                     )');
+            SQL.Add('               ) AS VARCHAR(20)');
+            SQL.Add('         ) || '' '' || cp.cp_un AS estoque_disponivel,');
+            SQL.Add('         es.es_custoatual,');
+            SQL.Add('     SUM(');
+            SQL.Add('              (');
+            SQL.Add('                       COALESCE(es.es_entradaforn, 0) +');
+            SQL.Add('                       COALESCE(es.es_enttransf, 0) +');
+            SQL.Add('                       COALESCE(es.es_entbalanco, 0)');
+            SQL.Add('               ) -');
+            SQL.Add('               (');
+            SQL.Add('                       COALESCE(es.es_saidaforn, 0) +');
+            SQL.Add('                       COALESCE(es.es_saidatransf, 0) +');
+            SQL.Add('                       COALESCE(es.es_saidabalanco, 0)');
+            SQL.Add('               )');
+            SQL.Add('        ) OVER() AS total_estoque_fisico,');
+            SQL.Add('     SUM(');
+            SQL.Add('               COALESCE(es.es_saidaempenho, 0) -');
+            SQL.Add('               COALESCE(es.es_entempenho, 0)');
+            SQL.Add('        ) OVER() AS total_empenhos,');
+            SQL.Add('     SUM(');
+            SQL.Add('              (');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_entradaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_enttransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_entbalanco, 0)');
+            SQL.Add('                     ) -');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidatransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidabalanco, 0)');
+            SQL.Add('                     )');
+            SQL.Add('              ) -');
+            SQL.Add('              (');
+            SQL.Add('                     COALESCE(es.es_saidaempenho, 0) -');
+            SQL.Add('                     COALESCE(es.es_entempenho, 0)');
+            SQL.Add('              )');
+            SQL.Add('        ) OVER() AS total_estoque_disponivel');
+            SQL.Add('     FROM estoque AS es');
+            SQL.Add('     JOIN grade_cor AS gc ON gc.grc_id = es.es_idgradecor');
+            SQL.Add('     JOIN grade_tamanho AS gt ON gt.grt_id = es.es_idgradetam');
+            SQL.Add('     JOIN cadastro_produto AS cp ON cp.cp_id = es.es_codproduto');
+            SQL.Add('     WHERE es_codproduto = :idArtigo');
+
+            ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+            Open;
+        end; }
+
+
+
+//        dmPrincipal.dsEstTecidos.DataSet     :=dmPrincipal.qryEstAviamentos;
+//
+//        rlRelTecidos.DataSource             :=dmPrincipal.dsEstTecidos;
+
+        //AQUI
+
+//        rlDBEstilista.DataSource                  :=dmPrincipal.dsEstTecidos;
+//        rlDBEstilista.DataField                   :='comp_nome';
+//
+//        rlDBTamanho.DataSource              :=dmPrincipal.dsEstArtigo;
+//        rlDBTamanho.DataField               :='grt_nome';
+//
+//        rlDBBalanco.DataSource              :=dmPrincipal.dsEstArtigo;
+//        rlDBBalanco.DataField               :='balanco';
+//
+//        rlDBFisico.DataSource               :=dmPrincipal.dsEstArtigo;
+//        rlDBFisico.DataField                :='estoque_fisico';
+//
+//        rlDBEmpenhos.DataSource             :=dmPrincipal.dsEstArtigo;
+//        rlDBEmpenhos.DataField              :='empenhos';
+//
+//        rlDBDisponivel.DataSource           :=dmPrincipal.dsEstArtigo;
+//        rlDBDisponivel.DataField            :='estoque_disponivel';
+//
+//        rlDBCusto.DataSource                :=dmPrincipal.dsEstArtigo;
+//        rlDBCusto.DataField                 :='es_custoatual';
+
+
+
+ {       with dmPrincipal.qryTotaisAviamentos do
+        begin
+            Close;
+            SQL.Clear;
+            SQL.Add('SELECT');
+            SQL.Add('       SUM(');
+            SQL.Add('                 (');
+            SQL.Add('                         COALESCE(es.es_entradaforn,0) +');
+            SQL.Add('                         COALESCE(es.es_enttransf,0) +');
+            SQL.Add('                         COALESCE(es.es_entbalanco,0)');
+            SQL.Add('                 ) -');
+            SQL.Add('                 (');
+            SQL.Add('                         COALESCE(es.es_saidaforn,0) +');
+            SQL.Add('                         COALESCE(es.es_saidatransf,0) +');
+            SQL.Add('                         COALESCE(es.es_saidabalanco,0)');
+            SQL.Add('                 )');
+            SQL.Add('         ) AS total_estoque_fisico,');
+            SQL.Add('       SUM(');
+            SQL.Add('                 COALESCE(es.es_saidaempenho,0) -');
+            SQL.Add('                 COALESCE(es.es_entempenho,0)');
+            SQL.Add('       ) AS total_empenhos,');
+            SQL.Add('       SUM(');
+            SQL.Add('                 (');
+            SQL.Add('                       (');
+            SQL.Add('                             COALESCE(es.es_entradaforn,0) +');
+            SQL.Add('                             COALESCE(es.es_enttransf,0) +');
+            SQL.Add('                             COALESCE(es.es_entbalanco,0)');
+            SQL.Add('                       ) -');
+            SQL.Add('                       (');
+            SQL.Add('                             COALESCE(es.es_saidaforn,0) +');
+            SQL.Add('                             COALESCE(es.es_saidatransf,0) +');
+            SQL.Add('                             COALESCE(es.es_saidabalanco,0)');
+            SQL.Add('                       )');
+            SQL.Add('                ) -');
+            SQL.Add('                (');
+            SQL.Add('                         COALESCE(es.es_saidaempenho,0) -');
+            SQL.Add('                         COALESCE(es.es_entempenho,0)');
+            SQL.Add('                )');
+            SQL.Add('        ) AS total_estoque_disponivel');
+            SQL.Add('        FROM estoque es');
+            SQL.Add('       WHERE es.es_codproduto = :idArtigo');
+
+            ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+            Open;
+        end;
+
+
+        dmPrincipal.dsTotaisAviamentos.DataSet     :=dmPrincipal.qryTotaisAviamentos;        }
+
+        //AQUI
+
+
+//        rlDBTotFisico.DataSource                :=dmPrincipal.dsTotaisEstoque;
+//        rlDBTotFisico.DataField                 :='total_estoque_fisico';
+//
+//        rlDBTotEmpenhos.DataSource              :=dmPrincipal.dsTotaisEstoque;
+//        rlDBTotEmpenhos.DataField               :='total_empenhos';
+//
+//        rlDBTotDisponivel.DataSource            :=dmPrincipal.dsTotaisEstoque;
+//        rlDBTotDisponivel.DataField             :='total_estoque_disponivel';
+
 end;
 
 

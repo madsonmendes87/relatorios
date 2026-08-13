@@ -114,6 +114,7 @@ type
     rlLblTotDisponivel: TRLLabel;
     rlDBTotal: TRLDBText;
     rlLabTotal: TRLLabel;
+    RLGroup1: TRLGroup;
     procedure FormShow(Sender: TObject);
     procedure rlLabelEstilistaBeforePrint(Sender: TObject;
       var AText: string; var PrintIt: Boolean);
@@ -398,8 +399,8 @@ begin
      dmPrincipal.dsEstTecidos.DataSet     :=dmPrincipal.qryEstTecidos;
 
 
-     rlRelTecidos.DataSource              :=dmPrincipal.dsEstTecidos;
-     rlEstoqueEstilista.DataFields        :='comp_nome';
+//     rlRelTecidos.DataSource              :=dmPrincipal.dsEstTecidos;
+//     rlEstoqueEstilista.DataFields        :='comp_nome';
 
      rlLabelEstilista.DataSource          :=dmPrincipal.dsEstTecidos;
      rlLabelEstilista.DataField           :='comp_nome';
@@ -457,97 +458,302 @@ begin
 
 
 
-//     with dmPrincipal.qryEmpTecidos do
-//     begin
-//          Close;
-//          SQL.Clear;
-//          SQL.Add('(SELECT');
-//          SQL.Add('       cp.cp_id,');
-//          SQL.Add('       gc.grc_id,');
-//          SQL.Add('       gt.grt_id,');
-//          SQL.Add('       est.es_id,');
-//          SQL.Add('       (est.es_nome) AS estilista,');
-//          SQL.Add('       ce.emp_idestoque,');
-//          SQL.Add('       (SELECT emp_dtlanc');
-//          SQL.Add('                   FROM controle_empenho');
-//          SQL.Add('                   WHERE emp_codprocesso=ce.emp_codprocesso');
-//          SQL.Add('                   AND emp_idestoque=ce.emp_idestoque');
-//          SQL.Add('                   AND emp_situacao<>''C''');
-//          SQL.Add('                   AND emp_tipo=''S''');
-//          SQL.Add('                   AND emp_eprototipo=ce.emp_eprototipo');
-//          SQL.Add('                   AND emp_dtlanc IS NOT NULL');
-//          SQL.Add('                   ORDER BY emp_id ASC');
-//          SQL.Add('                   LIMIT 1');
-//          SQL.Add('       ) AS emp_dtlanc,');
-//          SQL.Add('       ce.emp_codprocesso,');
-//          SQL.Add('       ce.emp_idordemcorte,');
-//          SQL.Add('       ce.emp_idordproducao,');
-//          SQL.Add('       pa.cad_idreferencia,');
-//          SQL.Add('       (gc.grc_codexterno || '' - ''|| gc.grc_nome) AS grc_nome,');
-//          SQL.Add('       gt.grt_nome,');
-//          SQL.Add('       ce.emp_eprototipo,');
-//          SQL.Add('       (CASE WHEN ce.emp_eprototipo=TRUE THEN ''PROTÓTIPO'' ELSE ''G. ESCALA'' END) AS tipo,');
-//          SQL.Add('       (CASE');
-//          SQL.Add('                     WHEN ce.emp_situacao IN (''N'', ''P'') THEN ''SOB PEDIDO DE EMPENHO''');
-//          SQL.Add('                     WHEN ce.emp_situacao = ''E'' THEN ''TRANSFERIDO''');
-//          SQL.Add('       END) AS situacao_empenho,');
-//          SQL.Add('       COALESCE(');
-//          SQL.Add('                   (SELECT SUM(ces.emp_consumo::numeric) FROM controle_empenho AS ces');
-//          SQL.Add('                   WHERE');
-//          SQL.Add('                         ces.emp_idestoque=ce.emp_idestoque');
-//          SQL.Add('                         AND ces.emp_codprocesso=ce.emp_codprocesso');
-//          SQL.Add('                         AND ces.emp_tipo=''S''');
-//          SQL.Add('                         AND ces.emp_situacao<>''C''');
-//          SQL.Add('                         AND ces.emp_eprototipo=ce.emp_eprototipo');
-//          SQL.Add('                   ),0) AS ent,');
-//          SQL.Add('       COALESCE(');
-//          SQL.Add('                   (SELECT SUM(ces.emp_consumo::numeric) From controle_empenho AS ces');
-//          SQL.Add('                   WHERE');
-//          SQL.Add('                         ces.emp_idestoque=ce.emp_idestoque');
-//          SQL.Add('                         AND ces.emp_codprocesso=ce.emp_codprocesso');
-//          SQL.Add('                         AND ces.emp_tipo =''E''');
-//          SQL.Add('                         AND ces.emp_mod=0');
-//          SQL.Add('                         AND ces.emp_situacao<>''C''');
-//          SQL.Add('                         AND ces.emp_eprototipo=ce.emp_eprototipo');
-//          SQL.Add('                   ), 0) AS dev,');
-//          SQL.Add('       ce.emp_situacao,');
-//          SQL.Add('       e.es_numrolo');
-//          SQL.Add('       FROM controle_empenho AS ce');
-//          SQL.Add('       JOIN estoque AS e ON e.es_id = ce.emp_idestoque');
-//          SQL.Add('       JOIN cadastro_produto AS cp On cp.cp_id=e.es_codproduto');
-//          SQL.Add('       JOIN grade_cor AS gc On gc.grc_id = e.es_idgradecor');
-//          SQL.Add('       JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam');
-//          SQL.Add('       JOIN ficha_tecnica AS ft ON ft.fi_id = ce.emp_codprocesso');
-//          SQL.Add('       JOIN produto_acabado AS pa ON pa.cad_id = ft.fi_idprodutoacabado');
-//          SQL.Add('       LEFT JOIN cadastro_estilista As est On est.es_id = pa.cad_idestilista');
-//          SQL.Add('       WHERE');
-//          SQL.Add('       cp.cp_id=:idArtigo');
-//          SQL.Add('       AND ce.emp_situacao<>''C''');
-//          SQL.Add('       AND ce.emp_tipo=''S''');
-//          SQL.Add('       GROUP BY');
-//          SQL.Add('                 est.es_nome,');
-//          SQL.Add('                 ce.emp_idordemcorte,');
-//          SQL.Add('                 ce.emp_idordproducao,');
-//          SQL.Add('                 ce.emp_situacao,');
-//          SQL.Add('                 pa.cad_idreferencia,');
-//          SQL.Add('                 gc.grc_codexterno,');
-//          SQL.Add('                 gc.grc_nome,');
-//          SQL.Add('                 cp.cp_id,');
-//          SQL.Add('                 gc.grc_id,');
-//          SQL.Add('                 gt.grt_id,');
-//          SQL.Add('                 ce.emp_eprototipo,');
-//          SQL.Add('                 ce.emp_codprocesso,');
-//          SQL.Add('                 gt.grt_nome,');
-//          SQL.Add('                 est.es_id,');
-//          SQL.Add('                 ce.emp_idestoque,');
-//          SQL.Add('                 e.es_numrolo');
-//          SQL.Add('     ORDER BY');
-//          SQL.Add('                 est.es_nome,');
-//          SQL.Add('                 pa.cad_idreferencia)');
+     with dmPrincipal.qryEmpTecidos do
+     begin
+          Close;
+          SQL.Clear;
+          SQL.Add('(SELECT');
+          SQL.Add('       cp.cp_id,');
+          SQL.Add('       gc.grc_id,');
+          SQL.Add('       gt.grt_id,');
+          SQL.Add('       est.es_id,');
+          SQL.Add('       (est.es_nome) AS estilista,');
+          SQL.Add('       ce.emp_idestoque,');
+          SQL.Add('       (SELECT emp_dtlanc');
+          SQL.Add('                   FROM controle_empenho');
+          SQL.Add('                   WHERE emp_codprocesso=ce.emp_codprocesso');
+          SQL.Add('                   AND emp_idestoque=ce.emp_idestoque');
+          SQL.Add('                   AND emp_situacao<>''C''');
+          SQL.Add('                   AND emp_tipo=''S''');
+          SQL.Add('                   AND emp_eprototipo=ce.emp_eprototipo');
+          SQL.Add('                   AND emp_dtlanc IS NOT NULL');
+          SQL.Add('                   ORDER BY emp_id ASC');
+          SQL.Add('                   LIMIT 1');
+          SQL.Add('       ) AS emp_dtlanc,');
+          SQL.Add('       ce.emp_codprocesso,');
+          SQL.Add('       ce.emp_idordemcorte,');
+          SQL.Add('       ce.emp_idordproducao,');
+          SQL.Add('       pa.cad_idreferencia,');
+          SQL.Add('       (gc.grc_codexterno || '' - ''|| gc.grc_nome) AS grc_nome,');
+          SQL.Add('       gt.grt_nome,');
+          SQL.Add('       ce.emp_eprototipo,');
+          SQL.Add('       (CASE WHEN ce.emp_eprototipo=TRUE THEN ''PROTÓTIPO'' ELSE ''G. ESCALA'' END) AS tipo,');
+          SQL.Add('       (CASE');
+          SQL.Add('                     WHEN ce.emp_situacao IN (''N'', ''P'') THEN ''SOB PEDIDO DE EMPENHO''');
+          SQL.Add('                     WHEN ce.emp_situacao = ''E'' THEN ''TRANSFERIDO''');
+          SQL.Add('       END) AS situacao_empenho,');
+          SQL.Add('       COALESCE(');
+          SQL.Add('                   (SELECT SUM(ces.emp_consumo::numeric) FROM controle_empenho AS ces');
+          SQL.Add('                   WHERE');
+          SQL.Add('                         ces.emp_idestoque=ce.emp_idestoque');
+          SQL.Add('                         AND ces.emp_codprocesso=ce.emp_codprocesso');
+          SQL.Add('                         AND ces.emp_tipo=''S''');
+          SQL.Add('                         AND ces.emp_situacao<>''C''');
+          SQL.Add('                         AND ces.emp_eprototipo=ce.emp_eprototipo');
+          SQL.Add('                   ),0) AS ent,');
+          SQL.Add('       COALESCE(');
+          SQL.Add('                   (SELECT SUM(ces.emp_consumo::numeric) From controle_empenho AS ces');
+          SQL.Add('                   WHERE');
+          SQL.Add('                         ces.emp_idestoque=ce.emp_idestoque');
+          SQL.Add('                         AND ces.emp_codprocesso=ce.emp_codprocesso');
+          SQL.Add('                         AND ces.emp_tipo =''E''');
+          SQL.Add('                         AND ces.emp_mod=0');
+          SQL.Add('                         AND ces.emp_situacao<>''C''');
+          SQL.Add('                         AND ces.emp_eprototipo=ce.emp_eprototipo');
+          SQL.Add('                   ), 0) AS dev,');
+          SQL.Add('       ce.emp_situacao,');
+          SQL.Add('       e.es_numrolo');
+          SQL.Add('       FROM controle_empenho AS ce');
+          SQL.Add('       JOIN estoque AS e ON e.es_id = ce.emp_idestoque');
+          SQL.Add('       JOIN cadastro_produto AS cp On cp.cp_id=e.es_codproduto');
+          SQL.Add('       JOIN grade_cor AS gc On gc.grc_id = e.es_idgradecor');
+          SQL.Add('       JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam');
+          SQL.Add('       JOIN ficha_tecnica AS ft ON ft.fi_id = ce.emp_codprocesso');
+          SQL.Add('       JOIN produto_acabado AS pa ON pa.cad_id = ft.fi_idprodutoacabado');
+          SQL.Add('       LEFT JOIN cadastro_estilista As est On est.es_id = pa.cad_idestilista');
+          SQL.Add('       WHERE');
+          SQL.Add('       cp.cp_id=:idArtigo');
+          SQL.Add('       AND ce.emp_situacao<>''C''');
+          SQL.Add('       AND ce.emp_tipo=''S''');
+          SQL.Add('       GROUP BY');
+          SQL.Add('                 est.es_nome,');
+          SQL.Add('                 ce.emp_idordemcorte,');
+          SQL.Add('                 ce.emp_idordproducao,');
+          SQL.Add('                 ce.emp_situacao,');
+          SQL.Add('                 pa.cad_idreferencia,');
+          SQL.Add('                 gc.grc_codexterno,');
+          SQL.Add('                 gc.grc_nome,');
+          SQL.Add('                 cp.cp_id,');
+          SQL.Add('                 gc.grc_id,');
+          SQL.Add('                 gt.grt_id,');
+          SQL.Add('                 ce.emp_eprototipo,');
+          SQL.Add('                 ce.emp_codprocesso,');
+          SQL.Add('                 gt.grt_nome,');
+          SQL.Add('                 est.es_id,');
+          SQL.Add('                 ce.emp_idestoque,');
+          SQL.Add('                 e.es_numrolo');
+          SQL.Add('     ORDER BY');
+          SQL.Add('                 est.es_nome,');
+          SQL.Add('                 pa.cad_idreferencia)');
+
+          ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+          Open;
+     end;
+
+
+     //dmPrincipal.dsEmpTecidos.DataSet     :=dmPrincipal.qryEmpTecidos;
+
+
+     //FTotalEntForn := dmPrincipal.qryEstTecidos.FieldByName('total_ig_qtdadeforn').AsFloat;
+
+     //rlTotalEntForn.DataSource            :=dmPrincipal.dsEstTecidos;
+     //rlTotalEntForn.DataField             :='total_ig_qtdadeforn';
+
+     //ShowMessage(dmPrincipal.qryEstTecidos.FieldByName('total_ig_qtdadeforn').AsString);
+//     RLDBMemo1.DataSource           :=dmPrincipal.dsEstTecidos;
+//     RLDBMemo1.DataField            :='ig_numrolo';
+     //rlDBEstilista.DataField                   :='comp_nome';
+    {    with dmPrincipal.qryEstAviamentos do
+        begin
+            Close;
+            SQL.Clear;
+            SQL.Add('SELECT');
+            SQL.Add('     CAST(');
+            SQL.Add('             COALESCE(gc.grc_codexterno, '''') || '' - '' || TRIM(gc.grc_nome) AS VARCHAR(50)');
+            SQL.Add('         ) AS grc_nome_pa,');
+            SQL.Add('     gt.grt_nome,');
+            SQL.Add('     CASE');
+            SQL.Add('         WHEN es.es_entbalanco > 0 THEN ''SIM''');
+            SQL.Add('         ELSE ''NAO''');
+            SQL.Add('     END AS balanco,');
+            SQL.Add('     CAST(');
+            SQL.Add('               (');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_entradaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_enttransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_entbalanco, 0)');
+            SQL.Add('                     ) -');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidatransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidabalanco, 0)');
+            SQL.Add('                     )');
+            SQL.Add('               ) AS VARCHAR(20)');
+            SQL.Add('         ) || '' '' || cp.cp_un AS estoque_fisico,');
+            SQL.Add('     CAST(');
+            SQL.Add('               (');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaempenho, 0) -');
+            SQL.Add('                             COALESCE(es.es_entempenho, 0)');
+            SQL.Add('                     )');
+            SQL.Add('               ) AS VARCHAR(20)');
+            SQL.Add('         ) || '' '' || cp.cp_un AS empenhos,');
+            SQL.Add('     CAST(');
+            SQL.Add('               (');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_entradaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_enttransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_entbalanco, 0)');
+            SQL.Add('                     ) -');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidatransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidabalanco, 0)');
+            SQL.Add('                     )');
+            SQL.Add('                     -');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaempenho, 0) -');
+            SQL.Add('                             COALESCE(es.es_entempenho, 0)');
+            SQL.Add('                     )');
+            SQL.Add('               ) AS VARCHAR(20)');
+            SQL.Add('         ) || '' '' || cp.cp_un AS estoque_disponivel,');
+            SQL.Add('         es.es_custoatual,');
+            SQL.Add('     SUM(');
+            SQL.Add('              (');
+            SQL.Add('                       COALESCE(es.es_entradaforn, 0) +');
+            SQL.Add('                       COALESCE(es.es_enttransf, 0) +');
+            SQL.Add('                       COALESCE(es.es_entbalanco, 0)');
+            SQL.Add('               ) -');
+            SQL.Add('               (');
+            SQL.Add('                       COALESCE(es.es_saidaforn, 0) +');
+            SQL.Add('                       COALESCE(es.es_saidatransf, 0) +');
+            SQL.Add('                       COALESCE(es.es_saidabalanco, 0)');
+            SQL.Add('               )');
+            SQL.Add('        ) OVER() AS total_estoque_fisico,');
+            SQL.Add('     SUM(');
+            SQL.Add('               COALESCE(es.es_saidaempenho, 0) -');
+            SQL.Add('               COALESCE(es.es_entempenho, 0)');
+            SQL.Add('        ) OVER() AS total_empenhos,');
+            SQL.Add('     SUM(');
+            SQL.Add('              (');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_entradaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_enttransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_entbalanco, 0)');
+            SQL.Add('                     ) -');
+            SQL.Add('                     (');
+            SQL.Add('                             COALESCE(es.es_saidaforn, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidatransf, 0) +');
+            SQL.Add('                             COALESCE(es.es_saidabalanco, 0)');
+            SQL.Add('                     )');
+            SQL.Add('              ) -');
+            SQL.Add('              (');
+            SQL.Add('                     COALESCE(es.es_saidaempenho, 0) -');
+            SQL.Add('                     COALESCE(es.es_entempenho, 0)');
+            SQL.Add('              )');
+            SQL.Add('        ) OVER() AS total_estoque_disponivel');
+            SQL.Add('     FROM estoque AS es');
+            SQL.Add('     JOIN grade_cor AS gc ON gc.grc_id = es.es_idgradecor');
+            SQL.Add('     JOIN grade_tamanho AS gt ON gt.grt_id = es.es_idgradetam');
+            SQL.Add('     JOIN cadastro_produto AS cp ON cp.cp_id = es.es_codproduto');
+            SQL.Add('     WHERE es_codproduto = :idArtigo');
+
+            ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+            Open;
+        end; }
+
+
+
+//        dmPrincipal.dsEstTecidos.DataSet     :=dmPrincipal.qryEstAviamentos;
 //
-//          ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
-//          Open;
-//     end;
+//        rlRelTecidos.DataSource             :=dmPrincipal.dsEstTecidos;
+
+        //AQUI
+
+//        rlDBEstilista.DataSource                  :=dmPrincipal.dsEstTecidos;
+//        rlDBEstilista.DataField                   :='comp_nome';
+//
+//        rlDBTamanho.DataSource              :=dmPrincipal.dsEstArtigo;
+//        rlDBTamanho.DataField               :='grt_nome';
+//
+//        rlDBBalanco.DataSource              :=dmPrincipal.dsEstArtigo;
+//        rlDBBalanco.DataField               :='balanco';
+//
+//        rlDBFisico.DataSource               :=dmPrincipal.dsEstArtigo;
+//        rlDBFisico.DataField                :='estoque_fisico';
+//
+//        rlDBEmpenhos.DataSource             :=dmPrincipal.dsEstArtigo;
+//        rlDBEmpenhos.DataField              :='empenhos';
+//
+//        rlDBDisponivel.DataSource           :=dmPrincipal.dsEstArtigo;
+//        rlDBDisponivel.DataField            :='estoque_disponivel';
+//
+//        rlDBCusto.DataSource                :=dmPrincipal.dsEstArtigo;
+//        rlDBCusto.DataField                 :='es_custoatual';
+
+
+
+ {       with dmPrincipal.qryTotaisAviamentos do
+        begin
+            Close;
+            SQL.Clear;
+            SQL.Add('SELECT');
+            SQL.Add('       SUM(');
+            SQL.Add('                 (');
+            SQL.Add('                         COALESCE(es.es_entradaforn,0) +');
+            SQL.Add('                         COALESCE(es.es_enttransf,0) +');
+            SQL.Add('                         COALESCE(es.es_entbalanco,0)');
+            SQL.Add('                 ) -');
+            SQL.Add('                 (');
+            SQL.Add('                         COALESCE(es.es_saidaforn,0) +');
+            SQL.Add('                         COALESCE(es.es_saidatransf,0) +');
+            SQL.Add('                         COALESCE(es.es_saidabalanco,0)');
+            SQL.Add('                 )');
+            SQL.Add('         ) AS total_estoque_fisico,');
+            SQL.Add('       SUM(');
+            SQL.Add('                 COALESCE(es.es_saidaempenho,0) -');
+            SQL.Add('                 COALESCE(es.es_entempenho,0)');
+            SQL.Add('       ) AS total_empenhos,');
+            SQL.Add('       SUM(');
+            SQL.Add('                 (');
+            SQL.Add('                       (');
+            SQL.Add('                             COALESCE(es.es_entradaforn,0) +');
+            SQL.Add('                             COALESCE(es.es_enttransf,0) +');
+            SQL.Add('                             COALESCE(es.es_entbalanco,0)');
+            SQL.Add('                       ) -');
+            SQL.Add('                       (');
+            SQL.Add('                             COALESCE(es.es_saidaforn,0) +');
+            SQL.Add('                             COALESCE(es.es_saidatransf,0) +');
+            SQL.Add('                             COALESCE(es.es_saidabalanco,0)');
+            SQL.Add('                       )');
+            SQL.Add('                ) -');
+            SQL.Add('                (');
+            SQL.Add('                         COALESCE(es.es_saidaempenho,0) -');
+            SQL.Add('                         COALESCE(es.es_entempenho,0)');
+            SQL.Add('                )');
+            SQL.Add('        ) AS total_estoque_disponivel');
+            SQL.Add('        FROM estoque es');
+            SQL.Add('       WHERE es.es_codproduto = :idArtigo');
+
+            ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+            Open;
+        end;
+
+
+        dmPrincipal.dsTotaisAviamentos.DataSet     :=dmPrincipal.qryTotaisAviamentos;        }
+
+        //AQUI
+
+
+//        rlDBTotFisico.DataSource                :=dmPrincipal.dsTotaisEstoque;
+//        rlDBTotFisico.DataField                 :='total_estoque_fisico';
+//
+//        rlDBTotEmpenhos.DataSource              :=dmPrincipal.dsTotaisEstoque;
+//        rlDBTotEmpenhos.DataField               :='total_empenhos';
+//
+//        rlDBTotDisponivel.DataSource            :=dmPrincipal.dsTotaisEstoque;
+//        rlDBTotDisponivel.DataField             :='total_estoque_disponivel';
+
 end;
 
 

@@ -1471,7 +1471,7 @@ object frmRelTecidos: TfrmRelTecidos
         Top = 129
         Width = 786
         Height = 40
-        BandType = btFooter
+        BandType = btSummary
         BeforePrint = rlTotaisBeforePrint
         object rlPanelTotEntForn: TRLPanel
           Left = 70
@@ -1660,6 +1660,12 @@ object frmRelTecidos: TfrmRelTecidos
           end
         end
       end
+    end
+    object RLGroup1: TRLGroup
+      Left = 4
+      Top = 329
+      Width = 786
+      Height = 64
     end
   end
 end

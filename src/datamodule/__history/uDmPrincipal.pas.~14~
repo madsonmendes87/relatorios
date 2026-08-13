@@ -28,8 +28,6 @@ type
     dsTotaisTecido: TDataSource;
     qryEstTecidos: TFDQuery;
     dsEstTecidos: TDataSource;
-    qryEmpTecidos: TFDQuery;
-    dsEmpTecidos: TDataSource;
   private
     { Private declarations }
   public

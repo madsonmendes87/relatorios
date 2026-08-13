@@ -1661,5 +1661,11 @@ object frmRelTecidos: TfrmRelTecidos
         end
       end
     end
+    object rlEmpenhoEstilista: TRLGroup
+      Left = 4
+      Top = 329
+      Width = 786
+      Height = 64
+    end
   end
 end

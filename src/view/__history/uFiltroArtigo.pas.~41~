@@ -41,8 +41,6 @@ type
     rbEstilista: TRadioButton;
     pnlVisualizar: TPanel;
     btnVisualizar: TSpeedButton;
-    pnlVisualEmpenho: TPanel;
-    btnVisEmpenho: TSpeedButton;
     procedure edtCodigoKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure btnZerarCorClick(Sender: TObject);
@@ -51,7 +49,6 @@ type
     procedure btnZeraCompradorClick(Sender: TObject);
     procedure btnZeraFornecedorClick(Sender: TObject);
     procedure btnVisualizarClick(Sender: TObject);
-    procedure btnVisEmpenhoClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -66,41 +63,20 @@ implementation
 
 {$R *.dfm}
 
-uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho;
-
-procedure TfrmFiltroArtigo.btnVisEmpenhoClick(Sender: TObject);
-begin
-    previsualizacao;
-
-    if dmPrincipal.qryDadosArtigo.FindField('tp_nome') <> nil then
-    begin
-        if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
-        begin
-            frmRelTecidoEmpenho.carregarDados;
-            frmRelTecidoEmpenho.rlRelTecidoEmpenho.Preview();
-        end
-        else
-        begin
-            ShowMessage('Abrir relatorio artigos');
-        end;
-    end;
-end;
+uses uPrincipal, uDmPrincipal, uRelTecidos;
 
 procedure TfrmFiltroArtigo.btnVisualizarClick(Sender: TObject);
 begin
     previsualizacao;
 
-    if dmPrincipal.qryDadosArtigo.FindField('tp_nome') <> nil then
+    if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
     begin
-        if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
-        begin
-            frmRelTecidos.carregarDados;
-            frmRelTecidos.rlRelTecidos.Preview();
-        end
-        else
-        begin
-            ShowMessage('Abrir relatorio artigos');
-        end;
+        frmRelTecidos.carregarDados;
+        frmRelTecidos.rlRelTecidos.Preview();
+    end
+    else
+    begin
+        ShowMessage('Abrir relatorio artigos');
     end;
 
 end;

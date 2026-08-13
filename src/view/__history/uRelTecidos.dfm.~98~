@@ -625,7 +625,7 @@ object frmRelTecidos: TfrmRelTecidos
       Left = 4
       Top = 159
       Width = 786
-      Height = 170
+      Height = 178
       object rlDadosEstoque: TRLBand
         Left = 0
         Top = 89

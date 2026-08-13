@@ -278,6 +278,7 @@ object frmPrincipal: TfrmPrincipal
     Color = clFloralwhite
     ParentBackground = False
     TabOrder = 9
+    ExplicitTop = 246
     object lblVersao: TLabel
       Left = 19
       Top = 4

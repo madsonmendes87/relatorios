@@ -1,19 +1,18 @@
-object frmRelTecidos: TfrmRelTecidos
+object frmRelTecidoEmpenho: TfrmRelTecidoEmpenho
   Left = 0
   Top = 0
-  Caption = 'frmRelTecidos'
-  ClientHeight = 749
-  ClientWidth = 798
+  Caption = 'Empenho Tecido'
+  ClientHeight = 529
+  ClientWidth = 770
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -12
   Font.Name = 'Segoe UI'
   Font.Style = []
-  OnShow = FormShow
   TextHeight = 15
-  object rlRelTecidos: TRLReport
-    Left = -4
+  object rlRelTecidoEmpenho: TRLReport
+    Left = -24
     Top = 0
     Width = 794
     Height = 1123
@@ -187,9 +186,9 @@ object frmRelTecidos: TfrmRelTecidos
         Transparent = False
       end
       object rlImageJFI: TRLImage
-        Left = 3
+        Left = 17
         Top = 22
-        Width = 96
+        Width = 97
         Height = 48
         Picture.Data = {
           0954506E67496D61676589504E470D0A1A0A0000000D494844520000005A0000
@@ -621,8 +620,8 @@ object frmRelTecidos: TfrmRelTecidos
         Transparent = False
       end
     end
-    object rlEstoqueEstilista: TRLGroup
-      Left = 4
+    object rlEmpenhoEstilista: TRLGroup
+      Left = 0
       Top = 159
       Width = 786
       Height = 170
@@ -1052,359 +1051,16 @@ object frmRelTecidos: TfrmRelTecidos
         Width = 786
         Height = 89
         BandType = btHeader
-        object RLDraw1: TRLDraw
-          Left = 502
-          Top = 31
-          Width = 58
-          Height = 35
-        end
-        object RLDraw10: TRLDraw
-          Left = 461
-          Top = 31
-          Width = 42
-          Height = 35
-        end
-        object RLDraw11: TRLDraw
-          Left = 559
-          Top = 31
-          Width = 45
-          Height = 35
-        end
-        object RLDraw12: TRLDraw
-          Left = 739
-          Top = 31
-          Width = 47
-          Height = 35
-        end
-        object RLDraw13: TRLDraw
-          Left = 3
-          Top = 31
-          Width = 68
-          Height = 35
-        end
-        object RLDraw14: TRLDraw
-          Left = 228
-          Top = 31
-          Width = 66
-          Height = 35
-        end
-        object RLDraw15: TRLDraw
-          Left = 169
-          Top = 31
-          Width = 60
-          Height = 35
-        end
-        object RLDraw16: TRLDraw
-          Left = 117
-          Top = 31
-          Width = 53
-          Height = 35
-        end
-        object RLDraw2: TRLDraw
-          Left = 350
-          Top = 31
-          Width = 58
-          Height = 35
-        end
-        object RLDraw3: TRLDraw
-          Left = 707
-          Top = 31
-          Width = 41
-          Height = 35
-        end
-        object RLDraw4: TRLDraw
-          Left = 659
-          Top = 31
-          Width = 49
-          Height = 35
-        end
-        object RLDraw5: TRLDraw
-          Left = 63
-          Top = 31
-          Width = 55
-          Height = 35
-        end
-        object RLDraw6: TRLDraw
-          Left = 603
-          Top = 31
-          Width = 57
-          Height = 35
-        end
-        object RLDraw7: TRLDraw
-          Left = 406
-          Top = 31
-          Width = 56
-          Height = 35
-        end
-        object RLDraw8: TRLDraw
-          Left = 293
-          Top = 31
-          Width = 58
-          Height = 35
-        end
-        object RLDraw9: TRLDraw
-          Left = 3
-          Top = 1
-          Width = 783
-          Height = 31
-        end
-        object rlLabBalanco: TRLLabel
-          Left = 505
-          Top = 45
-          Width = 51
-          Height = 15
-          Caption = 'BALAN'#199'O'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabEntradaForn_: TRLLabel
-          Left = 303
-          Top = 48
-          Width = 30
-          Height = 15
-          Caption = 'FORN'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabEntrada: TRLLabel
-          Left = 409
-          Top = 45
-          Width = 49
-          Height = 15
-          Caption = 'ENTRADA'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object RLLabel12: TRLLabel
+        object rlLblEmpenho: TRLLabel
           Left = 357
           Top = 9
-          Width = 66
+          Width = 77
           Height = 16
-          Caption = 'ESTOQUE'
+          Caption = 'EMPENHOS'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -13
           Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabFator: TRLLabel
-          Left = 464
-          Top = 45
-          Width = 35
-          Height = 15
-          Caption = 'FATOR'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabFisico: TRLLabel
-          Left = 564
-          Top = 45
-          Width = 35
-          Height = 15
-          Caption = 'FISICO'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabForn: TRLLabel
-          Left = 750
-          Top = 45
-          Width = 30
-          Height = 15
-          Caption = 'FORN'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabNumInterno: TRLLabel
-          Left = 5
-          Top = 48
-          Width = 55
-          Height = 15
-          Caption = 'N'#186'INTERNO'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabEmpenhos: TRLLabel
-          Left = 603
-          Top = 45
-          Width = 56
-          Height = 15
-          Caption = 'EMPENHOS'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabCodNfe: TRLLabel
-          Left = 5
-          Top = 32
-          Width = 46
-          Height = 15
-          Caption = 'COD NFE'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clNavy
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabRolo: TRLLabel
-          Left = 248
-          Top = 45
-          Width = 30
-          Height = 15
-          Caption = 'ROLO'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabCor: TRLLabel
-          Left = 132
-          Top = 45
-          Width = 24
-          Height = 15
-          Caption = 'COR'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabTamanho: TRLLabel
-          Left = 172
-          Top = 45
-          Width = 51
-          Height = 15
-          Caption = 'TAMANHO'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabCustoForn: TRLLabel
-          Left = 360
-          Top = 32
-          Width = 35
-          Height = 15
-          Caption = 'CUSTO'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabCustoForn_: TRLLabel
-          Left = 362
-          Top = 48
-          Width = 30
-          Height = 15
-          Caption = 'FORN'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabCusto: TRLLabel
-          Left = 710
-          Top = 45
-          Width = 35
-          Height = 15
-          Caption = 'CUSTO'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabDisponivel: TRLLabel
-          Left = 670
-          Top = 45
-          Width = 25
-          Height = 15
-          Caption = 'DISP'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabEntData_: TRLLabel
-          Left = 75
-          Top = 48
-          Width = 29
-          Height = 15
-          Caption = 'DATA'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabEntData: TRLLabel
-          Left = 66
-          Top = 32
-          Width = 49
-          Height = 15
-          Caption = 'ENTRADA'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlLabEntradaForn: TRLLabel
-          Left = 297
-          Top = 32
-          Width = 49
-          Height = 15
-          Caption = 'ENTRADA'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           ParentFont = False
         end
@@ -1472,7 +1128,6 @@ object frmRelTecidos: TfrmRelTecidos
         Width = 786
         Height = 40
         BandType = btFooter
-        BeforePrint = rlTotaisBeforePrint
         object rlPanelTotEntForn: TRLPanel
           Left = 70
           Top = -3

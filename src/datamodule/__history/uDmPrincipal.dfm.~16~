@@ -113,14 +113,4 @@ object dmPrincipal: TdmPrincipal
     Left = 160
     Top = 336
   end
-  object qryEmpTecidos: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 256
-    Top = 336
-  end
-  object dsEmpTecidos: TDataSource
-    DataSet = qryEmpTecidos
-    Left = 352
-    Top = 336
-  end
 end
