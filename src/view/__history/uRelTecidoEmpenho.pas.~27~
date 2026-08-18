@@ -26,37 +26,22 @@ type
     rlSubGrupo: TRLLabel;
     rlEmpenhoEstilista: TRLGroup;
     rlDadosEstoque: TRLBand;
-    rlPanelNfe: TRLPanel;
-    rlDBCodNfe: TRLDBText;
-    rlDBInternoNfe: TRLDBText;
     rlPanelDtEntrada: TRLPanel;
-    rlDBDtEntrada: TRLDBText;
+    rlDBDtEmpenho: TRLDBText;
+    rlPanRef: TRLPanel;
+    rlDBRef: TRLDBMemo;
+    rlPanelOrdemCorte: TRLPanel;
+    rlDBOrdCorte: TRLDBText;
+    rlPanelOrdProd: TRLPanel;
+    rlDBOrdProducao: TRLDBMemo;
     rlPanelCor: TRLPanel;
-    rlDBCor: TRLDBMemo;
     rlPanelTamanho: TRLPanel;
     rlDBTamanho: TRLDBText;
     rlPanelRolo: TRLPanel;
-    rlDBRolo: TRLDBMemo;
-    rlPanelEntForn: TRLPanel;
-    rlDBEntForn: TRLDBText;
-    rlPanelCustoForn: TRLPanel;
-    rlDBCustForn: TRLDBText;
-    rlPanelEntrada: TRLPanel;
-    rlDBEntrada: TRLDBText;
-    rlPanelFator: TRLPanel;
-    rlDBFator: TRLDBText;
-    rlPanelBalanco: TRLPanel;
-    rlDBalanco: TRLDBText;
-    rlPanelFisico: TRLPanel;
-    rlDBFisico: TRLDBText;
-    rlPanelEmpenhos: TRLPanel;
-    rlDBEmpenhos: TRLDBText;
-    rlPanelDisp: TRLPanel;
-    rlDBDisp: TRLDBText;
-    rlCusto: TRLPanel;
-    rlDBCusto: TRLDBText;
+    rlPanTipo: TRLPanel;
+    rlDBTipo: TRLDBText;
+    rlPanelSitEmp: TRLPanel;
     rlPanelForn: TRLPanel;
-    rlDBFornecedor: TRLDBMemo;
     rlCabecalhoEstoque: TRLBand;
     rlLblEmpenho: TRLLabel;
     rlPanelEstilista: TRLPanel;
@@ -67,15 +52,6 @@ type
     rlPanelTotEntForn: TRLPanel;
     rLabTotEntForn: TRLLabel;
     rlLblTotalEntForn: TRLLabel;
-    rlPanelTotEntrada: TRLPanel;
-    rLabTotEntrada: TRLLabel;
-    rlLblTotalEntrada: TRLLabel;
-    rlPanelTotalFisico: TRLPanel;
-    rlLabelTotalFisico: TRLLabel;
-    rlLblTotalFisico: TRLLabel;
-    rlTotalEmpenhos: TRLPanel;
-    rLabelTotEmpenhos: TRLLabel;
-    rlLblTotEmpenhos: TRLLabel;
     rlPanelTotalDisponivel: TRLPanel;
     rlLabTotDisponivel: TRLLabel;
     rlLblTotDisponivel: TRLLabel;
@@ -90,6 +66,22 @@ type
     rlLblOrdProducao: TRLLabel;
     rlPanCor: TRLPanel;
     rlLblCor: TRLLabel;
+    rlPanelTam: TRLPanel;
+    rlLblTam: TRLLabel;
+    rlPanRolo: TRLPanel;
+    rlLblRolo: TRLLabel;
+    rlPanelTipo: TRLPanel;
+    rlLblTipo: TRLLabel;
+    rlPanSitEmpenho: TRLPanel;
+    rlLblSitEmp: TRLLabel;
+    rlSitEmp_: TRLLabel;
+    rlLblOrdProd_: TRLLabel;
+    rlPanConsumo: TRLPanel;
+    rlLblConsumo: TRLLabel;
+    rlDBCor: TRLDBMemo;
+    rlDBRolo: TRLDBMemo;
+    rlDBSitEmp: TRLDBMemo;
+    rlDBConsumo: TRLDBText;
 
   private
     { Private declarations }
@@ -132,8 +124,6 @@ begin
 
     rlDBComposicao.DataSource             :=dmPrincipal.dsDadosArtigo;
     rlDBComposicao.DataField              :='cm_descricao';
-
-
 
 
 
@@ -191,21 +181,43 @@ begin
         SQL.Add('                         AND ces.emp_situacao<>''C''');
         SQL.Add('                         AND ces.emp_eprototipo=ce.emp_eprototipo');
         SQL.Add('                   ), 0) AS dev,');
-        SQL.Add('       ce.emp_situacao,');
-        SQL.Add('       e.es_numrolo');
-        SQL.Add('       FROM controle_empenho AS ce');
-        SQL.Add('       JOIN estoque AS e ON e.es_id = ce.emp_idestoque');
-        SQL.Add('       JOIN cadastro_produto AS cp On cp.cp_id=e.es_codproduto');
-        SQL.Add('       JOIN grade_cor AS gc On gc.grc_id = e.es_idgradecor');
-        SQL.Add('       JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam');
-        SQL.Add('       JOIN ficha_tecnica AS ft ON ft.fi_id = ce.emp_codprocesso');
-        SQL.Add('       JOIN produto_acabado AS pa ON pa.cad_id = ft.fi_idprodutoacabado');
-        SQL.Add('       LEFT JOIN cadastro_estilista As est On est.es_id = pa.cad_idestilista');
-        SQL.Add('       WHERE');
-        SQL.Add('       cp.cp_id=:idArtigo');
-        SQL.Add('       AND ce.emp_situacao<>''C''');
-        SQL.Add('       AND ce.emp_tipo=''S''');
-        SQL.Add('       GROUP BY');
+        SQL.Add('      (');
+        SQL.Add('             COALESCE((');
+        SQL.Add('                         SELECT SUM(ces.emp_consumo::numeric)');
+        SQL.Add('                               FROM controle_empenho AS ces');
+        SQL.Add('                               WHERE ces.emp_idestoque = ce.emp_idestoque');
+        SQL.Add('                               AND ces.emp_codprocesso = ce.emp_codprocesso');
+        SQL.Add('                               AND ces.emp_tipo = ''S''');
+        SQL.Add('                               AND ces.emp_situacao <> ''C''');
+        SQL.Add('                               AND ces.emp_eprototipo = ce.emp_eprototipo');
+        SQL.Add('             ), 0)');
+        SQL.Add('             -');
+        SQL.Add('             COALESCE((');
+        SQL.Add('                       SELECT SUM(ces.emp_consumo::numeric)');
+        SQL.Add('                               FROM controle_empenho AS ces');
+        SQL.Add('                               WHERE ces.emp_idestoque = ce.emp_idestoque');
+        SQL.Add('                               AND ces.emp_codprocesso = ce.emp_codprocesso');
+        SQL.Add('                               AND ces.emp_tipo = ''E''');
+        SQL.Add('                               AND ces.emp_mod = 0');
+        SQL.Add('                               AND ces.emp_situacao <> ''C''');
+        SQL.Add('                               AND ces.emp_eprototipo = ce.emp_eprototipo');
+        SQL.Add('                       ), 0)');
+        SQL.Add('      ) AS saldo,');
+        SQL.Add('      ce.emp_situacao,');
+        SQL.Add('      e.es_numrolo');
+        SQL.Add('      FROM controle_empenho AS ce');
+        SQL.Add('      JOIN estoque AS e ON e.es_id = ce.emp_idestoque');
+        SQL.Add('      JOIN cadastro_produto AS cp On cp.cp_id=e.es_codproduto');
+        SQL.Add('      JOIN grade_cor AS gc On gc.grc_id = e.es_idgradecor');
+        SQL.Add('      JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam');
+        SQL.Add('      JOIN ficha_tecnica AS ft ON ft.fi_id = ce.emp_codprocesso');
+        SQL.Add('      JOIN produto_acabado AS pa ON pa.cad_id = ft.fi_idprodutoacabado');
+        SQL.Add('      LEFT JOIN cadastro_estilista As est On est.es_id = pa.cad_idestilista');
+        SQL.Add('      WHERE');
+        SQL.Add('      cp.cp_id=:idArtigo');
+        SQL.Add('      AND ce.emp_situacao<>''C''');
+        SQL.Add('      AND ce.emp_tipo=''S''');
+        SQL.Add('      GROUP BY');
         SQL.Add('                 est.es_nome,');
         SQL.Add('                 ce.emp_idordemcorte,');
         SQL.Add('                 ce.emp_idordproducao,');
@@ -234,12 +246,41 @@ begin
     dmPrincipal.dsEstTecidos.DataSet     :=dmPrincipal.qryEstTecidos;
 
 
-     rlRelTecidoEmpenho.DataSource              :=dmPrincipal.dsEmpTecidos;
-     rlEmpenhoEstilista.DataFields              :='estilista';
+    rlRelTecidoEmpenho.DataSource        :=dmPrincipal.dsEmpTecidos;
+    rlEmpenhoEstilista.DataFields        :='estilista';
 
-     rlLabelEstilista.DataSource          :=dmPrincipal.dsEstTecidos;
-     rlLabelEstilista.DataField           :='estilista';
+    rlLabelEstilista.DataSource          :=dmPrincipal.dsEmpTecidos;
+    rlLabelEstilista.DataField           :='estilista';
+
+    rlDBDtEmpenho.DataSource             :=dmPrincipal.dsEmpTecidos;
+    rlDBDtEmpenho.DataField              :='emp_dtlanc';
+
+    rlDBRef.DataSource                   :=dmPrincipal.dsEmpTecidos;
+    rlDBRef.DataField                    :='cad_idreferencia';
+
+    rlDBOrdCorte.DataSource              :=dmPrincipal.dsEmpTecidos;
+    rlDBOrdCorte.DataField               :='emp_idordemcorte';
+
+    rlDBOrdProducao.DataSource           :=dmPrincipal.dsEmpTecidos;
+    rlDBOrdProducao.DataField            :='emp_idordproducao';
+
+    rlDBCor.DataSource                   :=dmPrincipal.dsEmpTecidos;
+    rlDBCor.DataField                    :='grc_nome';
+
+    rlDBTamanho.DataSource               :=dmPrincipal.dsEmpTecidos;
+    rlDBTamanho.DataField                :='grt_nome';
+
+    rlDBRolo.DataSource                  :=dmPrincipal.dsEmpTecidos;
+    rlDBRolo.DataField                   :='es_numrolo';
+
+    rlDBTipo.DataSource                  :=dmPrincipal.dsEmpTecidos;
+    rlDBTipo.DataField                   :='tipo';
+
+    rlDBSitEmp.DataSource                :=dmPrincipal.dsEmpTecidos;
+    rlDBSitEmp.DataField                 :='situacao_empenho';
+
+    rlDBConsumo.DataSource               :=dmPrincipal.dsEmpTecidos;
+    rlDBConsumo.DataField                :='saldo';
 end;
-
 
 end.

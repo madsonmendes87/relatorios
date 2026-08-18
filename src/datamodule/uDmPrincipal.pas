@@ -30,6 +30,8 @@ type
     dsEstTecidos: TDataSource;
     qryEmpTecidos: TFDQuery;
     dsEmpTecidos: TDataSource;
+    qryTotaisEmpenho: TFDQuery;
+    dsTotaisEmpenho: TDataSource;
   private
     { Private declarations }
   public

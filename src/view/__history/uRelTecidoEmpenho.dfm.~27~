@@ -624,7 +624,7 @@ object frmRelTecidoEmpenho: TfrmRelTecidoEmpenho
       Left = 4
       Top = 159
       Width = 786
-      Height = 130
+      Height = 170
       object rlDadosEstoque: TRLBand
         Left = 0
         Top = 89
@@ -1275,90 +1275,87 @@ object frmRelTecidoEmpenho: TfrmRelTecidoEmpenho
           end
         end
       end
-    end
-    object rlTotais: TRLBand
-      Left = 4
-      Top = 289
-      Width = 786
-      Height = 26
-      BandType = btSummary
-      object rlPanelTotEntForn: TRLPanel
-        Left = 3
-        Top = 0
-        Width = 374
-        Height = 25
-        Borders.Sides = sdCustom
-        Borders.DrawLeft = True
-        Borders.DrawTop = True
-        Borders.DrawRight = True
-        Borders.DrawBottom = True
-        Borders.FixedLeft = True
-        Borders.FixedRight = True
-        Borders.FixedBottom = True
-        object rLabTotEntForn: TRLLabel
-          Left = 7
-          Top = 2
-          Width = 92
-          Height = 15
-          Caption = 'TOTAL EMPENHOS:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
+      object rlTotais: TRLBand
+        Left = 0
+        Top = 129
+        Width = 786
+        Height = 40
+        BandType = btFooter
+        object rlPanelTotEntForn: TRLPanel
+          Left = 3
+          Top = -3
+          Width = 374
+          Height = 28
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = True
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          Borders.FixedLeft = True
+          Borders.FixedRight = True
+          Borders.FixedBottom = True
+          object rLabTotEntForn: TRLLabel
+            Left = 7
+            Top = 2
+            Width = 92
+            Height = 15
+            Caption = 'TOTAL EMPENHOS:'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object rlDBTotEmpenhos: TRLDBText
+            Left = 119
+            Top = 3
+            Width = 77
+            Height = 15
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            Text = ''
+          end
         end
-        object rlDBTotEmpenhos: TRLDBText
-          Left = 105
-          Top = 2
-          Width = 77
-          Height = 15
-          DisplayMask = '0.0000'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          ParentFont = False
-          Text = ''
-        end
-      end
-      object rlPanelTotalDisponivel: TRLPanel
-        Left = 376
-        Top = 0
-        Width = 410
-        Height = 25
-        Borders.Sides = sdCustom
-        Borders.DrawLeft = False
-        Borders.DrawTop = True
-        Borders.DrawRight = True
-        Borders.DrawBottom = True
-        object rlLabTotDisponivel: TRLLabel
-          Left = 18
-          Top = 2
-          Width = 169
-          Height = 15
-          Caption = 'TOTAL EMPENHOS TRANSFERIDOS:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlDBEmpTransferidos: TRLDBText
-          Left = 193
-          Top = 2
-          Width = 90
-          Height = 15
-          DisplayMask = '0.0000'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          ParentFont = False
-          Text = ''
+        object rlPanelTotalDisponivel: TRLPanel
+          Left = 376
+          Top = 0
+          Width = 410
+          Height = 25
+          Borders.Sides = sdCustom
+          Borders.DrawLeft = False
+          Borders.DrawTop = False
+          Borders.DrawRight = True
+          Borders.DrawBottom = True
+          object rlLabTotDisponivel: TRLLabel
+            Left = 18
+            Top = 2
+            Width = 169
+            Height = 15
+            Caption = 'TOTAL EMPENHOS TRANSFERIDOS:'
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = [fsBold]
+            ParentFont = False
+          end
+          object rlLblTotDisponivel: TRLLabel
+            Left = 193
+            Top = 3
+            Width = 76
+            Height = 15
+            Font.Charset = ANSI_CHARSET
+            Font.Color = clBlack
+            Font.Height = -11
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+          end
         end
       end
     end

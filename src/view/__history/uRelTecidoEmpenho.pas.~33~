@@ -53,6 +53,7 @@ type
     rLabTotEntForn: TRLLabel;
     rlPanelTotalDisponivel: TRLPanel;
     rlLabTotDisponivel: TRLLabel;
+    rlLblTotDisponivel: TRLLabel;
     rlPanelTituloEmp: TRLPanel;
     rlPanelDtEmpenho: TRLPanel;
     rlLblDtEmpenho: TRLLabel;
@@ -81,7 +82,6 @@ type
     rlDBSitEmp: TRLDBMemo;
     rlDBConsumo: TRLDBText;
     rlDBTotEmpenhos: TRLDBText;
-    rlDBEmpTransferidos: TRLDBText;
 
   private
     { Private declarations }
@@ -237,32 +237,6 @@ begin
         SQL.Add('                   cp.cp_id=:idArtigo');
         SQL.Add('                   AND ce.emp_situacao<>''C''');
         SQL.Add('                   AND ce.emp_tipo=''S''');
-
-        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
-        begin
-              SQL.Add('AND gc.grc_id = :idCor');
-              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
-        end;
-
-        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
-        begin
-              SQL.Add('AND gt.grt_id = :idTamanho');
-              ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
-        end;
-
-//        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
-//        begin
-//            SQL.Add('AND cc.comp_id = :idComprador');
-//            ParamByName('idComprador').AsInteger :=frmFiltroArtigo.dblcbComprador.KeyValue;
-//        end;
-//
-//        if frmFiltroArtigo.dblcbFornecedor.KeyValue <> Null then
-//        begin
-//            SQL.Add('AND f.for_codigo = :idFornecedor');
-//            ParamByName('idFornecedor').AsInteger :=frmFiltroArtigo.dblcbFornecedor.KeyValue;
-//        end;
-
-
         SQL.Add('             GROUP BY');
         SQL.Add('                   est.es_nome,');
         SQL.Add('                   ce.emp_idordemcorte,');
@@ -284,7 +258,6 @@ begin
         SQL.Add('                 est.es_nome,');
         SQL.Add('                 pa.cad_idreferencia');
         SQL.Add('          )AS dados');
-
 
         ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
         Open;
@@ -450,19 +423,6 @@ begin
         SQL.Add('          cp.cp_id = :idArtigo');
         SQL.Add('      AND ce.emp_situacao <> ''C''');
         SQL.Add('      AND ce.emp_tipo = ''S''');
-
-        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
-        begin
-              SQL.Add('AND gc.grc_id = :idCor');
-              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
-        end;
-
-        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
-        begin
-              SQL.Add('AND gt.grt_id = :idTamanho');
-              ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
-        end;
-
         SQL.Add('    GROUP BY');
         SQL.Add('        est.es_nome,');
         SQL.Add('        est.es_id,');
@@ -489,9 +449,6 @@ begin
 
     rlDBTotEmpenhos.DataSource           :=dmPrincipal.dsTotaisEmpenho;
     rlDBTotEmpenhos.DataField            :='total_sob_pedido';
-
-    rlDBEmpTransferidos.DataSource       :=dmPrincipal.dsTotaisEmpenho;
-    rlDBEmpTransferidos.DataField        :='total_transferido';
 end;
 
 end.

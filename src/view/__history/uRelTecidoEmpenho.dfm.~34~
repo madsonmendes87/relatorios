@@ -1313,7 +1313,6 @@ object frmRelTecidoEmpenho: TfrmRelTecidoEmpenho
           Top = 2
           Width = 77
           Height = 15
-          DisplayMask = '0.0000'
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -1346,19 +1345,17 @@ object frmRelTecidoEmpenho: TfrmRelTecidoEmpenho
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object rlDBEmpTransferidos: TRLDBText
+        object rlLblTotDisponivel: TRLLabel
           Left = 193
-          Top = 2
-          Width = 90
+          Top = 3
+          Width = 76
           Height = 15
-          DisplayMask = '0.0000'
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Arial Narrow'
           Font.Style = []
           ParentFont = False
-          Text = ''
         end
       end
     end

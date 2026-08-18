@@ -123,4 +123,14 @@ object dmPrincipal: TdmPrincipal
     Left = 352
     Top = 336
   end
+  object qryTotaisEmpenho: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 464
+    Top = 336
+  end
+  object dsTotaisEmpenho: TDataSource
+    DataSet = qryTotaisEmpenho
+    Left = 464
+    Top = 400
+  end
 end
