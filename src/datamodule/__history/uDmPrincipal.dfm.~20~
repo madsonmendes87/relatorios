@@ -37,8 +37,8 @@ object dmPrincipal: TdmPrincipal
     Connection = dmConexao.Conexao
     SQL.Strings = (
       
-        'SELECT comp_id, comp_nome FROM cadastro_compradores ORDER BY com' +
-        'p_nome')
+        'SELECT comp_id, comp_nome, comp_idestilista FROM cadastro_compra' +
+        'dores ORDER BY comp_nome')
     Left = 88
     Top = 128
   end
@@ -81,14 +81,61 @@ object dmPrincipal: TdmPrincipal
     Left = 376
     Top = 208
   end
-  object qryTotaisEstoque: TFDQuery
+  object qryTotaisAviamentos: TFDQuery
     Connection = dmConexao.Conexao
     Left = 72
     Top = 272
   end
-  object dsTotaisEstoque: TDataSource
-    DataSet = qryTotaisEstoque
-    Left = 176
+  object dsTotaisAviamentos: TDataSource
+    DataSet = qryTotaisAviamentos
+    Left = 200
     Top = 272
+  end
+  object qryTotaisTecido: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 312
+    Top = 272
+  end
+  object dsTotaisTecido: TDataSource
+    DataSet = qryTotaisTecido
+    Left = 408
+    Top = 272
+  end
+  object qryEstTecidos: TFDQuery
+    Connection = dmConexao.Conexao
+    SQL.Strings = (
+      '')
+    Left = 72
+    Top = 336
+  end
+  object dsEstTecidos: TDataSource
+    DataSet = qryEstTecidos
+    Left = 160
+    Top = 336
+  end
+  object qryEmpTecidos: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 256
+    Top = 336
+  end
+  object dsEmpTecidos: TDataSource
+    DataSet = qryEmpTecidos
+    Left = 352
+    Top = 336
+  end
+  object qryTotaisEmpenho: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 464
+    Top = 336
+  end
+  object dsTotaisEmpenho: TDataSource
+    DataSet = qryTotaisEmpenho
+    Left = 568
+    Top = 336
+  end
+  object qryEstilistaComprador: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 424
+    Top = 48
   end
 end

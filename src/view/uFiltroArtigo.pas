@@ -102,7 +102,6 @@ begin
             ShowMessage('Abrir relatorio artigos');
         end;
     end;
-
 end;
 
 procedure TfrmFiltroArtigo.btnZeraCompradorClick(Sender: TObject);

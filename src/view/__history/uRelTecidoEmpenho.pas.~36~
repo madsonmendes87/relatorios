@@ -127,21 +127,6 @@ begin
 
 
 
-    if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
-    begin
-         with dmPrincipal.qryEstilistaComprador do
-        begin
-            Close;
-            SQL.Clear;
-            SQL.Add('SELECT comp_nome, comp_idestilista FROM cadastro_compradores');
-            SQL.Add('   WHERE comp_id = :idComprador');
-
-            ParamByName('idComprador').AsInteger    :=frmFiltroArtigo.dblcbComprador.KeyValue;
-            Open;
-        end;
-    end;
-
-
 
     with dmPrincipal.qryEmpTecidos do
     begin
@@ -265,11 +250,18 @@ begin
               ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
         end;
 
-        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
-        begin
-            SQL.Add('AND est.es_id = :idEstilista');
-            ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
-        end;
+//        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+//        begin
+//            SQL.Add('AND cc.comp_id = :idComprador');
+//            ParamByName('idComprador').AsInteger :=frmFiltroArtigo.dblcbComprador.KeyValue;
+//        end;
+//
+//        if frmFiltroArtigo.dblcbFornecedor.KeyValue <> Null then
+//        begin
+//            SQL.Add('AND f.for_codigo = :idFornecedor');
+//            ParamByName('idFornecedor').AsInteger :=frmFiltroArtigo.dblcbFornecedor.KeyValue;
+//        end;
+
 
         SQL.Add('             GROUP BY');
         SQL.Add('                   est.es_nome,');
@@ -469,12 +461,6 @@ begin
         begin
               SQL.Add('AND gt.grt_id = :idTamanho');
               ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
-        end;
-
-        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
-        begin
-            SQL.Add('AND est.es_id = :idEstilista');
-            ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
         end;
 
         SQL.Add('    GROUP BY');

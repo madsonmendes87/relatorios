@@ -32,6 +32,8 @@ type
     dsEmpTecidos: TDataSource;
     qryTotaisEmpenho: TFDQuery;
     dsTotaisEmpenho: TDataSource;
+    qryEstilistaComprador: TFDQuery;
+    qryTecidoEstoqueTot: TFDQuery;
   private
     { Private declarations }
   public

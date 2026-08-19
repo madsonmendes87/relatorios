@@ -625,7 +625,7 @@ object frmRelTecidos: TfrmRelTecidos
       Left = 4
       Top = 159
       Width = 786
-      Height = 170
+      Height = 130
       object rlDadosEstoque: TRLBand
         Left = 0
         Top = 89
@@ -1466,198 +1466,198 @@ object frmRelTecidos: TfrmRelTecidos
           end
         end
       end
-      object rlTotais: TRLBand
-        Left = 0
-        Top = 129
-        Width = 786
-        Height = 40
-        BandType = btFooter
-        BeforePrint = rlTotaisBeforePrint
-        object rlPanelTotEntForn: TRLPanel
-          Left = 70
-          Top = -3
-          Width = 168
-          Height = 40
-          Borders.Sides = sdCustom
-          Borders.DrawLeft = True
-          Borders.DrawTop = False
-          Borders.DrawRight = True
-          Borders.DrawBottom = True
-          Borders.FixedLeft = True
-          Borders.FixedRight = True
-          Borders.FixedBottom = True
-          object rLabTotEntForn: TRLLabel
-            Left = 7
-            Top = 2
-            Width = 152
-            Height = 15
-            Caption = 'TOTAL ENTRADA FORNECEDOR'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object rlLblTotalEntForn: TRLLabel
-            Left = 60
-            Top = 20
-            Width = 72
-            Height = 15
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = []
-            ParentFont = False
-          end
+    end
+    object rlTotais: TRLBand
+      Left = 4
+      Top = 289
+      Width = 786
+      Height = 40
+      BandType = btSummary
+      BeforePrint = rlTotaisBeforePrint
+      object rlPanelTotEntForn: TRLPanel
+        Left = 70
+        Top = 0
+        Width = 168
+        Height = 37
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = True
+        Borders.DrawTop = True
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
+        Borders.FixedLeft = True
+        Borders.FixedRight = True
+        Borders.FixedBottom = True
+        object rLabTotEntForn: TRLLabel
+          Left = 7
+          Top = 2
+          Width = 152
+          Height = 15
+          Caption = 'TOTAL ENTRADA FORNECEDOR'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
-        object rlPanelTotEntrada: TRLPanel
-          Left = 235
-          Top = -3
-          Width = 125
-          Height = 40
-          Borders.Sides = sdCustom
-          Borders.DrawLeft = False
-          Borders.DrawTop = False
-          Borders.DrawRight = True
-          Borders.DrawBottom = True
-          Borders.FixedRight = True
-          Borders.FixedBottom = True
-          object rLabTotEntrada: TRLLabel
-            Left = 27
-            Top = 2
-            Width = 82
-            Height = 15
-            Caption = 'TOTAL ENTRADA'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object rlLblTotalEntrada: TRLLabel
-            Left = 32
-            Top = 20
-            Width = 59
-            Height = 15
-            Caption = 'rlTotalEntrada'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = []
-            ParentFont = False
-          end
+        object rlLblTotalEntForn: TRLLabel
+          Left = 60
+          Top = 20
+          Width = 72
+          Height = 15
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          ParentFont = False
         end
-        object rlPanelTotalFisico: TRLPanel
-          Left = 357
-          Top = 0
-          Width = 115
-          Height = 37
-          Borders.Sides = sdCustom
-          Borders.DrawLeft = False
-          Borders.DrawTop = False
-          Borders.DrawRight = True
-          Borders.DrawBottom = True
-          object rlLabelTotalFisico: TRLLabel
-            Left = 22
-            Top = 2
-            Width = 68
-            Height = 15
-            Caption = 'TOTAL F'#205'SICO'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object rlLblTotalFisico: TRLLabel
-            Left = 32
-            Top = 18
-            Width = 65
-            Height = 15
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = []
-            ParentFont = False
-          end
+      end
+      object rlPanelTotEntrada: TRLPanel
+        Left = 235
+        Top = 0
+        Width = 125
+        Height = 37
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = True
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
+        Borders.FixedRight = True
+        Borders.FixedBottom = True
+        object rLabTotEntrada: TRLLabel
+          Left = 27
+          Top = 2
+          Width = 82
+          Height = 15
+          Caption = 'TOTAL ENTRADA'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
         end
-        object rlTotalEmpenhos: TRLPanel
-          Left = 466
-          Top = 0
-          Width = 126
-          Height = 37
-          Borders.Sides = sdCustom
-          Borders.DrawLeft = False
-          Borders.DrawTop = False
-          Borders.DrawRight = True
-          Borders.DrawBottom = True
-          object rLabelTotEmpenhos: TRLLabel
-            Left = 17
-            Top = 2
-            Width = 89
-            Height = 15
-            Caption = 'TOTAL EMPENHOS'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object rlLblTotEmpenhos: TRLLabel
-            Left = 44
-            Top = 18
-            Width = 77
-            Height = 15
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = []
-            ParentFont = False
-          end
+        object rlLblTotalEntrada: TRLLabel
+          Left = 32
+          Top = 20
+          Width = 59
+          Height = 15
+          Caption = 'rlTotalEntrada'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          ParentFont = False
         end
-        object rlPanelTotalDisponivel: TRLPanel
-          Left = 592
-          Top = 0
-          Width = 132
-          Height = 37
-          Borders.Sides = sdCustom
-          Borders.DrawLeft = False
-          Borders.DrawTop = False
-          Borders.DrawRight = True
-          Borders.DrawBottom = True
-          object rlLabTotDisponivel: TRLLabel
-            Left = 18
-            Top = 2
-            Width = 93
-            Height = 15
-            Caption = 'TOTAL DISPONIVEL'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-          object rlLblTotDisponivel: TRLLabel
-            Left = 40
-            Top = 18
-            Width = 76
-            Height = 15
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = []
-            ParentFont = False
-          end
+      end
+      object rlPanelTotalFisico: TRLPanel
+        Left = 357
+        Top = 0
+        Width = 115
+        Height = 37
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = True
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
+        object rlLabelTotalFisico: TRLLabel
+          Left = 22
+          Top = 2
+          Width = 68
+          Height = 15
+          Caption = 'TOTAL F'#205'SICO'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object rlLblTotalFisico: TRLLabel
+          Left = 32
+          Top = 18
+          Width = 65
+          Height = 15
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          ParentFont = False
+        end
+      end
+      object rlTotalEmpenhos: TRLPanel
+        Left = 466
+        Top = 0
+        Width = 126
+        Height = 37
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = True
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
+        object rLabelTotEmpenhos: TRLLabel
+          Left = 17
+          Top = 2
+          Width = 89
+          Height = 15
+          Caption = 'TOTAL EMPENHOS'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object rlLblTotEmpenhos: TRLLabel
+          Left = 44
+          Top = 18
+          Width = 77
+          Height = 15
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          ParentFont = False
+        end
+      end
+      object rlPanelTotalDisponivel: TRLPanel
+        Left = 593
+        Top = 0
+        Width = 132
+        Height = 37
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = True
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
+        object rlLabTotDisponivel: TRLLabel
+          Left = 18
+          Top = 2
+          Width = 93
+          Height = 15
+          Caption = 'TOTAL DISPONIVEL'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object rlLblTotDisponivel: TRLLabel
+          Left = 40
+          Top = 18
+          Width = 76
+          Height = 15
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          ParentFont = False
         end
       end
     end
