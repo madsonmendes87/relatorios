@@ -1,0 +1,72 @@
+unit uRelArtigos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
+
+type
+  TfrmRelArtigos = class(TForm)
+    rlRelArtigos: TRLReport;
+    rlCabecalho: TRLBand;
+    rLabelCod: TRLLabel;
+    rLabProduto: TRLLabel;
+    rLabTipoProd: TRLLabel;
+    rlComposicao: TRLLabel;
+    rlDBCodigo: TRLDBText;
+    rlDBComposicao: TRLDBText;
+    rlDBGrupo: TRLDBText;
+    rlDBProduto: TRLDBText;
+    rlDBSubgrupo: TRLDBText;
+    rlDBTipoProduto: TRLDBText;
+    rlGrupo: TRLLabel;
+    rlImageJFI: TRLImage;
+    rlImageNAT: TRLImage;
+    rlSubGrupo: TRLLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure carregarDados;
+  end;
+
+var
+  frmRelArtigos: TfrmRelArtigos;
+
+implementation
+
+{$R *.dfm}
+
+uses uFiltroArtigo, uConexao, uDmPrincipal;
+
+{ TfrmRelArtigos }
+
+procedure TfrmRelArtigos.carregarDados;
+begin
+    {CABEÇALHO RELATÓRIO}
+
+    dmConexao.Conexao.Connected :=true;
+
+    dmPrincipal.dsDadosArtigo.DataSet     :=dmPrincipal.qryDadosArtigo;
+
+    rlDBCodigo.DataSource                 :=dmPrincipal.dsDadosArtigo;
+    rlDBCodigo.DataField                  :='cp_id';
+
+    rlDBProduto.DataSource                :=dmPrincipal.dsDadosArtigo;
+    rlDBProduto.DataField                 :='cp_descricao';
+
+    rlDBGrupo.DataSource                  :=dmPrincipal.dsDadosArtigo;
+    rlDBGrupo.DataField                   :='gr_nome';
+
+    rlDBSubgrupo.DataSource               :=dmPrincipal.dsDadosArtigo;
+    rlDBSubGrupo.DataField                :='sgr_nome';
+
+    rlDBTipoProduto.DataSource            :=dmPrincipal.dsDadosArtigo;
+    rlDBTipoProduto.DataField             :='tp_nome';
+
+    rlDBComposicao.DataSource             :=dmPrincipal.dsDadosArtigo;
+    rlDBComposicao.DataField              :='cm_descricao';
+end;
+
+end.

@@ -22,8 +22,18 @@ type
     dsDadosArtigo: TDataSource;
     qryEstAviamentos: TFDQuery;
     dsEstAviamentos: TDataSource;
-    qryTotaisEstoque: TFDQuery;
-    dsTotaisEstoque: TDataSource;
+    qryTotaisAviamentos: TFDQuery;
+    dsTotaisAviamentos: TDataSource;
+    qryTotaisTecido: TFDQuery;
+    dsTotaisTecido: TDataSource;
+    qryEstTecidos: TFDQuery;
+    dsEstTecidos: TDataSource;
+    qryEmpTecidos: TFDQuery;
+    dsEmpTecidos: TDataSource;
+    qryTotaisEmpenho: TFDQuery;
+    dsTotaisEmpenho: TDataSource;
+    qryEstilistaComprador: TFDQuery;
+    qryTecidoEstoqueTot: TFDQuery;
   private
     { Private declarations }
   public

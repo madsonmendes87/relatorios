@@ -7,8 +7,7 @@ uses
   uFiltroArtigo in 'src\view\uFiltroArtigo.pas' {frmFiltroArtigo},
   uDmPrincipal in 'src\datamodule\uDmPrincipal.pas' {dmPrincipal: TDataModule},
   uRelTecidos in 'src\view\uRelTecidos.pas' {frmRelTecidos},
-  uRelTecidoEmpenho in 'src\view\uRelTecidoEmpenho.pas' {frmRelTecidoEmpenho},
-  uRelArtigos in 'src\view\uRelArtigos.pas' {frmRelArtigos};
+  uRelTecidoEmpenho in 'src\view\uRelTecidoEmpenho.pas' {frmRelTecidoEmpenho};
 
 {$R *.res}
 
@@ -20,6 +19,5 @@ begin
   Application.CreateForm(TdmPrincipal, dmPrincipal);
   Application.CreateForm(TfrmRelTecidos, frmRelTecidos);
   Application.CreateForm(TfrmRelTecidoEmpenho, frmRelTecidoEmpenho);
-  Application.CreateForm(TfrmRelArtigos, frmRelArtigos);
   Application.Run;
 end.

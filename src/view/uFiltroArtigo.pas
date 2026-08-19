@@ -40,7 +40,7 @@ type
     rbNumRolo: TRadioButton;
     rbEstilista: TRadioButton;
     pnlVisualizar: TPanel;
-    btnVisualizar: TSpeedButton;
+    btnVisualizarEstoque: TSpeedButton;
     pnlVisualEmpenho: TPanel;
     btnVisEmpenho: TSpeedButton;
     procedure edtCodigoKeyPress(Sender: TObject; var Key: Char);
@@ -50,7 +50,7 @@ type
     procedure btnZeraTamanhoClick(Sender: TObject);
     procedure btnZeraCompradorClick(Sender: TObject);
     procedure btnZeraFornecedorClick(Sender: TObject);
-    procedure btnVisualizarClick(Sender: TObject);
+    procedure btnVisualizarEstoqueClick(Sender: TObject);
     procedure btnVisEmpenhoClick(Sender: TObject);
   private
     { Private declarations }
@@ -66,7 +66,7 @@ implementation
 
 {$R *.dfm}
 
-uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho;
+uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho, uRelArtigos;
 
 procedure TfrmFiltroArtigo.btnVisEmpenhoClick(Sender: TObject);
 begin
@@ -86,7 +86,7 @@ begin
     end;
 end;
 
-procedure TfrmFiltroArtigo.btnVisualizarClick(Sender: TObject);
+procedure TfrmFiltroArtigo.btnVisualizarEstoqueClick(Sender: TObject);
 begin
     previsualizacao;
 
@@ -99,7 +99,8 @@ begin
         end
         else
         begin
-            ShowMessage('Abrir relatorio artigos');
+            frmRelArtigos.carregarDados;
+            frmRelArtigos.rlRelArtigos.Preview();
         end;
     end;
 end;

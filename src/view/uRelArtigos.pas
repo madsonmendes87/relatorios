@@ -1,0 +1,227 @@
+unit uRelArtigos;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
+
+type
+  TfrmRelArtigos = class(TForm)
+    rlRelArtigos: TRLReport;
+    rlCabecalho: TRLBand;
+    rLabelCod: TRLLabel;
+    rLabProduto: TRLLabel;
+    rLabTipoProd: TRLLabel;
+    rlComposicao: TRLLabel;
+    rlDBCodigo: TRLDBText;
+    rlDBComposicao: TRLDBText;
+    rlDBGrupo: TRLDBText;
+    rlDBProduto: TRLDBText;
+    rlDBSubgrupo: TRLDBText;
+    rlDBTipoProduto: TRLDBText;
+    rlGrupo: TRLLabel;
+    rlImageJFI: TRLImage;
+    rlImageNAT: TRLImage;
+    rlSubGrupo: TRLLabel;
+    RLDraw1: TRLDraw;
+    RLDraw10: TRLDraw;
+    RLDraw11: TRLDraw;
+    RLDraw12: TRLDraw;
+    RLDraw2: TRLDraw;
+    RLDraw3: TRLDraw;
+    RLDraw4: TRLDraw;
+    RLDraw6: TRLDraw;
+    RLDraw7: TRLDraw;
+    RLDraw8: TRLDraw;
+    RLDraw9: TRLDraw;
+    rlLabBalanco: TRLLabel;
+    rlLabEntradaForn_: TRLLabel;
+    rlLabEntrada: TRLLabel;
+    RLLabel12: TRLLabel;
+    rlLabFator: TRLLabel;
+    rlLabFisico: TRLLabel;
+    rlLabForn: TRLLabel;
+    rlLabEmpenhos: TRLLabel;
+    rlLabCor: TRLLabel;
+    rlLabTamanho: TRLLabel;
+    rlLabCustoForn: TRLLabel;
+    rlLabCustoForn_: TRLLabel;
+    rlLabCusto: TRLLabel;
+    rlLabDisponivel: TRLLabel;
+    rlLabEntradaForn: TRLLabel;
+    rlDadosEstoque: TRLBand;
+    rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
+    rlPanelTamanho: TRLPanel;
+    rlDBTamanho: TRLDBText;
+    rlPanelEntForn: TRLPanel;
+    rlDBEntForn: TRLDBText;
+    rlPanelCustoForn: TRLPanel;
+    rlDBCustForn: TRLDBText;
+    rlPanelEntrada: TRLPanel;
+    rlDBEntrada: TRLDBText;
+    rlPanelFator: TRLPanel;
+    rlDBFator: TRLDBText;
+    rlPanelBalanco: TRLPanel;
+    rlDBalanco: TRLDBText;
+    rlPanelFisico: TRLPanel;
+    rlDBFisico: TRLDBText;
+    rlPanelEmpenhos: TRLPanel;
+    rlDBEmpenhos: TRLDBText;
+    rlPanelDisp: TRLPanel;
+    rlDBDisp: TRLDBText;
+    rlCusto: TRLPanel;
+    rlDBCusto: TRLDBText;
+    rlPanelForn: TRLPanel;
+    rlDBFornecedor: TRLDBMemo;
+    rlPanTitCor: TRLPanel;
+    rlPanelTitTam: TRLPanel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure carregarDados;
+  end;
+
+var
+  frmRelArtigos: TfrmRelArtigos;
+
+implementation
+
+{$R *.dfm}
+
+uses uFiltroArtigo, uConexao, uDmPrincipal;
+
+{ TfrmRelArtigos }
+
+procedure TfrmRelArtigos.carregarDados;
+begin
+    {CABEÇALHO RELATÓRIO}
+
+    dmConexao.Conexao.Connected :=true;
+
+    dmPrincipal.dsDadosArtigo.DataSet     :=dmPrincipal.qryDadosArtigo;
+
+    rlDBCodigo.DataSource                 :=dmPrincipal.dsDadosArtigo;
+    rlDBCodigo.DataField                  :='cp_id';
+
+    rlDBProduto.DataSource                :=dmPrincipal.dsDadosArtigo;
+    rlDBProduto.DataField                 :='cp_descricao';
+
+    rlDBGrupo.DataSource                  :=dmPrincipal.dsDadosArtigo;
+    rlDBGrupo.DataField                   :='gr_nome';
+
+    rlDBSubgrupo.DataSource               :=dmPrincipal.dsDadosArtigo;
+    rlDBSubGrupo.DataField                :='sgr_nome';
+
+    rlDBTipoProduto.DataSource            :=dmPrincipal.dsDadosArtigo;
+    rlDBTipoProduto.DataField             :='tp_nome';
+
+    rlDBComposicao.DataSource             :=dmPrincipal.dsDadosArtigo;
+    rlDBComposicao.DataField              :='cm_descricao';
+
+
+    with dmPrincipal.qryEstArtigos do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     CAST(');
+        SQL.Add('           COALESCE(gc.grc_codexterno, '''') || '' - '' || TRIM(gc.grc_nome) AS VARCHAR(50)');
+        SQL.Add('         ) AS grc_nome_pa,');
+        SQL.Add('     gt.grt_nome,');
+        SQL.Add('     CASE');
+        SQL.Add('         WHEN es.es_entbalanco > 0 THEN ''SIM''');
+        SQL.Add('         ELSE ''NAO''');
+        SQL.Add('     END AS balanco,');
+        SQL.Add('     CAST(');
+        SQL.Add('               (');
+        SQL.Add('                       (');
+        SQL.Add('                             COALESCE(es.es_entradaforn, 0) +');
+        SQL.Add('                             COALESCE(es.es_enttransf, 0) +');
+        SQL.Add('                             COALESCE(es.es_entbalanco, 0)');
+        SQL.Add('                       ) -');
+        SQL.Add('                       (');
+        SQL.Add('                             COALESCE(es.es_saidaforn, 0) +');
+        SQL.Add('                             COALESCE(es.es_saidatransf, 0) +');
+        SQL.Add('                             COALESCE(es.es_saidabalanco, 0)');
+        SQL.Add('                       )');
+        SQL.Add('               )AS VARCHAR(20)');
+        SQL.Add('     ) || '' '' || cp.cp_un AS estoque_fisico,');
+        SQL.Add('     CAST(');
+        SQL.Add('               (');
+        SQL.Add('                       (');
+        SQL.Add('                             COALESCE(es.es_entradaforn, 0) +');
+        SQL.Add('                             COALESCE(es.es_enttransf, 0) +');
+        SQL.Add('                             COALESCE(es.es_entbalanco, 0)');
+        SQL.Add('                       ) -');
+        SQL.Add('                       (');
+        SQL.Add('                             COALESCE(es.es_saidaforn, 0) +');
+        SQL.Add('                             COALESCE(es.es_saidatransf, 0) +');
+        SQL.Add('                             COALESCE(es.es_saidabalanco, 0)');
+        SQL.Add('                       )');
+        SQL.Add('                       -');
+        SQL.Add('                       (');
+        SQL.Add('                              COALESCE(es.es_saidaempenho, 0) -');
+        SQL.Add('                              COALESCE(es.es_entempenho, 0)');
+        SQL.Add('                       )');
+        SQL.Add('              ) AS VARCHAR(20)');
+        SQL.Add('    ) || '' '' || cp.cp_un AS estoque_disponivel,');
+        SQL.Add('    es.es_custoatual,');
+        SQL.Add('    SUM(');
+        SQL.Add('              (');
+        SQL.Add('                       COALESCE(es.es_entradaforn, 0) +');
+        SQL.Add('                       COALESCE(es.es_enttransf, 0) +');
+        SQL.Add('                       COALESCE(es.es_entbalanco, 0)');
+        SQL.Add('              ) -');
+        SQL.Add('              (');
+        SQL.Add('                       COALESCE(es.es_saidaforn, 0) +');
+        SQL.Add('                       COALESCE(es.es_saidatransf, 0) +');
+        SQL.Add('                       COALESCE(es.es_saidabalanco, 0)');
+        SQL.Add('              )');
+        SQL.Add('    ) OVER() AS total_estoque_fisico,');
+        SQL.Add('    SUM(');
+        SQL.Add('              COALESCE(es.es_saidaempenho, 0) -');
+        SQL.Add('              COALESCE(es.es_entempenho, 0)');
+        SQL.Add('    ) OVER() AS total_empenhos,');
+        SQL.Add('    SUM(');
+        SQL.Add('             (');
+        SQL.Add('                    (');
+        SQL.Add('                           COALESCE(es.es_entradaforn, 0) +');
+        SQL.Add('                           COALESCE(es.es_enttransf, 0) +');
+        SQL.Add('                           COALESCE(es.es_entbalanco, 0)');
+        SQL.Add('                    ) -');
+        SQL.Add('                    (');
+        SQL.Add('                           COALESCE(es.es_saidaforn, 0) +');
+        SQL.Add('                           COALESCE(es.es_saidatransf, 0) +');
+        SQL.Add('                           COALESCE(es.es_saidabalanco, 0)');
+        SQL.Add('                    )');
+        SQL.Add('             ) -');
+        SQL.Add('             (');
+        SQL.Add('                    COALESCE(es.es_saidaempenho, 0) -');
+        SQL.Add('                    COALESCE(es.es_entempenho, 0)');
+        SQL.Add('             )');
+        SQL.Add('     ) OVER() AS total_estoque_disponivel');
+        SQL.Add('     FROM estoque AS es');
+        SQL.Add('     JOIN grade_cor AS gc ON gc.grc_id = es.es_idgradecor');
+        SQL.Add('     JOIN grade_tamanho AS gt ON gt.grt_id = es.es_idgradetam');
+        SQL.Add('     JOIN cadastro_produto AS cp ON cp.cp_id = es.es_codproduto');
+        SQL.Add('     WHERE es_codproduto = :idArtigo');
+
+        ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+        Open;
+    end;
+
+
+    dmPrincipal.dsEstArtigos.DataSet     :=dmPrincipal.qryEstArtigos;
+
+
+    rlRelArtigos.DataSource              :=dmPrincipal.dsEstArtigos;
+//    rlEstoqueEstilista.DataFields        :='comp_nome';
+
+    rlDBCor.DataSource                   :=dmPrincipal.dsEstArtigos;
+    rlDBCor.DataField                    :='grc_nome_pa';
+end;
+
+end.

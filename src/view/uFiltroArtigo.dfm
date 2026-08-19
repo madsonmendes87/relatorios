@@ -396,7 +396,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Color = clMenuHighlight
     ParentBackground = False
     TabOrder = 11
-    object btnVisualizar: TSpeedButton
+    object btnVisualizarEstoque: TSpeedButton
       Left = 1
       Top = 1
       Width = 107
@@ -411,7 +411,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = btnVisualizarClick
+      OnClick = btnVisualizarEstoqueClick
       ExplicitLeft = 86
       ExplicitTop = 9
       ExplicitWidth = 23
@@ -423,7 +423,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Top = 304
     Width = 120
     Height = 31
-    Color = clHotLight
+    Color = clSeagreen
     ParentBackground = False
     TabOrder = 12
     object btnVisEmpenho: TSpeedButton
