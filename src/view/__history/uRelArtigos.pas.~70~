@@ -24,64 +24,48 @@ type
     rlImageJFI: TRLImage;
     rlImageNAT: TRLImage;
     rlSubGrupo: TRLLabel;
-    rlCabecalhoEstoque: TRLBand;
-    RLDraw1: TRLDraw;
-    RLDraw10: TRLDraw;
-    RLDraw11: TRLDraw;
-    RLDraw12: TRLDraw;
-    RLDraw2: TRLDraw;
-    RLDraw3: TRLDraw;
-    RLDraw4: TRLDraw;
-    RLDraw6: TRLDraw;
-    RLDraw7: TRLDraw;
-    RLDraw8: TRLDraw;
     RLDraw9: TRLDraw;
-    rlLabBalanco: TRLLabel;
-    rlLabEntradaForn_: TRLLabel;
-    rlLabEntrada: TRLLabel;
     RLLabel12: TRLLabel;
-    rlLabFator: TRLLabel;
-    rlLabFisico: TRLLabel;
-    rlLabForn: TRLLabel;
-    rlLabEmpenhos: TRLLabel;
     rlLabCor: TRLLabel;
     rlLabTamanho: TRLLabel;
-    rlLabCustoForn: TRLLabel;
-    rlLabCustoForn_: TRLLabel;
-    rlLabCusto: TRLLabel;
-    rlLabDisponivel: TRLLabel;
-    rlLabEntradaForn: TRLLabel;
+    rlLblCusto: TRLLabel;
     rlDadosEstoque: TRLBand;
     rlPanelCor: TRLPanel;
     rlDBCor: TRLDBMemo;
     rlPanelTamanho: TRLPanel;
     rlDBTamanho: TRLDBText;
-    rlPanelEntForn: TRLPanel;
-    rlDBEntForn: TRLDBText;
-    rlPanelCustoForn: TRLPanel;
-    rlDBCustForn: TRLDBText;
-    rlPanelEntrada: TRLPanel;
-    rlDBEntrada: TRLDBText;
-    rlPanelFator: TRLPanel;
-    rlDBFator: TRLDBText;
-    rlPanelBalanco: TRLPanel;
-    rlDBalanco: TRLDBText;
-    rlPanelFisico: TRLPanel;
-    rlDBFisico: TRLDBText;
-    rlPanelEmpenhos: TRLPanel;
-    rlDBEmpenhos: TRLDBText;
-    rlPanelDisp: TRLPanel;
-    rlDBDisp: TRLDBText;
-    rlCusto: TRLPanel;
-    rlDBCusto: TRLDBText;
-    rlPanelForn: TRLPanel;
-    rlDBFornecedor: TRLDBMemo;
-    rlPanelEstilista: TRLPanel;
-    rlLabelEstilista: TRLDBText;
-    rlDBTotal: TRLDBText;
-    rlLabTotal: TRLLabel;
     rlPanTitCor: TRLPanel;
     rlPanelTitTam: TRLPanel;
+    rlPanBalanco: TRLPanel;
+    rlDBTitBalanco: TRLLabel;
+    rlPanBalanco_: TRLPanel;
+    rlDBBalanco: TRLDBText;
+    rlPanEstFisico: TRLPanel;
+    rlLabEstFisico: TRLLabel;
+    rlPanEstFisico_: TRLPanel;
+    rlDBEstFisico: TRLDBText;
+    rlPanelTitEmpenhos: TRLPanel;
+    rlLbEmpTItulo: TRLLabel;
+    rlPanEmp_: TRLPanel;
+    rlDBEmpenho: TRLDBText;
+    rlPanEstDisp: TRLPanel;
+    rlLabEstDisp: TRLLabel;
+    rlPanelEstoqueDisp: TRLPanel;
+    rlDBEstDisponivel: TRLDBText;
+    rlPanelCusto: TRLPanel;
+    rlPanCusto_: TRLPanel;
+    rlDBCusto: TRLDBText;
+    rlTotais: TRLBand;
+    rlPanTotFisico: TRLPanel;
+    rlLblTotFisico: TRLLabel;
+    rlDBTotFisico: TRLLabel;
+    rlTotalEmpenhos: TRLPanel;
+    rlLblTotalEmpenhos: TRLLabel;
+    rlDBTotEmpenhos: TRLLabel;
+    rlPanelTotDisp: TRLPanel;
+    RLLabel1: TRLLabel;
+    rlDBTotDisponivel: TRLLabel;
+    procedure rlTotaisBeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
   public
@@ -157,6 +141,15 @@ begin
         SQL.Add('     CAST(');
         SQL.Add('               (');
         SQL.Add('                       (');
+        SQL.Add('                             COALESCE(es.es_saidaempenho, 0) -');
+        SQL.Add('                             COALESCE(es.es_entempenho, 0)');
+        SQL.Add('                       )');
+        SQL.Add('               ) AS VARCHAR(20)');
+        SQL.Add('     ) || '' '' || cp.cp_un AS empenhos,');
+        //SQL.Add('');
+        SQL.Add('     CAST(');
+        SQL.Add('               (');
+        SQL.Add('                       (');
         SQL.Add('                             COALESCE(es.es_entradaforn, 0) +');
         SQL.Add('                             COALESCE(es.es_enttransf, 0) +');
         SQL.Add('                             COALESCE(es.es_entbalanco, 0)');
@@ -213,6 +206,7 @@ begin
         SQL.Add('     JOIN grade_tamanho AS gt ON gt.grt_id = es.es_idgradetam');
         SQL.Add('     JOIN cadastro_produto AS cp ON cp.cp_id = es.es_codproduto');
         SQL.Add('     WHERE es_codproduto = :idArtigo');
+        SQL.Add('     ORDER BY grt_nome');
 
         ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
         Open;
@@ -222,11 +216,47 @@ begin
     dmPrincipal.dsEstArtigos.DataSet     :=dmPrincipal.qryEstArtigos;
 
 
-//    rlRelTecidos.DataSource              :=dmPrincipal.dsEstTecidos;
-//    rlEstoqueEstilista.DataFields        :='comp_nome';
+    rlRelArtigos.DataSource              :=dmPrincipal.dsEstArtigos;
+
 
     rlDBCor.DataSource                   :=dmPrincipal.dsEstArtigos;
     rlDBCor.DataField                    :='grc_nome_pa';
+
+    rlDBTamanho.DataSource               :=dmPrincipal.dsEstArtigos;
+    rlDBTamanho.DataField                :='grt_nome';
+
+    rlDBBalanco.DataSource               :=dmPrincipal.dsEstArtigos;
+    rlDBBalanco.DataField                :='balanco';
+
+    rlDBEstFisico.DataSource             :=dmPrincipal.dsEstArtigos;
+    rlDBEstFisico.DataField              :='estoque_fisico';
+
+    rlDBEmpenho.DataSource               :=dmPrincipal.dsEstArtigos;
+    rlDBEmpenho.DataField                :='empenhos';
+
+    rlDBEstDisponivel.DataSource         :=dmPrincipal.dsEstArtigos;
+    rlDBEstDisponivel.DataField          :='estoque_disponivel';
+
+    rlDBCusto.DataSource                 :=dmPrincipal.dsEstArtigos;
+    rlDBCusto.DataField                  :='es_custoatual';
+
+end;
+
+procedure TfrmRelArtigos.rlTotaisBeforePrint(Sender: TObject;
+  var PrintIt: Boolean);
+
+  var
+      totalFisico, totalEmpenhos, totalDisponivel : double;
+
+begin
+    totalFisico                 :=dmPrincipal.qryEstArtigos.FieldByName('total_estoque_fisico').AsFloat;
+    rlDBTotFisico.Caption       :=FormatFloat('0.0000', totalFisico);
+
+    totalEmpenhos               :=dmPrincipal.qryEstArtigos.FieldByName('total_empenhos').AsFloat;
+    rlDBTotEmpenhos.Caption     :=FormatFloat('0.0000', totalEmpenhos);
+
+    totalDisponivel             :=dmPrincipal.qryEstArtigos.FieldByName('total_estoque_disponivel').AsFloat;
+    rlDBTotDisponivel.Caption   :=FormatFloat('0.0000', totalDisponivel);
 end;
 
 end.

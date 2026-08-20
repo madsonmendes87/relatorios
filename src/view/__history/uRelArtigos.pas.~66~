@@ -62,9 +62,6 @@ type
     rlTotalEmpenhos: TRLPanel;
     rlLblTotalEmpenhos: TRLLabel;
     rlDBTotEmpenhos: TRLLabel;
-    rlPanelTotDisp: TRLPanel;
-    RLLabel1: TRLLabel;
-    rlDBTotDisponivel: TRLLabel;
     procedure rlTotaisBeforePrint(Sender: TObject; var PrintIt: Boolean);
   private
     { Private declarations }
@@ -146,6 +143,7 @@ begin
         SQL.Add('                       )');
         SQL.Add('               ) AS VARCHAR(20)');
         SQL.Add('     ) || '' '' || cp.cp_un AS empenhos,');
+        //SQL.Add('');
         SQL.Add('     CAST(');
         SQL.Add('               (');
         SQL.Add('                       (');
@@ -205,51 +203,7 @@ begin
         SQL.Add('     JOIN grade_tamanho AS gt ON gt.grt_id = es.es_idgradetam');
         SQL.Add('     JOIN cadastro_produto AS cp ON cp.cp_id = es.es_codproduto');
         SQL.Add('     WHERE es_codproduto = :idArtigo');
-
-        case frmFiltroArtigo.cboTipoSaldo.ItemIndex of
-          0:
-            SQL.Add(
-              ' AND ((COALESCE(es.es_entradaforn,0) - COALESCE(es.es_saidaforn,0) + ' +
-              '       COALESCE(es.es_enttransf,0) - COALESCE(es.es_saidatransf,0)) - ' +
-              '      (COALESCE(es.es_saidaempenho,0) - COALESCE(es.es_entempenho,0)) - ' +
-              '      (COALESCE(es.es_saidabalanco,0) - COALESCE(es.es_entbalanco,0)) ' +
-              '     ) >= 0');
-
-          1:
-            SQL.Add(
-              ' AND ((COALESCE(es.es_entradaforn,0) - COALESCE(es.es_saidaforn,0) + ' +
-              '       COALESCE(es.es_enttransf,0) - COALESCE(es.es_saidatransf,0)) - ' +
-              '      (COALESCE(es.es_saidaempenho,0) - COALESCE(es.es_entempenho,0)) - ' +
-              '      (COALESCE(es.es_saidabalanco,0) - COALESCE(es.es_entbalanco,0)) ' +
-              '     ) > 0');
-        end;
-
-
-        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
-        begin
-              SQL.Add('AND gc.grc_id = :idCor');
-              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
-        end;
-
-        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
-        begin
-              SQL.Add('AND gt.grt_id = :idTamanho');
-              ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
-        end;
-
-        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
-        begin
-            SQL.Add('AND cc.comp_id = :idComprador');
-            ParamByName('idComprador').AsInteger :=frmFiltroArtigo.dblcbComprador.KeyValue;
-        end;
-
-        if frmFiltroArtigo.dblcbFornecedor.KeyValue <> Null then
-        begin
-            SQL.Add('AND f.for_codigo = :idFornecedor');
-            ParamByName('idFornecedor').AsInteger :=frmFiltroArtigo.dblcbFornecedor.KeyValue;
-        end;
-
-        SQL.Add('     ORDER BY grt_nome');
+        SQL.Add('     ORDER BY grc_nome_pa');
 
         ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
         Open;
@@ -260,7 +214,7 @@ begin
 
 
     rlRelArtigos.DataSource              :=dmPrincipal.dsEstArtigos;
-
+//    rlEstoqueEstilista.DataFields        :='comp_nome';
 
     rlDBCor.DataSource                   :=dmPrincipal.dsEstArtigos;
     rlDBCor.DataField                    :='grc_nome_pa';
@@ -283,13 +237,15 @@ begin
     rlDBCusto.DataSource                 :=dmPrincipal.dsEstArtigos;
     rlDBCusto.DataField                  :='es_custoatual';
 
+//    rlDBTotFisico.DataSource             :=dmPrincipal.dsEstArtigos;
+//    rlDBTotFisico.DataField              :='total_estoque_fisico';
 end;
 
 procedure TfrmRelArtigos.rlTotaisBeforePrint(Sender: TObject;
   var PrintIt: Boolean);
 
   var
-      totalFisico, totalEmpenhos, totalDisponivel : double;
+      totalFisico, totalEmpenhos : double;
 
 begin
     totalFisico                 :=dmPrincipal.qryEstArtigos.FieldByName('total_estoque_fisico').AsFloat;
@@ -297,9 +253,6 @@ begin
 
     totalEmpenhos               :=dmPrincipal.qryEstArtigos.FieldByName('total_empenhos').AsFloat;
     rlDBTotEmpenhos.Caption     :=FormatFloat('0.0000', totalEmpenhos);
-
-    totalDisponivel             :=dmPrincipal.qryEstArtigos.FieldByName('total_estoque_disponivel').AsFloat;
-    rlDBTotDisponivel.Caption   :=FormatFloat('0.0000', totalDisponivel);
 end;
 
 end.

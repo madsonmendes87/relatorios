@@ -225,30 +225,6 @@ begin
         end;
 
 
-        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
-        begin
-              SQL.Add('AND gc.grc_id = :idCor');
-              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
-        end;
-
-        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
-        begin
-              SQL.Add('AND gt.grt_id = :idTamanho');
-              ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
-        end;
-
-        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
-        begin
-            SQL.Add('AND cc.comp_id = :idComprador');
-            ParamByName('idComprador').AsInteger :=frmFiltroArtigo.dblcbComprador.KeyValue;
-        end;
-
-        if frmFiltroArtigo.dblcbFornecedor.KeyValue <> Null then
-        begin
-            SQL.Add('AND f.for_codigo = :idFornecedor');
-            ParamByName('idFornecedor').AsInteger :=frmFiltroArtigo.dblcbFornecedor.KeyValue;
-        end;
-
         SQL.Add('     ORDER BY grt_nome');
 
         ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
