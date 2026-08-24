@@ -107,7 +107,7 @@
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
         <DCC_DcuOutput>D:\projetoFabrica\relatorios\dcu</DCC_DcuOutput>
-        <DCC_UnitSearchPath>D:\projetoFabrica\relatorios\src;D:\projetoFabrica\relatorios\src\view;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <DCC_UnitSearchPath>D:\projetoFabrica\relatorios\src\view;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
@@ -156,6 +156,10 @@
         </DCCReference>
         <DCCReference Include="src\view\uRelArtigos.pas">
             <Form>frmRelArtigos</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="src\view\uRelArtigosEmpenho.pas">
+            <Form>frmRelArtigosEmpenho</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <BuildConfiguration Include="Base">

@@ -8,8 +8,7 @@ uses
   uDmPrincipal in 'src\datamodule\uDmPrincipal.pas' {dmPrincipal: TDataModule},
   uRelTecidos in 'src\view\uRelTecidos.pas' {frmRelTecidos},
   uRelTecidoEmpenho in 'src\view\uRelTecidoEmpenho.pas' {frmRelTecidoEmpenho},
-  uRelArtigos in 'src\view\uRelArtigos.pas' {frmRelArtigos},
-  uRelArtigosEmpenho in 'src\view\uRelArtigosEmpenho.pas' {frmRelArtigosEmpenho};
+  uRelArtigos in 'src\view\uRelArtigos.pas' {frmRelArtigos};
 
 {$R *.res}
 
@@ -22,6 +21,5 @@ begin
   Application.CreateForm(TfrmRelTecidos, frmRelTecidos);
   Application.CreateForm(TfrmRelTecidoEmpenho, frmRelTecidoEmpenho);
   Application.CreateForm(TfrmRelArtigos, frmRelArtigos);
-  Application.CreateForm(TfrmRelArtigosEmpenho, frmRelArtigosEmpenho);
   Application.Run;
 end.

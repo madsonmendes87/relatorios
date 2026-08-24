@@ -36,6 +36,8 @@ type
     qryTecidoEstoqueTot: TFDQuery;
     qryEstArtigos: TFDQuery;
     dsEstArtigos: TDataSource;
+    qryEmpArtigos: TFDQuery;
+    dsEmpArtigos: TDataSource;
   private
     { Private declarations }
   public

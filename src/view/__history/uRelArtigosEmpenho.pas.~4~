@@ -1,4 +1,4 @@
-unit uRelTecidoEmpenho;
+unit uRelArtigosEmpenho;
 
 interface
 
@@ -7,8 +7,8 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
 
 type
-  TfrmRelTecidoEmpenho = class(TForm)
-    rlRelTecidoEmpenho: TRLReport;
+  TfrmRelArtigosEmpenho = class(TForm)
+    rlRelArtigosEmpenho: TRLReport;
     rlCabecalho: TRLBand;
     rLabelCod: TRLLabel;
     rLabProduto: TRLLabel;
@@ -35,26 +35,24 @@ type
     rlPanelOrdProd: TRLPanel;
     rlDBOrdProducao: TRLDBMemo;
     rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
     rlPanelTamanho: TRLPanel;
     rlDBTamanho: TRLDBText;
     rlPanelRolo: TRLPanel;
+    rlDBRolo: TRLDBMemo;
     rlPanTipo: TRLPanel;
     rlDBTipo: TRLDBText;
     rlPanelSitEmp: TRLPanel;
+    rlDBSitEmp: TRLDBMemo;
     rlPanelForn: TRLPanel;
+    rlDBConsumo: TRLDBText;
     rlCabecalhoEstoque: TRLBand;
-    rlLblEmpenho: TRLLabel;
     rlPanelEstilista: TRLPanel;
     rlLabelEstilista: TRLDBText;
     rlDBTotal: TRLDBText;
     rlLabTotal: TRLLabel;
-    rlTotais: TRLBand;
-    rlPanelTotEntForn: TRLPanel;
-    rLabTotEntForn: TRLLabel;
-    rlPanelTotalDisponivel: TRLPanel;
-    rlLabTotDisponivel: TRLLabel;
-    rlLblTotDisponivel: TRLLabel;
     rlPanelTituloEmp: TRLPanel;
+    rlLblEmpenho: TRLLabel;
     rlPanelDtEmpenho: TRLPanel;
     rlLblDtEmpenho: TRLLabel;
     rlPanelReferencia: TRLPanel;
@@ -63,6 +61,7 @@ type
     rlLblOrdCorte: TRLLabel;
     rlPanelOrdProducao: TRLPanel;
     rlLblOrdProducao: TRLLabel;
+    rlLblOrdProd_: TRLLabel;
     rlPanCor: TRLPanel;
     rlLblCor: TRLLabel;
     rlPanelTam: TRLPanel;
@@ -74,15 +73,15 @@ type
     rlPanSitEmpenho: TRLPanel;
     rlLblSitEmp: TRLLabel;
     rlSitEmp_: TRLLabel;
-    rlLblOrdProd_: TRLLabel;
     rlPanConsumo: TRLPanel;
     rlLblConsumo: TRLLabel;
-    rlDBCor: TRLDBMemo;
-    rlDBRolo: TRLDBMemo;
-    rlDBSitEmp: TRLDBMemo;
-    rlDBConsumo: TRLDBText;
+    rlTotais: TRLBand;
+    rlPanelTotEntForn: TRLPanel;
+    rLabTotEntForn: TRLLabel;
     rlDBTotEmpenhos: TRLDBText;
-
+    rlPanelTotalDisponivel: TRLPanel;
+    rlLabTotDisponivel: TRLLabel;
+    rlDBEmpTransferidos: TRLDBText;
   private
     { Private declarations }
   public
@@ -91,17 +90,17 @@ type
   end;
 
 var
-  frmRelTecidoEmpenho: TfrmRelTecidoEmpenho;
+  frmRelArtigosEmpenho: TfrmRelArtigosEmpenho;
 
 implementation
 
 {$R *.dfm}
 
-uses uDmPrincipal, uFiltroArtigo, uConexao;
+uses uConexao, uDmPrincipal, uPrincipal, uFiltroArtigo;
 
-{ TfrmRelTecidoEmpenho }
+{ TfrmRelArtigosEmpenho }
 
-procedure TfrmRelTecidoEmpenho.carregarDados;
+procedure TfrmRelArtigosEmpenho.carregarDados;
 begin
     dmConexao.Conexao.Connected :=true;
 
@@ -127,8 +126,23 @@ begin
 
 
 
+    if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+    begin
+         with dmPrincipal.qryEstilistaComprador do
+        begin
+            Close;
+            SQL.Clear;
+            SQL.Add('SELECT comp_nome, comp_idestilista FROM cadastro_compradores');
+            SQL.Add('   WHERE comp_id = :idComprador');
 
-    with dmPrincipal.qryEmpTecidos do
+            ParamByName('idComprador').AsInteger    :=frmFiltroArtigo.dblcbComprador.KeyValue;
+            Open;
+        end;
+    end;
+
+
+
+    with dmPrincipal.qryEmpArtigos do
     begin
         Close;
         SQL.Clear;
@@ -237,6 +251,25 @@ begin
         SQL.Add('                   cp.cp_id=:idArtigo');
         SQL.Add('                   AND ce.emp_situacao<>''C''');
         SQL.Add('                   AND ce.emp_tipo=''S''');
+
+        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
+        begin
+              SQL.Add('AND gc.grc_id = :idCor');
+              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
+        begin
+              SQL.Add('AND gt.grt_id = :idTamanho');
+              ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+        begin
+            SQL.Add('AND est.es_id = :idEstilista');
+            ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
+        end;
+
         SQL.Add('             GROUP BY');
         SQL.Add('                   est.es_nome,');
         SQL.Add('                   ce.emp_idordemcorte,');
@@ -259,55 +292,53 @@ begin
         SQL.Add('                 pa.cad_idreferencia');
         SQL.Add('          )AS dados');
 
+
         ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
         Open;
     end;
 
 
-    dmPrincipal.dsEstTecidos.DataSet     :=dmPrincipal.qryEstTecidos;
+    dmPrincipal.dsEmpArtigos.DataSet     :=dmPrincipal.qryEmpArtigos;
 
 
-    rlRelTecidoEmpenho.DataSource        :=dmPrincipal.dsEmpTecidos;
+    rlRelArtigosEmpenho.DataSource        :=dmPrincipal.dsEmpArtigos;
     rlEmpenhoEstilista.DataFields        :='estilista';
 
-    rlLabelEstilista.DataSource          :=dmPrincipal.dsEmpTecidos;
+    rlLabelEstilista.DataSource          :=dmPrincipal.dsEmpArtigos;
     rlLabelEstilista.DataField           :='estilista';
 
-    rlDBDtEmpenho.DataSource             :=dmPrincipal.dsEmpTecidos;
+    rlDBDtEmpenho.DataSource             :=dmPrincipal.dsEmpArtigos;
     rlDBDtEmpenho.DataField              :='emp_dtlanc';
 
-    rlDBRef.DataSource                   :=dmPrincipal.dsEmpTecidos;
+    rlDBRef.DataSource                   :=dmPrincipal.dsEmpArtigos;
     rlDBRef.DataField                    :='cad_idreferencia';
 
-    rlDBOrdCorte.DataSource              :=dmPrincipal.dsEmpTecidos;
+    rlDBOrdCorte.DataSource              :=dmPrincipal.dsEmpArtigos;
     rlDBOrdCorte.DataField               :='emp_idordemcorte';
 
-    rlDBOrdProducao.DataSource           :=dmPrincipal.dsEmpTecidos;
+    rlDBOrdProducao.DataSource           :=dmPrincipal.dsEmpArtigos;
     rlDBOrdProducao.DataField            :='emp_idordproducao';
 
-    rlDBCor.DataSource                   :=dmPrincipal.dsEmpTecidos;
+    rlDBCor.DataSource                   :=dmPrincipal.dsEmpArtigos;
     rlDBCor.DataField                    :='grc_nome';
 
-    rlDBTamanho.DataSource               :=dmPrincipal.dsEmpTecidos;
+    rlDBTamanho.DataSource               :=dmPrincipal.dsEmpArtigos;
     rlDBTamanho.DataField                :='grt_nome';
 
-    rlDBRolo.DataSource                  :=dmPrincipal.dsEmpTecidos;
+    rlDBRolo.DataSource                  :=dmPrincipal.dsEmpArtigos;
     rlDBRolo.DataField                   :='es_numrolo';
 
-    rlDBTipo.DataSource                  :=dmPrincipal.dsEmpTecidos;
+    rlDBTipo.DataSource                  :=dmPrincipal.dsEmpArtigos;
     rlDBTipo.DataField                   :='tipo';
 
-    rlDBSitEmp.DataSource                :=dmPrincipal.dsEmpTecidos;
+    rlDBSitEmp.DataSource                :=dmPrincipal.dsEmpArtigos;
     rlDBSitEmp.DataField                 :='situacao_empenho';
 
-    rlDBConsumo.DataSource               :=dmPrincipal.dsEmpTecidos;
+    rlDBConsumo.DataSource               :=dmPrincipal.dsEmpArtigos;
     rlDBConsumo.DataField                :='saldo';
 
-    rlDBTotal.DataSource                 :=dmPrincipal.dsEmpTecidos;
+    rlDBTotal.DataSource                 :=dmPrincipal.dsEmpArtigos;
     rlDBTotal.DataField                  :='total_saldo_estilista';
-
-    rlDBTotEmpenhos.DataSource           :=dmPrincipal.dsEmpTecidos;
-    rlDBTotEmpenhos.DataField            :='total_sob_pedido';
 end;
 
 end.

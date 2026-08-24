@@ -1,0 +1,509 @@
+unit uRelArtigosEmpenho;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
+
+type
+  TfrmRelArtigosEmpenho = class(TForm)
+    rlRelArtigosEmpenho: TRLReport;
+    rlCabecalho: TRLBand;
+    rLabelCod: TRLLabel;
+    rLabProduto: TRLLabel;
+    rLabTipoProd: TRLLabel;
+    rlComposicao: TRLLabel;
+    rlDBCodigo: TRLDBText;
+    rlDBComposicao: TRLDBText;
+    rlDBGrupo: TRLDBText;
+    rlDBProduto: TRLDBText;
+    rlDBSubgrupo: TRLDBText;
+    rlDBTipoProduto: TRLDBText;
+    rlGrupo: TRLLabel;
+    rlImageJFI: TRLImage;
+    rlImageNAT: TRLImage;
+    rlSubGrupo: TRLLabel;
+    rlEmpenhoEstilista: TRLGroup;
+    rlDadosEstoque: TRLBand;
+    rlPanelDtEntrada: TRLPanel;
+    rlDBDtEmpenho: TRLDBText;
+    rlPanRef: TRLPanel;
+    rlDBRef: TRLDBMemo;
+    rlPanelOrdemCorte: TRLPanel;
+    rlDBOrdCorte: TRLDBText;
+    rlPanelOrdProd: TRLPanel;
+    rlDBOrdProducao: TRLDBMemo;
+    rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
+    rlPanelTamanho: TRLPanel;
+    rlDBTamanho: TRLDBText;
+    rlPanelRolo: TRLPanel;
+    rlDBRolo: TRLDBMemo;
+    rlPanTipo: TRLPanel;
+    rlDBTipo: TRLDBText;
+    rlPanelSitEmp: TRLPanel;
+    rlDBSitEmp: TRLDBMemo;
+    rlPanelForn: TRLPanel;
+    rlDBConsumo: TRLDBText;
+    rlCabecalhoEstoque: TRLBand;
+    rlPanelEstilista: TRLPanel;
+    rlLabelEstilista: TRLDBText;
+    rlDBTotal: TRLDBText;
+    rlLabTotal: TRLLabel;
+    rlPanelTituloEmp: TRLPanel;
+    rlLblEmpenho: TRLLabel;
+    rlPanelDtEmpenho: TRLPanel;
+    rlLblDtEmpenho: TRLLabel;
+    rlPanelReferencia: TRLPanel;
+    rlLblReferencia: TRLLabel;
+    rlPanelOrdCorte: TRLPanel;
+    rlLblOrdCorte: TRLLabel;
+    rlPanelOrdProducao: TRLPanel;
+    rlLblOrdProducao: TRLLabel;
+    rlLblOrdProd_: TRLLabel;
+    rlPanCor: TRLPanel;
+    rlLblCor: TRLLabel;
+    rlPanelTam: TRLPanel;
+    rlLblTam: TRLLabel;
+    rlPanRolo: TRLPanel;
+    rlLblRolo: TRLLabel;
+    rlPanelTipo: TRLPanel;
+    rlLblTipo: TRLLabel;
+    rlPanSitEmpenho: TRLPanel;
+    rlLblSitEmp: TRLLabel;
+    rlSitEmp_: TRLLabel;
+    rlPanConsumo: TRLPanel;
+    rlLblConsumo: TRLLabel;
+    rlTotais: TRLBand;
+    rlPanelTotEntForn: TRLPanel;
+    rLabTotEntForn: TRLLabel;
+    rlDBTotEmpenhos: TRLDBText;
+    rlPanelTotalDisponivel: TRLPanel;
+    rlLabTotDisponivel: TRLLabel;
+    rlDBEmpTransferidos: TRLDBText;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure carregarDados;
+  end;
+
+var
+  frmRelArtigosEmpenho: TfrmRelArtigosEmpenho;
+
+implementation
+
+{$R *.dfm}
+
+uses uConexao, uDmPrincipal, uPrincipal, uFiltroArtigo;
+
+{ TfrmRelArtigosEmpenho }
+
+procedure TfrmRelArtigosEmpenho.carregarDados;
+begin
+    dmConexao.Conexao.Connected :=true;
+
+    dmPrincipal.dsDadosArtigo.DataSet     :=dmPrincipal.qryDadosArtigo;
+
+    rlDBCodigo.DataSource                 :=dmPrincipal.dsDadosArtigo;
+    rlDBCodigo.DataField                  :='cp_id';
+
+    rlDBProduto.DataSource                :=dmPrincipal.dsDadosArtigo;
+    rlDBProduto.DataField                 :='cp_descricao';
+
+    rlDBGrupo.DataSource                  :=dmPrincipal.dsDadosArtigo;
+    rlDBGrupo.DataField                   :='gr_nome';
+
+    rlDBSubgrupo.DataSource               :=dmPrincipal.dsDadosArtigo;
+    rlDBSubGrupo.DataField                :='sgr_nome';
+
+    rlDBTipoProduto.DataSource            :=dmPrincipal.dsDadosArtigo;
+    rlDBTipoProduto.DataField             :='tp_nome';
+
+    rlDBComposicao.DataSource             :=dmPrincipal.dsDadosArtigo;
+    rlDBComposicao.DataField              :='cm_descricao';
+
+
+
+    if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+    begin
+         with dmPrincipal.qryEstilistaComprador do
+        begin
+            Close;
+            SQL.Clear;
+            SQL.Add('SELECT comp_nome, comp_idestilista FROM cadastro_compradores');
+            SQL.Add('   WHERE comp_id = :idComprador');
+
+            ParamByName('idComprador').AsInteger    :=frmFiltroArtigo.dblcbComprador.KeyValue;
+            Open;
+        end;
+    end;
+
+
+
+    with dmPrincipal.qryEmpArtigos do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     dados.*,');
+        SQL.Add('     SUM(');
+        SQL.Add('           CASE');
+        SQL.Add('                   WHEN dados.situacao_empenho = ''SOB PEDIDO DE EMPENHO''');
+        SQL.Add('                   THEN dados.saldo');
+        SQL.Add('           ELSE 0');
+        SQL.Add('     END');
+        SQL.Add('     ) OVER () AS total_sob_pedido,');
+        SQL.Add('     SUM(');
+        SQL.Add('             CASE');
+        SQL.Add('                   WHEN dados.situacao_empenho = ''TRANSFERIDO''');
+        SQL.Add('             THEN dados.saldo');
+        SQL.Add('             ELSE 0');
+        SQL.Add('     END');
+        SQL.Add('     ) OVER () AS total_transferido,');
+        SQL.Add('     SUM(dados.saldo) OVER (');
+        SQL.Add('         PARTITION BY dados.estilista');
+        SQL.Add('     ) AS total_saldo_estilista');
+        SQL.Add('     FROM');
+        SQL.Add('           (SELECT');
+        SQL.Add('           cp.cp_id,');
+        SQL.Add('           gc.grc_id,');
+        SQL.Add('           gt.grt_id,');
+        SQL.Add('           est.es_id,');
+        SQL.Add('           (est.es_nome) AS estilista,');
+        SQL.Add('           ce.emp_idestoque,');
+        SQL.Add('           (SELECT emp_dtlanc');
+        SQL.Add('                   FROM controle_empenho');
+        SQL.Add('                   WHERE emp_codprocesso=ce.emp_codprocesso');
+        SQL.Add('                   AND emp_idestoque=ce.emp_idestoque');
+        SQL.Add('                   AND emp_situacao<>''C''');
+        SQL.Add('                   AND emp_tipo=''S''');
+        SQL.Add('                   AND emp_eprototipo=ce.emp_eprototipo');
+        SQL.Add('                   AND emp_dtlanc IS NOT NULL');
+        SQL.Add('                   ORDER BY emp_id ASC');
+        SQL.Add('                   LIMIT 1');
+        SQL.Add('           ) AS emp_dtlanc,');
+        SQL.Add('           ce.emp_codprocesso,');
+        SQL.Add('           ce.emp_idordemcorte,');
+        SQL.Add('           ce.emp_idordproducao,');
+        SQL.Add('           pa.cad_idreferencia,');
+        SQL.Add('           (gc.grc_codexterno || '' - ''|| gc.grc_nome) AS grc_nome,');
+        SQL.Add('           gt.grt_nome,');
+        SQL.Add('           ce.emp_eprototipo,');
+        SQL.Add('           (CASE WHEN ce.emp_eprototipo=TRUE THEN ''PROTÓTIPO'' ELSE ''G. ESCALA'' END) AS tipo,');
+        SQL.Add('           (CASE');
+        SQL.Add('                     WHEN ce.emp_situacao IN (''N'', ''P'') THEN ''SOB PEDIDO DE EMPENHO''');
+        SQL.Add('                     WHEN ce.emp_situacao = ''E'' THEN ''TRANSFERIDO''');
+        SQL.Add('           END) AS situacao_empenho,');
+        SQL.Add('           COALESCE(');
+        SQL.Add('                   (SELECT SUM(ces.emp_consumo::numeric) FROM controle_empenho AS ces');
+        SQL.Add('                   WHERE');
+        SQL.Add('                         ces.emp_idestoque=ce.emp_idestoque');
+        SQL.Add('                         AND ces.emp_codprocesso=ce.emp_codprocesso');
+        SQL.Add('                         AND ces.emp_tipo=''S''');
+        SQL.Add('                         AND ces.emp_situacao<>''C''');
+        SQL.Add('                         AND ces.emp_eprototipo=ce.emp_eprototipo');
+        SQL.Add('                   ),0) AS ent,');
+        SQL.Add('           COALESCE(');
+        SQL.Add('                   (SELECT SUM(ces.emp_consumo::numeric) From controle_empenho AS ces');
+        SQL.Add('                   WHERE');
+        SQL.Add('                         ces.emp_idestoque=ce.emp_idestoque');
+        SQL.Add('                         AND ces.emp_codprocesso=ce.emp_codprocesso');
+        SQL.Add('                         AND ces.emp_tipo =''E''');
+        SQL.Add('                         AND ces.emp_mod=0');
+        SQL.Add('                         AND ces.emp_situacao<>''C''');
+        SQL.Add('                         AND ces.emp_eprototipo=ce.emp_eprototipo');
+        SQL.Add('                   ), 0) AS dev,');
+        SQL.Add('          (');
+        SQL.Add('             COALESCE((');
+        SQL.Add('                         SELECT SUM(ces.emp_consumo::numeric)');
+        SQL.Add('                               FROM controle_empenho AS ces');
+        SQL.Add('                               WHERE ces.emp_idestoque = ce.emp_idestoque');
+        SQL.Add('                               AND ces.emp_codprocesso = ce.emp_codprocesso');
+        SQL.Add('                               AND ces.emp_tipo = ''S''');
+        SQL.Add('                               AND ces.emp_situacao <> ''C''');
+        SQL.Add('                               AND ces.emp_eprototipo = ce.emp_eprototipo');
+        SQL.Add('             ), 0)');
+        SQL.Add('             -');
+        SQL.Add('             COALESCE((');
+        SQL.Add('                       SELECT SUM(ces.emp_consumo::numeric)');
+        SQL.Add('                               FROM controle_empenho AS ces');
+        SQL.Add('                               WHERE ces.emp_idestoque = ce.emp_idestoque');
+        SQL.Add('                               AND ces.emp_codprocesso = ce.emp_codprocesso');
+        SQL.Add('                               AND ces.emp_tipo = ''E''');
+        SQL.Add('                               AND ces.emp_mod = 0');
+        SQL.Add('                               AND ces.emp_situacao <> ''C''');
+        SQL.Add('                               AND ces.emp_eprototipo = ce.emp_eprototipo');
+        SQL.Add('                       ), 0)');
+        SQL.Add('             ) AS saldo,');
+        SQL.Add('             ce.emp_situacao,');
+        SQL.Add('             e.es_numrolo');
+        SQL.Add('             FROM controle_empenho AS ce');
+        SQL.Add('             JOIN estoque AS e ON e.es_id = ce.emp_idestoque');
+        SQL.Add('             JOIN cadastro_produto AS cp On cp.cp_id=e.es_codproduto');
+        SQL.Add('             JOIN grade_cor AS gc On gc.grc_id = e.es_idgradecor');
+        SQL.Add('             JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam');
+        SQL.Add('             JOIN ficha_tecnica AS ft ON ft.fi_id = ce.emp_codprocesso');
+        SQL.Add('             JOIN produto_acabado AS pa ON pa.cad_id = ft.fi_idprodutoacabado');
+        SQL.Add('             LEFT JOIN cadastro_estilista As est On est.es_id = pa.cad_idestilista');
+        SQL.Add('             WHERE');
+        SQL.Add('                   cp.cp_id=:idArtigo');
+        SQL.Add('                   AND ce.emp_situacao<>''C''');
+        SQL.Add('                   AND ce.emp_tipo=''S''');
+
+        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
+        begin
+              SQL.Add('AND gc.grc_id = :idCor');
+              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
+        begin
+              SQL.Add('AND gt.grt_id = :idTamanho');
+              ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+        begin
+            SQL.Add('AND est.es_id = :idEstilista');
+            ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
+        end;
+
+        SQL.Add('             GROUP BY');
+        SQL.Add('                   est.es_nome,');
+        SQL.Add('                   ce.emp_idordemcorte,');
+        SQL.Add('                   ce.emp_idordproducao,');
+        SQL.Add('                   ce.emp_situacao,');
+        SQL.Add('                   pa.cad_idreferencia,');
+        SQL.Add('                   gc.grc_codexterno,');
+        SQL.Add('                   gc.grc_nome,');
+        SQL.Add('                   cp.cp_id,');
+        SQL.Add('                   gc.grc_id,');
+        SQL.Add('                   gt.grt_id,');
+        SQL.Add('                   ce.emp_eprototipo,');
+        SQL.Add('                   ce.emp_codprocesso,');
+        SQL.Add('                   gt.grt_nome,');
+        SQL.Add('                   est.es_id,');
+        SQL.Add('                   ce.emp_idestoque,');
+        SQL.Add('                   e.es_numrolo');
+        SQL.Add('           ORDER BY');
+        SQL.Add('                 est.es_nome,');
+        SQL.Add('                 pa.cad_idreferencia');
+        SQL.Add('          )AS dados');
+
+
+        ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+        Open;
+    end;
+
+
+    dmPrincipal.dsEmpArtigos.DataSet     :=dmPrincipal.qryEmpArtigos;
+
+
+    rlRelArtigosEmpenho.DataSource        :=dmPrincipal.dsEmpArtigos;
+    rlEmpenhoEstilista.DataFields        :='estilista';
+
+    rlLabelEstilista.DataSource          :=dmPrincipal.dsEmpArtigos;
+    rlLabelEstilista.DataField           :='estilista';
+
+    rlDBDtEmpenho.DataSource             :=dmPrincipal.dsEmpArtigos;
+    rlDBDtEmpenho.DataField              :='emp_dtlanc';
+
+    rlDBRef.DataSource                   :=dmPrincipal.dsEmpArtigos;
+    rlDBRef.DataField                    :='cad_idreferencia';
+
+    rlDBOrdCorte.DataSource              :=dmPrincipal.dsEmpArtigos;
+    rlDBOrdCorte.DataField               :='emp_idordemcorte';
+
+    rlDBOrdProducao.DataSource           :=dmPrincipal.dsEmpArtigos;
+    rlDBOrdProducao.DataField            :='emp_idordproducao';
+
+    rlDBCor.DataSource                   :=dmPrincipal.dsEmpArtigos;
+    rlDBCor.DataField                    :='grc_nome';
+
+    rlDBTamanho.DataSource               :=dmPrincipal.dsEmpArtigos;
+    rlDBTamanho.DataField                :='grt_nome';
+
+    rlDBRolo.DataSource                  :=dmPrincipal.dsEmpArtigos;
+    rlDBRolo.DataField                   :='es_numrolo';
+
+    rlDBTipo.DataSource                  :=dmPrincipal.dsEmpArtigos;
+    rlDBTipo.DataField                   :='tipo';
+
+    rlDBSitEmp.DataSource                :=dmPrincipal.dsEmpArtigos;
+    rlDBSitEmp.DataField                 :='situacao_empenho';
+
+    rlDBConsumo.DataSource               :=dmPrincipal.dsEmpArtigos;
+    rlDBConsumo.DataField                :='saldo';
+
+    rlDBTotal.DataSource                 :=dmPrincipal.dsEmpArtigos;
+    rlDBTotal.DataField                  :='total_saldo_estilista';
+
+
+    with dmPrincipal.qryTotaisEmpenho do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('    COALESCE(SUM(');
+        SQL.Add('        CASE');
+        SQL.Add('            WHEN dados.situacao_empenho = ''SOB PEDIDO DE EMPENHO''');
+        SQL.Add('            THEN dados.saldo');
+        SQL.Add('            ELSE 0');
+        SQL.Add('        END');
+        SQL.Add('    ), 0) AS total_sob_pedido,');
+        SQL.Add('    COALESCE(SUM(');
+        SQL.Add('        CASE');
+        SQL.Add('            WHEN dados.situacao_empenho = ''TRANSFERIDO''');
+        SQL.Add('            THEN dados.saldo');
+        SQL.Add('            ELSE 0');
+        SQL.Add('        END');
+        SQL.Add('    ), 0) AS total_transferido');
+        SQL.Add('FROM');
+        SQL.Add('(');
+        SQL.Add('    SELECT');
+        SQL.Add('        cp.cp_id,');
+        SQL.Add('        gc.grc_id,');
+        SQL.Add('        gt.grt_id,');
+        SQL.Add('        est.es_id,');
+        SQL.Add('        est.es_nome AS estilista,');
+        SQL.Add('        ce.emp_idestoque,');
+        SQL.Add('        (SELECT emp_dtlanc');
+        SQL.Add('           FROM controle_empenho');
+        SQL.Add('          WHERE emp_codprocesso = ce.emp_codprocesso');
+        SQL.Add('            AND emp_idestoque = ce.emp_idestoque');
+        SQL.Add('            AND emp_situacao <> ''C''');
+        SQL.Add('            AND emp_tipo = ''S''');
+        SQL.Add('            AND emp_eprototipo = ce.emp_eprototipo');
+        SQL.Add('            AND emp_dtlanc IS NOT NULL');
+        SQL.Add('          ORDER BY emp_id ASC');
+        SQL.Add('          LIMIT 1');
+        SQL.Add('        ) AS emp_dtlanc,');
+        SQL.Add('        ce.emp_codprocesso,');
+        SQL.Add('        ce.emp_idordemcorte,');
+        SQL.Add('        ce.emp_idordproducao,');
+        SQL.Add('        pa.cad_idreferencia,');
+        SQL.Add('        (gc.grc_codexterno || '' - '' || gc.grc_nome) AS grc_nome,');
+        SQL.Add('        gt.grt_nome,');
+        SQL.Add('        ce.emp_eprototipo,');
+        SQL.Add('        CASE');
+        SQL.Add('            WHEN ce.emp_eprototipo = TRUE');
+        SQL.Add('                THEN ''PROTÓTIPO''');
+        SQL.Add('            ELSE ''G. ESCALA''');
+        SQL.Add('        END AS tipo,');
+        SQL.Add('        CASE');
+        SQL.Add('            WHEN ce.emp_situacao IN (''N'', ''P'')');
+        SQL.Add('                THEN ''SOB PEDIDO DE EMPENHO''');
+        SQL.Add('            WHEN ce.emp_situacao = ''E''');
+        SQL.Add('                THEN ''TRANSFERIDO''');
+        SQL.Add('        END AS situacao_empenho,');
+        SQL.Add('        COALESCE(');
+        SQL.Add('            (SELECT SUM(ces.emp_consumo::numeric)');
+        SQL.Add('               FROM controle_empenho AS ces');
+        SQL.Add('              WHERE ces.emp_idestoque = ce.emp_idestoque');
+        SQL.Add('                AND ces.emp_codprocesso = ce.emp_codprocesso');
+        SQL.Add('                AND ces.emp_tipo = ''S''');
+        SQL.Add('                AND ces.emp_situacao <> ''C''');
+        SQL.Add('                AND ces.emp_eprototipo = ce.emp_eprototipo');
+        SQL.Add('            ), 0');
+        SQL.Add('        ) AS ent,');
+        SQL.Add('        COALESCE(');
+        SQL.Add('            (SELECT SUM(ces.emp_consumo::numeric)');
+        SQL.Add('               FROM controle_empenho AS ces');
+        SQL.Add('              WHERE ces.emp_idestoque = ce.emp_idestoque');
+        SQL.Add('                AND ces.emp_codprocesso = ce.emp_codprocesso');
+        SQL.Add('                AND ces.emp_tipo = ''E''');
+        SQL.Add('                AND ces.emp_mod = 0');
+        SQL.Add('                AND ces.emp_situacao <> ''C''');
+        SQL.Add('                AND ces.emp_eprototipo = ce.emp_eprototipo');
+        SQL.Add('            ), 0');
+        SQL.Add('        ) AS dev,');
+        SQL.Add('        (');
+        SQL.Add('            COALESCE((');
+        SQL.Add('                SELECT SUM(ces.emp_consumo::numeric)');
+        SQL.Add('                FROM controle_empenho AS ces');
+        SQL.Add('                WHERE ces.emp_idestoque = ce.emp_idestoque');
+        SQL.Add('                  AND ces.emp_codprocesso = ce.emp_codprocesso');
+        SQL.Add('                  AND ces.emp_tipo = ''S''');
+        SQL.Add('                  AND ces.emp_situacao <> ''C''');
+        SQL.Add('                  AND ces.emp_eprototipo = ce.emp_eprototipo');
+        SQL.Add('            ), 0)');
+        SQL.Add('            -');
+        SQL.Add('            COALESCE((');
+        SQL.Add('                SELECT SUM(ces.emp_consumo::numeric)');
+        SQL.Add('                FROM controle_empenho AS ces');
+        SQL.Add('                WHERE ces.emp_idestoque = ce.emp_idestoque');
+        SQL.Add('                  AND ces.emp_codprocesso = ce.emp_codprocesso');
+        SQL.Add('                  AND ces.emp_tipo = ''E''');
+        SQL.Add('                  AND ces.emp_mod = 0');
+        SQL.Add('                  AND ces.emp_situacao <> ''C''');
+        SQL.Add('                  AND ces.emp_situacao <> ''C''');
+        SQL.Add('                  AND ces.emp_eprototipo = ce.emp_eprototipo');
+        SQL.Add('            ), 0)');
+        SQL.Add('        ) AS saldo,');
+        SQL.Add('        ce.emp_situacao,');
+        SQL.Add('        e.es_numrolo');
+        SQL.Add('    FROM controle_empenho AS ce');
+        SQL.Add('    JOIN estoque AS e ON e.es_id = ce.emp_idestoque');
+        SQL.Add('    JOIN cadastro_produto AS cp ON cp.cp_id = e.es_codproduto');
+        SQL.Add('    JOIN grade_cor AS gc ON gc.grc_id = e.es_idgradecor');
+        SQL.Add('    JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam');
+        SQL.Add('    JOIN ficha_tecnica AS ft ON ft.fi_id = ce.emp_codprocesso');
+        SQL.Add('    JOIN produto_acabado AS pa ON pa.cad_id = ft.fi_idprodutoacabado');
+        SQL.Add('    LEFT JOIN cadastro_estilista AS est ON est.es_id = pa.cad_idestilista');
+        SQL.Add('    WHERE');
+        SQL.Add('          cp.cp_id = :idArtigo');
+        SQL.Add('      AND ce.emp_situacao <> ''C''');
+        SQL.Add('      AND ce.emp_tipo = ''S''');
+
+        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
+        begin
+              SQL.Add('AND gc.grc_id = :idCor');
+              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
+        begin
+              SQL.Add('AND gt.grt_id = :idTamanho');
+              ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+        begin
+            SQL.Add('AND est.es_id = :idEstilista');
+            ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
+        end;
+
+        SQL.Add('    GROUP BY');
+        SQL.Add('        est.es_nome,');
+        SQL.Add('        est.es_id,');
+        SQL.Add('        ce.emp_idordemcorte,');
+        SQL.Add('        ce.emp_idordproducao,');
+        SQL.Add('        ce.emp_situacao,');
+        SQL.Add('        pa.cad_idreferencia,');
+        SQL.Add('        gc.grc_codexterno,');
+        SQL.Add('        gc.grc_nome,');
+        SQL.Add('        cp.cp_id,');
+        SQL.Add('        gc.grc_id,');
+        SQL.Add('        gt.grt_id,');
+        SQL.Add('        ce.emp_eprototipo,');
+        SQL.Add('        ce.emp_codprocesso,');
+        SQL.Add('        gt.grt_nome,');
+        SQL.Add('        ce.emp_idestoque,');
+        SQL.Add('        e.es_numrolo');
+        SQL.Add(') AS dados');
+
+        ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+        Open;
+    end;
+
+
+    rlDBTotEmpenhos.DataSource           :=dmPrincipal.dsTotaisEmpenho;
+    rlDBTotEmpenhos.DataField            :='total_sob_pedido';
+
+    rlDBEmpTransferidos.DataSource       :=dmPrincipal.dsTotaisEmpenho;
+    rlDBEmpTransferidos.DataField        :='total_transferido';
+end;
+
+end.

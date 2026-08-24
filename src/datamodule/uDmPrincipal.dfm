@@ -153,4 +153,14 @@ object dmPrincipal: TdmPrincipal
     Left = 504
     Top = 264
   end
+  object qryEmpArtigos: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 72
+    Top = 408
+  end
+  object dsEmpArtigos: TDataSource
+    DataSet = qryEmpArtigos
+    Left = 160
+    Top = 408
+  end
 end

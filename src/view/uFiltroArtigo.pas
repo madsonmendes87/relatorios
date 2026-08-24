@@ -66,7 +66,8 @@ implementation
 
 {$R *.dfm}
 
-uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho, uRelArtigos;
+uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho, uRelArtigos,
+  uRelArtigosEmpenho;
 
 procedure TfrmFiltroArtigo.btnVisEmpenhoClick(Sender: TObject);
 begin
@@ -81,7 +82,8 @@ begin
         end
         else
         begin
-            ShowMessage('Abrir relatorio artigos');
+            frmRelArtigosEmpenho.carregarDados;
+            frmRelArtigosEmpenho.rlRelArtigosEmpenho.Preview();
         end;
     end;
 end;

@@ -1,0 +1,98 @@
+unit uRelArtigosEmpenho;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
+
+type
+  TfrmRelArtigosEmpenho = class(TForm)
+    rlRelArtigosEmpenho: TRLReport;
+    rlCabecalho: TRLBand;
+    rLabelCod: TRLLabel;
+    rLabProduto: TRLLabel;
+    rLabTipoProd: TRLLabel;
+    rlComposicao: TRLLabel;
+    rlDBCodigo: TRLDBText;
+    rlDBComposicao: TRLDBText;
+    rlDBGrupo: TRLDBText;
+    rlDBProduto: TRLDBText;
+    rlDBSubgrupo: TRLDBText;
+    rlDBTipoProduto: TRLDBText;
+    rlGrupo: TRLLabel;
+    rlImageJFI: TRLImage;
+    rlImageNAT: TRLImage;
+    rlSubGrupo: TRLLabel;
+    rlEmpenhoEstilista: TRLGroup;
+    rlDadosEstoque: TRLBand;
+    rlPanelDtEntrada: TRLPanel;
+    rlDBDtEmpenho: TRLDBText;
+    rlPanRef: TRLPanel;
+    rlDBRef: TRLDBMemo;
+    rlPanelOrdemCorte: TRLPanel;
+    rlDBOrdCorte: TRLDBText;
+    rlPanelOrdProd: TRLPanel;
+    rlDBOrdProducao: TRLDBMemo;
+    rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
+    rlPanelTamanho: TRLPanel;
+    rlDBTamanho: TRLDBText;
+    rlPanelRolo: TRLPanel;
+    rlDBRolo: TRLDBMemo;
+    rlPanTipo: TRLPanel;
+    rlDBTipo: TRLDBText;
+    rlPanelSitEmp: TRLPanel;
+    rlDBSitEmp: TRLDBMemo;
+    rlPanelForn: TRLPanel;
+    rlDBConsumo: TRLDBText;
+    rlCabecalhoEstoque: TRLBand;
+    rlPanelEstilista: TRLPanel;
+    rlLabelEstilista: TRLDBText;
+    rlDBTotal: TRLDBText;
+    rlLabTotal: TRLLabel;
+    rlPanelTituloEmp: TRLPanel;
+    rlLblEmpenho: TRLLabel;
+    rlPanelDtEmpenho: TRLPanel;
+    rlLblDtEmpenho: TRLLabel;
+    rlPanelReferencia: TRLPanel;
+    rlLblReferencia: TRLLabel;
+    rlPanelOrdCorte: TRLPanel;
+    rlLblOrdCorte: TRLLabel;
+    rlPanelOrdProducao: TRLPanel;
+    rlLblOrdProducao: TRLLabel;
+    rlLblOrdProd_: TRLLabel;
+    rlPanCor: TRLPanel;
+    rlLblCor: TRLLabel;
+    rlPanelTam: TRLPanel;
+    rlLblTam: TRLLabel;
+    rlPanRolo: TRLPanel;
+    rlLblRolo: TRLLabel;
+    rlPanelTipo: TRLPanel;
+    rlLblTipo: TRLLabel;
+    rlPanSitEmpenho: TRLPanel;
+    rlLblSitEmp: TRLLabel;
+    rlSitEmp_: TRLLabel;
+    rlPanConsumo: TRLPanel;
+    rlLblConsumo: TRLLabel;
+    rlTotais: TRLBand;
+    rlPanelTotEntForn: TRLPanel;
+    rLabTotEntForn: TRLLabel;
+    rlDBTotEmpenhos: TRLDBText;
+    rlPanelTotalDisponivel: TRLPanel;
+    rlLabTotDisponivel: TRLLabel;
+    rlDBEmpTransferidos: TRLDBText;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmRelArtigosEmpenho: TfrmRelArtigosEmpenho;
+
+implementation
+
+{$R *.dfm}
+
+end.
