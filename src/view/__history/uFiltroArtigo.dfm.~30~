@@ -308,7 +308,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Top = 217
     Width = 185
     Height = 23
-    ItemIndex = 0
+    ItemIndex = 2
     TabOrder = 8
     Text = 'AMBOS'
     Items.Strings = (
@@ -396,7 +396,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Color = clMenuHighlight
     ParentBackground = False
     TabOrder = 11
-    object btnVisualizar: TSpeedButton
+    object btnVisualizarEstoque: TSpeedButton
       Left = 1
       Top = 1
       Width = 107
@@ -411,9 +411,39 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = btnVisualizarClick
+      OnClick = btnVisualizarEstoqueClick
       ExplicitLeft = 86
       ExplicitTop = 9
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
+  end
+  object pnlVisualEmpenho: TPanel
+    Left = 138
+    Top = 304
+    Width = 120
+    Height = 31
+    Color = clSeagreen
+    ParentBackground = False
+    TabOrder = 12
+    object btnVisEmpenho: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 118
+      Height = 29
+      Cursor = crHandPoint
+      Align = alClient
+      Caption = 'Visualizar Empenhos'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnVisEmpenhoClick
+      ExplicitLeft = 64
+      ExplicitTop = 8
       ExplicitWidth = 23
       ExplicitHeight = 22
     end

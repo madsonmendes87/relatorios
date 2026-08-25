@@ -38,6 +38,8 @@ type
     dsEstArtigos: TDataSource;
     qryEmpArtigos: TFDQuery;
     dsEmpArtigos: TDataSource;
+    qryReservaTecido: TFDQuery;
+    dsReservaTecido: TDataSource;
   private
     { Private declarations }
   public

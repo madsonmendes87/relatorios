@@ -43,6 +43,8 @@ type
     btnVisualizarEstoque: TSpeedButton;
     pnlVisualEmpenho: TPanel;
     btnVisEmpenho: TSpeedButton;
+    pnlVisualizarReserva: TPanel;
+    btnVisReservas: TSpeedButton;
     procedure edtCodigoKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure btnZerarCorClick(Sender: TObject);
@@ -52,6 +54,8 @@ type
     procedure btnZeraFornecedorClick(Sender: TObject);
     procedure btnVisualizarEstoqueClick(Sender: TObject);
     procedure btnVisEmpenhoClick(Sender: TObject);
+    procedure chkProtSemGEClick(Sender: TObject);
+    procedure btnVisReservasClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,7 +71,7 @@ implementation
 {$R *.dfm}
 
 uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho, uRelArtigos,
-  uRelArtigosEmpenho;
+  uRelArtigosEmpenho, uTecidoReserva;
 
 procedure TfrmFiltroArtigo.btnVisEmpenhoClick(Sender: TObject);
 begin
@@ -84,6 +88,26 @@ begin
         begin
             frmRelArtigosEmpenho.carregarDados;
             frmRelArtigosEmpenho.rlRelArtigosEmpenho.Preview();
+        end;
+    end;
+end;
+
+procedure TfrmFiltroArtigo.btnVisReservasClick(Sender: TObject);
+begin
+    previsualizacao;
+
+    if dmPrincipal.qryDadosArtigo.FindField('tp_nome') <> nil then
+    begin
+        if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
+        begin
+            frmTecidoReserva.carregarDados;
+            frmTecidoReserva.rlRelTecidoReserva.Preview();
+        end
+        else
+        begin
+            ShowMessage('Artigos Reserva');
+            //frmRelArtigos.carregarDados;
+            //frmRelArtigos.rlRelArtigos.Preview();
         end;
     end;
 end;
@@ -120,6 +144,20 @@ end;
 procedure TfrmFiltroArtigo.btnZeraTamanhoClick(Sender: TObject);
 begin
     dblcbTamanho.KeyValue   :=Null;
+end;
+
+procedure TfrmFiltroArtigo.chkProtSemGEClick(Sender: TObject);
+begin
+    if chkProtSemGE.Checked = true then
+    begin
+        cbTipoReserva.ItemIndex     :=1;
+        cboTipoEmpenho.ItemIndex    :=1;
+    end
+    else
+    begin
+        cbTipoReserva.ItemIndex     :=0;
+        cboTipoEmpenho.ItemIndex    :=0;
+    end;
 end;
 
 procedure TfrmFiltroArtigo.edtCodigoExit(Sender: TObject);

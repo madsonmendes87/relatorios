@@ -163,4 +163,14 @@ object dmPrincipal: TdmPrincipal
     Left = 160
     Top = 408
   end
+  object qryReservaTecido: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 264
+    Top = 408
+  end
+  object dsReservaTecido: TDataSource
+    DataSet = qryReservaTecido
+    Left = 368
+    Top = 408
+  end
 end

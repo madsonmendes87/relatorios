@@ -1,0 +1,255 @@
+unit uTecidoReserva;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
+
+type
+  TfrmTecidoReserva = class(TForm)
+    rlRelTecidoReserva: TRLReport;
+    rlCabecalho: TRLBand;
+    rLabelCod: TRLLabel;
+    rLabProduto: TRLLabel;
+    rLabTipoProd: TRLLabel;
+    rlComposicao: TRLLabel;
+    rlDBCodigo: TRLDBText;
+    rlDBComposicao: TRLDBText;
+    rlDBGrupo: TRLDBText;
+    rlDBProduto: TRLDBText;
+    rlDBSubgrupo: TRLDBText;
+    rlDBTipoProduto: TRLDBText;
+    rlGrupo: TRLLabel;
+    rlImageJFI: TRLImage;
+    rlImageNAT: TRLImage;
+    rlSubGrupo: TRLLabel;
+    rlEmpenhoEstilista: TRLGroup;
+    rlDadosEstoque: TRLBand;
+    rlPanelDtEntrada: TRLPanel;
+    rlDBDtEmpenho: TRLDBText;
+    rlPanRef: TRLPanel;
+    rlDBRef: TRLDBMemo;
+    rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
+    rlPanelTamanho: TRLPanel;
+    rlDBTamanho: TRLDBText;
+    rlPanelRolo: TRLPanel;
+    rlDBRolo: TRLDBMemo;
+    rlPanTipo: TRLPanel;
+    rlDBTipo: TRLDBText;
+    rlPanelSitEmp: TRLPanel;
+    rlDBSitEmp: TRLDBMemo;
+    rlPanelForn: TRLPanel;
+    rlDBConsumo: TRLDBText;
+    rlCabecalhoEstoque: TRLBand;
+    rlPanelEstilista: TRLPanel;
+    rlLabelEstilista: TRLDBText;
+    rlDBTotal: TRLDBText;
+    rlLabTotal: TRLLabel;
+    rlPanelTituloRes: TRLPanel;
+    rlLblReservas: TRLLabel;
+    rlPanelDtEmpenho: TRLPanel;
+    rlLblDtEmpenho: TRLLabel;
+    rlPanelReferencia: TRLPanel;
+    rlLblReferencia: TRLLabel;
+    rlPanCor: TRLPanel;
+    rlLblCor: TRLLabel;
+    rlPanelTam: TRLPanel;
+    rlLblTam: TRLLabel;
+    rlPanRolo: TRLPanel;
+    rlLblRolo: TRLLabel;
+    rlPanelTipo: TRLPanel;
+    rlLblTipo: TRLLabel;
+    rlPanSitEmpenho: TRLPanel;
+    rlLblSitEmp: TRLLabel;
+    rlSitEmp_: TRLLabel;
+    rlPanConsumo: TRLPanel;
+    rlLblConsumo: TRLLabel;
+    rlTotais: TRLBand;
+    rlPanelTotEntForn: TRLPanel;
+    rLabTotEntForn: TRLLabel;
+    rlDBTotEmpenhos: TRLDBText;
+    rlPanelTotalDisponivel: TRLPanel;
+    rlLabTotDisponivel: TRLLabel;
+    rlDBEmpTransferidos: TRLDBText;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure carregarDados;
+  end;
+
+var
+  frmTecidoReserva: TfrmTecidoReserva;
+
+implementation
+
+{$R *.dfm}
+
+uses uConexao, uDmPrincipal, uFiltroArtigo;
+
+{ TfrmTecidoReserva }
+
+procedure TfrmTecidoReserva.carregarDados;
+begin
+    dmConexao.Conexao.Connected :=true;
+
+    dmPrincipal.dsDadosArtigo.DataSet     :=dmPrincipal.qryDadosArtigo;
+
+    rlDBCodigo.DataSource                 :=dmPrincipal.dsDadosArtigo;
+    rlDBCodigo.DataField                  :='cp_id';
+
+    rlDBProduto.DataSource                :=dmPrincipal.dsDadosArtigo;
+    rlDBProduto.DataField                 :='cp_descricao';
+
+    rlDBGrupo.DataSource                  :=dmPrincipal.dsDadosArtigo;
+    rlDBGrupo.DataField                   :='gr_nome';
+
+    rlDBSubgrupo.DataSource               :=dmPrincipal.dsDadosArtigo;
+    rlDBSubGrupo.DataField                :='sgr_nome';
+
+    rlDBTipoProduto.DataSource            :=dmPrincipal.dsDadosArtigo;
+    rlDBTipoProduto.DataField             :='tp_nome';
+
+    rlDBComposicao.DataSource             :=dmPrincipal.dsDadosArtigo;
+    rlDBComposicao.DataField              :='cm_descricao';
+
+
+
+    if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+    begin
+         with dmPrincipal.qryEstilistaComprador do
+        begin
+            Close;
+            SQL.Clear;
+            SQL.Add('SELECT comp_nome, comp_idestilista FROM cadastro_compradores');
+            SQL.Add('   WHERE comp_id = :idComprador');
+
+            ParamByName('idComprador').AsInteger    :=frmFiltroArtigo.dblcbComprador.KeyValue;
+            Open;
+        end;
+    end;
+
+
+    with dmPrincipal.qryReservaTecido do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('       pa.cad_idreferencia,');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        SQL.Add('');
+        Open;
+    end;
+end;
+
+end.

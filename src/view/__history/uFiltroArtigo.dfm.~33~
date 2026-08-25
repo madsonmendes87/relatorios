@@ -222,19 +222,6 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Font.Style = [fsBold]
     ParentFont = False
   end
-  object lblRelPaisagem: TLabel
-    Left = 250
-    Top = 318
-    Width = 146
-    Height = 15
-    Caption = 'RELAT'#211'RIO EM PAISAGEM'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlue
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-  end
   object cboTipoSaldo: TComboBox
     Left = 8
     Top = 29
@@ -305,6 +292,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Width = 17
     Height = 17
     TabOrder = 6
+    OnClick = chkProtSemGEClick
   end
   object dblcbFornecedor: TDBLookupComboBox
     Left = 8
@@ -321,7 +309,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Top = 217
     Width = 185
     Height = 23
-    ItemIndex = 0
+    ItemIndex = 2
     TabOrder = 8
     Text = 'AMBOS'
     Items.Strings = (
@@ -332,7 +320,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
   object boxTecido: TGroupBox
     Left = 8
     Top = 245
-    Width = 297
+    Width = 329
     Height = 44
     Caption = 'OP'#199#195'O SOMENTE PARA TECIDO'
     TabOrder = 9
@@ -352,7 +340,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     end
   end
   object boxOrdenar: TGroupBox
-    Left = 311
+    Left = 356
     Top = 246
     Width = 341
     Height = 43
@@ -401,63 +389,22 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       TabOrder = 2
     end
   end
-  object chkConsEstilista: TCheckBox
-    Left = 8
-    Top = 318
-    Width = 161
-    Height = 17
-    Caption = 'RESUMO POR ESTILISTA'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 11
-  end
-  object chkRelPaisagem: TCheckBox
-    Left = 234
-    Top = 318
-    Width = 23
-    Height = 17
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clBlue
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 12
-  end
-  object chkAbrirAplicativo: TCheckBox
-    Left = 471
-    Top = 318
-    Width = 130
-    Height = 17
-    Caption = 'Abrir no Aplicativo'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 13
-  end
   object pnlVisualizar: TPanel
-    Left = 607
+    Left = 6
     Top = 304
     Width = 109
     Height = 31
     Color = clMenuHighlight
     ParentBackground = False
-    TabOrder = 14
-    object btnVisualizar: TSpeedButton
+    TabOrder = 11
+    object btnVisualizarEstoque: TSpeedButton
       Left = 1
       Top = 1
       Width = 107
       Height = 29
       Cursor = crHandPoint
       Align = alClient
-      Caption = 'F1 - Visualizar'
+      Caption = 'Visualizar Estoque'
       Flat = True
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWhite
@@ -465,8 +412,66 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
+      OnClick = btnVisualizarEstoqueClick
       ExplicitLeft = 86
       ExplicitTop = 9
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
+  end
+  object pnlVisualEmpenho: TPanel
+    Left = 138
+    Top = 304
+    Width = 120
+    Height = 31
+    Color = clSeagreen
+    ParentBackground = False
+    TabOrder = 12
+    object btnVisEmpenho: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 118
+      Height = 29
+      Cursor = crHandPoint
+      Align = alClient
+      Caption = 'Visualizar Empenhos'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnVisEmpenhoClick
+      ExplicitLeft = 64
+      ExplicitTop = 8
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
+  end
+  object pnlVisualizarReserva: TPanel
+    Left = 280
+    Top = 304
+    Width = 121
+    Height = 31
+    Color = clDarkseagreen
+    ParentBackground = False
+    TabOrder = 13
+    object btnVisReservas: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 119
+      Height = 29
+      Align = alClient
+      Caption = 'Visualizar Reservas'
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitLeft = 104
+      ExplicitTop = 8
       ExplicitWidth = 23
       ExplicitHeight = 22
     end

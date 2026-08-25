@@ -271,6 +271,11 @@ begin
             ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
         end;
 
+        if frmFiltroArtigo.cboTipoEmpenho.ItemIndex = 1 then
+            SQL.Add('AND ce.emp_eprototipo = TRUE')
+        else
+            SQL.Add('AND ce.emp_eprototipo = FALSE');
+
         SQL.Add('             GROUP BY');
         SQL.Add('                   est.es_nome,');
         SQL.Add('                   ce.emp_idordemcorte,');
@@ -476,6 +481,11 @@ begin
             SQL.Add('AND est.es_id = :idEstilista');
             ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
         end;
+
+        if frmFiltroArtigo.cboTipoEmpenho.ItemIndex = 1 then
+            SQL.Add('AND ce.emp_eprototipo = TRUE')
+        else
+            SQL.Add('AND ce.emp_eprototipo = FALSE');
 
         SQL.Add('    GROUP BY');
         SQL.Add('        est.es_nome,');

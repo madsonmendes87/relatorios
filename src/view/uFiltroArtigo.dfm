@@ -292,6 +292,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Width = 17
     Height = 17
     TabOrder = 6
+    OnClick = chkProtSemGEClick
   end
   object dblcbFornecedor: TDBLookupComboBox
     Left = 8
@@ -319,7 +320,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
   object boxTecido: TGroupBox
     Left = 8
     Top = 245
-    Width = 297
+    Width = 329
     Height = 44
     Caption = 'OP'#199#195'O SOMENTE PARA TECIDO'
     TabOrder = 9
@@ -339,7 +340,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     end
   end
   object boxOrdenar: TGroupBox
-    Left = 311
+    Left = 356
     Top = 246
     Width = 341
     Height = 43
@@ -443,6 +444,36 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       ParentFont = False
       OnClick = btnVisEmpenhoClick
       ExplicitLeft = 64
+      ExplicitTop = 8
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
+  end
+  object pnlVisualizarReserva: TPanel
+    Left = 280
+    Top = 304
+    Width = 121
+    Height = 31
+    Color = clTomato
+    ParentBackground = False
+    TabOrder = 13
+    object btnVisReservas: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 119
+      Height = 29
+      Cursor = crHandPoint
+      Align = alClient
+      Caption = 'Visualizar Reservas'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnVisReservasClick
+      ExplicitLeft = 104
       ExplicitTop = 8
       ExplicitWidth = 23
       ExplicitHeight = 22
