@@ -27,7 +27,7 @@ type
     rlEmpenhoEstilista: TRLGroup;
     rlDadosEstoque: TRLBand;
     rlPanelDtEntrada: TRLPanel;
-    rlDBDtEmpenho: TRLDBText;
+    rlDBDtReserva: TRLDBText;
     rlPanRef: TRLPanel;
     rlDBRef: TRLDBMemo;
     rlPanelCor: TRLPanel;
@@ -251,6 +251,26 @@ begin
         ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
         Open;
     end;
+
+
+    dmPrincipal.dsReservaTecido.DataSet     :=dmPrincipal.qryReservaTecido;
+
+
+
+    rlRelTecidoReserva.DataSource          :=dmPrincipal.dsReservaTecido;
+    rlEmpenhoEstilista.DataFields          :='estilista';
+
+    rlLabelEstilista.DataSource            :=dmPrincipal.dsReservaTecido;
+    rlLabelEstilista.DataField             :='estilista';
+
+    rlDBDtReserva.DataSource               :=dmPrincipal.dsReservaTecido;
+    rlDBDtReserva.DataField                :='fti_dtlanc';
+
+    rlDBRef.DataSource                     :=dmPrincipal.dsReservaTecido;
+    rlDBRef.DataField                      :='cad_idreferencia';
+
+    rlDBCor.DataSource                   :=dmPrincipal.dsReservaTecido;
+    rlDBCor.DataField                    :='grc_nome';
 end;
 
 end.

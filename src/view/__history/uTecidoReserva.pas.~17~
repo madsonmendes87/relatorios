@@ -36,7 +36,7 @@ type
     rlPanTipo: TRLPanel;
     rlDBTipo: TRLDBText;
     rlPanelSitEmp: TRLPanel;
-    rlDBConsModelagem: TRLDBMemo;
+    rlDBSitEmp: TRLDBMemo;
     rlPanelForn: TRLPanel;
     rlDBConsumo: TRLDBText;
     rlCabecalhoEstoque: TRLBand;
@@ -222,13 +222,35 @@ begin
         SQL.Add('                       ft.fi_situacao,');
         SQL.Add('                       fti.fti_tecido');
         SQL.Add('             ORDER BY ce.es_nome');
-
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
+//        SQL.Add('');
         ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
         Open;
     end;
 
 
     dmPrincipal.dsReservaTecido.DataSet     :=dmPrincipal.qryReservaTecido;
+
 
 
     rlRelTecidoReserva.DataSource          :=dmPrincipal.dsReservaTecido;
@@ -252,11 +274,7 @@ begin
     rlDBTipo.DataSource                    :=dmPrincipal.dsReservaTecido;
     rlDBTipo.DataField                     :='tipo';
 
-    rlDBConsumo.DataSource                 :=dmPrincipal.dsReservaTecido;
-    rlDBConsumo.DataField                  :='consumo';
 
-    rlDBConsModelagem.DataSource           :=dmPrincipal.dsReservaTecido;
-    rlDBConsModelagem.DataField            :='reserva_gescala_modelagem';
 end;
 
 end.

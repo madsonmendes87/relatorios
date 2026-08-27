@@ -27,19 +27,15 @@ type
     rlEmpenhoEstilista: TRLGroup;
     rlDadosEstoque: TRLBand;
     rlPanelDtEntrada: TRLPanel;
-    rlDBDtEmpenho: TRLDBText;
+    rlDBDtReserva: TRLDBText;
     rlPanRef: TRLPanel;
     rlDBRef: TRLDBMemo;
     rlPanelCor: TRLPanel;
     rlDBCor: TRLDBMemo;
     rlPanelTamanho: TRLPanel;
-    rlDBTamanho: TRLDBText;
-    rlPanelRolo: TRLPanel;
-    rlDBRolo: TRLDBMemo;
     rlPanTipo: TRLPanel;
     rlDBTipo: TRLDBText;
     rlPanelSitEmp: TRLPanel;
-    rlDBSitEmp: TRLDBMemo;
     rlPanelForn: TRLPanel;
     rlDBConsumo: TRLDBText;
     rlCabecalhoEstoque: TRLBand;
@@ -56,9 +52,7 @@ type
     rlPanCor: TRLPanel;
     rlLblCor: TRLLabel;
     rlPanelTam: TRLPanel;
-    rlLblTam: TRLLabel;
-    rlPanRolo: TRLPanel;
-    rlLblRolo: TRLLabel;
+    rlLblFicha: TRLLabel;
     rlPanelTipo: TRLPanel;
     rlLblTipo: TRLLabel;
     rlPanSitEmpenho: TRLPanel;
@@ -73,6 +67,8 @@ type
     rlPanelTotalDisponivel: TRLPanel;
     rlLabTotDisponivel: TRLLabel;
     rlDBEmpTransferidos: TRLDBText;
+    rlDBFichaTecnica: TRLDBText;
+    rlDBConsModelagem: TRLDBText;
   private
     { Private declarations }
   public
@@ -145,7 +141,7 @@ begin
         SQL.Add('       (gc.grc_codexterno || '' - '' || gc.grc_nome) AS grc_nome,');
         SQL.Add('       (');
         SQL.Add('               CASE');
-        SQL.Add('                          WHEN ft.fi_situacao IN (''A'', ''F'') THEN ''PROTÓTIPO''');
+        SQL.Add('                          WHEN ft.fi_situacao IN (''A'', ''F'') THEN ''PROTÃ“TIPO''');
         SQL.Add('                          WHEN ft.fi_situacao IN (''P'', ''Z'') THEN ''G ESCALA''');
         SQL.Add('               END');
         SQL.Add('       ) AS tipo,');
@@ -184,7 +180,7 @@ begin
         SQL.Add('                   (COALESCE(fti.fti_vlrredcustoprototipo, 0) * fti.fti_qtdade13) +');
         SQL.Add('                   (COALESCE(fti.fti_vlrredcustoprototipo, 0) * fti.fti_qtdade14) +');
         SQL.Add('                   (COALESCE(fti.fti_vlrredcustoprototipo, 0) * fti.fti_qtdade15)');
-        SQL.Add('       )  As reserva_gescala_modelagem,');
+        SQL.Add('       ) AS reserva_gescala_modelagem,');
         SQL.Add('       ft.fi_situacao,');
         SQL.Add('       fti.fti_tecido');
         SQL.Add('       FROM ficha_tecnica_itens AS fti');
@@ -226,28 +222,7 @@ begin
         SQL.Add('                       ft.fi_situacao,');
         SQL.Add('                       fti.fti_tecido');
         SQL.Add('             ORDER BY ce.es_nome');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
-//        SQL.Add('');
+
         ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
         Open;
     end;
@@ -256,11 +231,32 @@ begin
     dmPrincipal.dsReservaTecido.DataSet     :=dmPrincipal.qryReservaTecido;
 
 
-    rlRelTecidoReserva.DataSource        :=dmPrincipal.dsReservaTecido;
-    rlEmpenhoEstilista.DataFields        :='estilista';
+    rlRelTecidoReserva.DataSource          :=dmPrincipal.dsReservaTecido;
+    rlEmpenhoEstilista.DataFields          :='estilista';
 
-    rlLabelEstilista.DataSource          :=dmPrincipal.dsReservaTecido;
-    rlLabelEstilista.DataField           :='estilista';
+    rlLabelEstilista.DataSource            :=dmPrincipal.dsReservaTecido;
+    rlLabelEstilista.DataField             :='estilista';
+
+    rlDBDtReserva.DataSource               :=dmPrincipal.dsReservaTecido;
+    rlDBDtReserva.DataField                :='fti_dtlanc';
+
+    rlDBRef.DataSource                     :=dmPrincipal.dsReservaTecido;
+    rlDBRef.DataField                      :='cad_idreferencia';
+
+    rlDBCor.DataSource                     :=dmPrincipal.dsReservaTecido;
+    rlDBCor.DataField                      :='grc_nome';
+
+    rlDBFichaTecnica.DataSource            :=dmPrincipal.dsReservaTecido;
+    rlDBFichaTecnica.DataField             :='fi_id';
+
+    rlDBTipo.DataSource                    :=dmPrincipal.dsReservaTecido;
+    rlDBTipo.DataField                     :='tipo';
+
+    rlDBConsumo.DataSource                 :=dmPrincipal.dsReservaTecido;
+    rlDBConsumo.DataField                  :='consumo';
+
+    rlDBConsModelagem.DataSource           :=dmPrincipal.dsReservaTecido;
+    rlDBConsModelagem.DataField            :='reserva_gescala_modelagem';
 end;
 
 end.

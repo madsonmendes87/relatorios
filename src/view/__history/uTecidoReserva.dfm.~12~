@@ -775,16 +775,16 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawRight = True
           Borders.DrawBottom = True
           Borders.FixedBottom = True
-          object rlDBConsModelagem: TRLDBMemo
-            Left = 14
-            Top = 11
-            Width = 108
-            Height = 16
+          object rlDBSitEmp: TRLDBMemo
+            Left = 36
+            Top = 12
+            Width = 64
+            Height = 15
             Align = faCenter
             Behavior = [beSiteExpander]
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -13
+            Font.Height = -11
             Font.Name = 'Arial Narrow'
             Font.Style = []
             ParentFont = False

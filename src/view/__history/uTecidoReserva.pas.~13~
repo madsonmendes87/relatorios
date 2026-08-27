@@ -27,15 +27,13 @@ type
     rlEmpenhoEstilista: TRLGroup;
     rlDadosEstoque: TRLBand;
     rlPanelDtEntrada: TRLPanel;
-    rlDBDtEmpenho: TRLDBText;
+    rlDBDtReserva: TRLDBText;
     rlPanRef: TRLPanel;
     rlDBRef: TRLDBMemo;
     rlPanelCor: TRLPanel;
     rlDBCor: TRLDBMemo;
     rlPanelTamanho: TRLPanel;
-    rlDBTamanho: TRLDBText;
-    rlPanelRolo: TRLPanel;
-    rlDBRolo: TRLDBMemo;
+    rlDBFichaTecnica: TRLDBText;
     rlPanTipo: TRLPanel;
     rlDBTipo: TRLDBText;
     rlPanelSitEmp: TRLPanel;
@@ -57,8 +55,6 @@ type
     rlLblCor: TRLLabel;
     rlPanelTam: TRLPanel;
     rlLblTam: TRLLabel;
-    rlPanRolo: TRLPanel;
-    rlLblRolo: TRLLabel;
     rlPanelTipo: TRLPanel;
     rlLblTipo: TRLLabel;
     rlPanSitEmpenho: TRLPanel;
@@ -256,11 +252,26 @@ begin
     dmPrincipal.dsReservaTecido.DataSet     :=dmPrincipal.qryReservaTecido;
 
 
-    rlRelTecidoReserva.DataSource        :=dmPrincipal.dsReservaTecido;
-    rlReservaEstilista.DataFields        :='estilista';
 
-    rlLabelEstilista.DataSource          :=dmPrincipal.dsReservaTecido;
-    rlLabelEstilista.DataField           :='estilista';
+    rlRelTecidoReserva.DataSource          :=dmPrincipal.dsReservaTecido;
+    rlEmpenhoEstilista.DataFields          :='estilista';
+
+    rlLabelEstilista.DataSource            :=dmPrincipal.dsReservaTecido;
+    rlLabelEstilista.DataField             :='estilista';
+
+    rlDBDtReserva.DataSource               :=dmPrincipal.dsReservaTecido;
+    rlDBDtReserva.DataField                :='fti_dtlanc';
+
+    rlDBRef.DataSource                     :=dmPrincipal.dsReservaTecido;
+    rlDBRef.DataField                      :='cad_idreferencia';
+
+    rlDBCor.DataSource                     :=dmPrincipal.dsReservaTecido;
+    rlDBCor.DataField                      :='grc_nome';
+
+    rlDBTipo.DataSource                    :=dmPrincipal.dsReservaTecidos;
+    rlDBTipo.DataField                     :='tipo';
+
+
 end;
 
 end.

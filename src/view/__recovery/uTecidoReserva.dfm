@@ -775,19 +775,14 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawRight = True
           Borders.DrawBottom = True
           Borders.FixedBottom = True
-          object rlDBConsModelagem: TRLDBMemo
-            Left = 14
+          object rlDBConsModelagem: TRLDBText
+            Left = 5
             Top = 11
-            Width = 108
+            Width = 126
             Height = 16
             Align = faCenter
-            Behavior = [beSiteExpander]
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial Narrow'
-            Font.Style = []
-            ParentFont = False
+            DisplayMask = '0.0000'
+            Text = ''
           end
         end
         object rlPanelForn: TRLPanel
@@ -803,15 +798,15 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.FixedRight = True
           Borders.FixedBottom = True
           object rlDBConsumo: TRLDBText
-            Left = 2
-            Top = 12
-            Width = 68
-            Height = 14
+            Left = -5
+            Top = 11
+            Width = 84
+            Height = 16
             Align = faCenter
             DisplayMask = '0.0000'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = []
             ParentFont = False

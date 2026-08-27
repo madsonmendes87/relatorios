@@ -36,7 +36,7 @@ type
     rlPanTipo: TRLPanel;
     rlDBTipo: TRLDBText;
     rlPanelSitEmp: TRLPanel;
-    rlDBConsModelagem: TRLDBMemo;
+    rlDBSitEmp: TRLDBMemo;
     rlPanelForn: TRLPanel;
     rlDBConsumo: TRLDBText;
     rlCabecalhoEstoque: TRLBand;
@@ -231,6 +231,7 @@ begin
     dmPrincipal.dsReservaTecido.DataSet     :=dmPrincipal.qryReservaTecido;
 
 
+
     rlRelTecidoReserva.DataSource          :=dmPrincipal.dsReservaTecido;
     rlEmpenhoEstilista.DataFields          :='estilista';
 
@@ -252,11 +253,7 @@ begin
     rlDBTipo.DataSource                    :=dmPrincipal.dsReservaTecido;
     rlDBTipo.DataField                     :='tipo';
 
-    rlDBConsumo.DataSource                 :=dmPrincipal.dsReservaTecido;
-    rlDBConsumo.DataField                  :='consumo';
 
-    rlDBConsModelagem.DataSource           :=dmPrincipal.dsReservaTecido;
-    rlDBConsModelagem.DataField            :='reserva_gescala_modelagem';
 end;
 
 end.
