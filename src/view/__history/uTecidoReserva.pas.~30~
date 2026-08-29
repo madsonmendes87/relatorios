@@ -69,10 +69,6 @@ type
     rlDBTotResModelagem: TRLDBText;
     rlDBFichaTecnica: TRLDBText;
     rlDBConsModelagem: TRLDBText;
-    RLBand1: TRLBand;
-    RLLabel1: TRLLabel;
-    RLPanel1: TRLPanel;
-
   private
     { Private declarations }
   public
@@ -154,7 +150,7 @@ begin
         SQL.Add('           gc.grc_id,');
         SQL.Add('           (gc.grc_codexterno || '' - '' || gc.grc_nome) AS grc_nome,');
         SQL.Add('           CASE');
-        SQL.Add('               WHEN ft.fi_situacao IN (''A'', ''F'') THEN ''PROTÃ“TIPO''');
+        SQL.Add('               WHEN ft.fi_situacao IN (''A'', ''F'') THEN ''PROTÓTIPO''');
         SQL.Add('               WHEN ft.fi_situacao IN (''P'', ''Z'') THEN ''G ESCALA''');
         SQL.Add('           END AS tipo,');
         SQL.Add('           fti.fti_dtlanc,');
@@ -222,31 +218,11 @@ begin
         SQL.Add('          AND pti.pti_status = ''A''');
         SQL.Add('      )');
 
-
-        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
-        begin
-              SQL.Add('AND gc.grc_id = :idCor');
-              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
-        end;
-
         if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
         begin
               SQL.Add('AND gt.grt_id = :idTamanho');
               ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
         end;
-
-
-        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
-        begin
-            SQL.Add('AND ce.es_id = :idEstilista');
-            ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
-        end;
-
-        if frmFiltroArtigo.cbTipoReserva.ItemIndex = 1 then
-            SQL.Add('AND ft.fi_situacao IN (''A'', ''F'')');
-
-        if frmFiltroArtigo.cbTipoReserva.ItemIndex = 2 then
-            SQL.Add('AND ft.fi_situacao IN (''P'', ''Z'')');
 
         SQL.Add('    GROUP BY');
         SQL.Add('           pa.cad_idreferencia,');
@@ -313,11 +289,6 @@ begin
         SQL.Add('(');
         SQL.Add('    SELECT');
         SQL.Add('           ce.es_nome AS estilista,');
-        SQL.Add('           CASE');
-        SQL.Add('               WHEN ft.fi_situacao IN (''A'', ''F'') THEN ''PROTÃ“TIPO''');
-        SQL.Add('               WHEN ft.fi_situacao IN (''P'', ''Z'') THEN ''G ESCALA''');
-        SQL.Add('           END AS tipo,');
-        SQL.Add('           fti.fti_dtlanc,');
         SQL.Add('           SUM(');
         SQL.Add('               (fti.fti_vlr1  * fti.fti_qtdade1) +');
         SQL.Add('               (fti.fti_vlr2  * fti.fti_qtdade2) +');
@@ -380,43 +351,73 @@ begin
         SQL.Add('            AND pti.pti_status = ''A''');
         SQL.Add('      )');
 
-
-        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
-        begin
-              SQL.Add('AND gc.grc_id = :idCor');
-              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
-        end;
-
-
         if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
         begin
               SQL.Add('AND gt.grt_id = :idTamanho');
               ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
         end;
 
+        // ==========================
+        // FILTRO POR TAMANHO
+        // ==========================
+    //    if not VarIsNull(frmFiltroArtigo.dblcbTamanho.KeyValue) then
+    //    begin
+    //        SQL.Add('      AND gt.grt_id = :idTamanho');
+    //    end;
 
-        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
-        begin
-            SQL.Add('AND ce.es_id = :idEstilista');
-            ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
-        end;
+        // ==========================
+        // FILTRO POR COR
+        // ==========================
+    //    if not VarIsNull(frmFiltroArtigo.dblcbCor.KeyValue) then
+    //    begin
+    //        SQL.Add('      AND gc.grc_id = :idCor');
+    //    end;
 
-
-        if frmFiltroArtigo.cbTipoReserva.ItemIndex = 1 then
-            SQL.Add('AND ft.fi_situacao IN (''A'', ''F'')');
-
-        if frmFiltroArtigo.cbTipoReserva.ItemIndex = 2 then
-            SQL.Add('AND ft.fi_situacao IN (''P'', ''Z'')');
-
-
+        // ==========================
+        // FILTRO POR ESTILISTA
+        // ==========================
+    //    if not VarIsNull(frmFiltroArtigo.dblcbEstilista.KeyValue) then
+    //    begin
+    //        SQL.Add('      AND ce.es_id = :idEstilista');
+    //    end;
 
         SQL.Add('    GROUP BY');
         SQL.Add('           ce.es_nome,');
-        SQL.Add('           ft.fi_id,');
-        SQL.Add('           fti.fti_dtlanc');
+        SQL.Add('           ft.fi_id');
         SQL.Add(') AS dados');
 
+        // ==========================
+        // PARÂMETRO DO ARTIGO
+        // ==========================
         ParamByName('idArtigo').AsInteger :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+
+        // ==========================
+        // PARÂMETRO DO TAMANHO
+        // ==========================
+    //    if not VarIsNull(frmFiltroArtigo.dblcbTamanho.KeyValue) then
+    //    begin
+    //        ParamByName('idTamanho').AsInteger :=
+    //            frmFiltroArtigo.dblcbTamanho.KeyValue;
+    //    end;
+
+        // ==========================
+        // PARÂMETRO DA COR
+        // ==========================
+    //    if not VarIsNull(frmFiltroArtigo.dblcbCor.KeyValue) then
+    //    begin
+    //        ParamByName('idCor').AsInteger :=
+    //            frmFiltroArtigo.dblcbCor.KeyValue;
+    //    end;
+
+        // ==========================
+        // PARÂMETRO DO ESTILISTA
+        // ==========================
+    //    if not VarIsNull(frmFiltroArtigo.dblcbEstilista.KeyValue) then
+    //    begin
+    //        ParamByName('idEstilista').AsInteger :=
+    //            frmFiltroArtigo.dblcbEstilista.KeyValue;
+    //    end;
+
         Open;
     end;
 
@@ -427,7 +428,5 @@ begin
     rlDBTotResModelagem.DataSource         :=dmPrincipal.dsTotReservaTecido;
     rlDBTotResModelagem.DataField          :='total_reserva_gescala_modelagem';
 end;
-
-
 
 end.

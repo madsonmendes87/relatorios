@@ -1,5 +1,5 @@
 object dmPrincipal: TdmPrincipal
-  Height = 585
+  Height = 480
   Width = 640
   object qryGrc: TFDQuery
     Connection = dmConexao.Conexao
@@ -172,15 +172,5 @@ object dmPrincipal: TdmPrincipal
     DataSet = qryReservaTecido
     Left = 368
     Top = 408
-  end
-  object qryTotReservaTecido: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 72
-    Top = 472
-  end
-  object dsTotReservaTecido: TDataSource
-    DataSet = qryTotReservaTecido
-    Left = 192
-    Top = 472
   end
 end

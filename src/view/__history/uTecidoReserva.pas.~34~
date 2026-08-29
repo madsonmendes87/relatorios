@@ -69,10 +69,6 @@ type
     rlDBTotResModelagem: TRLDBText;
     rlDBFichaTecnica: TRLDBText;
     rlDBConsModelagem: TRLDBText;
-    RLBand1: TRLBand;
-    RLLabel1: TRLLabel;
-    RLPanel1: TRLPanel;
-
   private
     { Private declarations }
   public
@@ -154,7 +150,7 @@ begin
         SQL.Add('           gc.grc_id,');
         SQL.Add('           (gc.grc_codexterno || '' - '' || gc.grc_nome) AS grc_nome,');
         SQL.Add('           CASE');
-        SQL.Add('               WHEN ft.fi_situacao IN (''A'', ''F'') THEN ''PROTÃ“TIPO''');
+        SQL.Add('               WHEN ft.fi_situacao IN (''A'', ''F'') THEN ''PROTÓTIPO''');
         SQL.Add('               WHEN ft.fi_situacao IN (''P'', ''Z'') THEN ''G ESCALA''');
         SQL.Add('           END AS tipo,');
         SQL.Add('           fti.fti_dtlanc,');
@@ -314,7 +310,7 @@ begin
         SQL.Add('    SELECT');
         SQL.Add('           ce.es_nome AS estilista,');
         SQL.Add('           CASE');
-        SQL.Add('               WHEN ft.fi_situacao IN (''A'', ''F'') THEN ''PROTÃ“TIPO''');
+        SQL.Add('               WHEN ft.fi_situacao IN (''A'', ''F'') THEN ''PROTÓTIPO''');
         SQL.Add('               WHEN ft.fi_situacao IN (''P'', ''Z'') THEN ''G ESCALA''');
         SQL.Add('           END AS tipo,');
         SQL.Add('           fti.fti_dtlanc,');
@@ -427,7 +423,5 @@ begin
     rlDBTotResModelagem.DataSource         :=dmPrincipal.dsTotReservaTecido;
     rlDBTotResModelagem.DataField          :='total_reserva_gescala_modelagem';
 end;
-
-
 
 end.

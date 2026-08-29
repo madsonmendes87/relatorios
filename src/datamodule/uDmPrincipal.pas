@@ -40,6 +40,8 @@ type
     dsEmpArtigos: TDataSource;
     qryReservaTecido: TFDQuery;
     dsReservaTecido: TDataSource;
+    qryTotReservaTecido: TFDQuery;
+    dsTotReservaTecido: TDataSource;
   private
     { Private declarations }
   public

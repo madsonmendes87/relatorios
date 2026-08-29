@@ -3,7 +3,7 @@ object frmTecidoReserva: TfrmTecidoReserva
   Top = 0
   Caption = 'Reserva Tecido'
   ClientHeight = 668
-  ClientWidth = 833
+  ClientWidth = 799
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -641,15 +641,15 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawRight = True
           Borders.DrawBottom = True
           Borders.FixedBottom = True
-          object rlDBDtEmpenho: TRLDBText
-            Left = 22
-            Top = 12
-            Width = 67
-            Height = 15
+          object rlDBDtReserva: TRLDBText
+            Left = 18
+            Top = 11
+            Width = 75
+            Height = 16
             Align = faCenter
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = []
             ParentFont = False
@@ -669,14 +669,14 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.FixedBottom = True
           object rlDBRef: TRLDBMemo
             Left = 32
-            Top = 12
+            Top = 11
             Width = 45
-            Height = 15
+            Height = 16
             Align = faCenter
             Behavior = [beSiteExpander]
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = []
             ParentFont = False
@@ -696,23 +696,23 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.FixedBottom = True
           object rlDBCor: TRLDBMemo
             Left = 24
-            Top = 12
+            Top = 11
             Width = 80
-            Height = 15
+            Height = 16
             Align = faCenter
             Behavior = [beSiteExpander]
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = []
             ParentFont = False
           end
         end
         object rlPanelTamanho: TRLPanel
-          Left = 410
+          Left = 354
           Top = 0
-          Width = 66
+          Width = 115
           Height = 40
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -721,53 +721,25 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawBottom = True
           Borders.FixedRight = True
           Borders.FixedBottom = True
-          object rlDBTamanho: TRLDBText
-            Left = 3
-            Top = 12
-            Width = 59
-            Height = 15
+          object rlDBFichaTecnica: TRLDBText
+            Left = 13
+            Top = 11
+            Width = 87
+            Height = 16
             Align = faCenter
-            DisplayMask = '0.0000'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = []
             ParentFont = False
             Text = ''
           end
         end
-        object rlPanelRolo: TRLPanel
-          Left = 476
-          Top = 0
-          Width = 105
-          Height = 40
-          Borders.Sides = sdCustom
-          Borders.DrawLeft = False
-          Borders.DrawTop = False
-          Borders.DrawRight = True
-          Borders.DrawBottom = True
-          Borders.FixedRight = True
-          Borders.FixedBottom = True
-          object rlDBRolo: TRLDBMemo
-            Left = 8
-            Top = 12
-            Width = 87
-            Height = 14
-            Align = faCenter
-            Behavior = [beSiteExpander]
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial'
-            Font.Style = []
-            ParentFont = False
-          end
-        end
         object rlPanTipo: TRLPanel
-          Left = 581
+          Left = 469
           Top = 0
-          Width = 64
+          Width = 106
           Height = 40
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -777,15 +749,15 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.FixedRight = True
           Borders.FixedBottom = True
           object rlDBTipo: TRLDBText
-            Left = 12
-            Top = 12
-            Width = 38
-            Height = 15
+            Left = 30
+            Top = 11
+            Width = 45
+            Height = 16
             Align = faCenter
             DisplayMask = '0.0000'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = []
             ParentFont = False
@@ -793,9 +765,9 @@ object frmTecidoReserva: TfrmTecidoReserva
           end
         end
         object rlPanelSitEmp: TRLPanel
-          Left = 645
+          Left = 647
           Top = 0
-          Width = 76
+          Width = 138
           Height = 40
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -803,25 +775,20 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawRight = True
           Borders.DrawBottom = True
           Borders.FixedBottom = True
-          object rlDBSitEmp: TRLDBMemo
+          object rlDBConsModelagem: TRLDBText
             Left = 5
-            Top = 12
-            Width = 64
-            Height = 15
+            Top = 11
+            Width = 126
+            Height = 16
             Align = faCenter
-            Behavior = [beSiteExpander]
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = []
-            ParentFont = False
+            DisplayMask = '0.0000'
+            Text = ''
           end
         end
         object rlPanelForn: TRLPanel
-          Left = 720
+          Left = 575
           Top = 0
-          Width = 66
+          Width = 74
           Height = 40
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -831,15 +798,15 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.FixedRight = True
           Borders.FixedBottom = True
           object rlDBConsumo: TRLDBText
-            Left = -1
-            Top = 12
-            Width = 68
-            Height = 14
+            Left = -5
+            Top = 11
+            Width = 84
+            Height = 16
             Align = faCenter
             DisplayMask = '0.0000'
             Font.Charset = DEFAULT_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial'
             Font.Style = []
             ParentFont = False
@@ -867,7 +834,7 @@ object frmTecidoReserva: TfrmTecidoReserva
           ParentColor = False
           Transparent = False
           object rlLabelEstilista: TRLDBText
-            Left = 320
+            Left = 190
             Top = 3
             Width = 81
             Height = 16
@@ -881,7 +848,7 @@ object frmTecidoReserva: TfrmTecidoReserva
             Transparent = False
           end
           object rlDBTotal: TRLDBText
-            Left = 479
+            Left = 600
             Top = 3
             Width = 52
             Height = 16
@@ -896,11 +863,11 @@ object frmTecidoReserva: TfrmTecidoReserva
             Transparent = False
           end
           object rlLabTotal: TRLLabel
-            Left = 438
+            Left = 420
             Top = 3
-            Width = 41
+            Width = 177
             Height = 16
-            Caption = 'TOTAL:'
+            Caption = 'RESERVA EM GRANDE ESCALA :'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
             Font.Height = -13
@@ -949,15 +916,15 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.FixedLeft = True
           Borders.FixedBottom = True
           object rlLblDtEmpenho: TRLLabel
-            Left = 17
-            Top = 9
-            Width = 77
-            Height = 15
+            Left = 12
+            Top = 8
+            Width = 86
+            Height = 16
             Align = faCenter
             Caption = 'DATA RESERVA'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = [fsBold]
             ParentFont = False
@@ -975,15 +942,15 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawBottom = True
           Borders.FixedBottom = True
           object rlLblReferencia: TRLLabel
-            Left = 22
-            Top = 9
-            Width = 65
-            Height = 15
+            Left = 17
+            Top = 8
+            Width = 74
+            Height = 16
             Align = faCenter
             Caption = 'REFERENCIA'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = [fsBold]
             ParentFont = False
@@ -1001,24 +968,24 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawBottom = True
           Borders.FixedBottom = True
           object rlLblCor: TRLLabel
-            Left = 52
-            Top = 9
-            Width = 24
-            Height = 15
+            Left = 51
+            Top = 8
+            Width = 27
+            Height = 16
             Align = faCenter
             Caption = 'COR'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = [fsBold]
             ParentFont = False
           end
         end
         object rlPanelTam: TRLPanel
-          Left = 411
+          Left = 354
           Top = 32
-          Width = 64
+          Width = 115
           Height = 34
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -1026,23 +993,23 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawRight = True
           Borders.DrawBottom = True
           Borders.FixedBottom = True
-          object rlLblTam: TRLLabel
-            Left = 6
-            Top = 9
-            Width = 51
-            Height = 15
+          object rlLblFicha: TRLLabel
+            Left = 13
+            Top = 8
+            Width = 88
+            Height = 16
             Align = faCenter
-            Caption = 'TAMANHO'
+            Caption = 'FICHA TECNICA'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = [fsBold]
             ParentFont = False
           end
         end
-        object rlPanRolo: TRLPanel
-          Left = 475
+        object rlPanelTipo: TRLPanel
+          Left = 469
           Top = 32
           Width = 106
           Height = 34
@@ -1052,51 +1019,25 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawRight = True
           Borders.DrawBottom = True
           Borders.FixedBottom = True
-          object rlLblRolo: TRLLabel
-            Left = 37
-            Top = 9
-            Width = 30
-            Height = 15
-            Align = faCenter
-            Caption = 'ROLO'
-            Font.Charset = ANSI_CHARSET
-            Font.Color = clBlack
-            Font.Height = -11
-            Font.Name = 'Arial Narrow'
-            Font.Style = [fsBold]
-            ParentFont = False
-          end
-        end
-        object rlPanelTipo: TRLPanel
-          Left = 581
-          Top = 32
-          Width = 64
-          Height = 34
-          Borders.Sides = sdCustom
-          Borders.DrawLeft = False
-          Borders.DrawTop = False
-          Borders.DrawRight = True
-          Borders.DrawBottom = True
-          Borders.FixedBottom = True
           object rlLblTipo: TRLLabel
-            Left = 19
-            Top = 9
-            Width = 24
-            Height = 15
+            Left = 38
+            Top = 8
+            Width = 28
+            Height = 16
             Align = faCenter
             Caption = 'TIPO'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = [fsBold]
             ParentFont = False
           end
         end
         object rlPanSitEmpenho: TRLPanel
-          Left = 645
+          Left = 647
           Top = 32
-          Width = 76
+          Width = 138
           Height = 35
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -1105,36 +1046,36 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawBottom = True
           Borders.FixedBottom = True
           object rlLblSitEmp: TRLLabel
-            Left = 9
-            Top = 2
-            Width = 52
-            Height = 15
-            Caption = 'SITUA'#199#195'O'
+            Left = 4
+            Top = 1
+            Width = 129
+            Height = 16
+            Caption = 'CONSUMO PELA MEDIA'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = [fsBold]
             ParentFont = False
           end
           object rlSitEmp_: TRLLabel
-            Left = 10
+            Left = 30
             Top = 16
-            Width = 50
-            Height = 15
-            Caption = 'EMPENHO'
+            Width = 81
+            Height = 16
+            Caption = '(MODELAGEM)'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = [fsBold]
             ParentFont = False
           end
         end
         object rlPanConsumo: TRLPanel
-          Left = 721
+          Left = 575
           Top = 32
-          Width = 65
+          Width = 74
           Height = 35
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -1145,13 +1086,13 @@ object frmTecidoReserva: TfrmTecidoReserva
           object rlLblConsumo: TRLLabel
             Left = 6
             Top = 9
-            Width = 52
-            Height = 15
+            Width = 60
+            Height = 16
             Align = faCenter
             Caption = 'CONSUMO'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
-            Font.Height = -11
+            Font.Height = -13
             Font.Name = 'Arial Narrow'
             Font.Style = [fsBold]
             ParentFont = False
