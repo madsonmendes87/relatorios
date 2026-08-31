@@ -1,9 +1,9 @@
-object frmTecidoReserva: TfrmTecidoReserva
+object frmArtigosReserva: TfrmArtigosReserva
   Left = 0
   Top = 0
-  Caption = 'Reserva Tecido'
-  ClientHeight = 668
-  ClientWidth = 799
+  Caption = 'frmArtigosReserva'
+  ClientHeight = 749
+  ClientWidth = 795
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,7 +11,7 @@ object frmTecidoReserva: TfrmTecidoReserva
   Font.Name = 'Segoe UI'
   Font.Style = []
   TextHeight = 15
-  object rlRelTecidoReserva: TRLReport
+  object rlRelArtigoReserva: TRLReport
     Left = 0
     Top = 0
     Width = 794
@@ -767,7 +767,7 @@ object frmTecidoReserva: TfrmTecidoReserva
         object rlPanelSitEmp: TRLPanel
           Left = 647
           Top = 0
-          Width = 138
+          Width = 139
           Height = 40
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
@@ -776,7 +776,7 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.DrawBottom = True
           Borders.FixedBottom = True
           object rlDBConsModelagem: TRLDBText
-            Left = 5
+            Left = 6
             Top = 11
             Width = 126
             Height = 16
@@ -1037,8 +1037,8 @@ object frmTecidoReserva: TfrmTecidoReserva
         object rlPanSitEmpenho: TRLPanel
           Left = 647
           Top = 32
-          Width = 138
-          Height = 35
+          Width = 139
+          Height = 34
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
           Borders.DrawTop = False
@@ -1076,7 +1076,7 @@ object frmTecidoReserva: TfrmTecidoReserva
           Left = 575
           Top = 32
           Width = 74
-          Height = 35
+          Height = 34
           Borders.Sides = sdCustom
           Borders.DrawLeft = False
           Borders.DrawTop = False
@@ -1085,7 +1085,7 @@ object frmTecidoReserva: TfrmTecidoReserva
           Borders.FixedBottom = True
           object rlLblConsumo: TRLLabel
             Left = 6
-            Top = 9
+            Top = 8
             Width = 60
             Height = 16
             Align = faCenter
@@ -1106,6 +1106,44 @@ object frmTecidoReserva: TfrmTecidoReserva
       Width = 786
       Height = 26
       BandType = btSummary
+      object rlPanelTotalDisponivel: TRLPanel
+        Left = 375
+        Top = 0
+        Width = 411
+        Height = 25
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = True
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
+        object rlLabTotDisponivel: TRLLabel
+          Left = 8
+          Top = 2
+          Width = 208
+          Height = 16
+          Caption = 'TOTAL RESERVA(MEDIA MODELAGEM:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object rlDBTotResModelagem: TRLDBText
+          Left = 220
+          Top = 2
+          Width = 113
+          Height = 16
+          DisplayMask = '0.0000'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          ParentFont = False
+          Text = ''
+        end
+      end
       object rlPanelTotEntForn: TRLPanel
         Left = 3
         Top = 0
@@ -1122,63 +1160,25 @@ object frmTecidoReserva: TfrmTecidoReserva
         object rLabTotEntForn: TRLLabel
           Left = 7
           Top = 2
-          Width = 92
-          Height = 15
-          Caption = 'TOTAL EMPENHOS:'
+          Width = 96
+          Height = 16
+          Caption = 'TOTAL RESERVA:'
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           ParentFont = False
         end
-        object rlDBTotEmpenhos: TRLDBText
-          Left = 105
+        object rlDBTotReserva: TRLDBText
+          Left = 110
           Top = 2
-          Width = 77
-          Height = 15
+          Width = 80
+          Height = 16
           DisplayMask = '0.0000'
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          ParentFont = False
-          Text = ''
-        end
-      end
-      object rlPanelTotalDisponivel: TRLPanel
-        Left = 376
-        Top = 0
-        Width = 410
-        Height = 25
-        Borders.Sides = sdCustom
-        Borders.DrawLeft = False
-        Borders.DrawTop = True
-        Borders.DrawRight = True
-        Borders.DrawBottom = True
-        object rlLabTotDisponivel: TRLLabel
-          Left = 18
-          Top = 2
-          Width = 169
-          Height = 15
-          Caption = 'TOTAL EMPENHOS TRANSFERIDOS:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlDBEmpTransferidos: TRLDBText
-          Left = 193
-          Top = 2
-          Width = 90
-          Height = 15
-          DisplayMask = '0.0000'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
+          Font.Height = -13
           Font.Name = 'Arial Narrow'
           Font.Style = []
           ParentFont = False

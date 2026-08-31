@@ -1106,6 +1106,44 @@ object frmTecidoReserva: TfrmTecidoReserva
       Width = 786
       Height = 26
       BandType = btSummary
+      object rlPanelTotalDisponivel: TRLPanel
+        Left = 375
+        Top = 0
+        Width = 411
+        Height = 25
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = True
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
+        object rlLabTotDisponivel: TRLLabel
+          Left = 8
+          Top = 2
+          Width = 208
+          Height = 16
+          Caption = 'TOTAL RESERVA(MEDIA MODELAGEM:'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+        end
+        object rlDBTotResModelagem: TRLDBText
+          Left = 220
+          Top = 2
+          Width = 113
+          Height = 16
+          DisplayMask = '0.0000'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          ParentFont = False
+          Text = ''
+        end
+      end
       object rlPanelTotEntForn: TRLPanel
         Left = 3
         Top = 0
@@ -1145,69 +1183,6 @@ object frmTecidoReserva: TfrmTecidoReserva
           Font.Style = []
           ParentFont = False
           Text = ''
-        end
-      end
-      object rlPanelTotalDisponivel: TRLPanel
-        Left = 376
-        Top = 0
-        Width = 410
-        Height = 25
-        Borders.Sides = sdCustom
-        Borders.DrawLeft = False
-        Borders.DrawTop = True
-        Borders.DrawRight = True
-        Borders.DrawBottom = True
-        object rlLabTotDisponivel: TRLLabel
-          Left = 8
-          Top = 2
-          Width = 208
-          Height = 16
-          Caption = 'TOTAL RESERVA(MEDIA MODELAGEM:'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
-        object rlDBTotResModelagem: TRLDBText
-          Left = 220
-          Top = 2
-          Width = 113
-          Height = 16
-          DisplayMask = '0.0000'
-          Font.Charset = ANSI_CHARSET
-          Font.Color = clBlack
-          Font.Height = -13
-          Font.Name = 'Arial Narrow'
-          Font.Style = []
-          ParentFont = False
-          Text = ''
-        end
-      end
-    end
-    object RLBand1: TRLBand
-      Left = 4
-      Top = 315
-      Width = 786
-      Height = 94
-      BandType = btSummary
-      Borders.Sides = sdCustom
-      Borders.DrawLeft = False
-      Borders.DrawTop = False
-      Borders.DrawRight = False
-      Borders.DrawBottom = False
-      object RLPanel1: TRLPanel
-        Left = 238
-        Top = 24
-        Width = 104
-        Height = 32
-        object RLLabel1: TRLLabel
-          Left = 23
-          Top = 8
-          Width = 58
-          Height = 16
-          Align = faCenter
         end
       end
     end

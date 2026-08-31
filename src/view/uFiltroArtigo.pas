@@ -71,7 +71,7 @@ implementation
 {$R *.dfm}
 
 uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho, uRelArtigos,
-  uRelArtigosEmpenho, uTecidoReserva;
+  uRelArtigosEmpenho, uTecidoReserva, uArtigosReserva;
 
 procedure TfrmFiltroArtigo.btnVisEmpenhoClick(Sender: TObject);
 begin
@@ -105,9 +105,8 @@ begin
         end
         else
         begin
-            ShowMessage('Artigos Reserva');
-            //frmRelArtigos.carregarDados;
-            //frmRelArtigos.rlRelArtigos.Preview();
+            frmArtigosReserva.carregarDados;
+            frmArtigosReserva.rlRelArtigoReserva.Preview();
         end;
     end;
 end;

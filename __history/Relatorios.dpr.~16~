@@ -10,8 +10,7 @@ uses
   uRelTecidoEmpenho in 'src\view\uRelTecidoEmpenho.pas' {frmRelTecidoEmpenho},
   uRelArtigos in 'src\view\uRelArtigos.pas' {frmRelArtigos},
   uRelArtigosEmpenho in 'src\view\uRelArtigosEmpenho.pas' {frmRelArtigosEmpenho},
-  uTecidoReserva in 'src\view\uTecidoReserva.pas' {frmTecidoReserva},
-  uArtigosReserva in 'src\view\uArtigosReserva.pas' {frmArtigosReserva};
+  uTecidoReserva in 'src\view\uTecidoReserva.pas' {frmTecidoReserva};
 
 {$R *.res}
 
@@ -26,6 +25,5 @@ begin
   Application.CreateForm(TfrmRelArtigos, frmRelArtigos);
   Application.CreateForm(TfrmRelArtigosEmpenho, frmRelArtigosEmpenho);
   Application.CreateForm(TfrmTecidoReserva, frmTecidoReserva);
-  Application.CreateForm(TfrmArtigosReserva, frmArtigosReserva);
   Application.Run;
 end.

@@ -28,30 +28,22 @@ type
     dsTotaisTecido: TDataSource;
     qryEstTecidos: TFDQuery;
     dsEstTecidos: TDataSource;
-    qryEstTecidosnfe_id: TIntegerField;
-    qryEstTecidosnfe_codnfe: TIntegerField;
-    qryEstTecidosnfe_dtrecebimento: TDateField;
-    qryEstTecidoscp_id: TIntegerField;
-    qryEstTecidoscp_descricao: TWideStringField;
-    qryEstTecidosgrc_nome: TWideMemoField;
-    qryEstTecidosgrt_nome: TWideStringField;
-    qryEstTecidospnfe_pcofornecedor: TFMTBCDField;
-    qryEstTecidoscomp_id: TIntegerField;
-    qryEstTecidoscomp_nome: TWideStringField;
-    qryEstTecidosig_numrolo: TWideStringField;
-    qryEstTecidosig_qtdadeforn: TBCDField;
-    qryEstTecidosentrada: TFMTBCDField;
-    qryEstTecidoscp_unestoque: TWideStringField;
-    qryEstTecidospnfe_uncom: TWideStringField;
-    qryEstTecidosbalanco: TWideMemoField;
-    qryEstTecidosestoque_fisico: TFMTBCDField;
-    qryEstTecidosempenhos: TFMTBCDField;
-    qryEstTecidosdisponivel_para_empenho: TFMTBCDField;
-    qryEstTecidoses_custoatual: TFMTBCDField;
-    qryEstTecidosfor_nome: TWideStringField;
-    qryEstTecidosfor_apelido: TWideStringField;
-    qryEstTecidoses_id: TIntegerField;
-    qryEstTecidosig_fatorconversao: TBCDField;
+    qryEmpTecidos: TFDQuery;
+    dsEmpTecidos: TDataSource;
+    qryTotaisEmpenho: TFDQuery;
+    dsTotaisEmpenho: TDataSource;
+    qryEstilistaComprador: TFDQuery;
+    qryTecidoEstoqueTot: TFDQuery;
+    qryEstArtigos: TFDQuery;
+    dsEstArtigos: TDataSource;
+    qryEmpArtigos: TFDQuery;
+    dsEmpArtigos: TDataSource;
+    qryReservaTecido: TFDQuery;
+    dsReservaTecido: TDataSource;
+    qryTotReservaTecido: TFDQuery;
+    dsTotReservaTecido: TDataSource;
+    qryResumoGE: TFDQuery;
+    dsResumoGE: TDataSource;
   private
     { Private declarations }
   public

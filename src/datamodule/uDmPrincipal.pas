@@ -42,6 +42,10 @@ type
     dsReservaTecido: TDataSource;
     qryTotReservaTecido: TFDQuery;
     dsTotReservaTecido: TDataSource;
+    qryReservaArtigo: TFDQuery;
+    dsReservaArtigo: TDataSource;
+    qryTotReservaArtigo: TFDQuery;
+    dsTotReservaArtigo: TDataSource;
   private
     { Private declarations }
   public
@@ -55,7 +59,7 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses uConexao;
+uses uConexao, uArtigosReserva;
 
 {$R *.dfm}
 

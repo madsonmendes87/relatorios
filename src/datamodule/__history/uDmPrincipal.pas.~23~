@@ -28,6 +28,20 @@ type
     dsTotaisTecido: TDataSource;
     qryEstTecidos: TFDQuery;
     dsEstTecidos: TDataSource;
+    qryEmpTecidos: TFDQuery;
+    dsEmpTecidos: TDataSource;
+    qryTotaisEmpenho: TFDQuery;
+    dsTotaisEmpenho: TDataSource;
+    qryEstilistaComprador: TFDQuery;
+    qryTecidoEstoqueTot: TFDQuery;
+    qryEstArtigos: TFDQuery;
+    dsEstArtigos: TDataSource;
+    qryEmpArtigos: TFDQuery;
+    dsEmpArtigos: TDataSource;
+    qryReservaTecido: TFDQuery;
+    dsReservaTecido: TDataSource;
+    qryTotReservaTecido: TFDQuery;
+    dsTotReservaTecido: TDataSource;
   private
     { Private declarations }
   public

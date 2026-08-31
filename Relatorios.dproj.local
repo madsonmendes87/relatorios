@@ -6,11 +6,11 @@
     <Transaction>2026/06/10 08:57:14.000.585,C:\Users\MADSON\Documents\Embarcadero\Studio\Projects\Unit1.pas=D:\projetoFabrica\relatorios\src\view\uPrincipal.pas</Transaction>
     <Transaction>2026/06/10 08:57:28.000.226,C:\Users\MADSON\Documents\Embarcadero\Studio\Projects\Project1.dproj=D:\projetoFabrica\relatorios\Relatorios.dproj</Transaction>
     <Transaction>2026/06/10 13:14:00.000.878,=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
-    <Transaction>2026/06/10 13:14:51.000.389,D:\projetoFabrica\relatorios\src\datamodule\uConexao.dfm=D:\projetoFabrica\relatorios\Unit1.dfm</Transaction>
     <Transaction>2026/06/10 13:14:51.000.389,D:\projetoFabrica\relatorios\src\datamodule\uConexao.pas=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
+    <Transaction>2026/06/10 13:14:51.000.389,D:\projetoFabrica\relatorios\src\datamodule\uConexao.dfm=D:\projetoFabrica\relatorios\Unit1.dfm</Transaction>
     <Transaction>2026/06/18 07:48:12.000.009,=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
-    <Transaction>2026/06/18 08:06:58.000.999,D:\projetoFabrica\relatorios\src\view\uFiltroArtigo.dfm=D:\projetoFabrica\relatorios\Unit1.dfm</Transaction>
     <Transaction>2026/06/18 08:06:58.000.999,D:\projetoFabrica\relatorios\src\view\uFiltroArtigo.pas=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
+    <Transaction>2026/06/18 08:06:58.000.999,D:\projetoFabrica\relatorios\src\view\uFiltroArtigo.dfm=D:\projetoFabrica\relatorios\Unit1.dfm</Transaction>
     <Transaction>2026/06/18 16:04:08.000.358,=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
     <Transaction>2026/06/18 16:05:30.000.043,D:\projetoFabrica\relatorios\src\datamodule\uDmPrincipal.pas=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
     <Transaction>2026/06/18 16:05:30.000.043,D:\projetoFabrica\relatorios\src\datamodule\uDmPrincipal.dfm=D:\projetoFabrica\relatorios\Unit1.dfm</Transaction>
@@ -26,10 +26,13 @@
     <Transaction>2026/08/19 13:49:58.000.469,D:\projetoFabrica\relatorios\Unit1.pas=D:\projetoFabrica\relatorios\src\view\uRelArtigos.pas</Transaction>
     <Transaction>2026/08/19 13:49:58.000.469,D:\projetoFabrica\relatorios\Unit1.dfm=D:\projetoFabrica\relatorios\src\view\uRelArtigos.dfm</Transaction>
     <Transaction>2026/08/24 08:43:28.000.800,=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
-    <Transaction>2026/08/24 08:44:29.000.086,D:\projetoFabrica\relatorios\src\view\uRelArtigosEmpenho.pas=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
     <Transaction>2026/08/24 08:44:29.000.086,D:\projetoFabrica\relatorios\src\view\uRelArtigosEmpenho.dfm=D:\projetoFabrica\relatorios\Unit1.dfm</Transaction>
+    <Transaction>2026/08/24 08:44:29.000.086,D:\projetoFabrica\relatorios\src\view\uRelArtigosEmpenho.pas=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
     <Transaction>2026/08/25 08:00:34.000.274,=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
     <Transaction>2026/08/25 08:02:40.000.614,D:\projetoFabrica\relatorios\Unit1.pas=D:\projetoFabrica\relatorios\src\view\uTecidoReserva.pas</Transaction>
     <Transaction>2026/08/25 08:02:40.000.614,D:\projetoFabrica\relatorios\Unit1.dfm=D:\projetoFabrica\relatorios\src\view\uTecidoReserva.dfm</Transaction>
+    <Transaction>2026/08/31 15:38:11.117,=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
+    <Transaction>2026/08/31 15:40:29.537,D:\projetoFabrica\relatorios\src\view\uArtigosReserva.pas=D:\projetoFabrica\relatorios\Unit1.pas</Transaction>
+    <Transaction>2026/08/31 15:40:29.537,D:\projetoFabrica\relatorios\src\view\uArtigosReserva.dfm=D:\projetoFabrica\relatorios\Unit1.dfm</Transaction>
   </Transactions>
 </BorlandProject>

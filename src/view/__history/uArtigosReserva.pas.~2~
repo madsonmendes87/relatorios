@@ -1,0 +1,115 @@
+unit uArtigosReserva;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
+
+type
+  TfrmArtigosReserva = class(TForm)
+    rlRelArtigoReserva: TRLReport;
+    rlCabecalho: TRLBand;
+    rLabelCod: TRLLabel;
+    rLabProduto: TRLLabel;
+    rLabTipoProd: TRLLabel;
+    rlComposicao: TRLLabel;
+    rlDBCodigo: TRLDBText;
+    rlDBComposicao: TRLDBText;
+    rlDBGrupo: TRLDBText;
+    rlDBProduto: TRLDBText;
+    rlDBSubgrupo: TRLDBText;
+    rlDBTipoProduto: TRLDBText;
+    rlGrupo: TRLLabel;
+    rlImageJFI: TRLImage;
+    rlImageNAT: TRLImage;
+    rlSubGrupo: TRLLabel;
+    rlEmpenhoEstilista: TRLGroup;
+    rlDadosEstoque: TRLBand;
+    rlPanelDtEntrada: TRLPanel;
+    rlDBDtReserva: TRLDBText;
+    rlPanRef: TRLPanel;
+    rlDBRef: TRLDBMemo;
+    rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
+    rlPanelTamanho: TRLPanel;
+    rlDBFichaTecnica: TRLDBText;
+    rlPanTipo: TRLPanel;
+    rlDBTipo: TRLDBText;
+    rlPanelSitEmp: TRLPanel;
+    rlDBConsModelagem: TRLDBText;
+    rlPanelForn: TRLPanel;
+    rlDBConsumo: TRLDBText;
+    rlCabecalhoEstoque: TRLBand;
+    rlPanelEstilista: TRLPanel;
+    rlLabelEstilista: TRLDBText;
+    rlDBTotal: TRLDBText;
+    rlLabTotal: TRLLabel;
+    rlPanelTituloRes: TRLPanel;
+    rlLblReservas: TRLLabel;
+    rlPanelDtEmpenho: TRLPanel;
+    rlLblDtEmpenho: TRLLabel;
+    rlPanelReferencia: TRLPanel;
+    rlLblReferencia: TRLLabel;
+    rlPanCor: TRLPanel;
+    rlLblCor: TRLLabel;
+    rlPanelTam: TRLPanel;
+    rlLblFicha: TRLLabel;
+    rlPanelTipo: TRLPanel;
+    rlLblTipo: TRLLabel;
+    rlPanSitEmpenho: TRLPanel;
+    rlLblSitEmp: TRLLabel;
+    rlSitEmp_: TRLLabel;
+    rlPanConsumo: TRLPanel;
+    rlLblConsumo: TRLLabel;
+    rlTotais: TRLBand;
+    rlPanelTotalDisponivel: TRLPanel;
+    rlLabTotDisponivel: TRLLabel;
+    rlDBTotResModelagem: TRLDBText;
+    rlPanelTotEntForn: TRLPanel;
+    rLabTotEntForn: TRLLabel;
+    rlDBTotReserva: TRLDBText;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure carregarDados;
+  end;
+
+var
+  frmArtigosReserva: TfrmArtigosReserva;
+
+implementation
+
+{$R *.dfm}
+
+uses uConexao, uPrincipal, uDmPrincipal;
+
+{ TfrmArtigosReserva }
+
+procedure TfrmArtigosReserva.carregarDados;
+begin
+    dmConexao.Conexao.Connected :=true;
+
+    dmPrincipal.dsDadosArtigo.DataSet     :=dmPrincipal.qryDadosArtigo;
+
+    rlDBCodigo.DataSource                 :=dmPrincipal.dsDadosArtigo;
+    rlDBCodigo.DataField                  :='cp_id';
+
+    rlDBProduto.DataSource                :=dmPrincipal.dsDadosArtigo;
+    rlDBProduto.DataField                 :='cp_descricao';
+
+    rlDBGrupo.DataSource                  :=dmPrincipal.dsDadosArtigo;
+    rlDBGrupo.DataField                   :='gr_nome';
+
+    rlDBSubgrupo.DataSource               :=dmPrincipal.dsDadosArtigo;
+    rlDBSubGrupo.DataField                :='sgr_nome';
+
+    rlDBTipoProduto.DataSource            :=dmPrincipal.dsDadosArtigo;
+    rlDBTipoProduto.DataField             :='tp_nome';
+
+    rlDBComposicao.DataSource             :=dmPrincipal.dsDadosArtigo;
+    rlDBComposicao.DataField              :='cm_descricao';
+end;
+
+end.

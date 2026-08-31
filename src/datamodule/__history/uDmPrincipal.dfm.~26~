@@ -1,6 +1,6 @@
 object dmPrincipal: TdmPrincipal
   Height = 585
-  Width = 709
+  Width = 640
   object qryGrc: TFDQuery
     Connection = dmConexao.Conexao
     SQL.Strings = (
@@ -130,7 +130,7 @@ object dmPrincipal: TdmPrincipal
   end
   object dsTotaisEmpenho: TDataSource
     DataSet = qryTotaisEmpenho
-    Left = 584
+    Left = 568
     Top = 336
   end
   object qryEstilistaComprador: TFDQuery
@@ -183,24 +183,14 @@ object dmPrincipal: TdmPrincipal
     Left = 192
     Top = 472
   end
-  object qryReservaArtigo: TFDQuery
+  object qryResumoGE: TFDQuery
     Connection = dmConexao.Conexao
-    Left = 472
+    Left = 464
     Top = 408
   end
-  object dsReservaArtigo: TDataSource
-    DataSet = qryReservaArtigo
-    Left = 576
+  object dsResumoGE: TDataSource
+    DataSet = qryResumoGE
+    Left = 544
     Top = 408
-  end
-  object qryTotReservaArtigo: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 312
-    Top = 472
-  end
-  object dsTotReservaArtigo: TDataSource
-    DataSet = qryTotReservaArtigo
-    Left = 440
-    Top = 472
   end
 end
