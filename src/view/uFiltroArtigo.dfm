@@ -320,16 +320,35 @@ object frmFiltroArtigo: TfrmFiltroArtigo
   object boxTecido: TGroupBox
     Left = 8
     Top = 245
-    Width = 329
-    Height = 44
-    Caption = 'OP'#199#195'O SOMENTE PARA TECIDO'
+    Width = 433
+    Height = 53
+    Caption = 'OP'#199#195'O SOMENTE PARA SINTETICO MATERIAIS'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 9
-    object chkEmpRolos: TCheckBox
-      Left = 3
-      Top = 19
-      Width = 273
+    object lblA: TLabel
+      Left = 136
+      Top = 24
+      Width = 8
+      Height = 15
+      Caption = 'A'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object chkDtEntrada: TCheckBox
+      Left = 6
+      Top = 22
+      Width = 22
       Height = 17
-      Caption = 'SOMENTE EMPENHO DOS ROLOS IMPRESSO'
+      Cursor = crHandPoint
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -12
@@ -337,55 +356,24 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
+      OnClick = chkDtEntradaClick
     end
-  end
-  object boxOrdenar: TGroupBox
-    Left = 356
-    Top = 246
-    Width = 341
-    Height = 43
-    Caption = 'ORDENAR POR'
-    TabOrder = 10
-    object rbREF: TRadioButton
-      Left = 268
-      Top = 20
-      Width = 51
-      Height = 17
-      Caption = 'REF'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
-      TabOrder = 0
-    end
-    object rbNumRolo: TRadioButton
-      Left = 128
-      Top = 20
-      Width = 113
-      Height = 17
-      Caption = 'NUMERO ROLO'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
+    object data1: TDateTimePicker
+      Left = 31
+      Top = 18
+      Width = 96
+      Height = 23
+      Date = 46268.000000000000000000
+      Time = 0.456696446759451600
       TabOrder = 1
     end
-    object rbEstilista: TRadioButton
-      Left = 25
-      Top = 20
-      Width = 97
-      Height = 17
-      Caption = 'ESTILISTA'
-      Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -12
-      Font.Name = 'Segoe UI'
-      Font.Style = [fsBold]
-      ParentFont = False
+    object data2: TDateTimePicker
+      Left = 153
+      Top = 18
+      Width = 96
+      Height = 23
+      Date = 46268.000000000000000000
+      Time = 0.464279189814988100
       TabOrder = 2
     end
   end
@@ -396,7 +384,7 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Height = 31
     Color = clMenuHighlight
     ParentBackground = False
-    TabOrder = 11
+    TabOrder = 10
     object btnVisualizarEstoque: TSpeedButton
       Left = 1
       Top = 1
@@ -424,9 +412,9 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Top = 304
     Width = 120
     Height = 31
-    Color = clSeagreen
+    Color = clTeal
     ParentBackground = False
-    TabOrder = 12
+    TabOrder = 11
     object btnVisEmpenho: TSpeedButton
       Left = 1
       Top = 1
@@ -454,9 +442,9 @@ object frmFiltroArtigo: TfrmFiltroArtigo
     Top = 304
     Width = 121
     Height = 31
-    Color = clTomato
+    Color = clDarkred
     ParentBackground = False
-    TabOrder = 13
+    TabOrder = 12
     object btnVisReservas: TSpeedButton
       Left = 1
       Top = 1
@@ -474,6 +462,36 @@ object frmFiltroArtigo: TfrmFiltroArtigo
       ParentFont = False
       OnClick = btnVisReservasClick
       ExplicitLeft = 104
+      ExplicitTop = 8
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
+  end
+  object panSintMateriais: TPanel
+    Left = 425
+    Top = 304
+    Width = 120
+    Height = 31
+    Color = clIndigo
+    ParentBackground = False
+    TabOrder = 13
+    object btnSitMateriais: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 118
+      Height = 29
+      Cursor = crHandPoint
+      Align = alClient
+      Caption = 'Sintetico Materiais'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnSitMateriaisClick
+      ExplicitLeft = 64
       ExplicitTop = 8
       ExplicitWidth = 23
       ExplicitHeight = 22

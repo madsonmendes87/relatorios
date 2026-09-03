@@ -53,7 +53,6 @@ type
     rLabTotEntForn: TRLLabel;
     rlPanelTotalDisponivel: TRLPanel;
     rlLabTotDisponivel: TRLLabel;
-    rlLblTotDisponivel: TRLLabel;
     rlPanelTituloEmp: TRLPanel;
     rlPanelDtEmpenho: TRLPanel;
     rlLblDtEmpenho: TRLLabel;
@@ -82,6 +81,7 @@ type
     rlDBSitEmp: TRLDBMemo;
     rlDBConsumo: TRLDBText;
     rlDBTotEmpenhos: TRLDBText;
+    rlDBEmpTransferidos: TRLDBText;
 
   private
     { Private declarations }
@@ -125,6 +125,21 @@ begin
     rlDBComposicao.DataSource             :=dmPrincipal.dsDadosArtigo;
     rlDBComposicao.DataField              :='cm_descricao';
 
+
+
+    if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+    begin
+         with dmPrincipal.qryEstilistaComprador do
+        begin
+            Close;
+            SQL.Clear;
+            SQL.Add('SELECT comp_nome, comp_idestilista FROM cadastro_compradores');
+            SQL.Add('   WHERE comp_id = :idComprador');
+
+            ParamByName('idComprador').AsInteger    :=frmFiltroArtigo.dblcbComprador.KeyValue;
+            Open;
+        end;
+    end;
 
 
 
@@ -237,6 +252,30 @@ begin
         SQL.Add('                   cp.cp_id=:idArtigo');
         SQL.Add('                   AND ce.emp_situacao<>''C''');
         SQL.Add('                   AND ce.emp_tipo=''S''');
+
+        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
+        begin
+              SQL.Add('AND gc.grc_id = :idCor');
+              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
+        begin
+              SQL.Add('AND gt.grt_id = :idTamanho');
+              ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+        begin
+            SQL.Add('AND est.es_id = :idEstilista');
+            ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
+        end;
+
+        if frmFiltroArtigo.cboTipoEmpenho.ItemIndex = 1 then
+            SQL.Add('AND ce.emp_eprototipo = TRUE')
+        else
+            SQL.Add('AND ce.emp_eprototipo = FALSE');
+
         SQL.Add('             GROUP BY');
         SQL.Add('                   est.es_nome,');
         SQL.Add('                   ce.emp_idordemcorte,');
@@ -258,6 +297,7 @@ begin
         SQL.Add('                 est.es_nome,');
         SQL.Add('                 pa.cad_idreferencia');
         SQL.Add('          )AS dados');
+
 
         ParamByName('idArtigo').AsInteger   :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
         Open;
@@ -423,6 +463,30 @@ begin
         SQL.Add('          cp.cp_id = :idArtigo');
         SQL.Add('      AND ce.emp_situacao <> ''C''');
         SQL.Add('      AND ce.emp_tipo = ''S''');
+
+        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
+        begin
+              SQL.Add('AND gc.grc_id = :idCor');
+              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
+        begin
+              SQL.Add('AND gt.grt_id = :idTamanho');
+              ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+        begin
+            SQL.Add('AND est.es_id = :idEstilista');
+            ParamByName('idEstilista').AsInteger :=dmPrincipal.qryEstilistaComprador.FieldByName('comp_idestilista').AsInteger;
+        end;
+
+        if frmFiltroArtigo.cboTipoEmpenho.ItemIndex = 1 then
+            SQL.Add('AND ce.emp_eprototipo = TRUE')
+        else
+            SQL.Add('AND ce.emp_eprototipo = FALSE');
+
         SQL.Add('    GROUP BY');
         SQL.Add('        est.es_nome,');
         SQL.Add('        est.es_id,');
@@ -449,6 +513,9 @@ begin
 
     rlDBTotEmpenhos.DataSource           :=dmPrincipal.dsTotaisEmpenho;
     rlDBTotEmpenhos.DataField            :='total_sob_pedido';
+
+    rlDBEmpTransferidos.DataSource       :=dmPrincipal.dsTotaisEmpenho;
+    rlDBEmpTransferidos.DataField        :='total_transferido';
 end;
 
 end.

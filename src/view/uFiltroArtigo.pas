@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls,
-  Vcl.Buttons, Vcl.ExtCtrls;
+  Vcl.Buttons, Vcl.ExtCtrls, Vcl.ComCtrls;
 
 type
   TfrmFiltroArtigo = class(TForm)
@@ -34,17 +34,18 @@ type
     lblTipoEmpenho: TLabel;
     cboTipoEmpenho: TComboBox;
     boxTecido: TGroupBox;
-    chkEmpRolos: TCheckBox;
-    boxOrdenar: TGroupBox;
-    rbREF: TRadioButton;
-    rbNumRolo: TRadioButton;
-    rbEstilista: TRadioButton;
+    chkDtEntrada: TCheckBox;
     pnlVisualizar: TPanel;
     btnVisualizarEstoque: TSpeedButton;
     pnlVisualEmpenho: TPanel;
     btnVisEmpenho: TSpeedButton;
     pnlVisualizarReserva: TPanel;
     btnVisReservas: TSpeedButton;
+    data1: TDateTimePicker;
+    lblA: TLabel;
+    data2: TDateTimePicker;
+    panSintMateriais: TPanel;
+    btnSitMateriais: TSpeedButton;
     procedure edtCodigoKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure btnZerarCorClick(Sender: TObject);
@@ -56,6 +57,8 @@ type
     procedure btnVisEmpenhoClick(Sender: TObject);
     procedure chkProtSemGEClick(Sender: TObject);
     procedure btnVisReservasClick(Sender: TObject);
+    procedure chkDtEntradaClick(Sender: TObject);
+    procedure btnSitMateriaisClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -72,6 +75,46 @@ implementation
 
 uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho, uRelArtigos,
   uRelArtigosEmpenho, uTecidoReserva, uArtigosReserva;
+
+procedure TfrmFiltroArtigo.btnSitMateriaisClick(Sender: TObject);
+begin
+    if data1.Date > Now then
+    begin
+        Application.MessageBox('A data selecionada é maior que o momento atual','Relatorio Artigos', MB_OK + MB_ICONINFORMATION);
+        exit;
+    end;
+
+    if data2.Date > Now then
+    begin
+        Application.MessageBox('A data selecionada é maior que o momento atual','Relatorio Artigos', MB_OK + MB_ICONINFORMATION);
+        exit;
+    end;
+
+    if data1.Date > data2.Date then
+    begin
+        Application.MessageBox('A data inicial é maior que a data final','Relatorio Artigos', MB_OK + MB_ICONINFORMATION);
+        exit;
+    end;
+
+
+    previsualizacao;
+
+    if dmPrincipal.qryDadosArtigo.FindField('tp_nome') <> nil then
+    begin
+        if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
+        begin
+//            frmTecidoReserva.carregarDados;
+//            frmTecidoReserva.rlRelTecidoReserva.Preview();
+            ShowMessage('Sintetico Tecido');
+        end
+        else
+        begin
+//            frmArtigosReserva.carregarDados;
+//            frmArtigosReserva.rlRelArtigoReserva.Preview();
+            ShowMessage('Sintetico Artigo');
+        end;
+    end;
+end;
 
 procedure TfrmFiltroArtigo.btnVisEmpenhoClick(Sender: TObject);
 begin
@@ -143,6 +186,28 @@ end;
 procedure TfrmFiltroArtigo.btnZeraTamanhoClick(Sender: TObject);
 begin
     dblcbTamanho.KeyValue   :=Null;
+end;
+
+procedure TfrmFiltroArtigo.chkDtEntradaClick(Sender: TObject);
+begin
+    if chkDtEntrada.Checked then
+    begin
+        data1.Enabled                         :=true;
+        data2.Enabled                         :=true;
+        btnSitMateriais.Enabled               :=true;
+        btnVisualizarEstoque.Enabled          :=false;
+        btnVisEmpenho.Enabled                 :=false;
+        btnVisReservas.Enabled                :=false;
+    end
+    else
+    begin
+        data1.Enabled                         :=false;
+        data2.Enabled                         :=false;
+        btnSitMateriais.Enabled               :=false;
+        btnVisualizarEstoque.Enabled          :=true;
+        btnVisEmpenho.Enabled                 :=true;
+        btnVisReservas.Enabled                :=true;
+    end;
 end;
 
 procedure TfrmFiltroArtigo.chkProtSemGEClick(Sender: TObject);
@@ -259,7 +324,10 @@ begin
     dmPrincipal.qryTamanho.Active         :=true;
     dmPrincipal.qryComprador.Active       :=true;
     dmPrincipal.qryFornecedor.Active      :=true;
-    rbEstilista.Checked                   :=true;
+    chkDtEntrada.Checked                  :=false;
+    data1.Enabled                         :=false;
+    data2.Enabled                         :=false;
+    btnSitMateriais.Enabled               :=false;
 end;
 
 procedure TfrmFiltroArtigo.previsualizacao;

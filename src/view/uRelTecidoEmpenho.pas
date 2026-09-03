@@ -243,7 +243,7 @@ begin
         SQL.Add('             FROM controle_empenho AS ce');
         SQL.Add('             JOIN estoque AS e ON e.es_id = ce.emp_idestoque');
         SQL.Add('             JOIN cadastro_produto AS cp On cp.cp_id=e.es_codproduto');
-        SQL.Add('             JOIN grade_cor AS gc On gc.grc_id = e.es_idgradecor');
+        SQL.Add('             JOIN grade_cor AS gc ON gc.grc_id = e.es_idgradecor');
         SQL.Add('             JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam');
         SQL.Add('             JOIN ficha_tecnica AS ft ON ft.fi_id = ce.emp_codprocesso');
         SQL.Add('             JOIN produto_acabado AS pa ON pa.cad_id = ft.fi_idprodutoacabado');
