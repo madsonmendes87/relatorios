@@ -203,4 +203,14 @@ object dmPrincipal: TdmPrincipal
     Left = 440
     Top = 472
   end
+  object qrySinteticoTecido: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 64
+    Top = 528
+  end
+  object dsSinteticoTecido: TDataSource
+    DataSet = qrySinteticoTecido
+    Left = 168
+    Top = 528
+  end
 end

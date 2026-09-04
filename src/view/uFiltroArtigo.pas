@@ -74,7 +74,7 @@ implementation
 {$R *.dfm}
 
 uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho, uRelArtigos,
-  uRelArtigosEmpenho, uTecidoReserva, uArtigosReserva;
+  uRelArtigosEmpenho, uTecidoReserva, uArtigosReserva, uRelSinteticoTecido;
 
 procedure TfrmFiltroArtigo.btnSitMateriaisClick(Sender: TObject);
 begin
@@ -103,9 +103,8 @@ begin
     begin
         if dmPrincipal.qryDadosArtigo.FieldByName('tp_nome').AsString = 'MATERIA PRIMA' then
         begin
-//            frmTecidoReserva.carregarDados;
-//            frmTecidoReserva.rlRelTecidoReserva.Preview();
-            ShowMessage('Sintetico Tecido');
+            frmRelSinteticoTecido.carregarDados;
+            frmRelSinteticoTecido.rlRelSinteticoTecido.Preview()
         end
         else
         begin

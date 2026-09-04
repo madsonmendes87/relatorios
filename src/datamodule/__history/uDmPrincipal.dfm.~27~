@@ -1,6 +1,6 @@
 object dmPrincipal: TdmPrincipal
-  Height = 480
-  Width = 640
+  Height = 585
+  Width = 709
   object qryGrc: TFDQuery
     Connection = dmConexao.Conexao
     SQL.Strings = (
@@ -37,8 +37,8 @@ object dmPrincipal: TdmPrincipal
     Connection = dmConexao.Conexao
     SQL.Strings = (
       
-        'SELECT comp_id, comp_nome FROM cadastro_compradores ORDER BY com' +
-        'p_nome')
+        'SELECT comp_id, comp_nome, comp_idestilista FROM cadastro_compra' +
+        'dores ORDER BY comp_nome')
     Left = 88
     Top = 128
   end
@@ -112,5 +112,95 @@ object dmPrincipal: TdmPrincipal
     DataSet = qryEstTecidos
     Left = 160
     Top = 336
+  end
+  object qryEmpTecidos: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 256
+    Top = 336
+  end
+  object dsEmpTecidos: TDataSource
+    DataSet = qryEmpTecidos
+    Left = 352
+    Top = 336
+  end
+  object qryTotaisEmpenho: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 464
+    Top = 336
+  end
+  object dsTotaisEmpenho: TDataSource
+    DataSet = qryTotaisEmpenho
+    Left = 584
+    Top = 336
+  end
+  object qryEstilistaComprador: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 424
+    Top = 48
+  end
+  object qryTecidoEstoqueTot: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 472
+    Top = 112
+  end
+  object qryEstArtigos: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 488
+    Top = 200
+  end
+  object dsEstArtigos: TDataSource
+    DataSet = qryEstArtigos
+    Left = 504
+    Top = 264
+  end
+  object qryEmpArtigos: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 72
+    Top = 408
+  end
+  object dsEmpArtigos: TDataSource
+    DataSet = qryEmpArtigos
+    Left = 160
+    Top = 408
+  end
+  object qryReservaTecido: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 264
+    Top = 408
+  end
+  object dsReservaTecido: TDataSource
+    DataSet = qryReservaTecido
+    Left = 368
+    Top = 408
+  end
+  object qryTotReservaTecido: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 72
+    Top = 472
+  end
+  object dsTotReservaTecido: TDataSource
+    DataSet = qryTotReservaTecido
+    Left = 192
+    Top = 472
+  end
+  object qryReservaArtigo: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 472
+    Top = 408
+  end
+  object dsReservaArtigo: TDataSource
+    DataSet = qryReservaArtigo
+    Left = 576
+    Top = 408
+  end
+  object qryTotReservaArtigo: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 312
+    Top = 472
+  end
+  object dsTotReservaArtigo: TDataSource
+    DataSet = qryTotReservaArtigo
+    Left = 440
+    Top = 472
   end
 end
