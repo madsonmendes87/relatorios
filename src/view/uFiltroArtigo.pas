@@ -59,6 +59,7 @@ type
     procedure btnVisReservasClick(Sender: TObject);
     procedure chkDtEntradaClick(Sender: TObject);
     procedure btnSitMateriaisClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -315,6 +316,12 @@ procedure TfrmFiltroArtigo.edtCodigoKeyPress(Sender: TObject;
 begin
     if not (Key in ['0'..'9', #8]) then
       Key := #0;
+end;
+
+procedure TfrmFiltroArtigo.FormCreate(Sender: TObject);
+begin
+    data1.Date  :=now;
+    data2.Date  :=now;
 end;
 
 procedure TfrmFiltroArtigo.FormShow(Sender: TObject);

@@ -70,7 +70,7 @@ type
     rlPanelTotEntrada: TRLPanel;
     rLabTotEntForn: TRLLabel;
     rlDBTotEntrada: TRLDBText;
-    rlPanelTotalFisico: TRLPanel;
+    rlPanelTotalDisponivel: TRLPanel;
     rlLabTotFisico: TRLLabel;
     rlDBTotEstFisico: TRLDBText;
     rlLblComprador: TRLLabel;
@@ -87,9 +87,6 @@ type
     rlDBForn: TRLDBMemo;
     RlabEnt: TRLLabel;
     rlPanelTotDisp: TRLPanel;
-    rlLblTotDisp: TRLLabel;
-    rllabTot: TRLLabel;
-    rlDBTotDisp: TRLDBText;
   private
     { Private declarations }
   public
@@ -488,9 +485,6 @@ end;
 
     rlDBTotEstFisico.DataSource                 :=dmPrincipal.dsTotalSinTecido;
     rlDBTotEstFisico.DataField                  :='total_disponivel';
-
-    rlDBTotDisp.DataSource                      :=dmPrincipal.dsTotalSinTecido;
-    rlDBTotDisp.DataField                       :='total_disponivel_para_empenho';
 end;
 
 end.

@@ -213,4 +213,14 @@ object dmPrincipal: TdmPrincipal
     Left = 168
     Top = 528
   end
+  object qryTotalSinTecido: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 552
+    Top = 472
+  end
+  object dsTotalSinTecido: TDataSource
+    DataSet = qryTotalSinTecido
+    Left = 544
+    Top = 528
+  end
 end

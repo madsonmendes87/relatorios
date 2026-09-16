@@ -48,6 +48,8 @@ type
     dsTotReservaArtigo: TDataSource;
     qrySinteticoTecido: TFDQuery;
     dsSinteticoTecido: TDataSource;
+    qryTotalSinTecido: TFDQuery;
+    dsTotalSinTecido: TDataSource;
   private
     { Private declarations }
   public

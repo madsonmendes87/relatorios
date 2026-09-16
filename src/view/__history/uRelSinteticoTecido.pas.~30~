@@ -37,7 +37,7 @@ type
     rlDBEntrada: TRLDBText;
     rlPanelFisico: TRLPanel;
     rlPanTipo: TRLPanel;
-    rlDBDisp: TRLDBText;
+    rlDBEmpenhado: TRLDBText;
     rlPanelSitEmp: TRLPanel;
     rlDBCusto: TRLDBMemo;
     rlPanelForn: TRLPanel;
@@ -61,7 +61,7 @@ type
     rlPanFisico: TRLPanel;
     rlLblEstFisico: TRLLabel;
     rlPanelTipo: TRLPanel;
-    rlLblDisp: TRLLabel;
+    rlLblEmpenhado: TRLLabel;
     rlPanSitEmpenho: TRLPanel;
     lblCusto: TRLLabel;
     rlPanConsumo: TRLPanel;
@@ -70,9 +70,9 @@ type
     rlPanelTotEntrada: TRLPanel;
     rLabTotEntForn: TRLLabel;
     rlDBTotEntrada: TRLDBText;
-    rlPanelTotalFisico: TRLPanel;
-    rlLabTotFisico: TRLLabel;
-    rlDBTotEstFisico: TRLDBText;
+    rlPanelTotalDisponivel: TRLPanel;
+    rlLabTotDisponivel: TRLLabel;
+    rlDBEmpTransferidos: TRLDBText;
     rlLblComprador: TRLLabel;
     rlLblTotFisico: TRLLabel;
     rlDBFisico: TRLDBText;
@@ -86,10 +86,6 @@ type
     rlDBEstFisico: TRLDBText;
     rlDBForn: TRLDBMemo;
     RlabEnt: TRLLabel;
-    rlPanelTotDisp: TRLPanel;
-    rlLblTotDisp: TRLLabel;
-    rllabTot: TRLLabel;
-    rlDBTotDisp: TRLDBText;
   private
     { Private declarations }
   public
@@ -368,8 +364,8 @@ end;
     rlDBEstFisico.DataSource                :=dmPrincipal.dsSinteticoTecido;
     rlDBEstFisico.DataField                 :='real';
 
-    rlDBDisp.DataSource                     :=dmPrincipal.dsSinteticoTecido;
-    rlDBDisp.DataField                      :='disponivel_para_empenho';
+    rlDBEmpenhado.DataSource                :=dmPrincipal.dsSinteticoTecido;
+    rlDBEmpenhado.DataField                 :='disponivel_para_empenho';
 
     rlDBCusto.DataSource                    :=dmPrincipal.dsSinteticoTecido;
     rlDBCusto.DataField                     :='es_custoatual';
@@ -481,16 +477,10 @@ end;
         Open;
     end;
 
-    dmPrincipal.dsTotalSinTecido.DataSet        :=dmPrincipal.qryTotalSinTecido;
+    dmPrincipal.dsTotalSinTecido.DataSet := dmPrincipal.qryTotalSinTecido;
 
     rlDBTotEntrada.DataSource                   :=dmPrincipal.dsTotalSinTecido;
     rlDBTotEntrada.DataField                    :='total_entrada';
-
-    rlDBTotEstFisico.DataSource                 :=dmPrincipal.dsTotalSinTecido;
-    rlDBTotEstFisico.DataField                  :='total_disponivel';
-
-    rlDBTotDisp.DataSource                      :=dmPrincipal.dsTotalSinTecido;
-    rlDBTotDisp.DataField                       :='total_disponivel_para_empenho';
 end;
 
 end.
