@@ -207,7 +207,6 @@ object frmPrincipal: TfrmPrincipal
       Font.Name = 'Segoe UI'
       Font.Style = [fsBold]
       ParentFont = False
-      OnClick = btnProdutividadeClick
       ExplicitLeft = 98
       ExplicitTop = 35
       ExplicitWidth = 23

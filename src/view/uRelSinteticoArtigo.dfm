@@ -1,9 +1,9 @@
-object frmRelSinteticoTecido: TfrmRelSinteticoTecido
+object frmRelSinteticoArtigo: TfrmRelSinteticoArtigo
   Left = 0
   Top = 0
-  Caption = 'Sintetico Tecido'
-  ClientHeight = 749
-  ClientWidth = 801
+  Caption = 'Sintetico Artigos'
+  ClientHeight = 441
+  ClientWidth = 807
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,8 +11,8 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
   Font.Name = 'Segoe UI'
   Font.Style = []
   TextHeight = 15
-  object rlRelSinteticoTecido: TRLReport
-    Left = 0
+  object rlRelSinteticoArtigo: TRLReport
+    Left = 5
     Top = 0
     Width = 794
     Height = 1123
@@ -26,10 +26,10 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
     Font.Name = 'Arial'
     Font.Style = []
     object rlCabecalho: TRLBand
-      Left = 4
+      Left = 0
       Top = 4
       Width = 786
-      Height = 155
+      Height = 188
       BandType = btHeader
       object rLabelCod: TRLLabel
         Left = 120
@@ -619,15 +619,45 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         ParentFont = False
         Transparent = False
       end
+      object rlPanelTituloEmp: TRLPanel
+        Left = 3
+        Top = 156
+        Width = 783
+        Height = 32
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = True
+        Borders.DrawTop = True
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
+        Borders.FixedBottom = True
+        Color = clLavenderblush
+        ParentColor = False
+        Transparent = False
+        object rlLblEmpenho: TRLLabel
+          Left = 267
+          Top = 8
+          Width = 248
+          Height = 16
+          Align = faCenter
+          Caption = 'RELAT'#211'RIO SINT'#201'TICO DE MATERIAIS'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+      end
     end
     object rlEmpenhoEstilista: TRLGroup
-      Left = 4
-      Top = 159
+      Left = 0
+      Top = 192
       Width = 786
-      Height = 160
+      Height = 127
       object rlDadosEstoque: TRLBand
         Left = 0
-        Top = 89
+        Top = 57
         Width = 786
         Height = 70
         object rlPanelDtEntrada: TRLPanel
@@ -815,10 +845,10 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
           Color = clLightcyan
           ParentColor = False
           Transparent = False
-          object rlDBEmpenhado: TRLDBText
-            Left = 7
+          object rlDBDisp: TRLDBText
+            Left = 22
             Top = 27
-            Width = 69
+            Width = 38
             Height = 15
             Align = faCenter
             DisplayMask = '0.0000'
@@ -870,20 +900,19 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
           Borders.DrawBottom = True
           Borders.FixedRight = True
           Borders.FixedBottom = True
-          object rlDBConsumo: TRLDBText
-            Left = 4
+          object rlDBForn: TRLDBMemo
+            Left = 9
             Top = 27
-            Width = 68
-            Height = 14
+            Width = 59
+            Height = 15
             Align = faCenter
-            DisplayMask = '0.0000'
-            Font.Charset = DEFAULT_CHARSET
+            Behavior = [beSiteExpander]
+            Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
             Font.Height = -11
-            Font.Name = 'Arial'
+            Font.Name = 'Arial Narrow'
             Font.Style = []
             ParentFont = False
-            Text = ''
           end
         end
         object rlPanelEmFicha: TRLPanel
@@ -916,11 +945,11 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         Left = 0
         Top = 0
         Width = 786
-        Height = 89
+        Height = 57
         BandType = btHeader
         object rlPanelEstilista: TRLPanel
           Left = 3
-          Top = 32
+          Top = 0
           Width = 783
           Height = 23
           Borders.Sides = sdCustom
@@ -1007,6 +1036,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
             Top = 3
             Width = 52
             Height = 15
+            DisplayMask = '0.0000 MT'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -1035,6 +1065,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
             Top = 3
             Width = 73
             Height = 15
+            DisplayMask = '0.0000 MT'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -1045,39 +1076,9 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
             Transparent = False
           end
         end
-        object rlPanelTituloEmp: TRLPanel
-          Left = 3
-          Top = 0
-          Width = 783
-          Height = 32
-          Borders.Sides = sdCustom
-          Borders.DrawLeft = True
-          Borders.DrawTop = True
-          Borders.DrawRight = True
-          Borders.DrawBottom = True
-          Borders.FixedBottom = True
-          Color = clLavenderblush
-          ParentColor = False
-          Transparent = False
-          object rlLblEmpenho: TRLLabel
-            Left = 267
-            Top = 8
-            Width = 248
-            Height = 16
-            Align = faCenter
-            Caption = 'RELAT'#211'RIO SINT'#201'TICO DE MATERIAIS'
-            Font.Charset = DEFAULT_CHARSET
-            Font.Color = clBlack
-            Font.Height = -13
-            Font.Name = 'Arial'
-            Font.Style = [fsBold]
-            ParentFont = False
-            Transparent = False
-          end
-        end
         object rlPanelDtEmpenho: TRLPanel
           Left = 3
-          Top = 55
+          Top = 23
           Width = 86
           Height = 34
           Borders.Sides = sdCustom
@@ -1104,7 +1105,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         end
         object rlPanelReferencia: TRLPanel
           Left = 89
-          Top = 55
+          Top = 23
           Width = 64
           Height = 34
           Borders.Sides = sdCustom
@@ -1130,7 +1131,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         end
         object rlPanelOrdCorte: TRLPanel
           Left = 153
-          Top = 55
+          Top = 23
           Width = 85
           Height = 34
           Borders.Sides = sdCustom
@@ -1156,7 +1157,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         end
         object rlPanCor: TRLPanel
           Left = 238
-          Top = 55
+          Top = 23
           Width = 106
           Height = 34
           Borders.Sides = sdCustom
@@ -1182,7 +1183,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         end
         object rlPanelEntrada: TRLPanel
           Left = 343
-          Top = 55
+          Top = 23
           Width = 75
           Height = 34
           Borders.Sides = sdCustom
@@ -1213,7 +1214,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         end
         object rlPanFisico: TRLPanel
           Left = 418
-          Top = 55
+          Top = 23
           Width = 106
           Height = 34
           Borders.Sides = sdCustom
@@ -1243,7 +1244,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         end
         object rlPanelTipo: TRLPanel
           Left = 524
-          Top = 55
+          Top = 23
           Width = 84
           Height = 34
           Borders.Sides = sdCustom
@@ -1255,13 +1256,13 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
           Color = clLightcyan
           ParentColor = False
           Transparent = False
-          object rlLblEmpenhado: TRLLabel
-            Left = 9
+          object rlLblDisp: TRLLabel
+            Left = 11
             Top = 9
-            Width = 64
+            Width = 60
             Height = 15
             Align = faCenter
-            Caption = 'EMPENHADO'
+            Caption = 'DISPONIVEL'
             Font.Charset = ANSI_CHARSET
             Font.Color = clBlack
             Font.Height = -11
@@ -1273,7 +1274,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         end
         object rlPanSitEmpenho: TRLPanel
           Left = 608
-          Top = 55
+          Top = 23
           Width = 51
           Height = 34
           Borders.Sides = sdCustom
@@ -1299,7 +1300,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         end
         object rlPanConsumo: TRLPanel
           Left = 659
-          Top = 55
+          Top = 23
           Width = 78
           Height = 34
           Borders.Sides = sdCustom
@@ -1325,7 +1326,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
         end
         object rlPanelFicha: TRLPanel
           Left = 737
-          Top = 55
+          Top = 23
           Width = 49
           Height = 34
           Borders.Sides = sdCustom
@@ -1351,41 +1352,45 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
       end
     end
     object rlTotais: TRLBand
-      Left = 4
+      Left = 0
       Top = 319
       Width = 786
-      Height = 85
+      Height = 80
       BandType = btSummary
-      object rlPanelTotEntForn: TRLPanel
-        Left = 3
+      object rlPanelTotEntrada: TRLPanel
+        Left = 343
         Top = 0
-        Width = 374
-        Height = 25
+        Width = 75
+        Height = 73
         Borders.Sides = sdCustom
         Borders.DrawLeft = True
-        Borders.DrawTop = True
+        Borders.DrawTop = False
         Borders.DrawRight = True
         Borders.DrawBottom = True
         Borders.FixedLeft = True
         Borders.FixedRight = True
         Borders.FixedBottom = True
+        Color = clLavender
+        ParentColor = False
+        Transparent = False
         object rLabTotEntForn: TRLLabel
-          Left = 7
-          Top = 2
-          Width = 92
+          Left = 20
+          Top = 0
+          Width = 33
           Height = 15
-          Caption = 'TOTAL EMPENHOS:'
+          Caption = 'TOTAL'
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           ParentFont = False
+          Transparent = False
         end
-        object rlDBTotEmpenhos: TRLDBText
-          Left = 105
-          Top = 2
-          Width = 77
+        object rlDBTotEntrada: TRLDBText
+          Left = 10
+          Top = 40
+          Width = 64
           Height = 15
           DisplayMask = '0.0000'
           Font.Charset = ANSI_CHARSET
@@ -1395,35 +1400,54 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
           Font.Style = []
           ParentFont = False
           Text = ''
+          Transparent = False
+        end
+        object RlabEnt: TRLLabel
+          Left = 12
+          Top = 16
+          Width = 49
+          Height = 15
+          Caption = 'ENTRADA'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
         end
       end
-      object rlPanelTotalDisponivel: TRLPanel
-        Left = 375
+      object rlPanelTotalFisico: TRLPanel
+        Left = 418
         Top = 0
-        Width = 410
-        Height = 25
+        Width = 106
+        Height = 73
         Borders.Sides = sdCustom
         Borders.DrawLeft = False
-        Borders.DrawTop = True
+        Borders.DrawTop = False
         Borders.DrawRight = True
         Borders.DrawBottom = True
-        object rlLabTotDisponivel: TRLLabel
+        Color = clAzure
+        ParentColor = False
+        Transparent = False
+        object rlLabTotFisico: TRLLabel
           Left = 18
-          Top = 6
-          Width = 169
+          Top = 10
+          Width = 68
           Height = 15
-          Caption = 'TOTAL EMPENHOS TRANSFERIDOS:'
+          Caption = 'TOTAL FISICO'
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'Arial Narrow'
           Font.Style = [fsBold]
           ParentFont = False
+          Transparent = False
         end
-        object rlDBEmpTransferidos: TRLDBText
-          Left = 193
-          Top = 2
-          Width = 90
+        object rlDBTotEstFisico: TRLDBText
+          Left = 30
+          Top = 40
+          Width = 71
           Height = 15
           DisplayMask = '0.0000'
           Font.Charset = ANSI_CHARSET
@@ -1433,6 +1457,65 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
           Font.Style = []
           ParentFont = False
           Text = ''
+          Transparent = False
+        end
+      end
+      object rlPanelTotDisp: TRLPanel
+        Left = 524
+        Top = 0
+        Width = 84
+        Height = 73
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = False
+        Borders.DrawRight = True
+        Borders.DrawBottom = True
+        Borders.FixedBottom = True
+        Color = clLightcyan
+        ParentColor = False
+        Transparent = False
+        object rlLblTotDisp: TRLLabel
+          Left = 12
+          Top = 16
+          Width = 60
+          Height = 15
+          Caption = 'DISPONIVEL'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+        object rllabTot: TRLLabel
+          Left = 25
+          Top = 0
+          Width = 33
+          Height = 15
+          Caption = 'TOTAL'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+        object rlDBTotDisp: TRLDBText
+          Left = 20
+          Top = 40
+          Width = 51
+          Height = 15
+          DisplayMask = '0.0000'
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial Narrow'
+          Font.Style = []
+          ParentFont = False
+          Text = ''
+          Transparent = False
         end
       end
     end

@@ -1,0 +1,50 @@
+unit uFiltroProdutividade;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.DBCtrls,
+  Vcl.ExtCtrls, Data.DB, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TfrmFiltroProdutividade = class(TForm)
+    dbLkFase: TDBLookupComboBox;
+    lblFase: TLabel;
+    lblUsuarioFase: TLabel;
+    dbLkUsuario: TDBLookupComboBox;
+    lblColecao: TLabel;
+    dbLkColecao: TDBLookupComboBox;
+    lblGrupo: TLabel;
+    dbLkGrupo: TDBLookupComboBox;
+    lblSubGrupo: TLabel;
+    lblEstilista: TLabel;
+    dbLkEstilista: TDBLookupComboBox;
+    lblTipo: TLabel;
+    dbLkTipo: TDBLookupComboBox;
+    dbLkSubGrupo: TDBLookupComboBox;
+    lblMarca: TLabel;
+    dbLkMarca: TDBLookupComboBox;
+    lblGenero: TLabel;
+    cmbGenero: TComboBox;
+    lblGrife: TLabel;
+    dbLkGrife: TDBLookupComboBox;
+    pnlBuscar: TPanel;
+    pnlLimpar: TPanel;
+    Panel3: TPanel;
+    lblTipoTecido: TLabel;
+    DBGrid1: TDBGrid;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmFiltroProdutividade: TfrmFiltroProdutividade;
+
+implementation
+
+{$R *.dfm}
+
+end.

@@ -47,7 +47,7 @@ implementation
 
 {$R *.dfm}
 
-uses uFiltroArtigo, uDmPrincipal, uFiltroProdutividade;
+uses uFiltroArtigo, uDmPrincipal;
 
 procedure TfrmPrincipal.btnInfoArtigoClick(Sender: TObject);
 begin
@@ -62,12 +62,12 @@ end;
 
 procedure TfrmPrincipal.btnProdutividadeClick(Sender: TObject);
 begin
-    frmFiltroProdutividade :=TfrmFiltroProdutividade.Create(nil);
+    //frmFiltroProdutividade :=TfrmFiltroProdutividade.Create(nil);
 
     try
-      frmFiltroProdutividade.ShowModal;
+      //frmFiltroProdutividade.ShowModal;
     finally
-      FreeAndNil(frmFiltroProdutividade);
+      //FreeAndNil(frmFiltroProdutividade);
     end;
 end;
 

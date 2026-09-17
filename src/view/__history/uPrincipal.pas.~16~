@@ -47,7 +47,7 @@ implementation
 
 {$R *.dfm}
 
-uses uFiltroArtigo, uDmPrincipal, uFiltroProdutividade;
+uses uFiltroArtigo, uDmPrincipal;
 
 procedure TfrmPrincipal.btnInfoArtigoClick(Sender: TObject);
 begin

@@ -50,6 +50,10 @@ type
     dsSinteticoTecido: TDataSource;
     qryTotalSinTecido: TFDQuery;
     dsTotalSinTecido: TDataSource;
+    qrySinteticoArtigo: TFDQuery;
+    dsSinteticoArtigo: TDataSource;
+    qryTotalSinArtigo: TFDQuery;
+    dsTotalSinArtigo: TDataSource;
   private
     { Private declarations }
   public

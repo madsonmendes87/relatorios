@@ -13,8 +13,7 @@ uses
   uTecidoReserva in 'src\view\uTecidoReserva.pas' {frmTecidoReserva},
   uArtigosReserva in 'src\view\uArtigosReserva.pas' {frmArtigosReserva},
   uRelSinteticoTecido in 'src\view\uRelSinteticoTecido.pas' {frmRelSinteticoTecido},
-  uRelSinteticoArtigo in 'src\view\uRelSinteticoArtigo.pas' {frmRelSinteticoArtigo},
-  uFiltroProdutividade in 'src\view\uFiltroProdutividade.pas' {frmFiltroProdutividade};
+  uRelSinteticoArtigo in 'src\view\uRelSinteticoArtigo.pas' {frmRelSinteticoArtigo};
 
 {$R *.res}
 
@@ -32,6 +31,5 @@ begin
   Application.CreateForm(TfrmArtigosReserva, frmArtigosReserva);
   Application.CreateForm(TfrmRelSinteticoTecido, frmRelSinteticoTecido);
   Application.CreateForm(TfrmRelSinteticoArtigo, frmRelSinteticoArtigo);
-  Application.CreateForm(TfrmFiltroProdutividade, frmFiltroProdutividade);
   Application.Run;
 end.

@@ -1,0 +1,136 @@
+unit uRelSinteticoArtigo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
+
+type
+  TfrmRelSinteticoArtigo = class(TForm)
+    rlRelSinteticoArtigo: TRLReport;
+    rlCabecalho: TRLBand;
+    rLabelCod: TRLLabel;
+    rLabProduto: TRLLabel;
+    rLabTipoProd: TRLLabel;
+    rlComposicao: TRLLabel;
+    rlDBCodigo: TRLDBText;
+    rlDBComposicao: TRLDBText;
+    rlDBGrupo: TRLDBText;
+    rlDBProduto: TRLDBText;
+    rlDBSubgrupo: TRLDBText;
+    rlDBTipoProduto: TRLDBText;
+    rlGrupo: TRLLabel;
+    rlImageJFI: TRLImage;
+    rlImageNAT: TRLImage;
+    rlSubGrupo: TRLLabel;
+    rlPanelTituloEmp: TRLPanel;
+    rlLblEmpenho: TRLLabel;
+    rlEmpenhoEstilista: TRLGroup;
+    rlDadosEstoque: TRLBand;
+    rlPanelDtEntrada: TRLPanel;
+    rlDBDtEmpenho: TRLDBText;
+    rlPanRef: TRLPanel;
+    rlDBCod: TRLDBMemo;
+    rlPanelOrdemCorte: TRLPanel;
+    rlDBProd: TRLDBMemo;
+    rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
+    rlPanelEnt: TRLPanel;
+    rlDBEntrada: TRLDBText;
+    rlPanelFisico: TRLPanel;
+    rlDBEstFisico: TRLDBText;
+    rlPanTipo: TRLPanel;
+    rlDBDisp: TRLDBText;
+    rlPanelSitEmp: TRLPanel;
+    rlDBCusto: TRLDBMemo;
+    rlPanelForn: TRLPanel;
+    rlDBForn: TRLDBMemo;
+    rlPanelEmFicha: TRLPanel;
+    rlDBFicha: TRLDBText;
+    rlCabecalhoEstoque: TRLBand;
+    rlPanelEstilista: TRLPanel;
+    rlLabelEstilista: TRLDBText;
+    rlDBTotal: TRLDBText;
+    rlLabTotal: TRLLabel;
+    rlLblComprador: TRLLabel;
+    rlLblTotFisico: TRLLabel;
+    rlDBFisico: TRLDBText;
+    rlLblDisponivel: TRLLabel;
+    rlDBDisponivel: TRLDBText;
+    rlPanelDtEmpenho: TRLPanel;
+    rlLblDtEmpenho: TRLLabel;
+    rlPanelReferencia: TRLPanel;
+    rlLblReferencia: TRLLabel;
+    rlPanelOrdCorte: TRLPanel;
+    rlLblProduto: TRLLabel;
+    rlPanCor: TRLPanel;
+    rlLblCor: TRLLabel;
+    rlPanelEntrada: TRLPanel;
+    rlLblEntrada: TRLLabel;
+    rlPanFisico: TRLPanel;
+    rlLblEstFisico: TRLLabel;
+    rlPanelTipo: TRLPanel;
+    rlLblDisp: TRLLabel;
+    rlPanSitEmpenho: TRLPanel;
+    lblCusto: TRLLabel;
+    rlPanConsumo: TRLPanel;
+    rlLblFornecedor: TRLLabel;
+    rlPanelFicha: TRLPanel;
+    lblEmFicha: TRLLabel;
+    rlTotais: TRLBand;
+    rlPanelTotEntrada: TRLPanel;
+    rLabTotEntForn: TRLLabel;
+    rlDBTotEntrada: TRLDBText;
+    RlabEnt: TRLLabel;
+    rlPanelTotalFisico: TRLPanel;
+    rlLabTotFisico: TRLLabel;
+    rlDBTotEstFisico: TRLDBText;
+    rlPanelTotDisp: TRLPanel;
+    rlLblTotDisp: TRLLabel;
+    rllabTot: TRLLabel;
+    rlDBTotDisp: TRLDBText;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure carregarDados;
+  end;
+
+var
+  frmRelSinteticoArtigo: TfrmRelSinteticoArtigo;
+
+implementation
+
+{$R *.dfm}
+
+uses uDmPrincipal, uFiltroArtigo, uConexao;
+
+{ TfrmRelSinteticoArtigo }
+
+procedure TfrmRelSinteticoArtigo.carregarDados;
+begin
+    dmConexao.Conexao.Connected :=true;
+
+    dmPrincipal.dsDadosArtigo.DataSet     :=dmPrincipal.qryDadosArtigo;
+
+    rlDBCodigo.DataSource                 :=dmPrincipal.dsDadosArtigo;
+    rlDBCodigo.DataField                  :='cp_id';
+
+    rlDBProduto.DataSource                :=dmPrincipal.dsDadosArtigo;
+    rlDBProduto.DataField                 :='cp_descricao';
+
+    rlDBGrupo.DataSource                  :=dmPrincipal.dsDadosArtigo;
+    rlDBGrupo.DataField                   :='gr_nome';
+
+    rlDBSubgrupo.DataSource               :=dmPrincipal.dsDadosArtigo;
+    rlDBSubGrupo.DataField                :='sgr_nome';
+
+    rlDBTipoProduto.DataSource            :=dmPrincipal.dsDadosArtigo;
+    rlDBTipoProduto.DataField             :='tp_nome';
+
+    rlDBComposicao.DataSource             :=dmPrincipal.dsDadosArtigo;
+    rlDBComposicao.DataField              :='cm_descricao';
+end;
+
+end.

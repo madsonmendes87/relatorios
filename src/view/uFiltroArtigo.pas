@@ -75,7 +75,8 @@ implementation
 {$R *.dfm}
 
 uses uPrincipal, uDmPrincipal, uRelTecidos, uRelTecidoEmpenho, uRelArtigos,
-  uRelArtigosEmpenho, uTecidoReserva, uArtigosReserva, uRelSinteticoTecido;
+  uRelArtigosEmpenho, uTecidoReserva, uArtigosReserva, uRelSinteticoTecido,
+  uRelSinteticoArtigo;
 
 procedure TfrmFiltroArtigo.btnSitMateriaisClick(Sender: TObject);
 begin
@@ -109,9 +110,8 @@ begin
         end
         else
         begin
-//            frmArtigosReserva.carregarDados;
-//            frmArtigosReserva.rlRelArtigoReserva.Preview();
-            ShowMessage('Sintetico Artigo');
+            frmRelSinteticoArtigo.carregarDados;
+            frmRelSinteticoArtigo.rlRelSinteticoArtigo.Preview();
         end;
     end;
 end;
@@ -288,6 +288,8 @@ begin
             ParamByName('idProduto').AsInteger    :=StrToInt(edtCodigo.Text);
             Open;
         end;
+
+
 
 
 

@@ -1,6 +1,6 @@
 object dmPrincipal: TdmPrincipal
   Height = 585
-  Width = 709
+  Width = 780
   object qryGrc: TFDQuery
     Connection = dmConexao.Conexao
     SQL.Strings = (
@@ -220,7 +220,27 @@ object dmPrincipal: TdmPrincipal
   end
   object dsTotalSinTecido: TDataSource
     DataSet = qryTotalSinTecido
-    Left = 544
+    Left = 664
+    Top = 472
+  end
+  object qrySinteticoArtigo: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 288
+    Top = 528
+  end
+  object dsSinteticoArtigo: TDataSource
+    DataSet = qrySinteticoArtigo
+    Left = 392
+    Top = 528
+  end
+  object qryTotalSinArtigo: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 504
+    Top = 528
+  end
+  object dsTotalSinArtigo: TDataSource
+    DataSet = qryTotalSinArtigo
+    Left = 616
     Top = 528
   end
 end

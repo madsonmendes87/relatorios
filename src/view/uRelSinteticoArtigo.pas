@@ -1,0 +1,496 @@
+unit uRelSinteticoArtigo;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, Vcl.Imaging.pngimage;
+
+type
+  TfrmRelSinteticoArtigo = class(TForm)
+    rlRelSinteticoArtigo: TRLReport;
+    rlCabecalho: TRLBand;
+    rLabelCod: TRLLabel;
+    rLabProduto: TRLLabel;
+    rLabTipoProd: TRLLabel;
+    rlComposicao: TRLLabel;
+    rlDBCodigo: TRLDBText;
+    rlDBComposicao: TRLDBText;
+    rlDBGrupo: TRLDBText;
+    rlDBProduto: TRLDBText;
+    rlDBSubgrupo: TRLDBText;
+    rlDBTipoProduto: TRLDBText;
+    rlGrupo: TRLLabel;
+    rlImageJFI: TRLImage;
+    rlImageNAT: TRLImage;
+    rlSubGrupo: TRLLabel;
+    rlPanelTituloEmp: TRLPanel;
+    rlLblEmpenho: TRLLabel;
+    rlEmpenhoEstilista: TRLGroup;
+    rlDadosEstoque: TRLBand;
+    rlPanelDtEntrada: TRLPanel;
+    rlDBDtEmpenho: TRLDBText;
+    rlPanRef: TRLPanel;
+    rlDBCod: TRLDBMemo;
+    rlPanelOrdemCorte: TRLPanel;
+    rlDBProd: TRLDBMemo;
+    rlPanelCor: TRLPanel;
+    rlDBCor: TRLDBMemo;
+    rlPanelEnt: TRLPanel;
+    rlDBEntrada: TRLDBText;
+    rlPanelFisico: TRLPanel;
+    rlDBEstFisico: TRLDBText;
+    rlPanTipo: TRLPanel;
+    rlDBDisp: TRLDBText;
+    rlPanelSitEmp: TRLPanel;
+    rlDBCusto: TRLDBMemo;
+    rlPanelForn: TRLPanel;
+    rlDBForn: TRLDBMemo;
+    rlPanelEmFicha: TRLPanel;
+    rlDBFicha: TRLDBText;
+    rlCabecalhoEstoque: TRLBand;
+    rlPanelEstilista: TRLPanel;
+    rlLabelEstilista: TRLDBText;
+    rlDBTotal: TRLDBText;
+    rlLabTotal: TRLLabel;
+    rlLblComprador: TRLLabel;
+    rlLblTotFisico: TRLLabel;
+    rlDBFisico: TRLDBText;
+    rlLblDisponivel: TRLLabel;
+    rlDBDisponivel: TRLDBText;
+    rlPanelDtEmpenho: TRLPanel;
+    rlLblDtEmpenho: TRLLabel;
+    rlPanelReferencia: TRLPanel;
+    rlLblReferencia: TRLLabel;
+    rlPanelOrdCorte: TRLPanel;
+    rlLblProduto: TRLLabel;
+    rlPanCor: TRLPanel;
+    rlLblCor: TRLLabel;
+    rlPanelEntrada: TRLPanel;
+    rlLblEntrada: TRLLabel;
+    rlPanFisico: TRLPanel;
+    rlLblEstFisico: TRLLabel;
+    rlPanelTipo: TRLPanel;
+    rlLblDisp: TRLLabel;
+    rlPanSitEmpenho: TRLPanel;
+    lblCusto: TRLLabel;
+    rlPanConsumo: TRLPanel;
+    rlLblFornecedor: TRLLabel;
+    rlPanelFicha: TRLPanel;
+    lblEmFicha: TRLLabel;
+    rlTotais: TRLBand;
+    rlPanelTotEntrada: TRLPanel;
+    rLabTotEntForn: TRLLabel;
+    rlDBTotEntrada: TRLDBText;
+    RlabEnt: TRLLabel;
+    rlPanelTotalFisico: TRLPanel;
+    rlLabTotFisico: TRLLabel;
+    rlDBTotEstFisico: TRLDBText;
+    rlPanelTotDisp: TRLPanel;
+    rlLblTotDisp: TRLLabel;
+    rllabTot: TRLLabel;
+    rlDBTotDisp: TRLDBText;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    procedure carregarDados;
+  end;
+
+var
+  frmRelSinteticoArtigo: TfrmRelSinteticoArtigo;
+
+implementation
+
+{$R *.dfm}
+
+uses uDmPrincipal, uFiltroArtigo, uConexao;
+
+{ TfrmRelSinteticoArtigo }
+
+procedure TfrmRelSinteticoArtigo.carregarDados;
+begin
+    dmConexao.Conexao.Connected :=true;
+
+    dmPrincipal.dsDadosArtigo.DataSet     :=dmPrincipal.qryDadosArtigo;
+
+    rlDBCodigo.DataSource                 :=dmPrincipal.dsDadosArtigo;
+    rlDBCodigo.DataField                  :='cp_id';
+
+    rlDBProduto.DataSource                :=dmPrincipal.dsDadosArtigo;
+    rlDBProduto.DataField                 :='cp_descricao';
+
+    rlDBGrupo.DataSource                  :=dmPrincipal.dsDadosArtigo;
+    rlDBGrupo.DataField                   :='gr_nome';
+
+    rlDBSubgrupo.DataSource               :=dmPrincipal.dsDadosArtigo;
+    rlDBSubGrupo.DataField                :='sgr_nome';
+
+    rlDBTipoProduto.DataSource            :=dmPrincipal.dsDadosArtigo;
+    rlDBTipoProduto.DataField             :='tp_nome';
+
+    rlDBComposicao.DataSource             :=dmPrincipal.dsDadosArtigo;
+    rlDBComposicao.DataField              :='cm_descricao';
+
+
+    with dmPrincipal.qrySinteticoArtigo do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('       nfe.nfe_dtsaidaent,');
+        SQL.Add('       cp.cp_id,');
+        SQL.Add('       gc.grc_id,');
+        SQL.Add('       cp.cp_descricao,');
+        SQL.Add('       (gc.grc_codexterno || '' - '' || gc.grc_nome) AS grc_nome,');
+        SQL.Add('       cc.comp_id,');
+        SQL.Add('       cc.comp_nome,');
+        SQL.Add('       SUM(');
+        SQL.Add('           COALESCE(e.es_entradaforn, 0.0000) - COALESCE(e.es_saidaforn, 0.0000)');
+        SQL.Add('       ) AS entrada,');
+        SQL.Add('       SUM(');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_entradaforn, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_saidaforn, 0.0000) +');
+        SQL.Add('               COALESCE(e.es_enttransf, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_saidatransf, 0.0000)');
+        SQL.Add('           ) -');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_saidabalanco, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_entbalanco, 0.0000)');
+        SQL.Add('           )');
+        SQL.Add('       ) AS real,');
+        SQL.Add('       SUM(');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_entradaforn, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_saidaforn, 0.0000) +');
+        SQL.Add('               COALESCE(e.es_enttransf, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_saidatransf, 0.0000)');
+        SQL.Add('           ) -');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_saidaempenho, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_entempenho, 0.0000)');
+        SQL.Add('           ) -');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_saidabalanco, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_entbalanco, 0.0000)');
+        SQL.Add('           )');
+        SQL.Add('       ) AS disponivel_para_empenho,');
+        SQL.Add('       ROUND(AVG(e.es_custoatual), 2) AS es_custoatual,');
+        SQL.Add('       f.for_nome,');
+        SQL.Add('       f.for_apelido,');
+        SQL.Add('       tp.tp_id,');
+        SQL.Add('       tp.tp_nome,');
+        SQL.Add('       gp.gr_nome,');
+        SQL.Add('       sgp.sgr_nome,');
+        SQL.Add('       cp.cp_unestoque,');
+        SQL.Add('       cp.cp_reffabricante,');
+        SQL.Add('       (CASE');
+        SQL.Add('           WHEN (');
+        SQL.Add('               SELECT fti_id');
+        SQL.Add('               FROM ficha_tecnica_itens');
+        SQL.Add('               WHERE fti_idproduto = cp.cp_id');
+        SQL.Add('                 AND fti_status <> ''C''');
+        SQL.Add('                 AND fti_idgradecor = gc.grc_id');
+        SQL.Add('               LIMIT 1');
+        SQL.Add('           ) IS NOT NULL THEN ''SIM''');
+        SQL.Add('           ELSE ''NÃO''');
+        SQL.Add('       END) AS tem_em_ficha,');
+        SQL.Add('       SUM(');
+        SQL.Add('           SUM(');
+        SQL.Add('               COALESCE(e.es_entradaforn, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_saidaforn, 0.0000)');
+        SQL.Add('           )');
+        SQL.Add('       ) OVER (PARTITION BY cc.comp_id) AS total_entrada,');
+        SQL.Add('       SUM(');
+        SQL.Add('           SUM(');
+        SQL.Add('               (');
+        SQL.Add('                   COALESCE(e.es_entradaforn, 0.0000) -');
+        SQL.Add('                   COALESCE(e.es_saidaforn, 0.0000) +');
+        SQL.Add('                   COALESCE(e.es_enttransf, 0.0000) -');
+        SQL.Add('                   COALESCE(e.es_saidatransf, 0.0000)');
+        SQL.Add('               ) -');
+        SQL.Add('               (');
+        SQL.Add('                   COALESCE(e.es_saidabalanco, 0.0000) -');
+        SQL.Add('                   COALESCE(e.es_entbalanco, 0.0000)');
+        SQL.Add('               )');
+        SQL.Add('           )');
+        SQL.Add('       ) OVER (PARTITION BY cc.comp_id) AS total_disponivel,');
+        SQL.Add('       SUM(');
+        SQL.Add('           SUM(');
+        SQL.Add('               (');
+        SQL.Add('                   COALESCE(e.es_entradaforn, 0.0000) -');
+        SQL.Add('                   COALESCE(e.es_saidaforn, 0.0000) +');
+        SQL.Add('                   COALESCE(e.es_enttransf, 0.0000) -');
+        SQL.Add('                   COALESCE(e.es_saidatransf, 0.0000)');
+        SQL.Add('               ) -');
+        SQL.Add('               (');
+        SQL.Add('                   COALESCE(e.es_saidaempenho, 0.0000) -');
+        SQL.Add('                   COALESCE(e.es_entempenho, 0.0000)');
+        SQL.Add('               ) -');
+        SQL.Add('               (');
+        SQL.Add('                   COALESCE(e.es_saidabalanco, 0.0000) -');
+        SQL.Add('                   COALESCE(e.es_entbalanco, 0.0000)');
+        SQL.Add('               )');
+        SQL.Add('           )');
+        SQL.Add('       ) OVER (PARTITION BY cc.comp_id) AS total_disponivel_para_empenho');
+        SQL.Add('FROM estoque AS e');
+        SQL.Add('JOIN cadastro_produto AS cp ON e.es_codproduto = cp.cp_id');
+        SQL.Add('JOIN grade_cor AS gc ON gc.grc_id = e.es_idgradecor');
+        SQL.Add('JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam');
+        SQL.Add('LEFT JOIN itens_grade_nfentrada AS igf ON igf.ig_codproduto = cp.cp_id');
+        SQL.Add('   AND e.es_codproduto = igf.ig_codproduto');
+        SQL.Add('   AND igf.ig_gradecor = gc.grc_id');
+        SQL.Add('   AND e.es_idgradecor = igf.ig_gradecor');
+        SQL.Add('   AND igf.ig_gradetam = gt.grt_id');
+        SQL.Add('   AND e.es_idgradetam = igf.ig_gradetam');
+        SQL.Add('   AND igf.ig_numrolo = e.es_numrolo');
+        SQL.Add('   AND igf.ig_metragemrolo = e.es_metragemrolo');
+        SQL.Add('LEFT JOIN nota_fiscal_entrada AS nfe ON igf.ig_idnfent = nfe.nfe_id');
+        SQL.Add('LEFT JOIN cadastro_compradores AS cc ON cc.comp_id = igf.ig_idcomprador');
+        SQL.Add('LEFT JOIN fornecedor AS f ON f.for_codigo = nfe.nfe_codforn');
+        SQL.Add('LEFT JOIN produto_nf_entrada AS prodnfe ON prodnfe.pnfe_idnfe = nfe.nfe_id');
+        SQL.Add('   AND prodnfe.pnfe_codprod = cp.cp_id');
+        SQL.Add('   AND prodnfe.pnfe_coditem = igf.ig_id');
+        SQL.Add('LEFT JOIN itens_xml AS ixml ON ixml.pnfe_idnfe = nfe.nfe_id');
+        SQL.Add('   AND ixml.pnfe_coditem = prodnfe.pnfe_coditem');
+        SQL.Add('   AND ixml.pnfe_coditem = igf.ig_codproduto');
+        SQL.Add('   AND ixml.pnfe_id = prodnfe.pnfe_itemxml');
+        SQL.Add('JOIN tipo_produto AS tp ON tp.tp_id = cp.cp_idtipoproduto');
+        SQL.Add('JOIN grupo AS gp ON gp.gr_id = cp.cp_idgrupo');
+        SQL.Add('JOIN subgrupo AS sgp ON sgp.sgr_id = cp.cp_idsubgrupo');
+        SQL.Add('LEFT JOIN composicao_material AS cm ON cm.cm_id = cp.cp_idcomposicao');
+        SQL.Add('LEFT JOIN balanco_estoque_contagem AS bac ON bac.bc_codproduto = cp.cp_id');
+        SQL.Add('LEFT JOIN balanco AS b ON b.ba_id = bac.bc_idbalanco');
+        SQL.Add('WHERE 1=1');
+
+        if frmFiltroArtigo.edtCodigo.Text <> '' then
+        begin
+            SQL.Add('  AND cp.cp_id = :idArtigo');
+            ParamByName('idArtigo').AsInteger :=StrToInt(frmFiltroArtigo.edtCodigo.Text);
+        end;
+
+        if not VarIsNull(frmFiltroArtigo.dblcbTamanho.KeyValue) then
+        begin
+            SQL.Add('  AND gt.grt_id = :idTamanho');
+            ParamByName('idTamanho').AsInteger :=frmFiltroArtigo.dblcbTamanho.KeyValue;
+        end;
+
+        if frmFiltroArtigo.chkDtEntrada.Checked = true then
+        begin
+            SQL.Add('AND nfe.nfe_dtsaidaent >= :data1');
+            SQL.Add('AND nfe.nfe_dtsaidaent < :data2');
+
+            ParamByName('data1').AsDate := frmFiltroArtigo.data1.Date;
+            ParamByName('data2').AsDate := frmFiltroArtigo.data2.Date + 1;
+        end;
+
+        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
+        begin
+              SQL.Add('AND gc.grc_id = :idCor');
+              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+        begin
+            SQL.Add('AND cc.comp_id = :idEstilista');
+            ParamByName('idEstilista').AsInteger :=frmFiltroArtigo.dblcbComprador.KeyValue;
+        end;
+
+        SQL.Add('GROUP BY');
+        SQL.Add('       b.ba_dtcriado,');
+        SQL.Add('       cp.cp_id,');
+        SQL.Add('       cp.cp_descricao,');
+        SQL.Add('       gc.grc_codexterno,');
+        SQL.Add('       gc.grc_nome,');
+        SQL.Add('       gc.grc_id,');
+        SQL.Add('       cc.comp_id,');
+        SQL.Add('       cc.comp_nome,');
+        SQL.Add('       nfe.nfe_dtsaidaent,');
+        SQL.Add('       f.for_nome,');
+        SQL.Add('       f.for_apelido,');
+        SQL.Add('       tp.tp_id,');
+        SQL.Add('       tp.tp_nome,');
+        SQL.Add('       gp.gr_nome,');
+        SQL.Add('       sgp.sgr_nome,');
+        SQL.Add('       cm.cm_descricao,');
+        SQL.Add('       cp.cp_reffabricante,');
+        SQL.Add('       cp.cp_unestoque');
+        SQL.Add('ORDER BY');
+        SQL.Add('       cc.comp_nome,');
+        SQL.Add('       tp.tp_nome,');
+        SQL.Add('       gp.gr_nome,');
+        SQL.Add('       sgp.sgr_nome,');
+        SQL.Add('       cp.cp_id,');
+        SQL.Add('       (');
+        SQL.Add('           SUBSTRING(gc.grc_codexterno, 1, 1),');
+        SQL.Add('           LPAD(SUBSTRING(gc.grc_codexterno, 2), 5, ''0'')');
+        SQL.Add('       )');
+        Open;
+    end;
+
+
+    dmPrincipal.qrySinteticoArtigo.Open;
+
+    dmPrincipal.dsSinteticoArtigo.DataSet        :=dmPrincipal.qrySinteticoArtigo;
+
+
+    rlRelSinteticoArtigo.DataSource         :=dmPrincipal.dsSinteticoArtigo;
+    rlEmpenhoEstilista.DataFields           :='comp_nome';
+
+    rlLabelEstilista.DataSource             :=dmPrincipal.dsSinteticoArtigo;
+    rlLabelEstilista.DataField              :='comp_nome';
+
+    rlDBDtEmpenho.DataSource                :=dmPrincipal.dsSinteticoArtigo;
+    rlDBDtEmpenho.DataField                 :='nfe_dtsaidaent';
+
+    rlDBTotal.DataSource                    :=dmPrincipal.dsSinteticoArtigo;
+    rlDBTotal.DataField                     :='total_entrada';
+
+    rlDBFisico.DataSource                   :=dmPrincipal.dsSinteticoArtigo;
+    rlDBFisico.DataField                    :='total_disponivel';
+
+    rlDBDisponivel.DataSource               :=dmPrincipal.dsSinteticoArtigo;
+    rlDBDisponivel.DataField                :='total_disponivel_para_empenho';
+
+    rlDBCod.DataSource                      :=dmPrincipal.dsSinteticoArtigo;
+    rlDBCod.DataField                       :='cp_id';
+
+    rlDBProd.DataSource                     :=dmPrincipal.dsSinteticoArtigo;
+    rlDBProd.DataField                      :='cp_descricao';
+
+    rlDBCor.DataSource                      :=dmPrincipal.dsSinteticoArtigo;
+    rlDBCor.DataField                       :='grc_nome';
+
+    rlDBEntrada.DataSource                  :=dmPrincipal.dsSinteticoArtigo;
+    rlDBEntrada.DataField                   :='entrada';
+
+    rlDBEstFisico.DataSource                :=dmPrincipal.dsSinteticoArtigo;
+    rlDBEstFisico.DataField                 :='real';
+
+    rlDBDisp.DataSource                     :=dmPrincipal.dsSinteticoArtigo;
+    rlDBDisp.DataField                      :='disponivel_para_empenho';
+
+    rlDBCusto.DataSource                    :=dmPrincipal.dsSinteticoArtigo;
+    rlDBCusto.DataField                     :='es_custoatual';
+
+    rlDBForn.DataSource                     :=dmPrincipal.dsSinteticoArtigo;
+    rlDBForn.DataField                      :='for_apelido';
+
+    rlDBFicha.DataSource                    :=dmPrincipal.dsSinteticoArtigo;
+    rlDBFicha.DataField                     :='tem_em_ficha';
+
+
+
+    with dmPrincipal.qryTotalSinArtigo do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('       SUM(');
+        SQL.Add('           COALESCE(e.es_entradaforn, 0.0000) - COALESCE(e.es_saidaforn, 0.0000)');
+        SQL.Add('       ) AS total_entrada,');
+        SQL.Add('       SUM(');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_entradaforn, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_saidaforn, 0.0000) +');
+        SQL.Add('               COALESCE(e.es_enttransf, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_saidatransf, 0.0000)');
+        SQL.Add('           ) -');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_saidabalanco, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_entbalanco, 0.0000)');
+        SQL.Add('           )');
+        SQL.Add('       ) AS total_disponivel,');
+        SQL.Add('       SUM(');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_entradaforn, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_saidaforn, 0.0000) +');
+        SQL.Add('               COALESCE(e.es_enttransf, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_saidatransf, 0.0000)');
+        SQL.Add('           ) -');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_saidaempenho, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_entempenho, 0.0000)');
+        SQL.Add('           ) -');
+        SQL.Add('           (');
+        SQL.Add('               COALESCE(e.es_saidabalanco, 0.0000) -');
+        SQL.Add('               COALESCE(e.es_entbalanco, 0.0000)');
+        SQL.Add('           )');
+        SQL.Add('       ) AS total_disponivel_para_empenho');
+        SQL.Add('       FROM estoque AS e');
+        SQL.Add('       JOIN cadastro_produto AS cp ON e.es_codproduto = cp.cp_id');
+        SQL.Add('       JOIN grade_cor AS gc ON gc.grc_id = e.es_idgradecor');
+        SQL.Add('       JOIN grade_tamanho AS gt ON gt.grt_id = e.es_idgradetam');
+        SQL.Add('       LEFT JOIN itens_grade_nfentrada AS igf ON igf.ig_codproduto = cp.cp_id');
+        SQL.Add('       AND e.es_codproduto = igf.ig_codproduto');
+        SQL.Add('       AND igf.ig_gradecor = gc.grc_id');
+        SQL.Add('       AND e.es_idgradecor = igf.ig_gradecor');
+        SQL.Add('       AND igf.ig_gradetam = gt.grt_id');
+        SQL.Add('       AND e.es_idgradetam = igf.ig_gradetam');
+        SQL.Add('       AND igf.ig_numrolo = e.es_numrolo');
+        SQL.Add('       AND igf.ig_metragemrolo = e.es_metragemrolo');
+        SQL.Add('       LEFT JOIN nota_fiscal_entrada AS nfe ON igf.ig_idnfent = nfe.nfe_id');
+        SQL.Add('       LEFT JOIN cadastro_compradores AS cc ON cc.comp_id = igf.ig_idcomprador');
+        SQL.Add('       LEFT JOIN fornecedor AS f ON f.for_codigo = nfe.nfe_codforn');
+        SQL.Add('       LEFT JOIN produto_nf_entrada AS prodnfe ON prodnfe.pnfe_idnfe = nfe.nfe_id');
+        SQL.Add('       AND prodnfe.pnfe_codprod = cp.cp_id');
+        SQL.Add('       AND prodnfe.pnfe_coditem = igf.ig_id');
+        SQL.Add('       LEFT JOIN itens_xml AS ixml ON ixml.pnfe_idnfe = nfe.nfe_id');
+        SQL.Add('       AND ixml.pnfe_coditem = prodnfe.pnfe_coditem');
+        SQL.Add('       AND ixml.pnfe_coditem = igf.ig_codproduto');
+        SQL.Add('       AND ixml.pnfe_id = prodnfe.pnfe_itemxml');
+        SQL.Add('       JOIN tipo_produto AS tp ON tp.tp_id = cp.cp_idtipoproduto');
+        SQL.Add('       JOIN grupo AS gp ON gp.gr_id = cp.cp_idgrupo');
+        SQL.Add('       JOIN subgrupo AS sgp ON sgp.sgr_id = cp.cp_idsubgrupo');
+        SQL.Add('       WHERE 1=1');
+
+        if frmFiltroArtigo.edtCodigo.Text <> '' then
+        begin
+            SQL.Add('   AND cp.cp_id = :idArtigo');
+            ParamByName('idArtigo').AsInteger := StrToInt(frmFiltroArtigo.edtCodigo.Text);
+        end;
+
+        if frmFiltroArtigo.dblcbTamanho.KeyValue <> Null then
+        begin
+            SQL.Add('   AND gt.grt_id = :idTamanho');
+            ParamByName('idTamanho').AsInteger := frmFiltroArtigo.dblcbTamanho.KeyValue;
+        end;
+
+        if frmFiltroArtigo.chkDtEntrada.Checked = true then
+        begin
+            SQL.Add('AND nfe.nfe_dtsaidaent >= :data1');
+            SQL.Add('AND nfe.nfe_dtsaidaent < :data2');
+
+            ParamByName('data1').AsDate := frmFiltroArtigo.data1.Date;
+            ParamByName('data2').AsDate := frmFiltroArtigo.data2.Date + 1;
+        end;
+
+        if frmFiltroArtigo.dblcbCor.KeyValue <> Null then
+        begin
+              SQL.Add('AND gc.grc_id = :idCor');
+              ParamByName('idCor').AsInteger :=frmFiltroArtigo.dblcbCor.KeyValue;
+        end;
+
+        if frmFiltroArtigo.dblcbComprador.KeyValue <> Null then
+        begin
+            SQL.Add('AND cc.comp_id = :idEstilista');
+            ParamByName('idEstilista').AsInteger :=frmFiltroArtigo.dblcbComprador.KeyValue;
+        end;
+
+        Open;
+    end;
+
+    dmPrincipal.dsTotalSinArtigo.DataSet        :=dmPrincipal.qryTotalSinArtigo;
+
+    rlDBTotEntrada.DataSource                   :=dmPrincipal.dsTotalSinArtigo;
+    rlDBTotEntrada.DataField                    :='total_entrada';
+
+    rlDBTotEstFisico.DataSource                 :=dmPrincipal.dsTotalSinArtigo;
+    rlDBTotEstFisico.DataField                  :='total_disponivel';
+
+    rlDBTotDisp.DataSource                      :=dmPrincipal.dsTotalSinArtigo;
+    rlDBTotDisp.DataField                       :='total_disponivel_para_empenho';
+end;
+
+end.

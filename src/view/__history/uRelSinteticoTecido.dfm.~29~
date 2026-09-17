@@ -1445,7 +1445,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
           Transparent = False
         end
         object rlDBTotEstFisico: TRLDBText
-          Left = 20
+          Left = 30
           Top = 40
           Width = 71
           Height = 15
@@ -1503,7 +1503,7 @@ object frmRelSinteticoTecido: TfrmRelSinteticoTecido
           Transparent = False
         end
         object rlDBTotDisp: TRLDBText
-          Left = 18
+          Left = 20
           Top = 40
           Width = 51
           Height = 15

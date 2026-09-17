@@ -176,7 +176,7 @@ begin
           SQL.Add('SELECT');
           SQL.Add('     nfe.nfe_id,');
           SQL.Add('     nfe.nfe_codnfe,');
-          SQL.Add('     nfe.nfe_dtrecebimento,');
+          SQL.Add('     nfe.nfe_dtsaidaent,');
           SQL.Add('     cp.cp_id,');
           SQL.Add('     cp.cp_descricao,');
           SQL.Add('     (gc.grc_codexterno || '' - '' || gc.grc_nome) AS grc_nome,');
@@ -414,7 +414,7 @@ begin
      rlDBInternoNfe.DataField             :='nfe_id';
 
      rlDBDtEntrada.DataSource             :=dmPrincipal.dsEstTecidos;
-     rlDBDtEntrada.DataField              :='nfe_dtrecebimento';
+     rlDBDtEntrada.DataField              :='nfe_dtsaidaent';
 
      rlDbCor.DataSource                   :=dmPrincipal.dsEstTecidos;
      rlDbCor.DataField                    :='grc_nome';

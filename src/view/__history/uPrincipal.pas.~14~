@@ -31,7 +31,6 @@ type
     lblVersao: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnInfoArtigoClick(Sender: TObject);
-    procedure btnProdutividadeClick(Sender: TObject);
   private
     { Private declarations }
     function VersaoPrograma: string;
@@ -47,7 +46,7 @@ implementation
 
 {$R *.dfm}
 
-uses uFiltroArtigo, uDmPrincipal, uFiltroProdutividade;
+uses uFiltroArtigo, uDmPrincipal;
 
 procedure TfrmPrincipal.btnInfoArtigoClick(Sender: TObject);
 begin
@@ -57,17 +56,6 @@ begin
       frmFiltroArtigo.ShowModal;
     finally
       FreeAndNil(frmFiltroArtigo);
-    end;
-end;
-
-procedure TfrmPrincipal.btnProdutividadeClick(Sender: TObject);
-begin
-    frmFiltroProdutividade :=TfrmFiltroProdutividade.Create(nil);
-
-    try
-      frmFiltroProdutividade.ShowModal;
-    finally
-      FreeAndNil(frmFiltroProdutividade);
     end;
 end;
 
