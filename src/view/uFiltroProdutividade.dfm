@@ -5,7 +5,7 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
   BorderStyle = bsSingle
   Caption = 'Produtividade Corte e Planejamento'
   ClientHeight = 406
-  ClientWidth = 515
+  ClientWidth = 536
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -13,6 +13,9 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poScreenCenter
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  OnShow = FormShow
   TextHeight = 15
   object lblFase: TLabel
     Left = 8
@@ -157,11 +160,268 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object lblPrototipo: TLabel
+    Left = 294
+    Top = 233
+    Width = 64
+    Height = 15
+    Caption = 'PROT'#211'TIPO'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblGE: TLabel
+    Left = 415
+    Top = 233
+    Width = 92
+    Height = 15
+    Caption = 'GRANDE ESCALA'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblFicha: TLabel
+    Left = 294
+    Top = 265
+    Width = 85
+    Height = 15
+    Caption = 'FICHA T'#201'CNICA'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblOrdemCorte: TLabel
+    Left = 412
+    Top = 265
+    Width = 81
+    Height = 15
+    Caption = 'ORDEM CORTE'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblOrdemProducao: TLabel
+    Left = 296
+    Top = 297
+    Width = 109
+    Height = 15
+    Caption = 'ORDEM PRODU'#199#195'O'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblAnalitico: TLabel
+    Left = 294
+    Top = 329
+    Width = 62
+    Height = 15
+    Caption = 'ANAL'#205'TICO'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblSintetico: TLabel
+    Left = 412
+    Top = 329
+    Width = 60
+    Height = 15
+    Caption = 'SINT'#201'TICO'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clNavy
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object Label1: TLabel
+    Left = 385
+    Top = 360
+    Width = 14
+    Height = 15
+    Caption = 'A'
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI Semibold'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object btnZerarCor: TSpeedButton
+    Left = 244
+    Top = 23
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton1: TSpeedButton
+    Left = 245
+    Top = 68
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton2: TSpeedButton
+    Left = 244
+    Top = 112
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton3: TSpeedButton
+    Left = 244
+    Top = 160
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton4: TSpeedButton
+    Left = 245
+    Top = 204
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton5: TSpeedButton
+    Left = 510
+    Top = 23
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton6: TSpeedButton
+    Left = 510
+    Top = 68
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton7: TSpeedButton
+    Left = 510
+    Top = 112
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton8: TSpeedButton
+    Left = 510
+    Top = 160
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object SpeedButton9: TSpeedButton
+    Left = 510
+    Top = 204
+    Width = 23
+    Height = 23
+    Cursor = crHandPoint
+    Caption = 'X'
+    Flat = True
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object dbLkFase: TDBLookupComboBox
     Left = 8
     Top = 23
     Width = 233
     Height = 23
+    KeyField = 'fa_id'
+    ListField = 'fa_nome'
+    ListSource = dmFiltroProdutividade.dsFase
     TabOrder = 0
   end
   object dbLkUsuario: TDBLookupComboBox
@@ -195,7 +455,7 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
   object dbLkTipo: TDBLookupComboBox
     Left = 273
     Top = 112
-    Width = 233
+    Width = 234
     Height = 23
     TabOrder = 5
   end
@@ -236,6 +496,30 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     Color = clDarkcyan
     ParentBackground = False
     TabOrder = 10
+    object btnBuscar: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 70
+      Height = 23
+      Cursor = crHandPoint
+      Hint = 'F2'
+      Align = alClient
+      Caption = 'Buscar'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnBuscarClick
+      ExplicitLeft = 49
+      ExplicitTop = 3
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
   end
   object pnlLimpar: TPanel
     Left = 89
@@ -245,8 +529,32 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     Color = clOrange
     ParentBackground = False
     TabOrder = 11
+    object btnLimpar: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 70
+      Height = 23
+      Cursor = crHandPoint
+      Hint = 'F3'
+      Align = alClient
+      Caption = 'Limpar'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnLimparClick
+      ExplicitLeft = 49
+      ExplicitTop = 3
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
   end
-  object Panel3: TPanel
+  object pnlRetirar: TPanel
     Left = 169
     Top = 249
     Width = 72
@@ -254,6 +562,30 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     Color = clDarkred
     ParentBackground = False
     TabOrder = 12
+    object btnRetirar: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 70
+      Height = 23
+      Cursor = crHandPoint
+      Hint = 'F4'
+      Align = alClient
+      Caption = 'Retirar'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnRetirarClick
+      ExplicitLeft = 49
+      ExplicitTop = 3
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
   end
   object DBGrid1: TDBGrid
     Left = 8
@@ -266,5 +598,105 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     TitleFont.Height = -12
     TitleFont.Name = 'Segoe UI'
     TitleFont.Style = []
+  end
+  object chkPrototipo: TCheckBox
+    Left = 274
+    Top = 233
+    Width = 19
+    Height = 17
+    TabOrder = 14
+  end
+  object chkGE: TCheckBox
+    Left = 390
+    Top = 233
+    Width = 19
+    Height = 17
+    TabOrder = 15
+  end
+  object chkFicha: TCheckBox
+    Left = 274
+    Top = 265
+    Width = 19
+    Height = 17
+    TabOrder = 16
+  end
+  object chkOrdemCorte: TCheckBox
+    Left = 390
+    Top = 265
+    Width = 19
+    Height = 17
+    TabOrder = 17
+  end
+  object chkOrdemProducao: TCheckBox
+    Left = 274
+    Top = 297
+    Width = 19
+    Height = 17
+    TabOrder = 18
+  end
+  object chkSintetico: TCheckBox
+    Left = 390
+    Top = 329
+    Width = 19
+    Height = 17
+    TabOrder = 19
+  end
+  object chkAnalitico: TCheckBox
+    Left = 274
+    Top = 329
+    Width = 19
+    Height = 17
+    TabOrder = 20
+  end
+  object DateTimePicker1: TDateTimePicker
+    Left = 273
+    Top = 352
+    Width = 106
+    Height = 23
+    Date = 46283.000000000000000000
+    Time = 0.390431967593031000
+    TabOrder = 21
+  end
+  object DateTimePicker2: TDateTimePicker
+    Left = 400
+    Top = 352
+    Width = 106
+    Height = 23
+    Date = 46283.000000000000000000
+    Time = 0.390431967593031000
+    TabOrder = 22
+  end
+  object pnlGerar: TPanel
+    Left = 361
+    Top = 381
+    Width = 64
+    Height = 22
+    Color = clHotLight
+    ParentBackground = False
+    TabOrder = 23
+    object btnGerar: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 62
+      Height = 20
+      Cursor = crHandPoint
+      Hint = 'F1'
+      Align = alClient
+      Caption = 'GERAR'
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ParentShowHint = False
+      ShowHint = True
+      OnClick = btnGerarClick
+      ExplicitLeft = 41
+      ExplicitTop = 0
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
   end
 end

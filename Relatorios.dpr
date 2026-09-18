@@ -14,7 +14,8 @@ uses
   uArtigosReserva in 'src\view\uArtigosReserva.pas' {frmArtigosReserva},
   uRelSinteticoTecido in 'src\view\uRelSinteticoTecido.pas' {frmRelSinteticoTecido},
   uRelSinteticoArtigo in 'src\view\uRelSinteticoArtigo.pas' {frmRelSinteticoArtigo},
-  uFiltroProdutividade in 'src\view\uFiltroProdutividade.pas' {frmFiltroProdutividade};
+  uFiltroProdutividade in 'src\view\uFiltroProdutividade.pas' {frmFiltroProdutividade},
+  uDmFiltroProdutividade in 'src\datamodule\uDmFiltroProdutividade.pas' {dmFiltroProdutividade: TDataModule};
 
 {$R *.res}
 
@@ -32,6 +33,6 @@ begin
   Application.CreateForm(TfrmArtigosReserva, frmArtigosReserva);
   Application.CreateForm(TfrmRelSinteticoTecido, frmRelSinteticoTecido);
   Application.CreateForm(TfrmRelSinteticoArtigo, frmRelSinteticoArtigo);
-  Application.CreateForm(TfrmFiltroProdutividade, frmFiltroProdutividade);
+  Application.CreateForm(TdmFiltroProdutividade, dmFiltroProdutividade);
   Application.Run;
 end.
