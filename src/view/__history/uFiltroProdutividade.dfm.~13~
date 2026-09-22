@@ -174,7 +174,7 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     ParentFont = False
   end
   object lblGE: TLabel
-    Left = 413
+    Left = 415
     Top = 233
     Width = 92
     Height = 15
@@ -254,7 +254,7 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
   object Label1: TLabel
     Left = 385
     Top = 360
-    Width = 8
+    Width = 14
     Height = 15
     Caption = 'A'
     Font.Charset = ANSI_CHARSET
@@ -423,7 +423,6 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     ListField = 'fa_nome'
     ListSource = dmFiltroProdutividade.dsFase
     TabOrder = 0
-    OnExit = dbLkFaseExit
   end
   object dbLkUsuario: TDBLookupComboBox
     Left = 8

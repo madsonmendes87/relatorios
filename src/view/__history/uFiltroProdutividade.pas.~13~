@@ -209,31 +209,13 @@ begin
         SQL.Add('     WHERE fp.fa_id = :idFase');
 
         ParamByName('idFase').AsInteger   :=dbLkFase.KeyValue;
-        Open;
+        Open
     end;
 
     dmFiltroProdutividade.qryUsuarioFase.Active    :=true;
     dbLkUsuario.ListSource                         :=dmFiltroProdutividade.dsUsuarioFase;
     dbLkUsuario.ListField                          :='us_nome';
     dbLkUsuario.KeyField                           :='us_id';
-
-
-    with dmFiltroProdutividade.qryEstilista do
-    begin
-        Close;
-        SQL.Clear;
-        SQL.Add('SELECT');
-        SQL.Add('     es_id,');
-        SQL.Add('     es_nome');
-        SQL.Add('     FROM cadastro_estilista e');
-        SQL.Add('     ORDER BY es_nome');
-        Open;
-    end;
-
-    dmFiltroProdutividade.qryEstilista.Active      :=true;
-    dbLkEstilista.ListSource                       :=dmFiltroProdutividade.dsEstilista;
-    dbLkEstilista.ListField                        :='es_nome';
-    dbLkEstilista.KeyField                         :='es_id';
 end;
 
 end.

@@ -23,14 +23,4 @@ object dmFiltroProdutividade: TdmFiltroProdutividade
     Left = 272
     Top = 16
   end
-  object qryEstilista: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 32
-    Top = 80
-  end
-  object dsEstilista: TDataSource
-    DataSet = qryEstilista
-    Left = 112
-    Top = 80
-  end
 end

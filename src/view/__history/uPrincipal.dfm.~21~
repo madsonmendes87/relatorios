@@ -4,7 +4,7 @@ object frmPrincipal: TfrmPrincipal
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = 'Relat'#243'rios'
-  ClientHeight = 234
+  ClientHeight = 269
   ClientWidth = 441
   Color = clFloralwhite
   Font.Charset = DEFAULT_CHARSET
@@ -66,6 +66,7 @@ object frmPrincipal: TfrmPrincipal
       Cursor = crHandPoint
       Align = alClient
       Flat = True
+      OnClick = btnInfoArtigoClick
       ExplicitLeft = 98
       ExplicitTop = 35
       ExplicitWidth = 23
@@ -161,7 +162,7 @@ object frmPrincipal: TfrmPrincipal
     Top = 104
     Width = 121
     Height = 57
-    Color = clLightseagreen
+    Color = clTeal
     ParentBackground = False
     TabOrder = 5
     object btnInfArtReferencia: TSpeedButton
@@ -169,6 +170,7 @@ object frmPrincipal: TfrmPrincipal
       Top = 1
       Width = 119
       Height = 55
+      Cursor = crHandPoint
       Align = alClient
       Flat = True
       Font.Charset = DEFAULT_CHARSET
@@ -181,6 +183,115 @@ object frmPrincipal: TfrmPrincipal
       ExplicitTop = 35
       ExplicitWidth = 23
       ExplicitHeight = 22
+    end
+  end
+  object pnlProdutividade: TPanel
+    Left = 18
+    Top = 183
+    Width = 121
+    Height = 57
+    Color = clMenuHighlight
+    ParentBackground = False
+    TabOrder = 6
+    object btnProdutividade: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 119
+      Height = 55
+      Cursor = crHandPoint
+      Align = alClient
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      OnClick = btnProdutividadeClick
+      ExplicitLeft = 98
+      ExplicitTop = 35
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
+  end
+  object pnlEntradaSaida: TPanel
+    Left = 162
+    Top = 183
+    Width = 121
+    Height = 57
+    Color = clIndigo
+    ParentBackground = False
+    TabOrder = 7
+    object btnEntradaSaida: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 119
+      Height = 55
+      Cursor = crHandPoint
+      Align = alClient
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitLeft = 98
+      ExplicitTop = 35
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
+  end
+  object pnlInfoArtSintetico: TPanel
+    Left = 302
+    Top = 183
+    Width = 121
+    Height = 57
+    Color = clDarkmagenta
+    ParentBackground = False
+    TabOrder = 8
+    object btnInfoArtSintetico: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 119
+      Height = 55
+      Cursor = crHandPoint
+      Align = alClient
+      Flat = True
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitLeft = 98
+      ExplicitTop = 35
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
+  end
+  object pnlFooter: TPanel
+    Left = 0
+    Top = 249
+    Width = 441
+    Height = 20
+    Align = alBottom
+    Color = clFloralwhite
+    ParentBackground = False
+    TabOrder = 9
+    object lblVersao: TLabel
+      Left = 19
+      Top = 4
+      Width = 48
+      Height = 15
+      Align = alCustom
+      Caption = 'lblVersao'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
     end
   end
 end

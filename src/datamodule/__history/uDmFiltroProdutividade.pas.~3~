@@ -14,8 +14,6 @@ type
     dsFase: TDataSource;
     qryUsuarioFase: TFDQuery;
     dsUsuarioFase: TDataSource;
-    qryEstilista: TFDQuery;
-    dsEstilista: TDataSource;
   private
     { Private declarations }
   public
