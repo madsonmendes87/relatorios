@@ -340,9 +340,9 @@ begin
     end;
 
     dmFiltroProdutividade.qryGrife.Active      :=true;
-    dbLkGrife.ListSource                       :=dmFiltroProdutividade.dsGrife;
-    dbLkGrife.ListField                        :='gri_nome';
-    dbLkGrife.KeyField                         :='gri_id';
+    dbLkMarca.ListSource                       :=dmFiltroProdutividade.dsGrife;
+    dbLkMarca.ListField                        :='gri_nome';
+    dbLkMarca.KeyField                         :='gri_id';
 end;
 
 end.

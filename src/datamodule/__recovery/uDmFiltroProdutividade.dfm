@@ -83,4 +83,9 @@ object dmFiltroProdutividade: TdmFiltroProdutividade
     Left = 280
     Top = 224
   end
+  object qryUsuario: TFDQuery
+    Connection = dmConexao.Conexao
+    Left = 360
+    Top = 16
+  end
 end

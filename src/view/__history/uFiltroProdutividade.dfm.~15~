@@ -445,7 +445,6 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     Width = 233
     Height = 23
     TabOrder = 3
-    OnExit = dbLkGrupoExit
   end
   object dbLkEstilista: TDBLookupComboBox
     Left = 8
@@ -467,7 +466,6 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     Width = 233
     Height = 23
     TabOrder = 6
-    OnExit = dbLkSubGrupoExit
   end
   object dbLkMarca: TDBLookupComboBox
     Left = 273
@@ -482,11 +480,7 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     Width = 233
     Height = 23
     TabOrder = 8
-    Text = 'N'#195'O INFORMAR'
-    Items.Strings = (
-      'FEMININO'
-      'MASCULINO'
-      'UNISSEX')
+    Text = 'cmbGenero'
   end
   object dbLkGrife: TDBLookupComboBox
     Left = 274

@@ -74,6 +74,7 @@ type
     procedure FormKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure dbLkFaseExit(Sender: TObject);
 
 
   private
@@ -116,6 +117,30 @@ end;
 
 
 
+procedure TfrmFiltroProdutividade.dbLkFaseExit(Sender: TObject);
+begin
+    with dmFiltroProdutividade.qryUsuarioFase do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     u.us_id,');
+        SQL.Add('     u.us_nome');
+        SQL.Add('     FROM fase_producao fp');
+        SQL.Add('     JOIN cadastro_setor cs ON fp.fa_id = cs.se_idfase');
+        SQL.Add('     JOIN usuario u ON cs.se_id = u.us_idsetor');
+        SQL.Add('     WHERE fp.fa_id = :idFase');
+
+        ParamByName('idFase').AsInteger   :=dbLkFase.KeyValue;
+        Open
+    end;
+
+    dmFiltroProdutividade.qryUsuarioFase.Active    :=true;
+    dbLkUsuario.ListSource                         :=dmFiltroProdutividade.dsUsuarioFase;
+    dbLkUsuario.ListField                          :='us_nome';
+    dbLkUsuario.KeyField                           :='us_id';
+end;
+
 procedure TfrmFiltroProdutividade.FormCreate(Sender: TObject);
 begin
     KeyPreview  :=true;
@@ -144,9 +169,9 @@ end;
 
 procedure TfrmFiltroProdutividade.FormShow(Sender: TObject);
 begin
-    chkGE.Checked                           :=true;
-    chkOrdemProducao.Checked                :=true;
-    chkSintetico.Checked                    :=true;
+    chkGE.Checked                                   :=true;
+    chkOrdemProducao.Checked                        :=true;
+    chkSintetico.Checked                            :=true;
 
 
     with dmFiltroProdutividade.qryFase do
@@ -162,7 +187,7 @@ begin
     end;
 
 
-    dmFiltroProdutividade.qryFase.Active    :=true;
+    dmFiltroProdutividade.qryFase.Active           :=true;
     dbLkFase.ListSource                            :=dmFiltroProdutividade.dsFase;
     dbLkFase.ListField                             :='fa_nome';
     dbLkFase.KeyField                              :='fa_id';
@@ -184,13 +209,50 @@ begin
         SQL.Add('     WHERE fp.fa_id = :idFase');
 
         ParamByName('idFase').AsInteger   :=dbLkFase.KeyValue;
-        Open
+        Open;
     end;
 
     dmFiltroProdutividade.qryUsuarioFase.Active    :=true;
     dbLkUsuario.ListSource                         :=dmFiltroProdutividade.dsUsuarioFase;
     dbLkUsuario.ListField                          :='us_nome';
     dbLkUsuario.KeyField                           :='us_id';
+
+
+    with dmFiltroProdutividade.qryEstilista do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     es_id,');
+        SQL.Add('     es_nome');
+        SQL.Add('     FROM cadastro_estilista e');
+        SQL.Add('     ORDER BY es_nome');
+        Open;
+    end;
+
+    dmFiltroProdutividade.qryEstilista.Active      :=true;
+    dbLkEstilista.ListSource                       :=dmFiltroProdutividade.dsEstilista;
+    dbLkEstilista.ListField                        :='es_nome';
+    dbLkEstilista.KeyField                         :='es_id';
+
+
+
+    with dmFiltroProdutividade.qryGrupo do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     gr_id,');
+        SQL.Add('     gr_nome');
+        SQL.Add('     FROM grupo_prodacabado');
+        SQL.Add('     ORDER BY gr_nome');
+        Open;
+    end;
+
+    dmFiltroProdutividade.qryGrupo.Active         :=true;
+    dbLkGrupo.ListSource                       :=dmFiltroProdutividade.dsGrupo;
+    dbLkGrupo.ListField                        :='gr_nome';
+    dbLkGrupo.KeyField                         :='gr_id';
 end;
 
 end.

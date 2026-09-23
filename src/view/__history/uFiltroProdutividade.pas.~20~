@@ -321,28 +321,10 @@ begin
         Open;
     end;
 
-    dmFiltroProdutividade.qryMarca.Active      :=true;
+    dmFiltroProdutividade.qryGrupo.Active      :=true;
     dbLkMarca.ListSource                       :=dmFiltroProdutividade.dsMarca;
     dbLkMarca.ListField                        :='ma_nome';
     dbLkMarca.KeyField                         :='ma_id';
-
-
-
-    with dmFiltroProdutividade.qryGrife do
-    begin
-        Close;
-        SQL.Clear;
-        SQL.Add('SELECT');
-        SQL.Add('     *');
-        SQL.Add('     FROM griffe');
-        SQL.Add('     ORDER BY gri_nome');
-        Open;
-    end;
-
-    dmFiltroProdutividade.qryGrife.Active      :=true;
-    dbLkGrife.ListSource                       :=dmFiltroProdutividade.dsGrife;
-    dbLkGrife.ListField                        :='gri_nome';
-    dbLkGrife.KeyField                         :='gri_id';
 end;
 
 end.

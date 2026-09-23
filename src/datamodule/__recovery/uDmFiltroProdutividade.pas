@@ -26,6 +26,7 @@ type
     dsMarca: TDataSource;
     qryGrife: TFDQuery;
     dsGrife: TDataSource;
+    qryUsuario: TFDQuery;
   private
     { Private declarations }
   public

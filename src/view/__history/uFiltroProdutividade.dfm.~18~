@@ -467,7 +467,6 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
     Width = 233
     Height = 23
     TabOrder = 6
-    OnExit = dbLkSubGrupoExit
   end
   object dbLkMarca: TDBLookupComboBox
     Left = 273

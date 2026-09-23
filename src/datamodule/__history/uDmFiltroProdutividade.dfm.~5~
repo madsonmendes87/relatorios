@@ -43,44 +43,4 @@ object dmFiltroProdutividade: TdmFiltroProdutividade
     Left = 272
     Top = 80
   end
-  object qrySubGrupo: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 32
-    Top = 152
-  end
-  object dsSubGrupo: TDataSource
-    DataSet = qrySubGrupo
-    Left = 120
-    Top = 152
-  end
-  object qryTipo: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 208
-    Top = 152
-  end
-  object dsTipo: TDataSource
-    DataSet = qryTipo
-    Left = 280
-    Top = 152
-  end
-  object qryMarca: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 32
-    Top = 224
-  end
-  object dsMarca: TDataSource
-    DataSet = qryMarca
-    Left = 112
-    Top = 224
-  end
-  object qryGrife: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 208
-    Top = 224
-  end
-  object dsGrife: TDataSource
-    DataSet = qryGrife
-    Left = 280
-    Top = 224
-  end
 end

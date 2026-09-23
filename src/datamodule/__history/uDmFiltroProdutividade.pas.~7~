@@ -22,10 +22,6 @@ type
     dsSubGrupo: TDataSource;
     qryTipo: TFDQuery;
     dsTipo: TDataSource;
-    qryMarca: TFDQuery;
-    dsMarca: TDataSource;
-    qryGrife: TFDQuery;
-    dsGrife: TDataSource;
   private
     { Private declarations }
   public

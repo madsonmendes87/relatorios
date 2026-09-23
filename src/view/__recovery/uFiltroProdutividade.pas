@@ -105,6 +105,14 @@ end;
 procedure TfrmFiltroProdutividade.btnGerarClick(Sender: TObject);
 begin
     ShowMessage('Estou no botao GERAR');
+//    with dmFiltroProdutividade.qryUsuario do
+//    begin
+//        Close;
+//        SQL.Add('SELECT us_rel_produtividade_planejamento FROM usuario');
+//        SQL.Add('   WHERE us_id = :idUsuario');
+//
+//        ParamByname
+//    end;
 end;
 
 procedure TfrmFiltroProdutividade.btnLimparClick(Sender: TObject);
