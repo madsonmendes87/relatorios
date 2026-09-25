@@ -15,8 +15,7 @@ uses
   uRelSinteticoTecido in 'src\view\uRelSinteticoTecido.pas' {frmRelSinteticoTecido},
   uRelSinteticoArtigo in 'src\view\uRelSinteticoArtigo.pas' {frmRelSinteticoArtigo},
   uFiltroProdutividade in 'src\view\uFiltroProdutividade.pas' {frmFiltroProdutividade},
-  uDmFiltroProdutividade in 'src\datamodule\uDmFiltroProdutividade.pas' {dmFiltroProdutividade: TDataModule},
-  uTipoTecido in 'src\view\uTipoTecido.pas' {frmTipoTecido};
+  uDmFiltroProdutividade in 'src\datamodule\uDmFiltroProdutividade.pas' {dmFiltroProdutividade: TDataModule};
 
 {$R *.res}
 

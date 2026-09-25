@@ -95,52 +95,7 @@ object dmFiltroProdutividade: TdmFiltroProdutividade
   end
   object dsColecao: TDataSource
     DataSet = qryColecao
-    Left = 128
+    Left = 176
     Top = 296
-  end
-  object qryTipoTecido: TFDQuery
-    Connection = dmConexao.Conexao
-    Left = 48
-    Top = 360
-  end
-  object cdsTipoTecido: TClientDataSet
-    PersistDataPacket.Data = {
-      460000009619E0BD010000001800000002000000000003000000460006746563
-      5F69640400010000000000087465635F6E6F6D65010049000000010005574944
-      5448020002001E000000}
-    Active = True
-    Aggregates = <>
-    FieldDefs = <
-      item
-        Name = 'tec_id'
-        DataType = ftInteger
-      end
-      item
-        Name = 'tec_nome'
-        DataType = ftString
-        Size = 30
-      end>
-    IndexDefs = <>
-    Params = <>
-    StoreDefs = True
-    Left = 144
-    Top = 360
-    object cdsTipoTecidotec_id: TIntegerField
-      FieldName = 'tec_id'
-    end
-    object cdsTipoTecidotec_nome: TStringField
-      FieldName = 'tec_nome'
-      Size = 30
-    end
-    object cdsTipoTecidochecked: TBooleanField
-      FieldKind = fkCalculated
-      FieldName = 'checked'
-      Calculated = True
-    end
-  end
-  object dsTipoTecido: TDataSource
-    DataSet = qryTipoTecido
-    Left = 240
-    Top = 360
   end
 end

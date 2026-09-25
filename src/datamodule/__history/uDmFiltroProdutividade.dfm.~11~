@@ -110,19 +110,7 @@ object dmFiltroProdutividade: TdmFiltroProdutividade
       5448020002001E000000}
     Active = True
     Aggregates = <>
-    FieldDefs = <
-      item
-        Name = 'tec_id'
-        DataType = ftInteger
-      end
-      item
-        Name = 'tec_nome'
-        DataType = ftString
-        Size = 30
-      end>
-    IndexDefs = <>
     Params = <>
-    StoreDefs = True
     Left = 144
     Top = 360
     object cdsTipoTecidotec_id: TIntegerField
@@ -132,14 +120,9 @@ object dmFiltroProdutividade: TdmFiltroProdutividade
       FieldName = 'tec_nome'
       Size = 30
     end
-    object cdsTipoTecidochecked: TBooleanField
-      FieldKind = fkCalculated
-      FieldName = 'checked'
-      Calculated = True
-    end
   end
   object dsTipoTecido: TDataSource
-    DataSet = qryTipoTecido
+    DataSet = cdsTipoTecido
     Left = 240
     Top = 360
   end

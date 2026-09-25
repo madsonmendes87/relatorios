@@ -93,18 +93,32 @@ implementation
 
 {$R *.dfm}
 
-uses uDmFiltroProdutividade;
+uses uDmFiltroProdutividade, uTipoTecido;
 
 
 
 procedure TfrmFiltroProdutividade.btnBuscarClick(Sender: TObject);
 begin
-    ShowMessage('Estou no botao BUSCAR');
+    frmTipoTecido :=TfrmTipoTecido.Create(nil);
+
+    try
+      frmTipoTecido.ShowModal;
+    finally
+      FreeAndNil(frmTipoTecido);
+    end;
 end;
 
 procedure TfrmFiltroProdutividade.btnGerarClick(Sender: TObject);
 begin
     ShowMessage('Estou no botao GERAR');
+//    with dmFiltroProdutividade.qryUsuario do
+//    begin
+//        Close;
+//        SQL.Add('SELECT us_rel_produtividade_planejamento FROM usuario');
+//        SQL.Add('   WHERE us_id = :idUsuario');
+//
+//        ParamByname
+//    end;
 end;
 
 procedure TfrmFiltroProdutividade.btnLimparClick(Sender: TObject);
@@ -343,6 +357,27 @@ begin
     dbLkGrife.ListSource                       :=dmFiltroProdutividade.dsGrife;
     dbLkGrife.ListField                        :='gri_nome';
     dbLkGrife.KeyField                         :='gri_id';
+
+
+
+
+    with dmFiltroProdutividade.qryColecao do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     co_id,');
+        SQL.Add('     CAST(CONCAT(co_descricao, '' de '', to_char(co_anocolecao, ''YYYY'')) AS character varying(25)) AS nome');
+        SQL.Add('     FROM colecao');
+        SQL.Add('     WHERE EXTRACT(YEAR FROM co_anocolecao) = EXTRACT(YEAR FROM CURRENT_DATE)');
+        SQL.Add('     ORDER BY co_anocolecao');
+        Open;
+    end;
+
+    dmFiltroProdutividade.qryColecao.Active    :=true;
+    dbLkColecao.ListSource                     :=dmFiltroProdutividade.dsColecao;
+    dbLkColecao.ListField                      :='nome';
+    dbLkColecao.KeyField                       :='co_id';
 end;
 
 end.

@@ -34,7 +34,6 @@ type
     dsTipoTecido: TDataSource;
     cdsTipoTecidotec_id: TIntegerField;
     cdsTipoTecidotec_nome: TStringField;
-    cdsTipoTecidochecked: TBooleanField;
   private
     { Private declarations }
   public

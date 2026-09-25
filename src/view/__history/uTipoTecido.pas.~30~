@@ -1,0 +1,137 @@
+unit uTipoTecido;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, System.Generics.Collections, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ExtCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.Buttons;
+
+type
+  TfrmTipoTecido = class(TForm)
+    gridTipoTecido: TDBGrid;
+    pnlSelecionar: TPanel;
+    btnSelecionar: TSpeedButton;
+    procedure FormShow(Sender: TObject);
+    procedure gridTipoTecidoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
+    procedure gridTipoTecidoCellClick(Column: TColumn);
+
+  private
+    { Private declarations }
+    FSelecionados: TList<Integer>;
+    procedure alternarSelecao;
+
+  public
+    { Public declarations }
+  end;
+
+var
+  frmTipoTecido: TfrmTipoTecido;
+
+implementation
+
+{$R *.dfm}
+
+uses uFiltroProdutividade, uDmFiltroProdutividade;
+
+procedure TfrmTipoTecido.alternarSelecao;
+
+var
+  IdTecido: Integer;
+
+begin
+    IdTecido := dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_id').AsInteger;
+
+    if FSelecionados.Contains(IdTecido) then
+        FSelecionados.Remove(IdTecido)
+    else
+        FSelecionados.Add(IdTecido);
+
+    gridTipoTecido.Invalidate;
+end;
+
+
+procedure TfrmTipoTecido.FormCreate(Sender: TObject);
+begin
+    FSelecionados := TList<Integer>.Create;
+
+end;
+
+procedure TfrmTipoTecido.FormDestroy(Sender: TObject);
+begin
+    FSelecionados.Free;
+end;
+
+procedure TfrmTipoTecido.FormShow(Sender: TObject);
+begin
+    with dmFiltroProdutividade.qryTipoTecido do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     tec_id,');
+        SQL.Add('     tec_nome');
+        SQL.Add('     FROM tipo_tecido');
+        SQL.Add('     ORDER BY tec_nome');
+        Open;
+    end;
+
+
+    gridTipoTecido.Columns[0].Title.Alignment         :=taCenter;
+    gridTipoTecido.Columns[0].Title.Caption           :='CODIGO';
+    gridTipoTecido.Columns[1].Title.Alignment         :=taCenter;
+    gridTipoTecido.Columns[1].Title.Caption           :='TIPO TECIDO';
+
+end;
+
+procedure TfrmTipoTecido.gridTipoTecidoCellClick(Column: TColumn);
+begin
+    alternarSelecao;
+end;
+
+
+procedure TfrmTipoTecido.gridTipoTecidoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+
+  var
+    IdTecido: Integer;
+
+begin
+    if not dmFiltroProdutividade.qryTipoTecido.Active then
+    Exit;
+
+  if dmFiltroProdutividade.qryTipoTecido.IsEmpty then
+    Exit;
+
+  IdTecido :=
+    dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_id').AsInteger;
+
+  if FSelecionados.Contains(IdTecido) then
+  begin
+    gridTipoTecido.Canvas.Brush.Color := $00E6E6E6;
+    gridTipoTecido.Canvas.Font.Style := [fsBold];
+  end
+  else
+  begin
+    gridTipoTecido.Canvas.Brush.Color := clWhite;
+    gridTipoTecido.Canvas.Font.Style := [];
+  end;
+
+  gridTipoTecido.Canvas.FillRect(Rect);
+
+  gridTipoTecido.DefaultDrawColumnCell(
+    Rect,
+    DataCol,
+    Column,
+    State
+  );
+
+end;
+
+
+
+end.

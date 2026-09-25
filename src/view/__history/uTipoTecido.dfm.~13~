@@ -1,0 +1,65 @@
+object frmTipoTecido: TfrmTipoTecido
+  Left = 0
+  Top = 0
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = 'Segmento Tecido Produtividade'
+  ClientHeight = 270
+  ClientWidth = 334
+  Color = clSnow
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnShow = FormShow
+  TextHeight = 15
+  object gridTipoTecido: TDBGrid
+    Left = 6
+    Top = 39
+    Width = 320
+    Height = 223
+    DataSource = dmFiltroProdutividade.dsTipoTecido
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
+    TabOrder = 0
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -12
+    TitleFont.Name = 'Segoe UI'
+    TitleFont.Style = []
+    OnCellClick = gridTipoTecidoCellClick
+    OnDrawColumnCell = gridTipoTecidoDrawColumnCell
+  end
+  object pnlSelecionar: TPanel
+    Left = 192
+    Top = 8
+    Width = 134
+    Height = 25
+    Color = clMenuHighlight
+    ParentBackground = False
+    TabOrder = 1
+    object btnSelecionar: TSpeedButton
+      Left = 1
+      Top = 1
+      Width = 132
+      Height = 23
+      Cursor = crHandPoint
+      Align = alClient
+      Caption = 'SELECIONAR'
+      Flat = True
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWhite
+      Font.Height = -12
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold]
+      ParentFont = False
+      ExplicitLeft = 64
+      ExplicitTop = 3
+      ExplicitWidth = 23
+      ExplicitHeight = 22
+    end
+  end
+end

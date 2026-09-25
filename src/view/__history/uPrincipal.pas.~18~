@@ -31,7 +31,7 @@ type
     lblVersao: TLabel;
     pnlCabecalho: TPanel;
     lblUsuario: TLabel;
-    LbCodUsuario: TLabel;
+    lblCodUsuario: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnInfoArtigoClick(Sender: TObject);
     procedure btnProdutividadeClick(Sender: TObject);

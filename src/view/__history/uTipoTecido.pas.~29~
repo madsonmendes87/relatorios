@@ -1,0 +1,257 @@
+unit uTipoTecido;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, System.Generics.Collections, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB, Vcl.ExtCtrls, Vcl.Grids,
+  Vcl.DBGrids, Vcl.Buttons;
+
+type
+  TfrmTipoTecido = class(TForm)
+    gridTipoTecido: TDBGrid;
+    pnlSelecionar: TPanel;
+    btnSelecionar: TSpeedButton;
+    procedure FormShow(Sender: TObject);
+    procedure gridTipoTecidoDrawColumnCell(Sender: TObject;
+      const Rect: TRect; DataCol: Integer; Column: TColumn;
+      State: TGridDrawState);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure gridTipoTecidoCellClick(Column: TColumn);
+    procedure gridTipoTecidoKeyPress(Sender: TObject; var Key: Char);
+  private
+    { Private declarations }
+    FSelecionados: TList<Integer>;
+    procedure gridTipoTecidoClick(Sender: TObject);
+    procedure alternarSelecao;
+
+  public
+    procedure FormDestroy(Sender: TObject);
+    { Public declarations }
+  end;
+
+var
+  frmTipoTecido: TfrmTipoTecido;
+
+implementation
+
+{$R *.dfm}
+
+uses uFiltroProdutividade, uDmFiltroProdutividade;
+
+procedure TfrmTipoTecido.alternarSelecao;
+
+var
+  IdTecido: Integer;
+
+begin
+    IdTecido := dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_id').AsInteger;
+
+    if FSelecionados.Contains(IdTecido) then
+        FSelecionados.Remove(IdTecido)
+    else
+        FSelecionados.Add(IdTecido);
+
+    gridTipoTecido.Invalidate;
+end;
+
+procedure TfrmTipoTecido.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+    //dmFiltroProdutividade.cdsTipoTecido.EmptyDataSet;
+end;
+
+procedure TfrmTipoTecido.FormCreate(Sender: TObject);
+begin
+    FSelecionados := TList<Integer>.Create;
+
+end;
+
+procedure TfrmTipoTecido.FormDestroy(Sender: TObject);
+begin
+    FSelecionados.Free;
+end;
+
+procedure TfrmTipoTecido.FormShow(Sender: TObject);
+begin
+    with dmFiltroProdutividade.qryTipoTecido do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     tec_id,');
+        SQL.Add('     tec_nome,');
+        //SQL.Add('     false AS checked');
+        SQL.Add('     FROM tipo_tecido');
+        SQL.Add('     ORDER BY tec_nome');
+        Open;
+    end;
+
+
+    gridTipoTecido.Columns[0].Title.Alignment         :=taCenter;
+    gridTipoTecido.Columns[0].Title.Caption           :='CODIGO';
+    gridTipoTecido.Columns[1].Title.Alignment         :=taCenter;
+    gridTipoTecido.Columns[1].Title.Caption           :='TIPO TECIDO';
+    //gridTipoTecido.Columns[2].Visible                 :=true;
+
+
+//    dmFiltroProdutividade.qryTipoTecido.First;
+//    dmFiltroProdutividade.cdsTipoTecido.Open();
+//    while not dmFiltroProdutividade.qryTipoTecido.Eof do
+//    begin
+//        dmFiltroProdutividade.cdsTipoTecido.Append;
+//        dmFiltroProdutividade.cdsTipoTecido.FieldByName('tec_id').AsInteger     :=dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_id').AsInteger;
+//        dmFiltroProdutividade.cdsTipoTecido.FieldByName('tec_nome').AsString    :=dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_nome').AsString;
+//        dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').AsBoolean    :=dmFiltroProdutividade.qryTipoTecido.FieldByName('checked').AsBoolean;
+//        dmFiltroProdutividade.cdsTipoTecido.Post;
+//        dmFiltroProdutividade.qryTipoTecido.Next;
+//    end;
+//
+//
+//    dmFiltroProdutividade.cdsTipoTecido.First;
+end;
+
+procedure TfrmTipoTecido.gridTipoTecidoCellClick(Column: TColumn);
+
+var
+  IdTecido: Integer;
+
+begin
+    alternarSelecao;
+//    with dmFiltroProdutividade.cdsTipoTecido do
+//    begin
+//        Edit;
+//        FieldByName('checked').AsBoolean := not FieldByName('checked').AsBoolean;
+//        //Post;
+//    end;
+end;
+
+procedure TfrmTipoTecido.gridTipoTecidoClick(Sender: TObject);
+begin
+//  if Column.FieldName = 'checked' then
+//  begin
+//    dmFiltroProdutividade.cdsTipoTecido.Edit;
+//
+//    dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').Value := True;
+
+    //dmFiltroProdutividade.cdsTipoTecido.Post;
+  //end;
+//    with dmFiltroProdutividade.cdsTipoTecido do
+//  begin
+//    Edit;
+//    FieldByName('checked').AsBoolean :=
+//      not FieldByName('checked').AsBoolean;
+//  end;
+//    if dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').Value = false then
+//  begin
+//    dmFiltroProdutividade.cdsTipoTecido.Edit;
+//    dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').Value := True;
+//    //dmFiltroProdutividade.cdsTipoTecido.Post;
+//  end
+//  else
+//  begin
+//    dmFiltroProdutividade.cdsTipoTecido.Edit;
+//    dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').Value := False;
+    //dmFiltroProdutividade.cdsTipoTecido.Post;
+//  end;
+
+
+//    if dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').AsBoolean = false then
+//    begin
+//        dmFiltroProdutividade.cdsTipoTecido.Edit;
+//        dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').AsBoolean :=true;
+//
+//    end
+//    else
+//    begin
+//        dmFiltroProdutividade.cdsTipoTecido.Edit;
+//        dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').AsBoolean :=false;
+//
+//    end;
+
+end;
+
+procedure TfrmTipoTecido.gridTipoTecidoDrawColumnCell(Sender: TObject;
+  const Rect: TRect; DataCol: Integer; Column: TColumn;
+  State: TGridDrawState);
+
+  var
+    IdTecido: Integer;
+
+begin
+    IdTecido :=
+    dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_id').AsInteger;
+
+  if FSelecionados.Contains(IdTecido) then
+  begin
+    gridTipoTecido.Canvas.Brush.Color := $00E6E6E6;
+    gridTipoTecido.Canvas.Font.Style := [fsBold];
+  end
+  else
+  begin
+    gridTipoTecido.Canvas.Brush.Color := clWhite;
+    gridTipoTecido.Canvas.Font.Style := [];
+  end;
+
+  gridTipoTecido.Canvas.FillRect(Rect);
+
+  gridTipoTecido.DefaultDrawColumnCell(
+    Rect,
+    DataCol,
+    Column,
+    State
+  );
+//    inherited;
+//    if ((Sender as TDBGrid).DataSource.Dataset.IsEmpty) then
+//    exit;
+
+//    if Column.FieldName = 'checked' then
+//    begin
+//      TDBGrid(Sender).Canvas.FillRect(Rect);
+//
+//      if ((Sender as TDBGrid).DataSource.Dataset.FieldByName('checked').AsBoolean = true) then
+//        Check := DFCS_CHECKED
+//      else
+//        Check := 0;
+//
+//      R := Rect;
+//      InflateRect(R, -2, -2); { Diminue o tamanho do CheckBox }
+//      DrawFrameControl(TDBGrid(Sender).Canvas.Handle, R, DFC_BUTTON,
+//        DFCS_BUTTONCHECK or Check);
+//
+//    end;
+//
+//    inherited;
+//    if dmFiltroProdutividade.cdsTipoTecido.IsEmpty then
+//       exit;
+//
+//        if dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').Value = true then
+//        gridTipoTecido.Canvas.Brush.Color :=clYellow
+//    else
+//        gridTipoTecido.Canvas.Brush.Color :=clWhite;
+//
+//
+//    gridTipoTecido.DefaultDrawColumnCell(Rect, DataCol, Column, State);
+
+end;
+
+procedure TfrmTipoTecido.gridTipoTecidoKeyPress(Sender: TObject;
+  var Key: Char);
+begin
+    if key = #32 then
+    begin
+        if dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').Value = false then
+        begin
+            dmFiltroProdutividade.cdsTipoTecido.Edit;
+            dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').Value :=true;
+        end
+        else
+        begin
+            dmFiltroProdutividade.cdsTipoTecido.Edit;
+            dmFiltroProdutividade.cdsTipoTecido.FieldByName('checked').Value :=true;
+        end;
+    end;
+end;
+
+end.

@@ -35,5 +35,6 @@ begin
   Application.CreateForm(TfrmRelSinteticoTecido, frmRelSinteticoTecido);
   Application.CreateForm(TfrmRelSinteticoArtigo, frmRelSinteticoArtigo);
   Application.CreateForm(TdmFiltroProdutividade, dmFiltroProdutividade);
+  Application.CreateForm(TfrmTipoTecido, frmTipoTecido);
   Application.Run;
 end.

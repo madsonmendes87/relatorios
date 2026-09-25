@@ -29,9 +29,6 @@ type
     btnInfoArtSintetico: TSpeedButton;
     pnlFooter: TPanel;
     lblVersao: TLabel;
-    pnlCabecalho: TPanel;
-    lblUsuario: TLabel;
-    lblCodUsuario: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btnInfoArtigoClick(Sender: TObject);
     procedure btnProdutividadeClick(Sender: TObject);
@@ -76,17 +73,17 @@ end;
 
 procedure TfrmPrincipal.FormCreate(Sender: TObject);
 begin
-    btnRefOrdCorte.Caption          :='ReferÃªncias por'#13#10'Ordem de Corte';
-    btnInfoArtigo.Caption           :='InformaÃ§Ãµes'#13#10'Artigo(Analitico)';
-    btnTecidoReferencia.Caption     :='Tecido usado'#13#10'em referÃªncia';
-    btnInfoTecidoComp.Caption       :='InformaÃ§Ãµes'#13#10'Tecido e'#13#10'Comprado';
+    btnRefOrdCorte.Caption          :='Referências por'#13#10'Ordem de Corte';
+    btnInfoArtigo.Caption           :='Informações'#13#10'Artigo(Analitico)';
+    btnTecidoReferencia.Caption     :='Tecido usado'#13#10'em referência';
+    btnInfoTecidoComp.Caption       :='Informações'#13#10'Tecido e'#13#10'Comprado';
     btnAnaSintArtEmpenho.Caption    :='Analitico e'#13#10'Sintetico Artigo |'#13#10'Empenho |';
     btnInfArtReferencia.Caption     :='Inf. Artigo por'#13#10'Referencia'#13#10'(Sintetico)';
     btnProdutividade.Caption        :='Produtividade';
-    btnEntradaSaida.Caption         :='Entrada e Saida'#13#10'(sintÃ©tico)';
-    btnInfoArtSintetico.Caption     :='InformaÃ§Ãµes'#13#10'Artigo (SintÃ©tico)';
+    btnEntradaSaida.Caption         :='Entrada e Saida'#13#10'(sintético)';
+    btnInfoArtSintetico.Caption     :='Informações'#13#10'Artigo (Sintético)';
 
-    lblVersao.Caption := 'VersÃ£o ' + VersaoPrograma;
+    lblVersao.Caption := 'Versão ' + VersaoPrograma;
 end;
 
 function TfrmPrincipal.VersaoPrograma: string;

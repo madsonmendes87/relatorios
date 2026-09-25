@@ -75,6 +75,8 @@ type
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
     procedure dbLkFaseExit(Sender: TObject);
+    procedure dbLkGrupoExit(Sender: TObject);
+    procedure dbLkSubGrupoExit(Sender: TObject);
 
 
   private
@@ -91,18 +93,32 @@ implementation
 
 {$R *.dfm}
 
-uses uDmFiltroProdutividade;
+uses uDmFiltroProdutividade, uTipoTecido;
 
 
 
 procedure TfrmFiltroProdutividade.btnBuscarClick(Sender: TObject);
 begin
-    ShowMessage('Estou no botao BUSCAR');
+    frmTipoTecido :=TfrmTipoTecido.Create(nil);
+
+    try
+      frmTipoTecido.ShowModal;
+    finally
+      FreeAndNil(frmTipoTecido);
+    end;
 end;
 
 procedure TfrmFiltroProdutividade.btnGerarClick(Sender: TObject);
 begin
     ShowMessage('Estou no botao GERAR');
+//    with dmFiltroProdutividade.qryUsuario do
+//    begin
+//        Close;
+//        SQL.Add('SELECT us_rel_produtividade_planejamento FROM usuario');
+//        SQL.Add('   WHERE us_id = :idUsuario');
+//
+//        ParamByname
+//    end;
 end;
 
 procedure TfrmFiltroProdutividade.btnLimparClick(Sender: TObject);
@@ -140,6 +156,55 @@ begin
     dbLkUsuario.ListField                          :='us_nome';
     dbLkUsuario.KeyField                           :='us_id';
 end;
+
+procedure TfrmFiltroProdutividade.dbLkGrupoExit(Sender: TObject);
+begin
+    with dmFiltroProdutividade.qrySubGrupo do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     sgr_id,');
+        SQL.Add('     sgr_nome,');
+        SQL.Add('     sgr_idgrupo');
+        SQL.Add('     FROM subgrupo_prodacabado');
+        SQL.Add('     WHERE sgr_idgrupo = :idGrupo');
+        SQL.Add('     ORDER BY sgr_nome');
+
+        ParamByName('idGrupo').AsInteger   :=dbLkGrupo.KeyValue;
+        Open
+    end;
+
+    dmFiltroProdutividade.qrySubGrupo.Active       :=true;
+    dbLkSubGrupo.ListSource                        :=dmFiltroProdutividade.dsSubGrupo;
+    dbLkSubGrupo.ListField                         :='sgr_nome';
+    dbLkSubGrupo.KeyField                          :='sgr_id';
+end;
+
+procedure TfrmFiltroProdutividade.dbLkSubGrupoExit(Sender: TObject);
+begin
+    with dmFiltroProdutividade.qryTipo do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     tp_id,');
+        SQL.Add('     tp_nome,');
+        SQL.Add('     tp_idsubgrupo');
+        SQL.Add('     FROM tipo_prodacabado');
+        SQL.Add('     WHERE tp_idsubgrupo = :idSubGrupo');
+        SQL.Add('     ORDER BY tp_nome');
+
+        ParamByName('idSubGrupo').AsInteger   :=dbLkSubGrupo.KeyValue;
+        Open
+    end;
+
+    dmFiltroProdutividade.qryTipo.Active           :=true;
+    dbLkTipo.ListSource                            :=dmFiltroProdutividade.dsTipo;
+    dbLkTipo.ListField                             :='tp_nome';
+    dbLkTipo.KeyField                              :='tp_id';
+end;
+
 
 procedure TfrmFiltroProdutividade.FormCreate(Sender: TObject);
 begin
@@ -209,13 +274,109 @@ begin
         SQL.Add('     WHERE fp.fa_id = :idFase');
 
         ParamByName('idFase').AsInteger   :=dbLkFase.KeyValue;
-        Open
+        Open;
     end;
 
     dmFiltroProdutividade.qryUsuarioFase.Active    :=true;
     dbLkUsuario.ListSource                         :=dmFiltroProdutividade.dsUsuarioFase;
     dbLkUsuario.ListField                          :='us_nome';
     dbLkUsuario.KeyField                           :='us_id';
+
+
+
+
+    with dmFiltroProdutividade.qryEstilista do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     es_id,');
+        SQL.Add('     es_nome');
+        SQL.Add('     FROM cadastro_estilista e');
+        SQL.Add('     ORDER BY es_nome');
+        Open;
+    end;
+
+    dmFiltroProdutividade.qryEstilista.Active      :=true;
+    dbLkEstilista.ListSource                       :=dmFiltroProdutividade.dsEstilista;
+    dbLkEstilista.ListField                        :='es_nome';
+    dbLkEstilista.KeyField                         :='es_id';
+
+
+
+
+    with dmFiltroProdutividade.qryGrupo do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     gr_id,');
+        SQL.Add('     gr_nome');
+        SQL.Add('     FROM grupo_prodacabado');
+        SQL.Add('     ORDER BY gr_nome');
+        Open;
+    end;
+
+    dmFiltroProdutividade.qryGrupo.Active      :=true;
+    dbLkGrupo.ListSource                       :=dmFiltroProdutividade.dsGrupo;
+    dbLkGrupo.ListField                        :='gr_nome';
+    dbLkGrupo.KeyField                         :='gr_id';
+
+
+
+    with dmFiltroProdutividade.qryMarca do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     *');
+        SQL.Add('     FROM marca_produto_acabado');
+        SQL.Add('     ORDER BY ma_nome');
+        Open;
+    end;
+
+    dmFiltroProdutividade.qryMarca.Active      :=true;
+    dbLkMarca.ListSource                       :=dmFiltroProdutividade.dsMarca;
+    dbLkMarca.ListField                        :='ma_nome';
+    dbLkMarca.KeyField                         :='ma_id';
+
+
+
+    with dmFiltroProdutividade.qryGrife do
+    begin
+        Close;
+        SQL.Clear;
+        SQL.Add('SELECT');
+        SQL.Add('     *');
+        SQL.Add('     FROM griffe');
+        SQL.Add('     ORDER BY gri_nome');
+        Open;
+    end;
+
+    dmFiltroProdutividade.qryGrife.Active      :=true;
+    dbLkGrife.ListSource                       :=dmFiltroProdutividade.dsGrife;
+    dbLkGrife.ListField                        :='gri_nome';
+    dbLkGrife.KeyField                         :='gri_id';
+
+
+
+
+    with dmFiltroProdutividade.qryColecao do
+    begin
+        Close;
+        SQL.Add('SELECT');
+        SQL.Add('     co_id,');
+        SQL.Add('     CAST(CONCAT(co_descricao, '' de '', to_char(co_anocolecao, ''YYYY'')) AS character varying(25)) AS nome');
+        SQL.Add('     FROM colecao');
+        SQL.Add('     WHERE EXTRACT(YEAR FROM co_anocolecao) = EXTRACT(YEAR FROM CURRENT_DATE)');
+        SQL.Add('     ORDER BY co_anocolecao');
+        Open;
+    end;
+
+    dmFiltroProdutividade.qryColecao.Active    :=true;
+    dbLkColecao.ListSource                     :=dmFiltroProdutividade.dsColecao;
+    dbLkColecao.ListField                      :='nome';
+    dbLkColecao.KeyField                       :='co_id';
 end;
 
 end.

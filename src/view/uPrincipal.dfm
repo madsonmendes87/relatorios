@@ -294,4 +294,45 @@ object frmPrincipal: TfrmPrincipal
       ParentFont = False
     end
   end
+  object pnlCabecalho: TPanel
+    Left = 0
+    Top = 0
+    Width = 441
+    Height = 20
+    Align = alTop
+    BevelOuter = bvNone
+    Color = clLightyellow
+    ParentBackground = False
+    TabOrder = 10
+    object lblUsuario: TLabel
+      Left = 377
+      Top = 0
+      Width = 64
+      Height = 20
+      Align = alRight
+      Caption = ' - MADSON '
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI Light'
+      Font.Style = []
+      ParentFont = False
+      ExplicitHeight = 15
+    end
+    object LbCodUsuario: TLabel
+      Left = 367
+      Top = 0
+      Width = 10
+      Height = 20
+      Align = alRight
+      Caption = '16'
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -12
+      Font.Name = 'Segoe UI Light'
+      Font.Style = []
+      ParentFont = False
+      ExplicitHeight = 15
+    end
+  end
 end

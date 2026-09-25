@@ -139,7 +139,7 @@ object dmFiltroProdutividade: TdmFiltroProdutividade
     end
   end
   object dsTipoTecido: TDataSource
-    DataSet = qryTipoTecido
+    DataSet = cdsTipoTecido
     Left = 240
     Top = 360
   end
