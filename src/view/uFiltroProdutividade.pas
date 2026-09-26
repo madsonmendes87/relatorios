@@ -33,7 +33,7 @@ type
     pnlLimpar: TPanel;
     pnlRetirar: TPanel;
     lblTipoTecido: TLabel;
-    DBGrid1: TDBGrid;
+    gridTecido: TDBGrid;
     btnBuscar: TSpeedButton;
     btnLimpar: TSpeedButton;
     btnRetirar: TSpeedButton;
@@ -77,6 +77,7 @@ type
     procedure dbLkFaseExit(Sender: TObject);
     procedure dbLkGrupoExit(Sender: TObject);
     procedure dbLkSubGrupoExit(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
 
 
   private
@@ -123,14 +124,16 @@ end;
 
 procedure TfrmFiltroProdutividade.btnLimparClick(Sender: TObject);
 begin
-    ShowMessage('Estou no botao LIMPAR');
+    if not dmFiltroProdutividade.cdsTecido.IsEmpty then
+      dmFiltroProdutividade.cdsTecido.EmptyDataSet;
 end;
+
 
 procedure TfrmFiltroProdutividade.btnRetirarClick(Sender: TObject);
 begin
-    ShowMessage('Estou no botao RETIRAR');
+    if not dmFiltroProdutividade.cdsTecido.IsEmpty then
+      dmFiltroProdutividade.cdsTecido.Delete;
 end;
-
 
 
 procedure TfrmFiltroProdutividade.dbLkFaseExit(Sender: TObject);
@@ -205,6 +208,12 @@ begin
     dbLkTipo.KeyField                              :='tp_id';
 end;
 
+
+procedure TfrmFiltroProdutividade.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+    dmFiltroProdutividade.cdsTecido.EmptyDataSet;
+end;
 
 procedure TfrmFiltroProdutividade.FormCreate(Sender: TObject);
 begin
@@ -378,6 +387,11 @@ begin
     dbLkColecao.ListSource                     :=dmFiltroProdutividade.dsColecao;
     dbLkColecao.ListField                      :='nome';
     dbLkColecao.KeyField                       :='co_id';
+
+
+    gridTecido.Columns[0].Visible              :=false;
+    gridTecido.Columns[1].Title.Alignment      :=taCenter;
+    gridTecido.Columns[1].Title.Caption        :='TIPO TECIDO';
 end;
 
 end.

@@ -22,6 +22,7 @@ object frmTipoTecido: TfrmTipoTecido
     Top = 39
     Width = 320
     Height = 223
+    Cursor = crHandPoint
     DataSource = dmFiltroProdutividade.dsTipoTecido
     Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
     TabOrder = 0

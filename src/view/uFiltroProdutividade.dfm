@@ -13,6 +13,7 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
   Font.Name = 'Segoe UI'
   Font.Style = []
   Position = poScreenCenter
+  OnClose = FormClose
   OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnShow = FormShow
@@ -594,11 +595,12 @@ object frmFiltroProdutividade: TfrmFiltroProdutividade
       ExplicitHeight = 22
     end
   end
-  object DBGrid1: TDBGrid
+  object gridTecido: TDBGrid
     Left = 8
     Top = 280
     Width = 233
     Height = 123
+    DataSource = dmFiltroProdutividade.dsTecido
     TabOrder = 13
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText

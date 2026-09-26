@@ -97,8 +97,8 @@ begin
       for Item in FSelecionados do
       begin
           dmFiltroProdutividade.cdsTecido.Append;
-          dmFiltroProdutividade.cdsTecido.FieldByName('tec_id').AsInteger   :=Item.Id;
-          dmFiltroProdutividade.cdsTecido.FieldByName('tec_nome').AsString  :=Item.Nome;
+          dmFiltroProdutividade.cdsTecido.FieldByName('tec_id').AsInteger := Item.Id;
+          dmFiltroProdutividade.cdsTecido.FieldByName('tec_nome').AsString := Item.Nome;
           dmFiltroProdutividade.cdsTecido.Post;
       end;
 

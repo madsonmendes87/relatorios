@@ -30,11 +30,11 @@ type
     qryColecao: TFDQuery;
     dsColecao: TDataSource;
     qryTipoTecido: TFDQuery;
-    cdsTecido: TClientDataSet;
+    cdsTipoTecido: TClientDataSet;
     dsTipoTecido: TDataSource;
-    cdsTecidotec_id: TIntegerField;
-    cdsTecidotec_nome: TStringField;
-    dsTecido: TDataSource;
+    cdsTipoTecidotec_id: TIntegerField;
+    cdsTipoTecidotec_nome: TStringField;
+    cdsTipoTecidochecked: TBooleanField;
   private
     { Private declarations }
   public

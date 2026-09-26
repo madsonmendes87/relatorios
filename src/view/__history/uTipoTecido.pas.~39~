@@ -8,6 +8,12 @@ uses
   Vcl.DBGrids, Vcl.Buttons;
 
 type
+  TTecidoSelecionado = class
+  public
+    Id: Integer;
+    Nome: string;
+  end;
+
   TfrmTipoTecido = class(TForm)
     gridTipoTecido: TDBGrid;
     pnlSelecionar: TPanel;
@@ -19,10 +25,11 @@ type
     procedure FormCreate(Sender: TObject);
     procedure gridTipoTecidoCellClick(Column: TColumn);
     procedure FormDestroy(Sender: TObject);
+    procedure btnSelecionarClick(Sender: TObject);
 
   private
     { Private declarations }
-    FSelecionados: TList<Integer>;
+    FSelecionados: TObjectList<TTecidoSelecionado>;
     procedure alternarSelecao;
 
   public
@@ -41,23 +48,55 @@ uses uFiltroProdutividade, uDmFiltroProdutividade;
 procedure TfrmTipoTecido.alternarSelecao;
 
 var
-  IdTecido: Integer;
+  idTecido: Integer;
+  nomeTecido: string;
+  item: TTecidoSelecionado;
 
 begin
-    IdTecido := dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_id').AsInteger;
+    if dmFiltroProdutividade.qryTipoTecido.IsEmpty then
+    Exit;
 
-    if FSelecionados.Contains(IdTecido) then
-        FSelecionados.Remove(IdTecido)
-    else
-        FSelecionados.Add(IdTecido);
+    idTecido    :=dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_id').AsInteger;
 
-    gridTipoTecido.Invalidate;
+    nomeTecido  :=dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_nome').AsString;
+
+
+  for item in FSelecionados do
+  begin
+      if item.id = idTecido then
+      begin
+          FSelecionados.Remove(item);
+          gridTipoTecido.Invalidate;
+          Exit;
+      end;
+  end;
+
+
+  item      :=TTecidoSelecionado.Create;
+  item.id   :=idTecido;
+  item.Nome :=nomeTecido;
+
+  FSelecionados.Add(item);
+
+  gridTipoTecido.Invalidate;
 end;
 
 
+procedure TfrmTipoTecido.btnSelecionarClick(Sender: TObject);
+
+var
+  item: TTecidoSelecionado;
+
+begin
+    for item in FSelecionados do
+    begin
+        ShowMessage('ID: ' + Item.Id.ToString + sLineBreak +'Nome: ' + Item.Nome);
+    end;
+end;
+
 procedure TfrmTipoTecido.FormCreate(Sender: TObject);
 begin
-    FSelecionados := TList<Integer>.Create;
+    FSelecionados :=TObjectList<TTecidoSelecionado>.Create;
 
 end;
 
@@ -99,7 +138,9 @@ procedure TfrmTipoTecido.gridTipoTecidoDrawColumnCell(Sender: TObject;
   State: TGridDrawState);
 
   var
-    IdTecido: Integer;
+    idTecido: Integer;
+    item: TTecidoSelecionado;
+    selecionado: Boolean;
 
 begin
     if not dmFiltroProdutividade.qryTipoTecido.Active then
@@ -108,28 +149,33 @@ begin
   if dmFiltroProdutividade.qryTipoTecido.IsEmpty then
     Exit;
 
-  IdTecido :=
-    dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_id').AsInteger;
+  idTecido :=dmFiltroProdutividade.qryTipoTecido.FieldByName('tec_id').AsInteger;
 
-  if FSelecionados.Contains(IdTecido) then
+  selecionado :=False;
+
+  for item in FSelecionados do
   begin
-    gridTipoTecido.Canvas.Brush.Color := $00E6E6E6;
-    gridTipoTecido.Canvas.Font.Style := [fsBold];
+      if item.id = idTecido then
+      begin
+        selecionado := True;
+        break;
+      end;
+  end;
+
+  if selecionado then
+  begin
+      gridTipoTecido.Canvas.Brush.Color := $00E6E6E6;
+      gridTipoTecido.Canvas.Font.Style := [fsBold];
   end
   else
   begin
-    gridTipoTecido.Canvas.Brush.Color := clWhite;
-    gridTipoTecido.Canvas.Font.Style := [];
+      gridTipoTecido.Canvas.Brush.Color := clWhite;
+      gridTipoTecido.Canvas.Font.Style := [];
   end;
 
   gridTipoTecido.Canvas.FillRect(Rect);
 
-  gridTipoTecido.DefaultDrawColumnCell(
-    Rect,
-    DataCol,
-    Column,
-    State
-  );
+  gridTipoTecido.DefaultDrawColumnCell(Rect, DataCol, Column, State);
 
 end;
 

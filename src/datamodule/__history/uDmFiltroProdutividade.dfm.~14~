@@ -103,7 +103,7 @@ object dmFiltroProdutividade: TdmFiltroProdutividade
     Left = 48
     Top = 360
   end
-  object cdsTecido: TClientDataSet
+  object cdsTipoTecido: TClientDataSet
     PersistDataPacket.Data = {
       460000009619E0BD010000001800000002000000000003000000460006746563
       5F69640400010000000000087465635F6E6F6D65010049000000010005574944
@@ -123,24 +123,24 @@ object dmFiltroProdutividade: TdmFiltroProdutividade
     IndexDefs = <>
     Params = <>
     StoreDefs = True
-    Left = 248
+    Left = 144
     Top = 360
-    object cdsTecidotec_id: TIntegerField
+    object cdsTipoTecidotec_id: TIntegerField
       FieldName = 'tec_id'
     end
-    object cdsTecidotec_nome: TStringField
+    object cdsTipoTecidotec_nome: TStringField
       FieldName = 'tec_nome'
       Size = 30
+    end
+    object cdsTipoTecidochecked: TBooleanField
+      FieldKind = fkCalculated
+      FieldName = 'checked'
+      Calculated = True
     end
   end
   object dsTipoTecido: TDataSource
     DataSet = qryTipoTecido
-    Left = 144
-    Top = 360
-  end
-  object dsTecido: TDataSource
-    DataSet = cdsTecido
-    Left = 328
+    Left = 240
     Top = 360
   end
 end
